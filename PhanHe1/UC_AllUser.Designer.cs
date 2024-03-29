@@ -32,6 +32,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.pwtxtb = new Guna.UI2.WinForms.Guna2TextBox();
+            this.usernametxtb = new Guna.UI2.WinForms.Guna2TextBox();
             this.detailbtn = new Guna.UI2.WinForms.Guna2Button();
             this.updatebtn = new Guna.UI2.WinForms.Guna2Button();
             this.delUser_btn = new Guna.UI2.WinForms.Guna2Button();
@@ -39,10 +41,8 @@
             this.guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
             this.searchtxb = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.usernametxtb = new Guna.UI2.WinForms.Guna2TextBox();
-            this.pwtxtb = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -54,8 +54,8 @@
             this.guna2Panel1.BorderRadius = 16;
             this.guna2Panel1.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
             this.guna2Panel1.BorderThickness = 7;
-            this.guna2Panel1.Controls.Add(this.guna2HtmlLabel2);
-            this.guna2Panel1.Controls.Add(this.guna2HtmlLabel1);
+            this.guna2Panel1.Controls.Add(this.label2);
+            this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Controls.Add(this.pwtxtb);
             this.guna2Panel1.Controls.Add(this.usernametxtb);
             this.guna2Panel1.Controls.Add(this.detailbtn);
@@ -68,6 +68,50 @@
             this.guna2Panel1.Size = new System.Drawing.Size(210, 405);
             this.guna2Panel1.TabIndex = 0;
             this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
+            // 
+            // pwtxtb
+            // 
+            this.pwtxtb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.pwtxtb.BorderRadius = 12;
+            this.pwtxtb.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.pwtxtb.DefaultText = "";
+            this.pwtxtb.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.pwtxtb.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.pwtxtb.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.pwtxtb.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.pwtxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.pwtxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.pwtxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.pwtxtb.Location = new System.Drawing.Point(22, 165);
+            this.pwtxtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pwtxtb.Name = "pwtxtb";
+            this.pwtxtb.PasswordChar = '\0';
+            this.pwtxtb.PlaceholderText = "";
+            this.pwtxtb.SelectedText = "";
+            this.pwtxtb.Size = new System.Drawing.Size(163, 33);
+            this.pwtxtb.TabIndex = 5;
+            // 
+            // usernametxtb
+            // 
+            this.usernametxtb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.usernametxtb.BorderRadius = 12;
+            this.usernametxtb.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.usernametxtb.DefaultText = "";
+            this.usernametxtb.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.usernametxtb.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.usernametxtb.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.usernametxtb.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.usernametxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.usernametxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.usernametxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.usernametxtb.Location = new System.Drawing.Point(22, 76);
+            this.usernametxtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.usernametxtb.Name = "usernametxtb";
+            this.usernametxtb.PasswordChar = '\0';
+            this.usernametxtb.PlaceholderText = "";
+            this.usernametxtb.SelectedText = "";
+            this.usernametxtb.Size = new System.Drawing.Size(163, 33);
+            this.usernametxtb.TabIndex = 4;
             // 
             // detailbtn
             // 
@@ -228,67 +272,25 @@
             this.guna2Button1.TabIndex = 7;
             this.guna2Button1.Text = "Search";
             // 
-            // usernametxtb
+            // label1
             // 
-            this.usernametxtb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.usernametxtb.BorderRadius = 12;
-            this.usernametxtb.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.usernametxtb.DefaultText = "";
-            this.usernametxtb.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.usernametxtb.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.usernametxtb.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.usernametxtb.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.usernametxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.usernametxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.usernametxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.usernametxtb.Location = new System.Drawing.Point(22, 76);
-            this.usernametxtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.usernametxtb.Name = "usernametxtb";
-            this.usernametxtb.PasswordChar = '\0';
-            this.usernametxtb.PlaceholderText = "";
-            this.usernametxtb.SelectedText = "";
-            this.usernametxtb.Size = new System.Drawing.Size(163, 33);
-            this.usernametxtb.TabIndex = 4;
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label1.Location = new System.Drawing.Point(30, 51);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 20);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Username";
             // 
-            // pwtxtb
+            // label2
             // 
-            this.pwtxtb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.pwtxtb.BorderRadius = 12;
-            this.pwtxtb.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.pwtxtb.DefaultText = "";
-            this.pwtxtb.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.pwtxtb.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.pwtxtb.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.pwtxtb.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.pwtxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.pwtxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.pwtxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.pwtxtb.Location = new System.Drawing.Point(22, 165);
-            this.pwtxtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pwtxtb.Name = "pwtxtb";
-            this.pwtxtb.PasswordChar = '\0';
-            this.pwtxtb.PlaceholderText = "";
-            this.pwtxtb.SelectedText = "";
-            this.pwtxtb.Size = new System.Drawing.Size(163, 33);
-            this.pwtxtb.TabIndex = 5;
-            // 
-            // guna2HtmlLabel1
-            // 
-            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(22, 46);
-            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(77, 22);
-            this.guna2HtmlLabel1.TabIndex = 6;
-            this.guna2HtmlLabel1.Text = "Username";
-            // 
-            // guna2HtmlLabel2
-            // 
-            this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(22, 135);
-            this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(72, 22);
-            this.guna2HtmlLabel2.TabIndex = 7;
-            this.guna2HtmlLabel2.Text = "Password";
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label2.Location = new System.Drawing.Point(30, 140);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 20);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Password";
             // 
             // UC_AllUser
             // 
@@ -321,7 +323,7 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2TextBox pwtxtb;
         private Guna.UI2.WinForms.Guna2TextBox usernametxtb;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+// Data Source=XE;Persist Security Info=True;User ID=system;Password=***********;Unicode=True
 namespace PhanHe1
 {
     internal static class Program
