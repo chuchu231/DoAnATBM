@@ -1,5 +1,5 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD--MM--YYYY';
-
+alter session set "_ORACLE_SCRIPT" = true;
 -- Grant admin with pw admin123
 drop user admin cascade;
 create user admin identified by admin123;
