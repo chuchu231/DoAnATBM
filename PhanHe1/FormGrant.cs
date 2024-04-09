@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,11 +12,14 @@ using System.Threading.Tasks;
 using Oracle.ManagedDataAccess.Client;
 using System.Configuration;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PhanHe1
 {
     public partial class FormGrant : Form
     {
+        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
+
         string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
         public FormGrant()
         {
