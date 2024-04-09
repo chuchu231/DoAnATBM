@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -12,6 +14,8 @@ namespace PhanHe1
 {
     public partial class UC_GrantRevoke : UserControl
     {
+
+        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         public UC_GrantRevoke()
         {
             InitializeComponent();

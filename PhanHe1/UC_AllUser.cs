@@ -48,5 +48,10 @@ namespace PhanHe1
         {
 
         }
+
+        private void allusers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

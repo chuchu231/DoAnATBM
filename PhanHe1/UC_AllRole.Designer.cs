@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.allrole = new Guna.UI2.WinForms.Guna2DataGridView();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.searchtxb = new Guna.UI2.WinForms.Guna2TextBox();
@@ -49,34 +49,35 @@
             // 
             // allrole
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.allrole.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.allrole.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.allrole.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.allrole.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.allrole.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.allrole.ColumnHeadersHeight = 4;
             this.allrole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.allrole.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.allrole.DefaultCellStyle = dataGridViewCellStyle3;
             this.allrole.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.allrole.Location = new System.Drawing.Point(27, 84);
+            this.allrole.Location = new System.Drawing.Point(24, 67);
+            this.allrole.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.allrole.Name = "allrole";
             this.allrole.RowHeadersVisible = false;
             this.allrole.RowHeadersWidth = 62;
             this.allrole.RowTemplate.Height = 28;
-            this.allrole.Size = new System.Drawing.Size(654, 405);
+            this.allrole.Size = new System.Drawing.Size(581, 324);
             this.allrole.TabIndex = 3;
             this.allrole.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.allrole.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -99,6 +100,7 @@
             this.allrole.ThemeStyle.RowsStyle.Height = 28;
             this.allrole.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.allrole.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.allrole.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.allrole_CellContentClick);
             // 
             // guna2Button1
             // 
@@ -111,9 +113,10 @@
             this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(778, 24);
+            this.guna2Button1.Location = new System.Drawing.Point(692, 19);
+            this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(106, 43);
+            this.guna2Button1.Size = new System.Drawing.Size(94, 34);
             this.guna2Button1.TabIndex = 5;
             this.guna2Button1.Text = "Search";
             // 
@@ -129,13 +132,13 @@
             this.searchtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.searchtxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.searchtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.searchtxb.Location = new System.Drawing.Point(557, 37);
-            this.searchtxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchtxb.Location = new System.Drawing.Point(495, 30);
+            this.searchtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.searchtxb.Name = "searchtxb";
             this.searchtxb.PasswordChar = '\0';
             this.searchtxb.PlaceholderText = "";
             this.searchtxb.SelectedText = "";
-            this.searchtxb.Size = new System.Drawing.Size(201, 30);
+            this.searchtxb.Size = new System.Drawing.Size(179, 24);
             this.searchtxb.TabIndex = 6;
             // 
             // guna2Panel2
@@ -154,18 +157,19 @@
             this.guna2Panel2.Controls.Add(this.delRole_btn);
             this.guna2Panel2.Controls.Add(this.addrole_btn);
             this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.guna2Panel2.Location = new System.Drawing.Point(687, 84);
+            this.guna2Panel2.Location = new System.Drawing.Point(611, 67);
+            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(210, 405);
+            this.guna2Panel2.Size = new System.Drawing.Size(187, 324);
             this.guna2Panel2.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label2.Location = new System.Drawing.Point(29, 140);
+            this.label2.Location = new System.Drawing.Point(26, 112);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 20);
+            this.label2.Size = new System.Drawing.Size(67, 16);
             this.label2.TabIndex = 9;
             this.label2.Text = "Password";
             // 
@@ -173,9 +177,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(29, 51);
+            this.label1.Location = new System.Drawing.Point(26, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 20);
+            this.label1.Size = new System.Drawing.Size(36, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "Role";
             // 
@@ -192,13 +196,13 @@
             this.pwtxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.pwtxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.pwtxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.pwtxtb.Location = new System.Drawing.Point(22, 165);
-            this.pwtxtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pwtxtb.Location = new System.Drawing.Point(20, 132);
+            this.pwtxtb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pwtxtb.Name = "pwtxtb";
             this.pwtxtb.PasswordChar = '\0';
             this.pwtxtb.PlaceholderText = "";
             this.pwtxtb.SelectedText = "";
-            this.pwtxtb.Size = new System.Drawing.Size(163, 33);
+            this.pwtxtb.Size = new System.Drawing.Size(145, 26);
             this.pwtxtb.TabIndex = 5;
             // 
             // roletxtb
@@ -214,13 +218,13 @@
             this.roletxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.roletxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.roletxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.roletxtb.Location = new System.Drawing.Point(22, 76);
-            this.roletxtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.roletxtb.Location = new System.Drawing.Point(20, 61);
+            this.roletxtb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.roletxtb.Name = "roletxtb";
             this.roletxtb.PasswordChar = '\0';
             this.roletxtb.PlaceholderText = "";
             this.roletxtb.SelectedText = "";
-            this.roletxtb.Size = new System.Drawing.Size(163, 33);
+            this.roletxtb.Size = new System.Drawing.Size(145, 26);
             this.roletxtb.TabIndex = 4;
             // 
             // detailbtn
@@ -234,9 +238,10 @@
             this.detailbtn.FillColor = System.Drawing.Color.White;
             this.detailbtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.detailbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.detailbtn.Location = new System.Drawing.Point(22, 351);
+            this.detailbtn.Location = new System.Drawing.Point(20, 281);
+            this.detailbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.detailbtn.Name = "detailbtn";
-            this.detailbtn.Size = new System.Drawing.Size(163, 38);
+            this.detailbtn.Size = new System.Drawing.Size(145, 30);
             this.detailbtn.TabIndex = 3;
             this.detailbtn.Text = "DETAIL";
             // 
@@ -251,9 +256,10 @@
             this.updatebtn.FillColor = System.Drawing.Color.White;
             this.updatebtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.updatebtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.updatebtn.Location = new System.Drawing.Point(22, 307);
+            this.updatebtn.Location = new System.Drawing.Point(20, 246);
+            this.updatebtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.updatebtn.Name = "updatebtn";
-            this.updatebtn.Size = new System.Drawing.Size(163, 38);
+            this.updatebtn.Size = new System.Drawing.Size(145, 30);
             this.updatebtn.TabIndex = 2;
             this.updatebtn.Text = "UPDATE";
             // 
@@ -268,9 +274,10 @@
             this.delRole_btn.FillColor = System.Drawing.Color.White;
             this.delRole_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.delRole_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.delRole_btn.Location = new System.Drawing.Point(22, 263);
+            this.delRole_btn.Location = new System.Drawing.Point(20, 210);
+            this.delRole_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.delRole_btn.Name = "delRole_btn";
-            this.delRole_btn.Size = new System.Drawing.Size(163, 38);
+            this.delRole_btn.Size = new System.Drawing.Size(145, 30);
             this.delRole_btn.TabIndex = 1;
             this.delRole_btn.Text = "DELETE";
             // 
@@ -285,23 +292,25 @@
             this.addrole_btn.FillColor = System.Drawing.Color.White;
             this.addrole_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.addrole_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.addrole_btn.Location = new System.Drawing.Point(22, 219);
+            this.addrole_btn.Location = new System.Drawing.Point(20, 175);
+            this.addrole_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addrole_btn.Name = "addrole_btn";
-            this.addrole_btn.Size = new System.Drawing.Size(163, 38);
+            this.addrole_btn.Size = new System.Drawing.Size(145, 30);
             this.addrole_btn.TabIndex = 0;
             this.addrole_btn.Text = "ADD";
             // 
             // UC_AllRole
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.searchtxb);
             this.Controls.Add(this.guna2Button1);
             this.Controls.Add(this.allrole);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UC_AllRole";
-            this.Size = new System.Drawing.Size(925, 520);
+            this.Size = new System.Drawing.Size(822, 416);
             this.Load += new System.EventHandler(this.UC_AllRole_Load);
             ((System.ComponentModel.ISupportInitialize)(this.allrole)).EndInit();
             this.guna2Panel2.ResumeLayout(false);
