@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhanHe1", "PhanHe1\PhanHe1.csproj", "{6E491C4D-9944-4432-A406-0F7544B6EF0C}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Funcs", "Create_User\Funcs.sqlproj", "{8C337551-09CE-4A02-818D-89A36476A62A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,12 @@ Global
 		{6E491C4D-9944-4432-A406-0F7544B6EF0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E491C4D-9944-4432-A406-0F7544B6EF0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E491C4D-9944-4432-A406-0F7544B6EF0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C337551-09CE-4A02-818D-89A36476A62A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C337551-09CE-4A02-818D-89A36476A62A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C337551-09CE-4A02-818D-89A36476A62A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8C337551-09CE-4A02-818D-89A36476A62A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C337551-09CE-4A02-818D-89A36476A62A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C337551-09CE-4A02-818D-89A36476A62A}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
