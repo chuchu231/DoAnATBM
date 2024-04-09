@@ -12,7 +12,7 @@ ALTER TABLE DANGKY DROP CONSTRAINT fk_dangky_phancong;
 
 -- PHANCONG
 ALTER TABLE PHANCONG DROP CONSTRAINT fk_phancong_nhansu;
-ALTER TABLE PHANCONG DROP CONSTRAINT fk_phancong_hocphan;
+ALTER TABLE PHANCONG DROP CONSTRAINT fk_phancong_KHMO;
 
 -- NHANSU
 ALTER TABLE NHANSU DROP CONSTRAINT fk_nhansu_donvi;
@@ -20,31 +20,31 @@ ALTER TABLE NHANSU DROP CONSTRAINT fk_nhansu_donvi;
 -- DONVI
 ALTER TABLE NHANSU DROP CONSTRAINT fk_donvi_nhansu;
 
--- XÛa c·c r‡ng bu?c trÍn b?ng HOCPHAN
+-- X√≥a c√°c r√†ng bu?c tr√™n b?ng HOCPHAN
 ALTER TABLE HOCPHAN DROP CONSTRAINT fk_hocphan_donvi;
 
--- XÛa c·c r‡ng bu?c trÍn b?ng KHMO
+-- X√≥a c√°c r√†ng bu?c tr√™n b?ng KHMO
 ALTER TABLE KHMO DROP CONSTRAINT fk_khmo_hocphan;
 
--- XÛa b?ng –ANGKY
+-- X√≥a b?ng ƒêANGKY
 DROP TABLE DANGKY;
 
--- XÛa b?ng PHANCONG
+-- X√≥a b?ng PHANCONG
 DROP TABLE PHANCONG;
 
--- XÛa b?ng KHMO
+-- X√≥a b?ng KHMO
 DROP TABLE KHMO;
 
--- XÛa b?ng HOCPHAN
+-- X√≥a b?ng HOCPHAN
 DROP TABLE HOCPHAN;
 
--- XÛa b?ng DONVI
+-- X√≥a b?ng DONVI
 DROP TABLE DONVI;
 
--- XÛa b?ng SINHVIEN
+-- X√≥a b?ng SINHVIEN
 DROP TABLE SINHVIEN;
 
--- XÛa b?ng NHANSU
+-- X√≥a b?ng NHANSU
 DROP TABLE NHANSU;
 
 
@@ -118,7 +118,7 @@ CREATE TABLE PHANCONG (
     PRIMARY KEY (MAGV, MAHP, HK, NAM, MACT)
 );
 
--- T?o b?ng –ANGKY
+-- T?o b?ng ƒêANGKY
 CREATE TABLE DANGKY (
     MASV VARCHAR2(20),
     MAGV VARCHAR2(20),
@@ -143,7 +143,7 @@ select * from KHMO
 -- DONVI
 ALTER TABLE DONVI
 ADD CONSTRAINT fk_donvi_nhansu
-FOREIGN KEY (TRG–V)
+FOREIGN KEY (TRGƒêV)
 REFERENCES NHANSU(MANV);
 
 -- HOCPHAN
@@ -165,9 +165,9 @@ FOREIGN KEY (MAGV)
 REFERENCES NHANSU(MANV);
 
 ALTER TABLE PHANCONG
-ADD CONSTRAINT fk_phancong_hocphan
+ADD CONSTRAINT fk_phancong_KHMO
 FOREIGN KEY (MAHP, HK, NAM, MACT)
-REFERENCES HOCPHAN(MAHP, HK, NAM, MACT);
+REFERENCES KHMO(MAHP, HK, NAM, MACT);
 
 -- DANGKY
 ALTER TABLE DANGKY
@@ -181,14 +181,14 @@ FOREIGN KEY (MAGV, MAHP, HK, NAM, MACT)
 REFERENCES PHANCONG(MAGV, MAHP, HK, NAM, MACT);
 
 -- Insert
-insert into DONVI (MADV, TENDV, TRGDV) values (N'VPK', N'V„n ph?ng khoa', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'HTTT', N'B? mÙn HTTT', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'CNPM', N'B? mÙn CNPM', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'KHMT', N'B? mÙn KHMT', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'CNTT', N'B? mÙn CNTT', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'TGMT', N'B? mÙn TGMT', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'MMT', N'B? mÙn MMT v‡ Vi?n thÙng', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'GVK', N'Gi·o v? khoa', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'VPK', N'VƒÉn ph?ng khoa', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'HTTT', N'B? m√¥n HTTT', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'CNPM', N'B? m√¥n CNPM', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'KHMT', N'B? m√¥n KHMT', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'CNTT', N'B? m√¥n CNTT', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'TGMT', N'B? m√¥n TGMT', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'MMT', N'B? m√¥n MMT v√† Vi?n th√¥ng', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'GVK', N'Gi√°o v? khoa', null);
 
 insert into NHANSU values('GV001', 'Nguyen Van An', 'Nam', '05-01-1989', 1000, '0768897001',  'Giang vien', 'HTTT');
 insert into NHANSU values('NV001', 'Nguyen Thi Bich', 'Nu', '06-07-1990', 1000, '0768897002',  'Nhan vien', 'VPK');
@@ -216,16 +216,16 @@ UPDATE DONVI SET TRGDV = 'NV001' WHERE MADV = 'VPK';
 UPDATE DONVI SET TRGDV = 'GVU001' WHERE MADV = 'GVK';
 
 
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP100', N'Cı s? trÌ tu? nh‚n t?o', 4, 3, 1, 75, 'TGMT');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP085', N'H? qu?n tr? cı s? d? li?u', 4, 2, 2, 90, 'CNTT');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP120', N'Cı s? d? li?u', 4, 3, 1, 80, 'KHMT');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP100', N'C∆° s? tr√≠ tu? nh√¢n t?o', 4, 3, 1, 75, 'TGMT');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP085', N'H? qu?n tr? c∆° s? d? li?u', 4, 2, 2, 90, 'CNTT');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP120', N'C∆° s? d? li?u', 4, 3, 1, 80, 'KHMT');
 insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP075', N'Thi?t k? ph?n m?m', 4, 3, 1, 120, 'HTTT');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP090', N'Quy ho?ch tuy?n tÌnh', 3, 2, 1, 95, 'CNPM');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP110', N'To·n r?i r?c', 4, 2, 2, 90, 'CNPM');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP090', N'Quy ho?ch tuy?n t√≠nh', 3, 2, 1, 95, 'CNPM');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP110', N'To√°n r?i r?c', 4, 2, 2, 90, 'CNPM');
 insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP095', N'Kh?i nghi?p', 2, 2, 0, 100, 'VPK');
 insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP105', N'L?p tr?nh ?ng d?ng', 4, 3, 1, 100, 'HTTT');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP080', N'M? hÛa', 4, 3, 1, 110, 'CNPM');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP115', N'An to‡n v‡ b?o m?t d? li?u', 4, 3, 1, 90, 'TGMT');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP080', N'M? h√≥a', 4, 3, 1, 110, 'CNPM');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP115', N'An to√†n v√† b?o m?t d? li?u', 4, 3, 1, 90, 'TGMT');
 
 
 insert into KHMO (MAHP, HK, NAM, MACT) values ('HP100', 'HK1', '2023-2024', 'CLC');
@@ -1250,18 +1250,6 @@ insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL
 insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values (998, 'Michelina Bernolet', 'Nam', '07-10-2017', '51250 Reinke Way', '241 747 0656', 'CLC', 'HTTT', 107, 7.1);
 insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values (999, 'Kym Huzzey', 'Nu', '03-01-2010', '671 Killdeer Drive', '199 962 8138', 'CLC', 'KHDL', 110, 8.6);
 insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values (1000, 'Stearne Belch', 'Nam', '08-04-2011', '41 5th Place', '206 527 8046', 'VP', 'HTTT', 114, 8.6);
-
-
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV001', 'HP100', 'HK1', '2023-2024', 'CLC');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV008', 'HP085', 'HK2', '2023-2024', 'CLC');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV003', 'HP120', 'HK3', '2023-2024', 'CQ');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV006', 'HP075', 'HK1', '2023-2024', 'CLC');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV008', 'HP090', 'HK2', '2023-2024', 'CLC');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV003', 'HP110', 'HK3', '2023-2024', 'VP');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV001', 'HP095', 'HK1', '2023-2024', 'VP');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV001', 'HP105', 'HK2', '2023-2024', 'CQ');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV004', 'HP080', 'HK3', '2023-2024', 'CQ');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV002', 'HP115', 'HK1', '2023-2024', 'VP');
 
 
 insert into DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values (1, 'GV001', 'HP100', 'HK1', '2023-2024', 'CLC', 8.1, 8.4, 6.8, 5.7);

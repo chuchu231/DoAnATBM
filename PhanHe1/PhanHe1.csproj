@@ -128,6 +128,18 @@
     <Compile Include="UC_AllUser.Designer.cs">
       <DependentUpon>UC_AllUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC_DetailRole.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_DetailRole.Designer.cs">
+      <DependentUpon>UC_DetailRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_DetailUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_DetailUser.Designer.cs">
+      <DependentUpon>UC_DetailUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC_GrantRevoke.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -167,6 +179,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_AllUser.resx">
       <DependentUpon>UC_AllUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_DetailRole.resx">
+      <DependentUpon>UC_DetailRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_DetailUser.resx">
+      <DependentUpon>UC_DetailUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_GrantRevoke.resx">
       <DependentUpon>UC_GrantRevoke.cs</DependentUpon>
