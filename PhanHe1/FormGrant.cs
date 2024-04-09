@@ -186,8 +186,8 @@ namespace PhanHe1
                     {
                         connection.Open();
                         command.ExecuteNonQuery();
-                        MessageBox.Show("Thành công");
-
+                        //MessageBox.Show("Thành công");
+                        MessageBox.Show(query);
                     }
                     catch (Exception ex)
                     {
@@ -219,27 +219,7 @@ namespace PhanHe1
                     break;
                 }
             }
-            if (privs == "INSERT" || privs == "UPDATE")
-            {
-                string att = "";
-                for (int i = 0; i < att_list.Items.Count; i++)
-                {
-                    if (att_list.GetItemChecked(i))
-                    {
-                        att += att_list.Items[i].ToString();
-                        att += ",";
-                    }
-                }
-                att = att.Substring(0, att.Length - 1);
-                query = "REVOKE " + privs + " (" + att + ") ON " + userId + "." + tablename + " FROM " + user;
-
-
-            }
-            else
-            {
-                query = "REVOKE " + privs + " ON " + userId + "." + tablename + " FROM " + user;
-            }
-            if (check_grantopt.Checked == true) { query += " WITH GRANT OPTION"; }
+            query = "REVOKE " + privs + " ON " + userId + "." + tablename + " FROM " + user;
             
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
@@ -250,7 +230,6 @@ namespace PhanHe1
                         connection.Open();
                         command.ExecuteNonQuery();
                         MessageBox.Show("Thành công");
-
                     }
                     catch (Exception ex)
                     {
