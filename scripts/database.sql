@@ -3,6 +3,7 @@ alter session set "_ORACLE_SCRIPT" = true;
 -- Grant admin with pw admin123
 drop user admin cascade;
 create user admin identified by admin123;
+grant grant any role to admin;
 grant all privileges to admin;
 grant create session to admin;
 
@@ -26,7 +27,7 @@ ALTER TABLE HOCPHAN DROP CONSTRAINT fk_hocphan_donvi;
 -- Xóa các ràng bu?c trên b?ng KHMO
 ALTER TABLE KHMO DROP CONSTRAINT fk_khmo_hocphan;
 
--- Xóa b?ng ĐANGKY
+-- Xóa b?ng �?ANGKY
 DROP TABLE DANGKY;
 
 -- Xóa b?ng PHANCONG
@@ -118,7 +119,7 @@ CREATE TABLE PHANCONG (
     PRIMARY KEY (MAGV, MAHP, HK, NAM, MACT)
 );
 
--- T?o b?ng ĐANGKY
+-- T?o b?ng �?ANGKY
 CREATE TABLE DANGKY (
     MASV VARCHAR2(20),
     MAGV VARCHAR2(20),
@@ -143,7 +144,7 @@ select * from KHMO
 -- DONVI
 ALTER TABLE DONVI
 ADD CONSTRAINT fk_donvi_nhansu
-FOREIGN KEY (TRGĐV)
+FOREIGN KEY (TRG�?V)
 REFERENCES NHANSU(MANV);
 
 -- HOCPHAN
