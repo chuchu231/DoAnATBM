@@ -34,17 +34,17 @@
             this.allrole = new Guna.UI2.WinForms.Guna2DataGridView();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.searchtxb = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            this.UC_Containers = new System.Windows.Forms.Panel();
+            this.oracleDataAdapter1 = new Oracle.ManagedDataAccess.Client.OracleDataAdapter();
+            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pwtxtb = new Guna.UI2.WinForms.Guna2TextBox();
-            this.roletxtb = new Guna.UI2.WinForms.Guna2TextBox();
-            this.detailbtn = new Guna.UI2.WinForms.Guna2Button();
-            this.updatebtn = new Guna.UI2.WinForms.Guna2Button();
-            this.delRole_btn = new Guna.UI2.WinForms.Guna2Button();
-            this.addrole_btn = new Guna.UI2.WinForms.Guna2Button();
+            this.usernametxtb = new Guna.UI2.WinForms.Guna2TextBox();
+            this.addUser_btn = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.allrole)).BeginInit();
-            this.guna2Panel2.SuspendLayout();
+            this.UC_Containers.SuspendLayout();
+            this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // allrole
@@ -71,7 +71,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.allrole.DefaultCellStyle = dataGridViewCellStyle3;
             this.allrole.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.allrole.Location = new System.Drawing.Point(24, 67);
+            this.allrole.Location = new System.Drawing.Point(0, -2);
             this.allrole.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.allrole.Name = "allrole";
             this.allrole.RowHeadersVisible = false;
@@ -133,7 +133,7 @@
             this.searchtxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.searchtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.searchtxb.Location = new System.Drawing.Point(495, 30);
-            this.searchtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchtxb.Margin = new System.Windows.Forms.Padding(4);
             this.searchtxb.Name = "searchtxb";
             this.searchtxb.PasswordChar = '\0';
             this.searchtxb.PlaceholderText = "";
@@ -141,33 +141,42 @@
             this.searchtxb.Size = new System.Drawing.Size(179, 24);
             this.searchtxb.TabIndex = 6;
             // 
-            // guna2Panel2
+            // UC_Containers
             // 
-            this.guna2Panel2.BackColor = System.Drawing.Color.White;
-            this.guna2Panel2.BorderColor = System.Drawing.Color.Transparent;
-            this.guna2Panel2.BorderRadius = 16;
-            this.guna2Panel2.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-            this.guna2Panel2.BorderThickness = 7;
-            this.guna2Panel2.Controls.Add(this.label2);
-            this.guna2Panel2.Controls.Add(this.label1);
-            this.guna2Panel2.Controls.Add(this.pwtxtb);
-            this.guna2Panel2.Controls.Add(this.roletxtb);
-            this.guna2Panel2.Controls.Add(this.detailbtn);
-            this.guna2Panel2.Controls.Add(this.updatebtn);
-            this.guna2Panel2.Controls.Add(this.delRole_btn);
-            this.guna2Panel2.Controls.Add(this.addrole_btn);
-            this.guna2Panel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.guna2Panel2.Location = new System.Drawing.Point(611, 67);
-            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(187, 324);
-            this.guna2Panel2.TabIndex = 4;
+            this.UC_Containers.Controls.Add(this.allrole);
+            this.UC_Containers.Location = new System.Drawing.Point(24, 67);
+            this.UC_Containers.Name = "UC_Containers";
+            this.UC_Containers.Size = new System.Drawing.Size(581, 324);
+            this.UC_Containers.TabIndex = 7;
+            // 
+            // oracleDataAdapter1
+            // 
+            this.oracleDataAdapter1.RowUpdated += new Oracle.ManagedDataAccess.Client.OracleRowUpdatedEventHandler(this.oracleDataAdapter1_RowUpdated);
+            // 
+            // guna2Panel1
+            // 
+            this.guna2Panel1.BackColor = System.Drawing.Color.White;
+            this.guna2Panel1.BorderColor = System.Drawing.Color.Transparent;
+            this.guna2Panel1.BorderRadius = 16;
+            this.guna2Panel1.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+            this.guna2Panel1.BorderThickness = 7;
+            this.guna2Panel1.Controls.Add(this.label2);
+            this.guna2Panel1.Controls.Add(this.label1);
+            this.guna2Panel1.Controls.Add(this.pwtxtb);
+            this.guna2Panel1.Controls.Add(this.usernametxtb);
+            this.guna2Panel1.Controls.Add(this.addUser_btn);
+            this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.guna2Panel1.Location = new System.Drawing.Point(623, 65);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2Panel1.Name = "guna2Panel1";
+            this.guna2Panel1.Size = new System.Drawing.Size(187, 324);
+            this.guna2Panel1.TabIndex = 8;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label2.Location = new System.Drawing.Point(26, 112);
+            this.label2.Location = new System.Drawing.Point(27, 112);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 16);
             this.label2.TabIndex = 9;
@@ -177,11 +186,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(26, 41);
+            this.label1.Location = new System.Drawing.Point(27, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 16);
+            this.label1.Size = new System.Drawing.Size(70, 16);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Role";
+            this.label1.Text = "Username";
             // 
             // pwtxtb
             // 
@@ -197,7 +206,7 @@
             this.pwtxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.pwtxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.pwtxtb.Location = new System.Drawing.Point(20, 132);
-            this.pwtxtb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pwtxtb.Margin = new System.Windows.Forms.Padding(4);
             this.pwtxtb.Name = "pwtxtb";
             this.pwtxtb.PasswordChar = '\0';
             this.pwtxtb.PlaceholderText = "";
@@ -205,116 +214,64 @@
             this.pwtxtb.Size = new System.Drawing.Size(145, 26);
             this.pwtxtb.TabIndex = 5;
             // 
-            // roletxtb
+            // usernametxtb
             // 
-            this.roletxtb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.roletxtb.BorderRadius = 12;
-            this.roletxtb.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.roletxtb.DefaultText = "";
-            this.roletxtb.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.roletxtb.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.roletxtb.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.roletxtb.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.roletxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.roletxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.roletxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.roletxtb.Location = new System.Drawing.Point(20, 61);
-            this.roletxtb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.roletxtb.Name = "roletxtb";
-            this.roletxtb.PasswordChar = '\0';
-            this.roletxtb.PlaceholderText = "";
-            this.roletxtb.SelectedText = "";
-            this.roletxtb.Size = new System.Drawing.Size(145, 26);
-            this.roletxtb.TabIndex = 4;
+            this.usernametxtb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.usernametxtb.BorderRadius = 12;
+            this.usernametxtb.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.usernametxtb.DefaultText = "";
+            this.usernametxtb.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.usernametxtb.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.usernametxtb.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.usernametxtb.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.usernametxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.usernametxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.usernametxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.usernametxtb.Location = new System.Drawing.Point(20, 61);
+            this.usernametxtb.Margin = new System.Windows.Forms.Padding(4);
+            this.usernametxtb.Name = "usernametxtb";
+            this.usernametxtb.PasswordChar = '\0';
+            this.usernametxtb.PlaceholderText = "";
+            this.usernametxtb.SelectedText = "";
+            this.usernametxtb.Size = new System.Drawing.Size(145, 26);
+            this.usernametxtb.TabIndex = 4;
             // 
-            // detailbtn
+            // addUser_btn
             // 
-            this.detailbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.detailbtn.BorderRadius = 12;
-            this.detailbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.detailbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.detailbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.detailbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.detailbtn.FillColor = System.Drawing.Color.White;
-            this.detailbtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.detailbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.detailbtn.Location = new System.Drawing.Point(20, 281);
-            this.detailbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.detailbtn.Name = "detailbtn";
-            this.detailbtn.Size = new System.Drawing.Size(145, 30);
-            this.detailbtn.TabIndex = 3;
-            this.detailbtn.Text = "DETAIL";
-            // 
-            // updatebtn
-            // 
-            this.updatebtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.updatebtn.BorderRadius = 12;
-            this.updatebtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.updatebtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.updatebtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.updatebtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.updatebtn.FillColor = System.Drawing.Color.White;
-            this.updatebtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.updatebtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.updatebtn.Location = new System.Drawing.Point(20, 246);
-            this.updatebtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.updatebtn.Name = "updatebtn";
-            this.updatebtn.Size = new System.Drawing.Size(145, 30);
-            this.updatebtn.TabIndex = 2;
-            this.updatebtn.Text = "UPDATE";
-            // 
-            // delRole_btn
-            // 
-            this.delRole_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.delRole_btn.BorderRadius = 12;
-            this.delRole_btn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.delRole_btn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.delRole_btn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.delRole_btn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.delRole_btn.FillColor = System.Drawing.Color.White;
-            this.delRole_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.delRole_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.delRole_btn.Location = new System.Drawing.Point(20, 210);
-            this.delRole_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.delRole_btn.Name = "delRole_btn";
-            this.delRole_btn.Size = new System.Drawing.Size(145, 30);
-            this.delRole_btn.TabIndex = 1;
-            this.delRole_btn.Text = "DELETE";
-            // 
-            // addrole_btn
-            // 
-            this.addrole_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.addrole_btn.BorderRadius = 12;
-            this.addrole_btn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.addrole_btn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.addrole_btn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.addrole_btn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.addrole_btn.FillColor = System.Drawing.Color.White;
-            this.addrole_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.addrole_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.addrole_btn.Location = new System.Drawing.Point(20, 175);
-            this.addrole_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.addrole_btn.Name = "addrole_btn";
-            this.addrole_btn.Size = new System.Drawing.Size(145, 30);
-            this.addrole_btn.TabIndex = 0;
-            this.addrole_btn.Text = "ADD";
+            this.addUser_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.addUser_btn.BorderRadius = 12;
+            this.addUser_btn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.addUser_btn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.addUser_btn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.addUser_btn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.addUser_btn.FillColor = System.Drawing.Color.White;
+            this.addUser_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.addUser_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.addUser_btn.Location = new System.Drawing.Point(18, 235);
+            this.addUser_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.addUser_btn.Name = "addUser_btn";
+            this.addUser_btn.Size = new System.Drawing.Size(145, 30);
+            this.addUser_btn.TabIndex = 0;
+            this.addUser_btn.Text = "ADD";
+            this.addUser_btn.Click += new System.EventHandler(this.addUser_btn_Click);
             // 
             // UC_AllRole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.guna2Panel2);
+            this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.searchtxb);
             this.Controls.Add(this.guna2Button1);
-            this.Controls.Add(this.allrole);
+            this.Controls.Add(this.UC_Containers);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UC_AllRole";
             this.Size = new System.Drawing.Size(822, 416);
             this.Load += new System.EventHandler(this.UC_AllRole_Load);
             ((System.ComponentModel.ISupportInitialize)(this.allrole)).EndInit();
-            this.guna2Panel2.ResumeLayout(false);
-            this.guna2Panel2.PerformLayout();
+            this.UC_Containers.ResumeLayout(false);
+            this.guna2Panel1.ResumeLayout(false);
+            this.guna2Panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -323,14 +280,13 @@
         private Guna.UI2.WinForms.Guna2DataGridView allrole;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2TextBox searchtxb;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-        private Guna.UI2.WinForms.Guna2TextBox pwtxtb;
-        private Guna.UI2.WinForms.Guna2TextBox roletxtb;
-        private Guna.UI2.WinForms.Guna2Button detailbtn;
-        private Guna.UI2.WinForms.Guna2Button updatebtn;
-        private Guna.UI2.WinForms.Guna2Button delRole_btn;
-        private Guna.UI2.WinForms.Guna2Button addrole_btn;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel UC_Containers;
+        private Oracle.ManagedDataAccess.Client.OracleDataAdapter oracleDataAdapter1;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private Guna.UI2.WinForms.Guna2TextBox pwtxtb;
+        private Guna.UI2.WinForms.Guna2TextBox usernametxtb;
+        private Guna.UI2.WinForms.Guna2Button addUser_btn;
     }
 }

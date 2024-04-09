@@ -133,8 +133,8 @@
             this.privileges.ItemHeight = 30;
             this.privileges.Items.AddRange(new object[] {
             "SELECT",
-            "UPDATE",
             "INSERT",
+            "UPDATE",
             "DELETE"});
             this.privileges.Location = new System.Drawing.Point(137, 130);
             this.privileges.Name = "privileges";

@@ -9,6 +9,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Oracle.ManagedDataAccess.Client;
+using System.Configuration;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -18,6 +20,7 @@ namespace PhanHe1
     {
         OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
 
+        string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
         public FormGrant()
         {
             InitializeComponent();
@@ -25,78 +28,10 @@ namespace PhanHe1
 
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)
         {
-
+         
         }
 
-        private void grant_btn_Click(object sender, EventArgs e)
-        {
-            string query = "";
-            string user = username_role.Text;
-            string privs = privileges.Text;
-            string tablename = table.Text;
-            string userId = "";
-            string[] parts = connectionString.Split(';');
 
-            // Lặp qua từng phần con để tìm User Id
-            foreach (string part in parts)
-            {
-                // Tách phần con thành cặp key-value dựa trên dấu bằng 😊)
-                string[] keyValue = part.Split('=');
-
-                // Nếu phần tử đầu tiên trong cặp key-value là "User Id" (hoặc "User ID"), lấy giá trị của phần tử thứ hai
-                if (keyValue.Length == 2 && (keyValue[0].Trim().Equals("User Id", StringComparison.OrdinalIgnoreCase) || keyValue[0].Trim().Equals("User ID", StringComparison.OrdinalIgnoreCase)))
-                {
-                    userId = keyValue[1].Trim();
-                    break;
-                }
-            }
-            if (privs == "INSERT" || privs == "UPDATE")
-            {
-                string att = "";
-                for (int i = 0; i < att_list.Items.Count; i++)
-                {
-                    if (att_list.GetItemChecked(i))
-                    {
-                        att += att_list.Items[i].ToString();
-                        att += ",";
-                    }
-                }
-                att = att.Substring(0, att.Length - 1);
-                query = "GRANT " + privs + " (" + att + ") ON " + userId + "." + tablename + " TO " + user;
-
-
-            }
-            else
-            {
-                query = "GRANT " + privs + " ON " + userId + "." + tablename + " TO " + user;
-            }
-            if (check_grantopt.Checked == true) { query += " WITH GRANT OPTION"; }
-            Console.WriteLine(query);
-            using (OracleConnection connection = new OracleConnection(connectionString))
-            {
-                using (OracleCommand command = new OracleCommand(query, connection))
-                {
-                    try
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        MessageBox.Show("Thành công");
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine("Error: " + ex.Message);
-                    }
-                }
-            }
-        }
-
-        private void revoke_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        string connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
         private void PopulateComboBox()
         {
             try
@@ -136,19 +71,8 @@ namespace PhanHe1
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
-        private void FormGrant_Load(object sender, EventArgs e)
-        {
-            PopulateComboBox();
-        }
 
-        private void table_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (privileges.Text == "SELECT" || privileges.Text == "UPDATE" || privileges.Text=="" && privileges.Text !="")
-            {
-               populateAttList();
-            }
-        }
-        private void populateAttList()
+        private void PopulateAttList()
         {
             string tablename = table.Text;
             try
@@ -190,25 +114,156 @@ namespace PhanHe1
             }
         }
 
-        private void privileges_SelectedValueChanged(object sender, EventArgs e)
+        private void FormGrant_Load(object sender, EventArgs e)
         {
-            if (privileges.Text == "INSERT" ||  privileges.Text == "DELETE")
+            PopulateComboBox();
+        }
+
+     
+        private void table_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (privileges.Text == "INSERT" || privileges.Text == "UPDATE" || privileges.Text == "" )
+            {
+                PopulateAttList();
+            }
+        }
+
+         private void privileges_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (privileges.Text == "SELECT" || privileges.Text == "DELETE")
             {
                 att_list.Items.Clear();
-            }else
+            }
+            else
             {
-                populateAttList();
+                PopulateAttList();
+            }
+        }
+        
+        private void grant_btn_Click(object sender, EventArgs e)
+        {
+            string query = "";
+            string user = username_role.Text;
+            string privs = privileges.Text;
+            string tablename = table.Text;
+            string userId = "";
+            string[] parts = connectionString.Split(';');
+
+            // Lặp qua từng phần con để tìm User Id
+            foreach (string part in parts)
+            {
+                // Tách phần con thành cặp key-value dựa trên dấu bằng (=)
+                string[] keyValue = part.Split('=');
+
+                // Nếu phần tử đầu tiên trong cặp key-value là "User Id" (hoặc "User ID"), lấy giá trị của phần tử thứ hai
+                if (keyValue.Length == 2 && (keyValue[0].Trim().Equals("User Id", StringComparison.OrdinalIgnoreCase) || keyValue[0].Trim().Equals("User ID", StringComparison.OrdinalIgnoreCase)))
+                {
+                    userId = keyValue[1].Trim();
+                    break;
+                }
+            }
+            if (privs == "INSERT" || privs == "UPDATE")
+            {
+                string att = "";
+                for (int i = 0; i < att_list.Items.Count; i++)
+                {
+                    if (att_list.GetItemChecked(i))
+                    {
+                        att += att_list.Items[i].ToString();
+                        att += ",";
+                    }
+                }
+                att = att.Substring(0, att.Length - 1);
+                query = "GRANT " + privs + " (" + att + ") ON " + userId + "." + tablename + " TO " + user;
+
+
+            }
+            else
+            {
+                query = "GRANT " + privs + " ON " + userId + "." + tablename + " TO " + user;
+            }
+            if (check_grantopt.Checked == true) { query += " WITH GRANT OPTION"; }
+           
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                using (OracleCommand command = new OracleCommand(query, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Thành công");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void revoke_Click(object sender, EventArgs e)
+        {
+            string query = "";
+            string user = username_role.Text;
+            string privs = privileges.Text;
+            string tablename = table.Text;
+            string userId = "";
+            string[] parts = connectionString.Split(';');
+
+            // Lặp qua từng phần con để tìm User Id
+            foreach (string part in parts)
+            {
+                // Tách phần con thành cặp key-value dựa trên dấu bằng (=)
+                string[] keyValue = part.Split('=');
+
+                // Nếu phần tử đầu tiên trong cặp key-value là "User Id" (hoặc "User ID"), lấy giá trị của phần tử thứ hai
+                if (keyValue.Length == 2 && (keyValue[0].Trim().Equals("User Id", StringComparison.OrdinalIgnoreCase) || keyValue[0].Trim().Equals("User ID", StringComparison.OrdinalIgnoreCase)))
+                {
+                    userId = keyValue[1].Trim();
+                    break;
+                }
+            }
+            if (privs == "INSERT" || privs == "UPDATE")
+            {
+                string att = "";
+                for (int i = 0; i < att_list.Items.Count; i++)
+                {
+                    if (att_list.GetItemChecked(i))
+                    {
+                        att += att_list.Items[i].ToString();
+                        att += ",";
+                    }
+                }
+                att = att.Substring(0, att.Length - 1);
+                query = "REVOKE " + privs + " (" + att + ") ON " + userId + "." + tablename + " FROM " + user;
+
+
+            }
+            else
+            {
+                query = "REVOKE " + privs + " ON " + userId + "." + tablename + " FROM " + user;
+            }
+            if (check_grantopt.Checked == true) { query += " WITH GRANT OPTION"; }
+            
+            using (OracleConnection connection = new OracleConnection(connectionString))
+            {
+                using (OracleCommand command = new OracleCommand(query, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        MessageBox.Show("Thành công");
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: " + ex.Message);
+                    }
+                }
             }
         }
     }
 }
-
-
-    
-
-
-
-
-
-
-
