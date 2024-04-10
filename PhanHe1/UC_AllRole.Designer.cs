@@ -37,6 +37,7 @@
             this.UC_Containers = new System.Windows.Forms.Panel();
             this.oracleDataAdapter1 = new Oracle.ManagedDataAccess.Client.OracleDataAdapter();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btn_Update = new Guna.UI2.WinForms.Guna2Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pwtxtb = new Guna.UI2.WinForms.Guna2TextBox();
@@ -60,8 +61,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.allrole.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.allrole.ColumnHeadersHeight = 4;
-            this.allrole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.allrole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
@@ -75,7 +75,7 @@
             this.allrole.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.allrole.Name = "allrole";
             this.allrole.RowHeadersVisible = false;
-            this.allrole.RowHeadersWidth = 62;
+            this.allrole.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.allrole.RowTemplate.Height = 28;
             this.allrole.Size = new System.Drawing.Size(581, 324);
             this.allrole.TabIndex = 3;
@@ -90,7 +90,7 @@
             this.allrole.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.allrole.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.allrole.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.allrole.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.allrole.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.allrole.ThemeStyle.HeaderStyle.Height = 4;
             this.allrole.ThemeStyle.ReadOnly = false;
             this.allrole.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
@@ -119,6 +119,7 @@
             this.guna2Button1.Size = new System.Drawing.Size(94, 34);
             this.guna2Button1.TabIndex = 5;
             this.guna2Button1.Text = "Search";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // searchtxb
             // 
@@ -160,6 +161,7 @@
             this.guna2Panel1.BorderRadius = 16;
             this.guna2Panel1.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
             this.guna2Panel1.BorderThickness = 7;
+            this.guna2Panel1.Controls.Add(this.btn_Update);
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Controls.Add(this.pwtxtb);
@@ -171,6 +173,25 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(187, 324);
             this.guna2Panel1.TabIndex = 8;
+            // 
+            // btn_Update
+            // 
+            this.btn_Update.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btn_Update.BorderRadius = 12;
+            this.btn_Update.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btn_Update.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btn_Update.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btn_Update.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btn_Update.FillColor = System.Drawing.Color.White;
+            this.btn_Update.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_Update.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btn_Update.Location = new System.Drawing.Point(20, 264);
+            this.btn_Update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_Update.Name = "btn_Update";
+            this.btn_Update.Size = new System.Drawing.Size(145, 30);
+            this.btn_Update.TabIndex = 10;
+            this.btn_Update.Text = "UPDATE";
+            this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
             // 
             // label2
             // 
@@ -190,7 +211,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 16);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Username";
+            this.label1.Text = "Rolename";
             // 
             // pwtxtb
             // 
@@ -247,7 +268,7 @@
             this.addUser_btn.FillColor = System.Drawing.Color.White;
             this.addUser_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.addUser_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.addUser_btn.Location = new System.Drawing.Point(18, 235);
+            this.addUser_btn.Location = new System.Drawing.Point(20, 206);
             this.addUser_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addUser_btn.Name = "addUser_btn";
             this.addUser_btn.Size = new System.Drawing.Size(145, 30);
@@ -288,5 +309,6 @@
         private Guna.UI2.WinForms.Guna2TextBox pwtxtb;
         private Guna.UI2.WinForms.Guna2TextBox usernametxtb;
         private Guna.UI2.WinForms.Guna2Button addUser_btn;
+        private Guna.UI2.WinForms.Guna2Button btn_Update;
     }
 }

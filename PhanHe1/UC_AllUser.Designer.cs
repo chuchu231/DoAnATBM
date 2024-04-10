@@ -1,4 +1,6 @@
-﻿namespace PhanHe1
+﻿using System.Windows.Forms;
+
+namespace PhanHe1
 {
     partial class UC_AllUser
     {
@@ -32,6 +34,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btn_Update = new Guna.UI2.WinForms.Guna2Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pwtxtb = new Guna.UI2.WinForms.Guna2TextBox();
@@ -52,6 +55,7 @@
             this.guna2Panel1.BorderRadius = 16;
             this.guna2Panel1.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
             this.guna2Panel1.BorderThickness = 7;
+            this.guna2Panel1.Controls.Add(this.btn_Update);
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Controls.Add(this.pwtxtb);
@@ -64,6 +68,25 @@
             this.guna2Panel1.Size = new System.Drawing.Size(187, 324);
             this.guna2Panel1.TabIndex = 0;
             this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
+            // 
+            // btn_Update
+            // 
+            this.btn_Update.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btn_Update.BorderRadius = 12;
+            this.btn_Update.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btn_Update.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btn_Update.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btn_Update.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btn_Update.FillColor = System.Drawing.Color.White;
+            this.btn_Update.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btn_Update.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btn_Update.Location = new System.Drawing.Point(20, 269);
+            this.btn_Update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btn_Update.Name = "btn_Update";
+            this.btn_Update.Size = new System.Drawing.Size(145, 30);
+            this.btn_Update.TabIndex = 10;
+            this.btn_Update.Text = "UPDATE";
+            this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
             // 
             // label2
             // 
@@ -131,7 +154,6 @@
             // 
             // addUser_btn
             // 
-
             this.addUser_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.addUser_btn.BorderRadius = 12;
             this.addUser_btn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -141,7 +163,7 @@
             this.addUser_btn.FillColor = System.Drawing.Color.White;
             this.addUser_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.addUser_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.addUser_btn.Location = new System.Drawing.Point(20, 234);
+            this.addUser_btn.Location = new System.Drawing.Point(20, 212);
             this.addUser_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addUser_btn.Name = "addUser_btn";
             this.addUser_btn.Size = new System.Drawing.Size(145, 30);
@@ -187,11 +209,13 @@
             this.guna2Button1.Size = new System.Drawing.Size(95, 34);
             this.guna2Button1.TabIndex = 7;
             this.guna2Button1.Text = "Search";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // allusers
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.allusers.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.allusers.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
@@ -215,7 +239,7 @@
             this.allusers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.allusers.Name = "allusers";
             this.allusers.RowHeadersVisible = false;
-            this.allusers.RowHeadersWidth = 62;
+            this.allusers.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.allusers.RowTemplate.Height = 28;
             this.allusers.Size = new System.Drawing.Size(564, 324);
             this.allusers.TabIndex = 9;
@@ -277,11 +301,12 @@
         private Guna.UI2.WinForms.Guna2Button addUser_btn;
         private Guna.UI2.WinForms.Guna2TextBox searchtxb;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2TextBox pwtxtb;
-        private Guna.UI2.WinForms.Guna2TextBox usernametxtb;
+        public Guna.UI2.WinForms.Guna2TextBox pwtxtb;
+        public Guna.UI2.WinForms.Guna2TextBox usernametxtb;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Panel UC_Containers;
         public Guna.UI2.WinForms.Guna2DataGridView allusers;
+        private Guna.UI2.WinForms.Guna2Button btn_Update;
     }
 }
