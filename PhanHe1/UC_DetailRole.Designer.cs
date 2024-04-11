@@ -36,7 +36,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.updatebtn = new Guna.UI2.WinForms.Guna2Button();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.UC_Containers = new System.Windows.Forms.Panel();
             this.lb_RoleName = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -61,7 +60,7 @@
             this.guna2Button2.FillColor = System.Drawing.Color.WhiteSmoke;
             this.guna2Button2.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.guna2Button2.Location = new System.Drawing.Point(391, 257);
+            this.guna2Button2.Location = new System.Drawing.Point(307, 257);
             this.guna2Button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.Size = new System.Drawing.Size(145, 30);
@@ -84,7 +83,7 @@
             this.guna2Button1.FillColor = System.Drawing.Color.White;
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.guna2Button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.guna2Button1.Location = new System.Drawing.Point(210, 257);
+            this.guna2Button1.Location = new System.Drawing.Point(86, 257);
             this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(145, 30);
@@ -93,32 +92,11 @@
             this.guna2Button1.UseTransparentBackground = true;
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
-            // updatebtn
-            // 
-            this.updatebtn.AutoRoundedCorners = true;
-            this.updatebtn.BackColor = System.Drawing.Color.Transparent;
-            this.updatebtn.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.updatebtn.BorderRadius = 14;
-            this.updatebtn.BorderThickness = 2;
-            this.updatebtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.updatebtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.updatebtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.updatebtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.updatebtn.FillColor = System.Drawing.Color.White;
-            this.updatebtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.updatebtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.updatebtn.Location = new System.Drawing.Point(29, 257);
-            this.updatebtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.updatebtn.Name = "updatebtn";
-            this.updatebtn.Size = new System.Drawing.Size(145, 30);
-            this.updatebtn.TabIndex = 25;
-            this.updatebtn.Text = "UPDATE";
-            this.updatebtn.UseTransparentBackground = true;
-            this.updatebtn.Click += new System.EventHandler(this.updatebtn_Click);
-            // 
             // UC_Containers
             // 
+            this.UC_Containers.Controls.Add(this.guna2Button2);
             this.UC_Containers.Controls.Add(this.lb_RoleName);
+            this.UC_Containers.Controls.Add(this.guna2Button1);
             this.UC_Containers.Controls.Add(this.dataGridView1);
             this.UC_Containers.Controls.Add(this.DataGridView2);
             this.UC_Containers.Location = new System.Drawing.Point(0, 0);
@@ -251,9 +229,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.guna2Button2);
-            this.Controls.Add(this.guna2Button1);
-            this.Controls.Add(this.updatebtn);
             this.Controls.Add(this.UC_Containers);
             this.Name = "UC_DetailRole";
             this.Size = new System.Drawing.Size(564, 324);
@@ -268,7 +243,6 @@
         #endregion
         public Guna.UI2.WinForms.Guna2Button guna2Button2;
         public Guna.UI2.WinForms.Guna2Button guna2Button1;
-        public Guna.UI2.WinForms.Guna2Button updatebtn;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Windows.Forms.Panel UC_Containers;
         public Guna.UI2.WinForms.Guna2DataGridView dataGridView1;

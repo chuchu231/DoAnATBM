@@ -58,25 +58,26 @@ namespace PhanHe1
 
         }
 
-        private void updatebtn_Click(object sender, EventArgs e)
-        {
-            
-        }
+        
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
             this.dataGridView1.SendToBack();
             this.guna2Button1.SendToBack();
             this.guna2Button2.SendToBack();
-            this.updatebtn.SendToBack();
             var queryString = "SELECT * FROM ALL_USERS";
-
+            
             var dt = new DataTable();
             var da = new OracleDataAdapter(queryString, conn);
             da.Fill(dt);
 
             dataGridView2.DataSource = dt;
             dataGridView2.BringToFront();
+           /* this.Controls.Clear();
+            UC_AllUser uc = new UC_AllUser();
+            uc.allusers.Show();
+            uc.allusers.bing*/
+
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -104,15 +105,6 @@ namespace PhanHe1
                     uc.dataGridView1.DataSource = dataTable;
                 }
             }
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-
-        private void UC_Containers_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

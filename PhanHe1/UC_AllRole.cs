@@ -21,7 +21,7 @@ namespace PhanHe1
         void show()
         {
             UC_Containers.SendToBack();
-            var queryString = "SELECT * FROM dba_roles";
+            var queryString = "SELECT ROLE, ROLE_ID, PASSWORD_REQUIRED FROM dba_roles\r\n";
 
             var dt = new DataTable();
 
@@ -58,6 +58,8 @@ namespace PhanHe1
             UC_DetailRole uc = new UC_DetailRole();
             UC_Containers.BringToFront();
             addUserControl(uc);
+            this.usernametxtb.Text = this.allrole.Rows[e.RowIndex].Cells[0].Value.ToString(); ;
+            this.pwtxtb.Text = "*****";
             uc.lb_RoleName.Text = this.allrole.Rows[e.RowIndex].Cells[0].Value.ToString();
             conn.Open();
             using (OracleCommand command = new OracleCommand("GetRolePrivileges", conn))
@@ -108,6 +110,53 @@ namespace PhanHe1
             finally
             {
                 conn.Close();
+            }
+        }
+
+        private void btn_Update_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string rolename = this.usernametxtb.Text;
+
+                using (OracleCommand cmd = new OracleCommand("Alter_Role", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("Role_name", OracleDbType.Varchar2).Value = rolename;
+                    cmd.Parameters.Add("Password", OracleDbType.NVarchar2).Value = this.pwtxtb.Text;
+                    cmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Role " + rolename + " alter successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            string searchValue = this.searchtxb.Text.Trim();
+            bool userFound = false;
+            foreach (DataGridViewRow row in allrole.Rows)
+            {
+                if (row.Cells["Role"].Value != null &&
+                    row.Cells["Role"].Value.ToString().Equals(searchValue, StringComparison.OrdinalIgnoreCase))
+                {
+                    row.Selected = true;
+                    allrole.FirstDisplayedScrollingRowIndex = row.Index;
+                    userFound = true;
+                    break;
+                }
+            }
+            if (!userFound)
+            {
+                MessageBox.Show("Role not found.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

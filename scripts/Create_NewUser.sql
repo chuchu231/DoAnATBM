@@ -35,3 +35,7 @@ Begin
         END IF;
     END IF;
 End;
+GRANT DBA TO Cadmin2;
+GRANT EXECUTE ANY PROCEDURE TO Cadmin2;
+GRANT CREATE SESSION TO Cadmin2 CONTAINER = ALL;
+grant all privileges to cadmin2;

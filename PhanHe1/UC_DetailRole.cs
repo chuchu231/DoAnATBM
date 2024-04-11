@@ -31,7 +31,6 @@ namespace PhanHe1
             this.dataGridView1.SendToBack();
             this.guna2Button1.SendToBack();
             this.guna2Button2.SendToBack();
-            this.updatebtn.SendToBack();
             var queryString = "SELECT * FROM ALL_USERS";
 
             var dt = new DataTable();
@@ -43,39 +42,30 @@ namespace PhanHe1
 
         }
 
-        private void updatebtn_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                string username = row.Cells["ROLE"].Value.ToString();
-
-                using (OracleCommand cmd = new OracleCommand("Alter_Role", conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("Role_name", OracleDbType.Varchar2).Value = username;
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-            conn.Open();
             try
             {
+                conn.Open();
+                string rolename = this.lb_RoleName.Text;
+
                 using (OracleCommand cmd = new OracleCommand("Delete_Role", conn))
                 {
-                    string name = this.lb_RoleName.Text.ToString();
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("Role_name", OracleDbType.Varchar2).Value = name;
+                    cmd.Parameters.Add("Role_name", OracleDbType.Varchar2).Value = rolename;
                     cmd.ExecuteNonQuery();
                 }
+                MessageBox.Show("Deleted " + rolename + " successfully!");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
-            conn.Close();
+            finally
+            {
+                conn.Close();
+            }
         }
 
         private void DataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
