@@ -39,32 +39,30 @@ namespace PhanHe1
             conn.Open();
 
             string TABLENAME = guna2TextBox1.Text;
-            OracleCommand cmd = new OracleCommand("SELECT DISTINCT GRANTEE, TABLE_NAME FROM ALL_COL_PRIVS WHERE TABLE_NAME = '" + TABLENAME +"'" ,conn);
-           
-
-       
-
+            TABLENAME = TABLENAME.ToUpper();
+            OracleCommand cmd = new OracleCommand("SELECT GRANTOR, GRANTEE, TABLE_NAME, PRIVILEGE FROM ALL_TAB_PRIVS WHERE TABLE_NAME = '" + TABLENAME +"'" ,conn);
             using (OracleDataReader reader = cmd.ExecuteReader())
             {
+                Table.DataSource = null;
                 if (reader.HasRows)
                 {
                     DataTable dataTable = new DataTable();
                     dataTable.Load(reader);
-
                     Table.DataSource = dataTable;
                 }
             }
-             cmd = new OracleCommand("SELECT GRANTEE, TABLE_NAME, COLUMN_NAME , PRIVILEGE FROM ALL_COL_PRIVS WHERE TABLE_NAME = '" + TABLENAME + "'", conn);
+            cmd = new OracleCommand("SELECT GRANTEE, TABLE_NAME, COLUMN_NAME , PRIVILEGE FROM ALL_COL_PRIVS WHERE TABLE_NAME = '" + TABLENAME + "'", conn);
             using (OracleDataReader reader = cmd.ExecuteReader())
             {
+                Column.DataSource = null;
                 if (reader.HasRows)
                 {
                     DataTable dataTable = new DataTable();
                     dataTable.Load(reader);
-
                     Column.DataSource = dataTable;
                 }
             }
+            conn.Close();
         }
     }
 }

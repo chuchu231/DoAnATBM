@@ -9,8 +9,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Oracle.ManagedDataAccess.Client;
-using System.Configuration;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
@@ -173,10 +171,16 @@ namespace PhanHe1
                         att += ",";
                     }
                 }
-                att = att.Substring(0, att.Length - 1);
-                query = "GRANT " + privs + " (" + att + ") ON " + userId + "." + tablename + " TO " + user;
-
-
+                if (att.Length != 0)
+                {
+                    att = att.Substring(0, att.Length - 1);
+                    query = "GRANT " + privs + " (" + att + ") ON " + userId + "." + tablename + " TO " + user;
+                }
+                else
+                {
+                    query = "GRANT " + privs + " ON " + userId + "." + tablename + " TO " + user;
+                }
+              
             }
             else
             {
@@ -192,12 +196,13 @@ namespace PhanHe1
                     {
                         connection.Open();
                         command.ExecuteNonQuery();
-                        //MessageBox.Show("Thành công");
-                        MessageBox.Show(query);
+                        MessageBox.Show("Thành công");
+                        //MessageBox.Show(query);
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine("Error: " + ex.Message);
+                        //MessageBox.Show(query);
                     }
                 }
             }
