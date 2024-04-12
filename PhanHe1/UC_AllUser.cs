@@ -86,6 +86,8 @@ namespace PhanHe1
                     uc.dataGridView1.DataSource = dataTable;
                 }
             }
+            conn.Close();
+
         }
 
         private void UC_Containers_Paint(object sender, PaintEventArgs e)
@@ -126,7 +128,7 @@ namespace PhanHe1
         {
             try
             {
-                //conn.Open();
+                conn.Open();
                 string username = this.usernametxtb.Text;
                 this.allusers.Refresh();
                 using (OracleCommand cmd = new OracleCommand("Alter_User", conn))
