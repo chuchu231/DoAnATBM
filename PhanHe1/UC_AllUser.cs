@@ -109,7 +109,7 @@ namespace PhanHe1
                 cmd.Parameters.Add("Pass_Word", OracleDbType.NVarchar2).Value = password;
 
                 cmd.ExecuteNonQuery();
-
+                show();
                 MessageBox.Show("User " + username + " created successfully!");
             }
             catch (Exception ex)
@@ -128,7 +128,7 @@ namespace PhanHe1
             {
                 //conn.Open();
                 string username = this.usernametxtb.Text;
-                this.allusers.Refresh();    
+                this.allusers.Refresh();
                 using (OracleCommand cmd = new OracleCommand("Alter_User", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
@@ -143,7 +143,7 @@ namespace PhanHe1
                 UC_Containers.BringToFront();
                 addUserControl(uc);
 
-                uc.lb_UserName.Text = username;               
+                uc.lb_UserName.Text = username;
 
 
                 OracleCommand cmd2 = new OracleCommand("GetUserPrivilegesByUsername", conn);
@@ -177,6 +177,7 @@ namespace PhanHe1
         {
             string searchValue = this.searchtxb.Text.Trim();
             bool userFound = false;
+            this.allusers.Refresh();
             foreach (DataGridViewRow row in allusers.Rows)
             {
                 if (row.Cells["Username"].Value != null &&

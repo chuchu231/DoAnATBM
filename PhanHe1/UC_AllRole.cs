@@ -17,7 +17,6 @@ namespace PhanHe1
     {
         OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
 
-        int click = 0;
         void show()
         {
             UC_Containers.SendToBack();
@@ -76,6 +75,7 @@ namespace PhanHe1
                     uc.dataGridView1.DataSource = dataTable;
                 }
             }
+            conn.Close();
         }
 
         private void oracleDataAdapter1_RowUpdated(object sender, OracleRowUpdatedEventArgs e)
@@ -90,7 +90,9 @@ namespace PhanHe1
             {
                 string username = this.usernametxtb.Text;
                 string password = this.pwtxtb.Text;
-
+                if ( password == null) { 
+                    password = string.Empty;
+                }
                 conn.Open();
 
                 OracleCommand cmd = new OracleCommand("Create_NewRole", conn);
@@ -100,7 +102,7 @@ namespace PhanHe1
                 cmd.Parameters.Add("Pass_Word", OracleDbType.NVarchar2).Value = password;
 
                 cmd.ExecuteNonQuery();
-
+                show();
                 MessageBox.Show("Role " + username + " created successfully!");
             }
             catch (Exception ex)
@@ -114,16 +116,17 @@ namespace PhanHe1
         }
 
         private void btn_Update_Click(object sender, EventArgs e)
-        {
+        { 
             try
             {
                 string rolename = this.usernametxtb.Text;
-
-                using (OracleCommand cmd = new OracleCommand("Alter_Role", conn))
+                string pass = this.pwtxtb.Text;
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand("Alter_role", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("Role_name", OracleDbType.Varchar2).Value = rolename;
-                    cmd.Parameters.Add("Password", OracleDbType.NVarchar2).Value = this.pwtxtb.Text;
+                    cmd.Parameters.Add("role_name", OracleDbType.Varchar2).Value = rolename;
+                    cmd.Parameters.Add("pass_word", OracleDbType.NVarchar2).Value = pass;
                     cmd.ExecuteNonQuery();
                 }
 
