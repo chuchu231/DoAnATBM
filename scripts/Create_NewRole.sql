@@ -8,7 +8,9 @@ Begin
         RAISE_APPLICATION_ERROR(-20000,'Role da ton tai'); 
     ELSE 
         IF Pass_Word IS NULL THEN
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
             EXECUTE IMMEDIATE 'CREATE Role ' || Role_name; 
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = FALSE');
         ELSE
         execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
         execute immediate('Create role '|| Role_name||' identified by '||Pass_Word);

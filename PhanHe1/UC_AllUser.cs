@@ -26,7 +26,7 @@ namespace PhanHe1
         {
             UC_Containers.Controls.Clear();
             UC_Containers.SendToBack();
-            var queryString = "SELECT USERNAME, USER_ID, CREATED FROM ALL_USERS\r\n";
+            var queryString = "SELECT USERNAME, USER_ID, PASSWORD_CHANGE_DATE FROM DBA_USERS\r\n";
 
             var dt = new DataTable();
             var da = new OracleDataAdapter(queryString, conn);

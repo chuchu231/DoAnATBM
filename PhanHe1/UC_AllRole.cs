@@ -75,6 +75,20 @@ namespace PhanHe1
                     uc.dataGridView1.DataSource = dataTable;
                 }
             }
+            using (OracleCommand command = new OracleCommand("GetUsersOfRole", conn))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add("Role_name", OracleDbType.Varchar2).Value = this.allrole.Rows[e.RowIndex].Cells[0].Value.ToString();
+                command.Parameters.Add("UsersCursor", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+
+                using (OracleDataReader reader = command.ExecuteReader())
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable.Load(reader);
+                    uc.DGV_USERONROLE.DataSource = dataTable;
+                }
+            }
             conn.Close();
         }
 

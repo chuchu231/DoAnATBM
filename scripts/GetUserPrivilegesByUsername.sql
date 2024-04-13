@@ -4,8 +4,8 @@ AS
 BEGIN
     upper_user_name := UPPER(Username);
     OPEN UserCursor FOR
-    SELECT u.username, tp.table_name, tp.privilege
-    FROM DBA_TAB_PRIVS tp
-    JOIN dba_users u ON u.username = tp.grantee
-    WHERE u.username = upper_user_name;
+    SELECT TABLE_NAME , PRIVILEGE
+    FROM USER_TAB_PRIVS r
+    WHERE r.GRANTEE = upper_user_name;
+
 END;
