@@ -9,38 +9,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PhanHe1
 {
-    public partial class UC_GrantRevoke : UserControl
+    public partial class UC_TabAndView : UserControl
     {
-
         OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
-        public UC_GrantRevoke()
+        public UC_TabAndView()
         {
             InitializeComponent();
         }
 
-        private void GrantRevoke_btn_Click(object sender, EventArgs e)
+        private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
-            var grant_revoke = new FormGrant();
-            grant_revoke.Show();
+
         }
 
-        private void rolebtn_Click(object sender, EventArgs e)
-        {
-            var grant_revoke = new Form_Grant_Revoke_Role();
-            grant_revoke.Show();
-        }
 
+        // find table
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             conn.Open();
 
             string TABLENAME = guna2TextBox1.Text;
             TABLENAME = TABLENAME.ToUpper();
-            OracleCommand cmd = new OracleCommand("SELECT GRANTOR, GRANTEE, TABLE_NAME, PRIVILEGE FROM ALL_TAB_PRIVS WHERE TABLE_NAME = '" + TABLENAME +"'" ,conn);
+            OracleCommand cmd = new OracleCommand("SELECT TABLE_NAME FROM USER_TABLES WHERE TABLE_NAME = '" + TABLENAME + "'", conn);
             using (OracleDataReader reader = cmd.ExecuteReader())
             {
                 Table.DataSource = null;
@@ -51,18 +44,44 @@ namespace PhanHe1
                     Table.DataSource = dataTable;
                 }
             }
-            cmd = new OracleCommand("SELECT GRANTEE, TABLE_NAME, COLUMN_NAME , PRIVILEGE FROM ALL_COL_PRIVS WHERE TABLE_NAME = '" + TABLENAME + "'", conn);
+            
+            conn.Close();
+        }
+
+        private void SELECT_Click(object sender, EventArgs e)
+        {
+            conn.Open();
+
+            string TABLENAME = guna2TextBox1.Text;
+            TABLENAME = TABLENAME.ToUpper();
+            OracleCommand cmd = new OracleCommand("SELECT TABLE_NAME FROM USER_TABLES", conn);
             using (OracleDataReader reader = cmd.ExecuteReader())
             {
-                Column.DataSource = null;
+                Table.DataSource = null;
                 if (reader.HasRows)
                 {
                     DataTable dataTable = new DataTable();
                     dataTable.Load(reader);
-                    Column.DataSource = dataTable;
+                    Table.DataSource = dataTable;
+                }
+            }
+            cmd = new OracleCommand("SELECT VIEW_NAME FROM USER_VIEWS", conn);
+            using (OracleDataReader reader = cmd.ExecuteReader())
+            {
+                View.DataSource = null;
+                if (reader.HasRows)
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable.Load(reader);
+                    View.DataSource = dataTable;
                 }
             }
             conn.Close();
+        }
+
+        private void addTable_btn_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)

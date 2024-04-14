@@ -104,5 +104,11 @@ namespace PhanHe1
             UC_GrantRevoke uc = new UC_GrantRevoke();
             addUserControl(uc);
         }
+
+        private void TableAndView_Click_1(object sender, EventArgs e)
+        {
+            UC_TabAndView uc = new UC_TabAndView();
+            addUserControl(uc);
+        }
     }
 }
