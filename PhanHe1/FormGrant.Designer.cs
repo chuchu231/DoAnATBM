@@ -47,7 +47,7 @@
             this.guna2HtmlLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.guna2HtmlLabel2.Location = new System.Drawing.Point(14, 24);
             this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(140, 24);
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(120, 20);
             this.guna2HtmlLabel2.TabIndex = 18;
             this.guna2HtmlLabel2.Text = "Username/Role";
             // 
@@ -57,7 +57,7 @@
             this.guna2HtmlLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.guna2HtmlLabel3.Location = new System.Drawing.Point(14, 130);
             this.guna2HtmlLabel3.Name = "guna2HtmlLabel3";
-            this.guna2HtmlLabel3.Size = new System.Drawing.Size(61, 24);
+            this.guna2HtmlLabel3.Size = new System.Drawing.Size(51, 20);
             this.guna2HtmlLabel3.TabIndex = 19;
             this.guna2HtmlLabel3.Text = "Quyền";
             // 
@@ -67,7 +67,7 @@
             this.guna2HtmlLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel4.Location = new System.Drawing.Point(338, 24);
             this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(49, 24);
+            this.guna2HtmlLabel4.Size = new System.Drawing.Size(41, 20);
             this.guna2HtmlLabel4.TabIndex = 20;
             this.guna2HtmlLabel4.Text = "Bảng";
             // 
@@ -77,7 +77,7 @@
             this.guna2HtmlLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.guna2HtmlLabel5.Location = new System.Drawing.Point(338, 130);
             this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            this.guna2HtmlLabel5.Size = new System.Drawing.Size(98, 24);
+            this.guna2HtmlLabel5.Size = new System.Drawing.Size(82, 20);
             this.guna2HtmlLabel5.TabIndex = 21;
             this.guna2HtmlLabel5.Text = "Thuộc tính";
             // 
@@ -96,6 +96,7 @@
             this.table.Name = "table";
             this.table.Size = new System.Drawing.Size(159, 36);
             this.table.TabIndex = 22;
+            this.table.SelectedValueChanged += new System.EventHandler(this.table_SelectedValueChanged);
             // 
             // username_role
             // 
@@ -130,10 +131,16 @@
             this.privileges.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.privileges.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.privileges.ItemHeight = 30;
+            this.privileges.Items.AddRange(new object[] {
+            "SELECT",
+            "INSERT",
+            "UPDATE",
+            "DELETE"});
             this.privileges.Location = new System.Drawing.Point(137, 130);
             this.privileges.Name = "privileges";
             this.privileges.Size = new System.Drawing.Size(180, 36);
             this.privileges.TabIndex = 23;
+            this.privileges.SelectedValueChanged += new System.EventHandler(this.privileges_SelectedValueChanged);
             // 
             // att_list
             // 
@@ -142,7 +149,7 @@
             this.att_list.FormattingEnabled = true;
             this.att_list.Location = new System.Drawing.Point(419, 130);
             this.att_list.Name = "att_list";
-            this.att_list.Size = new System.Drawing.Size(139, 140);
+            this.att_list.Size = new System.Drawing.Size(139, 138);
             this.att_list.TabIndex = 25;
             // 
             // grant_btn
@@ -160,6 +167,7 @@
             this.grant_btn.Size = new System.Drawing.Size(138, 45);
             this.grant_btn.TabIndex = 26;
             this.grant_btn.Text = "Grant";
+            this.grant_btn.Click += new System.EventHandler(this.grant_btn_Click);
             // 
             // revoke
             // 
@@ -176,6 +184,7 @@
             this.revoke.Size = new System.Drawing.Size(138, 47);
             this.revoke.TabIndex = 27;
             this.revoke.Text = "Revoke";
+            this.revoke.Click += new System.EventHandler(this.revoke_Click);
             // 
             // check_grantopt
             // 
@@ -187,7 +196,7 @@
             this.check_grantopt.Font = new System.Drawing.Font("Yu Gothic UI", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.check_grantopt.Location = new System.Drawing.Point(419, 79);
             this.check_grantopt.Name = "check_grantopt";
-            this.check_grantopt.Size = new System.Drawing.Size(172, 23);
+            this.check_grantopt.Size = new System.Drawing.Size(145, 19);
             this.check_grantopt.TabIndex = 28;
             this.check_grantopt.Text = "WITH GRANT OPTION";
             this.check_grantopt.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
@@ -214,6 +223,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FormGrant";
             this.Text = "Grant and revoke user/role";
+            this.Load += new System.EventHandler(this.FormGrant_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,12 +1,11 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD--MM--YYYY';
 alter session set "_ORACLE_SCRIPT" = true;
-drop user adm;
-create user adm identified by admin123;
-grant all privileges to adm;
-grant sysdba to adm;
-grant connect to adm;
-grant create session to adm;
-GRANT SELECT ANY DICTIONARY TO adm;
+-- Grant admin with pw admin123
+drop user admin cascade;
+create user admin identified by admin123;
+grant grant any role to admin;
+grant all privileges to admin;
+grant create session to admin;
 
 --SELECT granted_role, grantee
 --    FROM dba_role_privs
@@ -35,31 +34,31 @@ ALTER TABLE NHANSU DROP CONSTRAINT fk_nhansu_donvi;
 -- DONVI
 ALTER TABLE NHANSU DROP CONSTRAINT fk_donvi_nhansu;
 
--- Xóa các ràng bu?c trên b?ng HOCPHAN
+-- XÃ³a cÃ¡c rÃ ng bu?c trÃªn b?ng HOCPHAN
 ALTER TABLE HOCPHAN DROP CONSTRAINT fk_hocphan_donvi;
 
--- Xóa các ràng bu?c trên b?ng KHMO
+-- XÃ³a cÃ¡c rÃ ng bu?c trÃªn b?ng KHMO
 ALTER TABLE KHMO DROP CONSTRAINT fk_khmo_hocphan;
 
--- Xóa b?ng ÐANGKY
+-- XÃ³a b?ng Ä?ANGKY
 DROP TABLE DANGKY;
 
--- Xóa b?ng PHANCONG
+-- XÃ³a b?ng PHANCONG
 DROP TABLE PHANCONG;
 
--- Xóa b?ng KHMO
+-- XÃ³a b?ng KHMO
 DROP TABLE KHMO;
 
--- Xóa b?ng HOCPHAN
+-- XÃ³a b?ng HOCPHAN
 DROP TABLE HOCPHAN;
 
--- Xóa b?ng DONVI
+-- XÃ³a b?ng DONVI
 DROP TABLE DONVI;
 
--- Xóa b?ng SINHVIEN
+-- XÃ³a b?ng SINHVIEN
 DROP TABLE SINHVIEN;
 
--- Xóa b?ng NHANSU
+-- XÃ³a b?ng NHANSU
 DROP TABLE NHANSU;
 
 
@@ -133,7 +132,7 @@ CREATE TABLE PHANCONG (
     PRIMARY KEY (MAGV, MAHP, HK, NAM, MACT)
 );
 
--- T?o b?ng ÐANGKY
+-- T?o b?ng Ä?ANGKY
 CREATE TABLE DANGKY (
     MASV VARCHAR2(20),
     MAGV VARCHAR2(20),
@@ -158,7 +157,7 @@ REFERENCES DONVI(MADV);
 -- DONVI
 ALTER TABLE DONVI
 ADD CONSTRAINT fk_donvi_nhansu
-FOREIGN KEY (TRGDV)
+FOREIGN KEY (TRGÄ?V)
 REFERENCES NHANSU(MANV);
 
 -- HOCPHAN
@@ -196,14 +195,14 @@ FOREIGN KEY (MAGV, MAHP, HK, NAM, MACT)
 REFERENCES PHANCONG(MAGV, MAHP, HK, NAM, MACT);
 
 -- Insert
-insert into DONVI (MADV, TENDV, TRGDV) values (N'VPK', N'Vãn ph?ng khoa', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'HTTT', N'B? môn HTTT', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'CNPM', N'B? môn CNPM', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'KHMT', N'B? môn KHMT', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'CNTT', N'B? môn CNTT', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'TGMT', N'B? môn TGMT', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'MMT', N'B? môn MMT và Vi?n thông', null);
-insert into DONVI (MADV, TENDV, TRGDV) values (N'GVK', N'Giáo v? khoa', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'VPK', N'VÄƒn ph?ng khoa', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'HTTT', N'B? mÃ´n HTTT', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'CNPM', N'B? mÃ´n CNPM', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'KHMT', N'B? mÃ´n KHMT', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'CNTT', N'B? mÃ´n CNTT', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'TGMT', N'B? mÃ´n TGMT', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'MMT', N'B? mÃ´n MMT vÃ  Vi?n thÃ´ng', null);
+insert into DONVI (MADV, TENDV, TRGDV) values (N'GVK', N'GiÃ¡o v? khoa', null);
 
 insert into NHANSU values('GV001', 'Nguyen Van An', 'Nam', '05-01-1989', 1000, '0768897001',  'Giang vien', 'HTTT');
 insert into NHANSU values('NV001', 'Nguyen Thi Bich', 'Nu', '06-07-1990', 1000, '0768897002',  'Nhan vien', 'VPK');
@@ -231,16 +230,16 @@ UPDATE DONVI SET TRGDV = 'NV001' WHERE MADV = 'VPK';
 UPDATE DONVI SET TRGDV = 'GVU001' WHERE MADV = 'GVK';
 
 
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP100', N'Cõ s? trí tu? nhân t?o', 4, 3, 1, 75, 'TGMT');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP085', N'H? qu?n tr? cõ s? d? li?u', 4, 2, 2, 90, 'CNTT');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP120', N'Cõ s? d? li?u', 4, 3, 1, 80, 'KHMT');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP100', N'CÆ¡ s? trÃ­ tu? nhÃ¢n t?o', 4, 3, 1, 75, 'TGMT');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP085', N'H? qu?n tr? cÆ¡ s? d? li?u', 4, 2, 2, 90, 'CNTT');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP120', N'CÆ¡ s? d? li?u', 4, 3, 1, 80, 'KHMT');
 insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP075', N'Thi?t k? ph?n m?m', 4, 3, 1, 120, 'HTTT');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP090', N'Quy ho?ch tuy?n tính', 3, 2, 1, 95, 'CNPM');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP110', N'Toán r?i r?c', 4, 2, 2, 90, 'CNPM');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP090', N'Quy ho?ch tuy?n tÃ­nh', 3, 2, 1, 95, 'CNPM');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP110', N'ToÃ¡n r?i r?c', 4, 2, 2, 90, 'CNPM');
 insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP095', N'Kh?i nghi?p', 2, 2, 0, 100, 'VPK');
 insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP105', N'L?p tr?nh ?ng d?ng', 4, 3, 1, 100, 'HTTT');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP080', N'M? hóa', 4, 3, 1, 110, 'CNPM');
-insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP115', N'An toàn và b?o m?t d? li?u', 4, 3, 1, 90, 'TGMT');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP080', N'M? hÃ³a', 4, 3, 1, 110, 'CNPM');
+insert into HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) values ('HP115', N'An toÃ n vÃ  b?o m?t d? li?u', 4, 3, 1, 90, 'TGMT');
 
 
 insert into KHMO (MAHP, HK, NAM, MACT) values ('HP100', 'HK1', '2023-2024', 'CLC');
