@@ -1,18 +1,33 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD--MM--YYYY';
 alter session set "_ORACLE_SCRIPT" = true;
--- Grant admin with pw admin123
-drop user admin cascade;
-create user admin identified by admin123;
-grant all privileges to admin;
-grant create session to admin;
+drop user adm;
+create user adm identified by admin123;
+grant all privileges to adm;
+grant sysdba to adm;
+grant connect to adm;
+grant create session to adm;
+GRANT SELECT ANY DICTIONARY TO adm;
 
+--SELECT granted_role, grantee
+--    FROM dba_role_privs
+--    WHERE granted_role = upper_role_name
+--    UNION
+--    SELECT granted_role, grantee
+--    FROM dba_role_privs
+--    WHERE grantee IN (SELECT username FROM dba_users WHERE username IN (SELECT grantee FROM dba_role_privs WHERE granted_role = upper_role_name));
+--
+--SELECT * FROM dba_role_privs r join dba_roles d on r.granted_role = d.role where d.role = 'RLTEST'
+--create user test2;
+--grant RLTEST to TEST2
+--create role RLTEST;
+--grant select on DANGKY to RLTEST;
 -- DANGKY
 ALTER TABLE DANGKY DROP CONSTRAINT fk_dangky_sinhvien;
 ALTER TABLE DANGKY DROP CONSTRAINT fk_dangky_phancong;
 
 -- PHANCONG
 ALTER TABLE PHANCONG DROP CONSTRAINT fk_phancong_nhansu;
-ALTER TABLE PHANCONG DROP CONSTRAINT fk_phancong_hocphan;
+ALTER TABLE PHANCONG DROP CONSTRAINT fk_phancong_KHMO;
 
 -- NHANSU
 ALTER TABLE NHANSU DROP CONSTRAINT fk_nhansu_donvi;
@@ -83,7 +98,7 @@ CREATE TABLE SINHVIEN (
 CREATE TABLE DONVI (
     MADV VARCHAR2(20) PRIMARY KEY,
     TENDV NVARCHAR2(100),
-    TRGDV NVARCHAR2(100)
+    TRGDV VARCHAR2(20)
 );
 
 -- T?o b?ng HOCPHAN
@@ -139,11 +154,11 @@ ALTER TABLE NHANSU
 ADD CONSTRAINT fk_nhansu_donvi
 FOREIGN KEY (MADV)
 REFERENCES DONVI(MADV);
-select * from KHMO
+
 -- DONVI
 ALTER TABLE DONVI
 ADD CONSTRAINT fk_donvi_nhansu
-FOREIGN KEY (TRGÐV)
+FOREIGN KEY (TRGDV)
 REFERENCES NHANSU(MANV);
 
 -- HOCPHAN
@@ -165,9 +180,9 @@ FOREIGN KEY (MAGV)
 REFERENCES NHANSU(MANV);
 
 ALTER TABLE PHANCONG
-ADD CONSTRAINT fk_phancong_hocphan
+ADD CONSTRAINT fk_phancong_KHMO
 FOREIGN KEY (MAHP, HK, NAM, MACT)
-REFERENCES HOCPHAN(MAHP, HK, NAM, MACT);
+REFERENCES KHMO(MAHP, HK, NAM, MACT);
 
 -- DANGKY
 ALTER TABLE DANGKY
@@ -1252,18 +1267,6 @@ insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL
 insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values (1000, 'Stearne Belch', 'Nam', '08-04-2011', '41 5th Place', '206 527 8046', 'VP', 'HTTT', 114, 8.6);
 
 
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV001', 'HP100', 'HK1', '2023-2024', 'CLC');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV008', 'HP085', 'HK2', '2023-2024', 'CLC');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV003', 'HP120', 'HK3', '2023-2024', 'CQ');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV006', 'HP075', 'HK1', '2023-2024', 'CLC');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV008', 'HP090', 'HK2', '2023-2024', 'CLC');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV003', 'HP110', 'HK3', '2023-2024', 'VP');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV001', 'HP095', 'HK1', '2023-2024', 'VP');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV001', 'HP105', 'HK2', '2023-2024', 'CQ');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV004', 'HP080', 'HK3', '2023-2024', 'CQ');
-insert into PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('GV002', 'HP115', 'HK1', '2023-2024', 'VP');
-
-
 insert into DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values (1, 'GV001', 'HP100', 'HK1', '2023-2024', 'CLC', 8.1, 8.4, 6.8, 5.7);
 insert into DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values (2, 'GV008', 'HP085', 'HK2', '2023-2024', 'CLC', 9.0, 8.3, 7.0, 6.8);
 insert into DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values (3, 'GV003', 'HP120', 'HK3', '2023-2024', 'CQ', 9.7, 7.1, 7.6, 8.4);
@@ -1274,4 +1277,3 @@ insert into DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIE
 insert into DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values (8, 'GV001', 'HP105', 'HK2', '2023-2024', 'CQ', 6.1, 5.8, 8.9, 9.5);
 insert into DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values (9, 'GV004', 'HP080', 'HK3', '2023-2024', 'CQ', 9.7, 8.4, 9.4, 5.2);
 insert into DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values (10, 'GV002', 'HP115', 'HK1', '2023-2024', 'VP', 8.2, 7.9, 6.2, 5.3);
-

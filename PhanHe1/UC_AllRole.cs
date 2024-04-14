@@ -19,7 +19,7 @@ namespace PhanHe1
 
         void show()
         {
-            var queryString = "SELECT * FROM dba_roles";
+            var queryString = "SELECT * FROM DBA_ROLES";
 
             var dt = new DataTable();
 
@@ -28,6 +28,8 @@ namespace PhanHe1
 
             allrole.DataSource = dt;
             conn.Close();
+            dt.Dispose();
+            da.Dispose();
         }
         public UC_AllRole()
         {
