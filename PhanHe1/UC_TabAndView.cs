@@ -1,23 +1,26 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PhanHe1
 {
     public partial class UC_TabAndView : UserControl
     {
+        private string connectionString;
         OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         public UC_TabAndView()
         {
             InitializeComponent();
+            connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+            // Replace placeholders with actual values
+            string username = Program.username.ToUpper(); // Assuming Program.username contains the username
+            string password = Program.password; // Assuming Program.password contains the password
+            connectionString = connectionString.Replace("{$user$}", username);
+            connectionString = connectionString.Replace("{$password%}", password);
+            conn = new OracleConnection(connectionString);
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
@@ -54,7 +57,7 @@ namespace PhanHe1
 
             string TABLENAME = guna2TextBox1.Text;
             TABLENAME = TABLENAME.ToUpper();
-            OracleCommand cmd = new OracleCommand("SELECT TABLE_NAME FROM USER_TABLES", conn);
+            OracleCommand cmd = new OracleCommand("SELECT TABLE_NAME FROM ALL_TABLES", conn);
             using (OracleDataReader reader = cmd.ExecuteReader())
             {
                 Table.DataSource = null;
@@ -65,7 +68,7 @@ namespace PhanHe1
                     Table.DataSource = dataTable;
                 }
             }
-            cmd = new OracleCommand("SELECT VIEW_NAME FROM USER_VIEWS", conn);
+            cmd = new OracleCommand("SELECT VIEW_NAME FROM ALL_VIEWS", conn);
             using (OracleDataReader reader = cmd.ExecuteReader())
             {
                 View.DataSource = null;

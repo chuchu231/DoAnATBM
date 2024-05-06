@@ -19,8 +19,9 @@ namespace PhanHe1
     {
         // connect db
 
-
+        private string connectionString;
         //OleDbConnection oleDbConn = new OleDbConnection("Provider=OraOLEDB.Oracle;Data Source=localhost;Persist Security Info=True;User ID=sys;Unicode=True");
+
         OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         void show()
         {
@@ -45,7 +46,19 @@ namespace PhanHe1
         public UC_AllUser()
         {
             InitializeComponent();
-        }
+        
+
+            connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+            // Replace placeholders with actual values
+            string username = Program.username.ToUpper(); // Assuming Program.username contains the username
+            string password = Program.password; // Assuming Program.password contains the password
+            connectionString = connectionString.Replace("{$user$}", username);
+            connectionString = connectionString.Replace("{$password%}", password);
+            conn = new OracleConnection(connectionString);
+
+
+    }
 
         private void UC_AllUser_Load(object sender, EventArgs e)
         {

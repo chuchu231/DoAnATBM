@@ -15,11 +15,19 @@ namespace PhanHe1
 {
     public partial class UC_GrantRevoke : UserControl
     {
-
+        private string connectionString;
         OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         public UC_GrantRevoke()
         {
             InitializeComponent();
+            connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+            // Replace placeholders with actual values
+            string username = Program.username.ToUpper(); // Assuming Program.username contains the username
+            string password = Program.password; // Assuming Program.password contains the password
+            connectionString = connectionString.Replace("{$user$}", username);
+            connectionString = connectionString.Replace("{$password%}", password);
+            conn = new OracleConnection(connectionString);
         }
 
         private void GrantRevoke_btn_Click(object sender, EventArgs e)
@@ -40,7 +48,7 @@ namespace PhanHe1
 
             string TABLENAME = guna2TextBox1.Text;
             TABLENAME = TABLENAME.ToUpper();
-            OracleCommand cmd = new OracleCommand("SELECT GRANTOR, GRANTEE, TABLE_NAME, PRIVILEGE FROM ALL_TAB_PRIVS WHERE TABLE_NAME = '" + TABLENAME +"'" ,conn);
+            OracleCommand cmd = new OracleCommand("SELECT GRANTOR, GRANTEE, TABLE_NAME, PRIVILEGE, GRANTABLE FROM ALL_TAB_PRIVS WHERE TABLE_NAME = '" + TABLENAME +"'" ,conn);
             using (OracleDataReader reader = cmd.ExecuteReader())
             {
                 Table.DataSource = null;
@@ -51,7 +59,7 @@ namespace PhanHe1
                     Table.DataSource = dataTable;
                 }
             }
-            cmd = new OracleCommand("SELECT GRANTEE, TABLE_NAME, COLUMN_NAME , PRIVILEGE FROM ALL_COL_PRIVS WHERE TABLE_NAME = '" + TABLENAME + "'", conn);
+            cmd = new OracleCommand("SELECT GRANTEE, TABLE_NAME, COLUMN_NAME , PRIVILEGE, GRANTABLE FROM ALL_COL_PRIVS WHERE TABLE_NAME = '" + TABLENAME + "'", conn);
             using (OracleDataReader reader = cmd.ExecuteReader())
             {
                 Column.DataSource = null;

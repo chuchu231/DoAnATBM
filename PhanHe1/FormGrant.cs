@@ -26,7 +26,7 @@ namespace PhanHe1
 
         private void guna2TextBox1_TextChanged(object sender, EventArgs e)
         {
-         
+
         }
 
 
@@ -117,16 +117,16 @@ namespace PhanHe1
             PopulateComboBox();
         }
 
-     
+
         private void table_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (privileges.Text == "INSERT" || privileges.Text == "UPDATE" || privileges.Text == "" )
+            if (privileges.Text == "INSERT" || privileges.Text == "UPDATE" || privileges.Text == "")
             {
                 PopulateAttList();
             }
         }
 
-         private void privileges_SelectedValueChanged(object sender, EventArgs e)
+        private void privileges_SelectedValueChanged(object sender, EventArgs e)
         {
             if (privileges.Text == "SELECT" || privileges.Text == "DELETE")
             {
@@ -137,7 +137,7 @@ namespace PhanHe1
                 PopulateAttList();
             }
         }
-        
+
         private void grant_btn_Click(object sender, EventArgs e)
         {
             string query = "";
@@ -180,14 +180,14 @@ namespace PhanHe1
                 {
                     query = "GRANT " + privs + " ON " + userId + "." + tablename + " TO " + user;
                 }
-              
+
             }
             else
             {
                 query = "GRANT " + privs + " ON " + userId + "." + tablename + " TO " + user;
             }
             if (check_grantopt.Checked == true) { query += " WITH GRANT OPTION"; }
-           
+
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
                 using (OracleCommand command = new OracleCommand(query, connection))
@@ -231,7 +231,7 @@ namespace PhanHe1
                 }
             }
             query = "REVOKE " + privs + " ON " + userId + "." + tablename + " FROM " + user;
-            
+
             using (OracleConnection connection = new OracleConnection(connectionString))
             {
                 using (OracleCommand command = new OracleCommand(query, connection))

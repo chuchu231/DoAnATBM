@@ -15,6 +15,7 @@ namespace PhanHe1
 {
     public partial class UC_AllRole : UserControl
     {
+        private string connectionString;
         OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
 
         void show()
@@ -42,6 +43,15 @@ namespace PhanHe1
         public UC_AllRole()
         {
             InitializeComponent();
+
+            connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+            // Replace placeholders with actual values
+            string username = Program.username.ToUpper(); // Assuming Program.username contains the username
+            string password = Program.password; // Assuming Program.password contains the password
+            connectionString = connectionString.Replace("{$user$}", username);
+            connectionString = connectionString.Replace("{$password%}", password);
+            conn = new OracleConnection(connectionString);
         }
 
         private void guna2HtmlLabel1_Click(object sender, EventArgs e)
@@ -106,7 +116,8 @@ namespace PhanHe1
             {
                 string username = this.usernametxtb.Text;
                 string password = this.pwtxtb.Text;
-                if ( password == null) { 
+                if (password == null)
+                {
                     password = string.Empty;
                 }
                 conn.Open();
@@ -132,7 +143,7 @@ namespace PhanHe1
         }
 
         private void btn_Update_Click(object sender, EventArgs e)
-        { 
+        {
             try
             {
                 string rolename = this.usernametxtb.Text;

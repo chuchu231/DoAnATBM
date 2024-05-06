@@ -14,11 +14,22 @@ namespace PhanHe1
 {
     public partial class UC_DetailRole : UserControl
     {
+        private string connectionString;
+        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
+
         public UC_DetailRole()
         {
             InitializeComponent();
+
+            connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+            // Replace placeholders with actual values
+            string username = Program.username.ToUpper(); // Assuming Program.username contains the username
+            string password = Program.password; // Assuming Program.password contains the password
+            connectionString = connectionString.Replace("{$user$}", username);
+            connectionString = connectionString.Replace("{$password%}", password);
+            conn = new OracleConnection(connectionString);
         }
-        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         private void addUserControl(UserControl uc)
         {
             uc.Dock = DockStyle.Fill;

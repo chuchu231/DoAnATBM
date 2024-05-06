@@ -15,9 +15,20 @@ namespace PhanHe1
 {
     public partial class UC_DetailUser : UserControl
     {
+        private string connectionString;
+        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
+
         public UC_DetailUser()
         {
             InitializeComponent();
+            connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+            // Replace placeholders with actual values
+            string username = Program.username.ToUpper(); // Assuming Program.username contains the username
+            string password = Program.password; // Assuming Program.password contains the password
+            connectionString = connectionString.Replace("{$user$}", username);
+            connectionString = connectionString.Replace("{$password%}", password);
+            conn = new OracleConnection(connectionString);
         }
         private void addUserControl(UserControl uc)
         {
@@ -26,7 +37,6 @@ namespace PhanHe1
             UC_Containers.Controls.Add(uc);
             uc.BringToFront();
         }
-        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             try
