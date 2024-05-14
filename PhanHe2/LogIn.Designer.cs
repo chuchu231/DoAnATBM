@@ -122,6 +122,7 @@
             this.txtBoxPassword.SelectedText = "";
             this.txtBoxPassword.Size = new System.Drawing.Size(351, 33);
             this.txtBoxPassword.TabIndex = 4;
+            this.txtBoxPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxPassword_KeyPress);
             // 
             // txtboxUsername
             // 
@@ -143,6 +144,7 @@
             this.txtboxUsername.SelectedText = "";
             this.txtboxUsername.Size = new System.Drawing.Size(351, 33);
             this.txtboxUsername.TabIndex = 3;
+            this.txtboxUsername.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtboxUsername_KeyPress);
             // 
             // label2
             // 

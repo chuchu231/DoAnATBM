@@ -16,7 +16,7 @@ namespace PhanHe2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HomeLEC());
+            Application.Run(new LogIn());
         }
     }
 }

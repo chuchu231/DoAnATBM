@@ -4,6 +4,7 @@ using Oracle.ManagedDataAccess.Client;
 using System.Configuration;
 using static System.Collections.Specialized.BitVector32;
 using static System.Net.Mime.MediaTypeNames;
+using System.Data;
 
 
 
@@ -13,7 +14,7 @@ namespace PhanHe2
     public partial class LogIn : Form
     {
         private string connectionString;
-        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
+        //OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         public static string username = "";
         public static string password = "";
         public static string work = "";
@@ -29,42 +30,77 @@ namespace PhanHe2
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            username = txtboxUsername.Text;
-            password = txtBoxPassword.Text;
-           
-            try
-            {
-                
+            string username = txtboxUsername.Text;
+            string password = txtBoxPassword.Text;
+
+          
                 connectionString = connectionString.Replace("{$user$}", username);
-                connectionString = connectionString.Replace("{$password%}", password);
-                conn = new OracleConnection(connectionString);
-
-                MessageBox.Show("Dang nhap thanh cong");
-
-                // Hiding LogIn form
-                this.Hide();
-
-                work = username.Substring(0, 3).ToUpper();
-                if (work == "NV0")
+                connectionString = connectionString.Replace("{$password%}", password); 
+                using (OracleConnection conn = new OracleConnection(connectionString))
                 {
-                    HomeStaff form = new HomeStaff();
-                    form.Show();
+                    try
+                    {
+                        conn.Open();
+                        if (conn.State == ConnectionState.Open)
+                        {
+                            MessageBox.Show("Đăng nhập thành công");
+
+                            // Hiding LogIn form
+                            this.Hide();
+
+                            string rolePrefix = username.Substring(0, 3).ToUpper();
+                            if (rolePrefix == "NV0")
+                            {
+                                HomeStaff form = new HomeStaff();
+                                form.Show();
+                            }
+                            else if (rolePrefix == "GV0" || rolePrefix == "TBM" || rolePrefix == "TK0")
+                            {
+                                HomeLEC form = new HomeLEC();
+                                form.Show();
+                            }
+                            else if (rolePrefix == "SV0")
+                            {
+                                HomeStudent form = new HomeStudent();
+                                form.Show();
+                            }
+                        }
+                        else
+                        {
+                            conn.Close();
+                            MessageBox.Show("Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.");
+                            txtboxUsername.Clear();
+                            txtBoxPassword.Clear();
+                        }
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine("Error: " + ex.Message);
+                        Console.WriteLine(txtboxUsername.Text + "" + txtBoxPassword.Text);
+                        //MessageBox.Show("Đăng nhập thất bại.");
+                        txtboxUsername.Clear();
+                        txtBoxPassword.Clear();
+                    }
                 }
-                else if (work == "GV0" || work == "TBM" || work == "TK0")
-                {
-                    HomeLEC form = new HomeLEC();
-                    form.Show();
-                }
-                else if (work == "SV0")
-                {
-                    HomeStudent form = new HomeStudent();
-                    form.Show();
-                }
-            }
-            catch (Exception ex)
+        }
+
+        private void txtBoxPassword_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
             {
-                MessageBox.Show(ex.ToString());
+                e.Handled = false;
+                btnLogIn_Click(sender, e);
             }
         }
+
+        private void txtboxUsername_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                txtBoxPassword.Focus();
+                e.Handled = true;
+            }
+        }
+
     }
 }
