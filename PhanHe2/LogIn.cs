@@ -64,23 +64,24 @@ namespace PhanHe2
                                 HomeStudent form = new HomeStudent();
                                 form.Show();
                             }
+                            else
+                            {
+                                conn.Close();
+                                MessageBox.Show("Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.");
+                                connectionString = connectionString.Replace(username, "{$user$}");
+                                connectionString = connectionString.Replace(password, "{$password%}");
                         }
-                        else
-                        {
-                            conn.Close();
-                            MessageBox.Show("Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.");
-                            txtboxUsername.Clear();
-                            txtBoxPassword.Clear();
                         }
+                        
                     }
                     catch(Exception ex)
-                    {
+                    {   
+                        conn.Close();
                         Console.WriteLine("Error: " + ex.Message);
-                        Console.WriteLine(txtboxUsername.Text + "" + txtBoxPassword.Text);
-                        //MessageBox.Show("Đăng nhập thất bại.");
-                        txtboxUsername.Clear();
-                        txtBoxPassword.Clear();
-                    }
+                        connectionString = connectionString.Replace( username, "{$user$}");
+                        connectionString = connectionString.Replace(password, "{$password%}");
+                    
+                }
                 }
         }
 
