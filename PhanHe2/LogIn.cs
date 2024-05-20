@@ -5,6 +5,7 @@ using System.Configuration;
 using static System.Collections.Specialized.BitVector32;
 using static System.Net.Mime.MediaTypeNames;
 using System.Data;
+using System.Drawing;
 
 
 
@@ -103,5 +104,27 @@ namespace PhanHe2
             }
         }
 
+        private void txtBoxPassword_Enter(object sender, EventArgs e)
+        {
+            txtBoxPassword.Text = "";
+
+            txtBoxPassword.ForeColor = Color.Black;
+
+            txtBoxPassword.UseSystemPasswordChar = true;
+        }
+
+        private void txtBoxPassword_Leave(object sender, EventArgs e)
+        {
+            if (txtBoxPassword.Text.Length == 0)
+            {
+                txtBoxPassword.ForeColor = Color.Gray;
+
+                txtBoxPassword.Text = "Enter password";
+
+                txtBoxPassword.UseSystemPasswordChar = false;
+
+                SelectNextControl(txtBoxPassword, true, true, false, true);
+            }
+        }
     }
 }

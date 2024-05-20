@@ -24,12 +24,85 @@ namespace PhanHe2
 
         private void Score_btn_Click(object sender, EventArgs e)
         {
-            if(LogIn.work != "SV0") {
-                var score = new FormScore_DANGKY();
-                score.Show();
-            } else
+            if (LogIn.work == "SV0")
             {
-                MessageBox.Show("Bạn không được cấp quyền");
+                // do something ?
+            }
+            else if (LogIn.work == "GVU")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "TBM")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "TK0")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "NV0")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "GV0")
+            {
+                // do something ?
+            }
+        }
+
+        private void insertbtn_Click(object sender, EventArgs e)
+        {
+            if (LogIn.work == "SV0")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "GVU")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "TBM")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "TK0")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "NV0")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "GV0")
+            {
+                // do something ?
+            }
+        }
+
+        private void delbtn_Click(object sender, EventArgs e)
+        {
+            if (LogIn.work == "SV0")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "GVU")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "TBM")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "TK0")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "NV0")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "GV0")
+            {
+                // do something ?
             }
         }
     }

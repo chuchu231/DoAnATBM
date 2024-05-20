@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label4 = new System.Windows.Forms.Label();
             this.MAGVtxb = new Guna.UI2.WinForms.Guna2TextBox();
             this.MACT = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -41,20 +41,20 @@
             this.searchtxb = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.UC_Containers = new System.Windows.Forms.Panel();
+            this.insertbtn = new Guna.UI2.WinForms.Guna2Button();
+            this.delbtn = new Guna.UI2.WinForms.Guna2Button();
+            this.updatebtn = new Guna.UI2.WinForms.Guna2Button();
+            this.DetailStaff = new Guna.UI2.WinForms.Guna2DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.HKtxb = new Guna.UI2.WinForms.Guna2TextBox();
             this.idtxtb = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.DetailStaff = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.insertbtn = new Guna.UI2.WinForms.Guna2Button();
-            this.delbtn = new Guna.UI2.WinForms.Guna2Button();
-            this.updatebtn = new Guna.UI2.WinForms.Guna2Button();
+            this.Score_btn = new Guna.UI2.WinForms.Guna2Button();
             this.label6 = new System.Windows.Forms.Label();
             this.MSSVtxb = new Guna.UI2.WinForms.Guna2TextBox();
-            this.Score_btn = new Guna.UI2.WinForms.Guna2Button();
             this.UC_Containers.SuspendLayout();
-            this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DetailStaff)).BeginInit();
+            this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label4
@@ -214,6 +214,118 @@
             this.UC_Containers.Size = new System.Drawing.Size(649, 496);
             this.UC_Containers.TabIndex = 40;
             // 
+            // insertbtn
+            // 
+            this.insertbtn.BackColor = System.Drawing.Color.White;
+            this.insertbtn.BorderRadius = 12;
+            this.insertbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.insertbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.insertbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.insertbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.insertbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.insertbtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.insertbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.insertbtn.Location = new System.Drawing.Point(38, 428);
+            this.insertbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.insertbtn.Name = "insertbtn";
+            this.insertbtn.Size = new System.Drawing.Size(163, 38);
+            this.insertbtn.TabIndex = 40;
+            this.insertbtn.Text = "INSERT";
+            this.insertbtn.Click += new System.EventHandler(this.insertbtn_Click);
+            // 
+            // delbtn
+            // 
+            this.delbtn.BackColor = System.Drawing.Color.White;
+            this.delbtn.BorderRadius = 12;
+            this.delbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.delbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.delbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.delbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.delbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.delbtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.delbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.delbtn.Location = new System.Drawing.Point(247, 428);
+            this.delbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.delbtn.Name = "delbtn";
+            this.delbtn.Size = new System.Drawing.Size(163, 38);
+            this.delbtn.TabIndex = 42;
+            this.delbtn.Text = "DELETE";
+            this.delbtn.Click += new System.EventHandler(this.delbtn_Click);
+            // 
+            // updatebtn
+            // 
+            this.updatebtn.BackColor = System.Drawing.Color.White;
+            this.updatebtn.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.updatebtn.BorderRadius = 12;
+            this.updatebtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.updatebtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.updatebtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.updatebtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.updatebtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.updatebtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.updatebtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.updatebtn.Location = new System.Drawing.Point(456, 428);
+            this.updatebtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.updatebtn.Name = "updatebtn";
+            this.updatebtn.Size = new System.Drawing.Size(163, 38);
+            this.updatebtn.TabIndex = 41;
+            this.updatebtn.Text = "UPDATE";
+            // 
+            // DetailStaff
+            // 
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.DetailStaff.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.DetailStaff.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DetailStaff.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.DetailStaff.ColumnHeadersHeight = 4;
+            this.DetailStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DetailStaff.DefaultCellStyle = dataGridViewCellStyle6;
+            this.DetailStaff.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.DetailStaff.Location = new System.Drawing.Point(0, 2);
+            this.DetailStaff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DetailStaff.Name = "DetailStaff";
+            this.DetailStaff.RowHeadersVisible = false;
+            this.DetailStaff.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.DetailStaff.RowTemplate.Height = 28;
+            this.DetailStaff.Size = new System.Drawing.Size(646, 402);
+            this.DetailStaff.TabIndex = 39;
+            this.DetailStaff.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
+            this.DetailStaff.ThemeStyle.AlternatingRowsStyle.Font = null;
+            this.DetailStaff.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
+            this.DetailStaff.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
+            this.DetailStaff.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
+            this.DetailStaff.ThemeStyle.BackColor = System.Drawing.Color.White;
+            this.DetailStaff.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.DetailStaff.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            this.DetailStaff.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.DetailStaff.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.DetailStaff.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.DetailStaff.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.DetailStaff.ThemeStyle.HeaderStyle.Height = 4;
+            this.DetailStaff.ThemeStyle.ReadOnly = false;
+            this.DetailStaff.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
+            this.DetailStaff.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.DetailStaff.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.DetailStaff.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.DetailStaff.ThemeStyle.RowsStyle.Height = 28;
+            this.DetailStaff.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            this.DetailStaff.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.DetailStaff.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_CellContentClick);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -295,115 +407,24 @@
             this.guna2Panel1.Size = new System.Drawing.Size(210, 500);
             this.guna2Panel1.TabIndex = 36;
             // 
-            // DetailStaff
+            // Score_btn
             // 
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            this.DetailStaff.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
-            this.DetailStaff.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DetailStaff.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
-            this.DetailStaff.ColumnHeadersHeight = 4;
-            this.DetailStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DetailStaff.DefaultCellStyle = dataGridViewCellStyle9;
-            this.DetailStaff.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.DetailStaff.Location = new System.Drawing.Point(0, 2);
-            this.DetailStaff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DetailStaff.Name = "DetailStaff";
-            this.DetailStaff.RowHeadersVisible = false;
-            this.DetailStaff.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.DetailStaff.RowTemplate.Height = 28;
-            this.DetailStaff.Size = new System.Drawing.Size(646, 402);
-            this.DetailStaff.TabIndex = 39;
-            this.DetailStaff.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
-            this.DetailStaff.ThemeStyle.AlternatingRowsStyle.Font = null;
-            this.DetailStaff.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
-            this.DetailStaff.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.Empty;
-            this.DetailStaff.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Empty;
-            this.DetailStaff.ThemeStyle.BackColor = System.Drawing.Color.White;
-            this.DetailStaff.ThemeStyle.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.DetailStaff.ThemeStyle.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.DetailStaff.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            this.DetailStaff.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.DetailStaff.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.DetailStaff.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            this.DetailStaff.ThemeStyle.HeaderStyle.Height = 4;
-            this.DetailStaff.ThemeStyle.ReadOnly = false;
-            this.DetailStaff.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.DetailStaff.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.DetailStaff.ThemeStyle.RowsStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.DetailStaff.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.DetailStaff.ThemeStyle.RowsStyle.Height = 28;
-            this.DetailStaff.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.DetailStaff.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.DetailStaff.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_CellContentClick);
-            // 
-            // insertbtn
-            // 
-            this.insertbtn.BackColor = System.Drawing.Color.White;
-            this.insertbtn.BorderRadius = 12;
-            this.insertbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.insertbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.insertbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.insertbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.insertbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.insertbtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.insertbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.insertbtn.Location = new System.Drawing.Point(38, 428);
-            this.insertbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.insertbtn.Name = "insertbtn";
-            this.insertbtn.Size = new System.Drawing.Size(163, 38);
-            this.insertbtn.TabIndex = 40;
-            this.insertbtn.Text = "INSERT";
-            // 
-            // delbtn
-            // 
-            this.delbtn.BackColor = System.Drawing.Color.White;
-            this.delbtn.BorderRadius = 12;
-            this.delbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.delbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.delbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.delbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.delbtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.delbtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.delbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.delbtn.Location = new System.Drawing.Point(247, 428);
-            this.delbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.delbtn.Name = "delbtn";
-            this.delbtn.Size = new System.Drawing.Size(163, 38);
-            this.delbtn.TabIndex = 42;
-            this.delbtn.Text = "DELETE";
-            // 
-            // updatebtn
-            // 
-            this.updatebtn.BackColor = System.Drawing.Color.White;
-            this.updatebtn.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.updatebtn.BorderRadius = 12;
-            this.updatebtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.updatebtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.updatebtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.updatebtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.updatebtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.updatebtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.updatebtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.updatebtn.Location = new System.Drawing.Point(456, 428);
-            this.updatebtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.updatebtn.Name = "updatebtn";
-            this.updatebtn.Size = new System.Drawing.Size(163, 38);
-            this.updatebtn.TabIndex = 41;
-            this.updatebtn.Text = "UPDATE";
+            this.Score_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Score_btn.BorderRadius = 12;
+            this.Score_btn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.Score_btn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.Score_btn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.Score_btn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.Score_btn.FillColor = System.Drawing.Color.White;
+            this.Score_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.Score_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.Score_btn.Location = new System.Drawing.Point(22, 430);
+            this.Score_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Score_btn.Name = "Score_btn";
+            this.Score_btn.Size = new System.Drawing.Size(163, 38);
+            this.Score_btn.TabIndex = 23;
+            this.Score_btn.Text = "ĐIỂM";
+            this.Score_btn.Click += new System.EventHandler(this.Score_btn_Click);
             // 
             // label6
             // 
@@ -437,25 +458,6 @@
             this.MSSVtxb.Size = new System.Drawing.Size(163, 32);
             this.MSSVtxb.TabIndex = 21;
             // 
-            // Score_btn
-            // 
-            this.Score_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.Score_btn.BorderRadius = 12;
-            this.Score_btn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.Score_btn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.Score_btn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.Score_btn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.Score_btn.FillColor = System.Drawing.Color.White;
-            this.Score_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.Score_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.Score_btn.Location = new System.Drawing.Point(22, 430);
-            this.Score_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Score_btn.Name = "Score_btn";
-            this.Score_btn.Size = new System.Drawing.Size(163, 38);
-            this.Score_btn.TabIndex = 23;
-            this.Score_btn.Text = "ĐIỂM";
-            this.Score_btn.Click += new System.EventHandler(this.Score_btn_Click);
-            // 
             // UC_DANGKY
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -468,9 +470,9 @@
             this.Name = "UC_DANGKY";
             this.Size = new System.Drawing.Size(925, 550);
             this.UC_Containers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DetailStaff)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DetailStaff)).EndInit();
             this.ResumeLayout(false);
 
         }

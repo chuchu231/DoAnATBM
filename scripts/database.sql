@@ -1,12 +1,13 @@
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD--MM--YYYY';
 alter session set "_ORACLE_SCRIPT" = true;
--- Grant admin with pw admin123
---drop user admin cascade;
---create user admin identified by admin123;
---grant grant any role to admin;
---grant all privileges to admin;
---grant create session to admin;
---grant connect to admin;
+--Grant admin with pw admin123
+drop user admin cascade;
+create user admin identified by admin123;
+grant grant any role to admin;
+grant all privileges to admin;
+grant create session to admin;
+grant connect to admin;
+GRANT EXECUTE ON DBMS_RLS TO ADMIN;
 
 --SELECT granted_role, grantee
 --    FROM dba_role_privs
@@ -177,23 +178,23 @@ REFERENCES HOCPHAN(MAHP);
 ALTER TABLE PHANCONG
 ADD CONSTRAINT fk_phancong_nhansu
 FOREIGN KEY (MAGV)
-REFERENCES NHANSU(MANV);
+REFERENCES NHANSU(MANV) DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE PHANCONG
 ADD CONSTRAINT fk_phancong_KHMO
 FOREIGN KEY (MAHP, HK, NAM, MACT)
-REFERENCES KHMO(MAHP, HK, NAM, MACT);
+REFERENCES KHMO(MAHP, HK, NAM, MACT) DEFERRABLE INITIALLY DEFERRED;
 
 -- DANGKY
 ALTER TABLE DANGKY
 ADD CONSTRAINT fk_dangky_sinhvien
 FOREIGN KEY (MASV)
-REFERENCES SINHVIEN(MASV);
+REFERENCES SINHVIEN(MASV) DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE DANGKY
 ADD CONSTRAINT fk_dangky_phancong
 FOREIGN KEY (MAGV, MAHP, HK, NAM, MACT)
-REFERENCES PHANCONG(MAGV, MAHP, HK, NAM, MACT);
+REFERENCES PHANCONG(MAGV, MAHP, HK, NAM, MACT) DEFERRABLE INITIALLY DEFERRED;
 
 -- Insert
 insert into DONVI (MADV, TENDV, TRGDV) values (N'VPK', N'Van phong khoa', null);
