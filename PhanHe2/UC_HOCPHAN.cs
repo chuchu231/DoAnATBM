@@ -100,5 +100,34 @@ namespace PhanHe2
                 // do something ?
             }
         }
+
+        private void UC_HOCPHAN_Load(object sender, EventArgs e)
+        {
+            // Load datagridview
+            if (LogIn.work == "SV0")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "GVU")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "TBM")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "TK0")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "NV0")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "GV0")
+            {
+                // do something ?
+            }
+        }
     }
 }

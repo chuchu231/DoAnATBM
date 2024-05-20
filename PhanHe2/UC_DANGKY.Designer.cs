@@ -324,7 +324,6 @@
             this.DetailStaff.ThemeStyle.RowsStyle.Height = 28;
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.DetailStaff.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_CellContentClick);
             // 
             // label1
             // 
@@ -469,6 +468,7 @@
             this.Controls.Add(this.guna2Panel1);
             this.Name = "UC_DANGKY";
             this.Size = new System.Drawing.Size(925, 550);
+            this.Load += new System.EventHandler(this.UC_DANGKY_Load);
             this.UC_Containers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DetailStaff)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
