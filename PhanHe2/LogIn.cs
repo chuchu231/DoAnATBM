@@ -14,8 +14,8 @@ namespace PhanHe2
 {
     public partial class LogIn : Form
     {
-        private string connectionString;
-        //OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
+        public static string connectionString;
+        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         public static string username = "";
         public static string password = "";
         public static string work = "";
@@ -54,11 +54,13 @@ namespace PhanHe2
                             {
                                 HomeStaff form = new HomeStaff();
                                 form.Show();
-                            }
+                            LogIn.work = rolePrefix;
+                        }
                             else if (rolePrefix == "GV0" || rolePrefix == "TBM" || rolePrefix == "TK0")
                             {
                                 HomeLEC form = new HomeLEC();
                                 form.Show();
+                                LogIn.work = rolePrefix;
                             }
                             else if (rolePrefix == "SV0")
                             {

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 namespace PhanHe2
 {
     public partial class UC_SINHVIEN : UserControl
-    {
+    { 
         public UC_SINHVIEN()
         {
             InitializeComponent();
@@ -33,11 +33,13 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
             }
             else if (LogIn.work == "NV0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
             }
             else if (LogIn.work == "GV0")
             {
@@ -61,11 +63,13 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
             }
             else if (LogIn.work == "NV0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
             }
             else if (LogIn.work == "GV0")
             {
@@ -89,40 +93,13 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                // do something ?
-            }
-            else if (LogIn.work == "NV0")
-            {
-                // do something ?
-            }
-            else if (LogIn.work == "GV0")
-            {
-                // do something ?
-            }
-        }
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
-        private void UC_SINHVIEN_Load(object sender, EventArgs e)
-        {
-            // Load datagridview
-            if (LogIn.work == "SV0")
-            {
-                // do something ?
-            }
-            else if (LogIn.work == "GVU")
-            {
-                // do something ?
-            }
-            else if (LogIn.work == "TBM")
-            {
-                // do something ?
-            }
-            else if (LogIn.work == "TK0")
-            {
-                // do something ?
             }
             else if (LogIn.work == "NV0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
             }
             else if (LogIn.work == "GV0")
             {

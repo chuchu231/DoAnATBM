@@ -1,4 +1,6 @@
-﻿namespace PhanHe2
+﻿using System;
+
+namespace PhanHe2
 {
     partial class UC_SINHVIEN
     {
@@ -375,6 +377,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.DetailStaff)).EndInit();
             this.ResumeLayout(false);
 
+        }
+
+
+        private void UC_SINHVIEN_Load(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

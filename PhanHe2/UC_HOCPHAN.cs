@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,11 +34,13 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
             }
             else if (LogIn.work == "NV0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
             }
             else if (LogIn.work == "GV0")
             {
@@ -61,11 +64,13 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
             }
             else if (LogIn.work == "NV0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
             }
             else if (LogIn.work == "GV0")
             {
@@ -89,11 +94,13 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
             }
             else if (LogIn.work == "NV0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
             }
             else if (LogIn.work == "GV0")
             {
@@ -118,11 +125,51 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                // do something ?
+                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                {
+                    conn.Open();
+
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.HOCPHAN", conn);
+                        using (OracleDataReader reader = cmd.ExecuteReader())
+                        {
+                            DetailStaff.DataSource = null;
+                            if (reader.HasRows)
+                            {
+                                DataTable dataTable = new DataTable();
+                                dataTable.Load(reader);
+                                DetailStaff.DataSource = dataTable;
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
+
             }
             else if (LogIn.work == "NV0")
             {
-                // do something ?
+                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                {
+                    conn.Open();
+
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.HOCPHAN", conn);
+                        using (OracleDataReader reader = cmd.ExecuteReader())
+                        {
+                            DetailStaff.DataSource = null;
+                            if (reader.HasRows)
+                            {
+                                DataTable dataTable = new DataTable();
+                                dataTable.Load(reader);
+                                DetailStaff.DataSource = dataTable;
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
+
             }
             else if (LogIn.work == "GV0")
             {
