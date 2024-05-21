@@ -15,8 +15,8 @@ namespace PhanHe2
     {
         private string connectionString;
         //OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
-        public static string username = "";
-        public static string password = "";
+        public static string username = "GV001";
+        public static string password = "GV001";
         public static string work = "";
         public LogIn()
         {
@@ -30,10 +30,9 @@ namespace PhanHe2
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            string username = txtboxUsername.Text;
-            string password = txtBoxPassword.Text;
+             username = txtboxUsername.Text;
+             password = txtBoxPassword.Text;
 
-          
                 connectionString = connectionString.Replace("{$user$}", username);
                 connectionString = connectionString.Replace("{$password%}", password); 
                 using (OracleConnection conn = new OracleConnection(connectionString))
