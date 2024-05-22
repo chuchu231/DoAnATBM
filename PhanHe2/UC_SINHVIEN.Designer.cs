@@ -30,9 +30,9 @@ namespace PhanHe2
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,6 +49,8 @@ namespace PhanHe2
             this.searchtxb = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.UC_Containers = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.mssv = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DetailStaff)).BeginInit();
             this.SuspendLayout();
@@ -60,8 +62,10 @@ namespace PhanHe2
             this.guna2Panel1.BorderRadius = 16;
             this.guna2Panel1.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
             this.guna2Panel1.BorderThickness = 7;
+            this.guna2Panel1.Controls.Add(this.label4);
             this.guna2Panel1.Controls.Add(this.label5);
             this.guna2Panel1.Controls.Add(this.label3);
+            this.guna2Panel1.Controls.Add(this.mssv);
             this.guna2Panel1.Controls.Add(this.delbtn);
             this.guna2Panel1.Controls.Add(this.PhoneNumbertxb);
             this.guna2Panel1.Controls.Add(this.DOB);
@@ -72,17 +76,17 @@ namespace PhanHe2
             this.guna2Panel1.Controls.Add(this.nametxtb);
             this.guna2Panel1.Controls.Add(this.addUser_btn);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(682, 77);
+            this.guna2Panel1.Location = new System.Drawing.Point(682, 57);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(210, 432);
+            this.guna2Panel1.Size = new System.Drawing.Size(210, 452);
             this.guna2Panel1.TabIndex = 16;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label5.Location = new System.Drawing.Point(29, 196);
+            this.label5.Location = new System.Drawing.Point(29, 258);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(102, 20);
             this.label5.TabIndex = 15;
@@ -92,7 +96,7 @@ namespace PhanHe2
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label3.Location = new System.Drawing.Point(28, 134);
+            this.label3.Location = new System.Drawing.Point(28, 196);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 20);
             this.label3.TabIndex = 13;
@@ -109,7 +113,7 @@ namespace PhanHe2
             this.delbtn.FillColor = System.Drawing.Color.White;
             this.delbtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.delbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.delbtn.Location = new System.Drawing.Point(22, 323);
+            this.delbtn.Location = new System.Drawing.Point(22, 366);
             this.delbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.delbtn.Name = "delbtn";
             this.delbtn.Size = new System.Drawing.Size(163, 38);
@@ -130,7 +134,7 @@ namespace PhanHe2
             this.PhoneNumbertxb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.PhoneNumbertxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.PhoneNumbertxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.PhoneNumbertxb.Location = new System.Drawing.Point(22, 221);
+            this.PhoneNumbertxb.Location = new System.Drawing.Point(22, 283);
             this.PhoneNumbertxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.PhoneNumbertxb.Name = "PhoneNumbertxb";
             this.PhoneNumbertxb.PasswordChar = '\0';
@@ -147,7 +151,7 @@ namespace PhanHe2
             this.DOB.FillColor = System.Drawing.Color.MediumPurple;
             this.DOB.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.DOB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DOB.Location = new System.Drawing.Point(22, 100);
+            this.DOB.Location = new System.Drawing.Point(22, 162);
             this.DOB.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.DOB.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.DOB.Name = "DOB";
@@ -166,7 +170,7 @@ namespace PhanHe2
             this.btn_Update.FillColor = System.Drawing.Color.White;
             this.btn_Update.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btn_Update.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btn_Update.Location = new System.Drawing.Point(22, 365);
+            this.btn_Update.Location = new System.Drawing.Point(22, 408);
             this.btn_Update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_Update.Name = "btn_Update";
             this.btn_Update.Size = new System.Drawing.Size(163, 38);
@@ -178,7 +182,7 @@ namespace PhanHe2
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label2.Location = new System.Drawing.Point(28, 77);
+            this.label2.Location = new System.Drawing.Point(28, 139);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(78, 20);
             this.label2.TabIndex = 9;
@@ -188,7 +192,7 @@ namespace PhanHe2
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(29, 15);
+            this.label1.Location = new System.Drawing.Point(29, 77);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(77, 20);
             this.label1.TabIndex = 8;
@@ -207,7 +211,7 @@ namespace PhanHe2
             this.addresstxb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.addresstxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.addresstxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.addresstxb.Location = new System.Drawing.Point(22, 159);
+            this.addresstxb.Location = new System.Drawing.Point(22, 221);
             this.addresstxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.addresstxb.Name = "addresstxb";
             this.addresstxb.PasswordChar = '\0';
@@ -229,7 +233,7 @@ namespace PhanHe2
             this.nametxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.nametxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.nametxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.nametxtb.Location = new System.Drawing.Point(22, 40);
+            this.nametxtb.Location = new System.Drawing.Point(22, 102);
             this.nametxtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nametxtb.Name = "nametxtb";
             this.nametxtb.PasswordChar = '\0';
@@ -249,7 +253,7 @@ namespace PhanHe2
             this.addUser_btn.FillColor = System.Drawing.Color.White;
             this.addUser_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.addUser_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.addUser_btn.Location = new System.Drawing.Point(22, 281);
+            this.addUser_btn.Location = new System.Drawing.Point(22, 324);
             this.addUser_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addUser_btn.Name = "addUser_btn";
             this.addUser_btn.Size = new System.Drawing.Size(163, 38);
@@ -259,27 +263,27 @@ namespace PhanHe2
             // 
             // DetailStaff
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.DetailStaff.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.DetailStaff.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.DetailStaff.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DetailStaff.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DetailStaff.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.DetailStaff.ColumnHeadersHeight = 4;
             this.DetailStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DetailStaff.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DetailStaff.DefaultCellStyle = dataGridViewCellStyle6;
             this.DetailStaff.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DetailStaff.Location = new System.Drawing.Point(32, 77);
             this.DetailStaff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -310,6 +314,7 @@ namespace PhanHe2
             this.DetailStaff.ThemeStyle.RowsStyle.Height = 28;
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.DetailStaff.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_CellClick);
             // 
             // searchtxb
             // 
@@ -324,7 +329,7 @@ namespace PhanHe2
             this.searchtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.searchtxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.searchtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.searchtxb.Location = new System.Drawing.Point(550, 23);
+            this.searchtxb.Location = new System.Drawing.Point(550, 11);
             this.searchtxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.searchtxb.Name = "searchtxb";
             this.searchtxb.PasswordChar = '\0';
@@ -344,7 +349,7 @@ namespace PhanHe2
             this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(771, 11);
+            this.guna2Button1.Location = new System.Drawing.Point(760, 2);
             this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(107, 42);
@@ -358,6 +363,38 @@ namespace PhanHe2
             this.UC_Containers.Name = "UC_Containers";
             this.UC_Containers.Size = new System.Drawing.Size(634, 405);
             this.UC_Containers.TabIndex = 20;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.label4.Location = new System.Drawing.Point(29, 11);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 20);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "MASV";
+            // 
+            // mssv
+            // 
+            this.mssv.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.mssv.BorderRadius = 12;
+            this.mssv.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.mssv.DefaultText = "";
+            this.mssv.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.mssv.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.mssv.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.mssv.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.mssv.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.mssv.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.mssv.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.mssv.Location = new System.Drawing.Point(22, 36);
+            this.mssv.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.mssv.Name = "mssv";
+            this.mssv.PasswordChar = '\0';
+            this.mssv.PlaceholderText = "";
+            this.mssv.SelectedText = "";
+            this.mssv.Size = new System.Drawing.Size(163, 32);
+            this.mssv.TabIndex = 16;
             // 
             // UC_SINHVIEN
             // 
@@ -399,5 +436,7 @@ namespace PhanHe2
         private Guna.UI2.WinForms.Guna2TextBox searchtxb;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         public System.Windows.Forms.Panel UC_Containers;
+        private System.Windows.Forms.Label label4;
+        public Guna.UI2.WinForms.Guna2TextBox mssv;
     }
 }

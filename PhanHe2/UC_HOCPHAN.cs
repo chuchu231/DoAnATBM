@@ -71,7 +71,27 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                try
+                {
+                    var queryString = "INSERT INTO ADMIN.HOCPHAN VALUES ('" + idtxtb.Text + "', '" + tenhptxb.Text + "', '" + SOTCtxb.Text + "', '"+STLTtxb.Text +"', '" + STTHtxb.Text + "', '" + SOSVTDtxb.Text+"')";
+
+                    using (conn = new OracleConnection(LogIn.connectionString))
+                    {
+                        conn.Open();
+                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        {
+
+                            Console.WriteLine(queryString);
+                            cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TBM")
             {
@@ -131,7 +151,27 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                try
+                {
+                    var queryString = "UPDATE ADMIN.HOCPHAN SET TENHP = '" + tenhptxb.Text + "' AND SOTC = '" + SOTCtxb.Text + "' AND STTL = '"+STLTtxb.Text+"' AND STTH ='"+STTHtxb.Text+"' AND SOSVTD ='"+SOSVTDtxb.Text+"' WHERE MAHP = '" + idtxtb.Text + "'";
+
+                    using (conn = new OracleConnection(LogIn.connectionString))
+                    {
+                        conn.Open();
+                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        {
+
+                            Console.WriteLine(queryString);
+                            cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TBM")
             {
@@ -165,7 +205,7 @@ namespace PhanHe2
                 STTHtxb.Enabled = false;
                 SOSVTDtxb.Enabled = false;
                 MADVtxb.Enabled = false;
-                var queryString = "SELECT * FROM CADMIN2.HOCPHAN\r\n";
+                var queryString = "SELECT * FROM ADMIN.HOCPHAN\r\n";
 
                 var dt = new DataTable();
 
@@ -183,7 +223,7 @@ namespace PhanHe2
             else if (LogIn.work == "GVU")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.HOCPHAN\r\n";
+                var queryString = "SELECT * FROM ADMIN.HOCPHAN\r\n";
 
                 var dt = new DataTable();
 
@@ -195,10 +235,6 @@ namespace PhanHe2
                 dt.Dispose();
                 da.Dispose();
             }
-            else if (LogIn.work == "TBM")
-            {
-                // do something ?
-            }
             else if (LogIn.work == "TK0")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
@@ -207,7 +243,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.HOCPHAN", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.HOCPHAN", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -223,7 +259,7 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.work == "NV0" || LogIn.work == "TBM")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -231,7 +267,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.HOCPHAN", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.HOCPHAN", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -255,7 +291,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.HOCPHAN", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.HOCPHAN", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -275,7 +311,7 @@ namespace PhanHe2
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             string key = searchtxb.Text;
-            var queryString = $"SELECT * FROM CADMIN2.HOCPHAN WHERE UPPER(MAHP) = UPPER('{key}') OR UPPER(TENHP) LIKE UPPER('%{key}%')\r\n";
+            var queryString = $"SELECT * FROM ADMIN.HOCPHAN WHERE UPPER(MAHP) = UPPER('{key}') OR UPPER(TENHP) LIKE UPPER('%{key}%')\r\n";
 
             var dt = new DataTable();
 
@@ -289,6 +325,17 @@ namespace PhanHe2
             DetailStaff.ReadOnly = true;
             conn.Close();
             dt.Dispose();
+        }
+
+        private void DetailStaff_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            idtxtb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[0].Value.ToString();
+            tenhptxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[1].Value.ToString();
+            SOTCtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[2].Value.ToString();
+            STLTtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[3].Value.ToString();
+            STTHtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[4].Value.ToString();
+            SOSVTDtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[5].Value.ToString();
+            MADVtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[6].Value.ToString();
         }
     }
 }

@@ -85,10 +85,6 @@ namespace PhanHe2
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
-            {
-                // do something ?
-            }
             else if (LogIn.work == "TBM")
             {
                 // do something ?
@@ -98,10 +94,10 @@ namespace PhanHe2
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.work == "NV0" || LogIn.work == "GVU")
             {
                 string query;
-                query = "UPDATE CADMIN2.NVCB_NHANSU_VIEW SET DT = '" + PhoneNumbertxb.Text + "'";
+                query = "UPDATE ADMIN.NVCB_NHANSU_VIEW SET DT = '" + PhoneNumbertxb.Text + "'";
                 Console.WriteLine(query);
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -138,14 +134,6 @@ namespace PhanHe2
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
-            {
-                // do something ?
-            }
-            else if (LogIn.work == "TBM")
-            {
-                // do something ?
-            }
             else if (LogIn.work == "TK0")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
@@ -154,7 +142,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.NHANSU", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.NHANSU", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -170,7 +158,7 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.work == "NV0" || LogIn.work == "TBM" || LogIn.work == "GVU")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -178,7 +166,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.NVCB_NHANSU_VIEW", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.NVCB_NHANSU_VIEW", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -202,7 +190,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.NVCB_NHANSU_VIEW", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.NVCB_NHANSU_VIEW", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;

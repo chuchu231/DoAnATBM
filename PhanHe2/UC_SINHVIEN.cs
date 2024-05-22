@@ -17,6 +17,7 @@ namespace PhanHe2
     {
         private string connectionString;
         OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
+        
         public UC_SINHVIEN()
         {
 
@@ -37,7 +38,27 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                try
+                {
+                    var queryString = "INSERT INTO ADMIN.SINHVIEN (MASV, HOTEN, NGSINH, DCHI, DT) VALUES ('" + mssv.Text + "', '" + nametxtb.Text + "', '" + DOB.Text + "', '" + addresstxb.Text + "', " + PhoneNumbertxb.Text + "')";
+
+                    using (conn = new OracleConnection(LogIn.connectionString))
+                    {
+                        conn.Open();
+                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        {
+
+                            Console.WriteLine(queryString);
+                            cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TBM")
             {
@@ -67,7 +88,7 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                
             }
             else if (LogIn.work == "TBM")
             {
@@ -97,7 +118,26 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                try
+                {
+
+                    var queryString = "UPDATE ADMIN.SINHVIEN SET HOTEN = '" + nametxtb.Text + "', NGSINH = '" + DOB.Text + "', DCHI = '" + addresstxb.Text + "', DT = '"+ PhoneNumbertxb.Text+"' " +
+                                        "WHEREMASV = '" + mssv.Text + "'";
+                    using (var conn = new OracleConnection(LogIn.connectionString))
+                    {
+                        conn.Open();
+                        using (var cmd = new OracleCommand(queryString, conn))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+
             }
             else if (LogIn.work == "TBM")
             {
@@ -126,10 +166,10 @@ namespace PhanHe2
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.work == "GVU" || LogIn.work == "TBM")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.SINHVIEN\r\n";
+                var queryString = "SELECT * FROM ADMIN.SINHVIEN\r\n";
 
                 var dt = new DataTable();
 
@@ -140,10 +180,6 @@ namespace PhanHe2
                 conn.Close();
                 dt.Dispose();
                 da.Dispose();
-            }
-            else if (LogIn.work == "TBM")
-            {
-                // do something ?
             }
             else if (LogIn.work == "TK0")
             {
@@ -157,6 +193,16 @@ namespace PhanHe2
             {
                 // do something ?
             }
+        }
+
+        private void DetailStaff_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            mssv.Text = this.DetailStaff.Rows[e.RowIndex].Cells[0].Value.ToString();
+            nametxtb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[1].Value.ToString();
+            DOB.Text = this.DetailStaff.Rows[e.RowIndex].Cells[3].Value.ToString();
+            addresstxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[4].Value.ToString();
+            PhoneNumbertxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[5].Value.ToString();
+
         }
     }
 }
