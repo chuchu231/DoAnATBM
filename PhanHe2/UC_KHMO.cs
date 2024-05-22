@@ -147,7 +147,7 @@ namespace PhanHe2
                 HKtxb.Enabled = false; 
                 Namtxb.Enabled = false;
                 MACT.Enabled = false;
-                var queryString = "SELECT * FROM ADMIN.KHMO\r\n";
+                var queryString = "SELECT * FROM CADMIN2.KHMO\r\n";
 
                 var dt = new DataTable();
 
@@ -164,7 +164,18 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                UC_Containers.SendToBack();
+                var queryString = "SELECT * FROM CADMIN2.KHMO\r\n";
+
+                var dt = new DataTable();
+
+                var da = new OracleDataAdapter(queryString, conn);
+                da.Fill(dt);
+                DetailStaff.DataSource = dt;
+
+                conn.Close();
+                dt.Dispose();
+                da.Dispose();
             }
             else if (LogIn.work == "TBM")
             {

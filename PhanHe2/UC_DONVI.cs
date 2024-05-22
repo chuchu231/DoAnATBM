@@ -8,14 +8,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
+
 
 namespace PhanHe2
 {
     public partial class UC_DONVI : UserControl
     {
+
+        private string connectionString;
+        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         public UC_DONVI()
         {
+
             InitializeComponent();
+            connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+            // Replace the placeholders with actual username and password
+            connectionString = connectionString.Replace("{$user$}", LogIn.username);
+            connectionString = connectionString.Replace("{$password%}", LogIn.password);
+            conn = new OracleConnection(connectionString);
         }
 
         private void addUser_btn_Click(object sender, EventArgs e)
@@ -117,7 +129,18 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                UC_Containers.SendToBack();
+                var queryString = "SELECT * FROM CADMIN2.DONVI\r\n";
+
+                var dt = new DataTable();
+
+                var da = new OracleDataAdapter(queryString, conn);
+                da.Fill(dt);
+                DetailStaff.DataSource = dt;
+
+                conn.Close();
+                dt.Dispose();
+                da.Dispose();
             }
             else if (LogIn.work == "TBM")
             {

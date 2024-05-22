@@ -20,6 +20,8 @@ namespace PhanHe2
     {
         private string connectionString;
         OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
+        string old_gv, old_hp, old_hk, old_nam, old_mact, dv;
+
         public UC_PHANCONG()
         {
             InitializeComponent();
@@ -42,12 +44,32 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TBM")
             {
-                // do something ?
+                try
+                {
+                    var queryString = "INSERT INTO CADMIN2.UV_TRGDV_QUANLY_PHANCONG VALUES ('" + MAGVtxb.Text + "', '" + dv + "', '" + idtxtb.Text + "', '" + HKtxb.Text + "', '" + Namtxb.Text + "', '" + MACT.Text + "')";
+
+                    using (conn = new OracleConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        {
+
+                            Console.WriteLine(queryString);
+                            cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TK0")
             {
                 string query;
-                query = "INSERT INTO KAN.TRK_PHANCONG_VIEW VALUES ('" + MAGVtxb.Text + "','" + idtxtb.Text + "','" + HKtxb.Text + "','" + Namtxb.Text + "','" + MACT.Text + "')";
+                query = "INSERT INTO CADMIN2.TRK_PHANCONG_VIEW VALUES ('" + MAGVtxb.Text + "','" + idtxtb.Text + "','" + HKtxb.Text + "','" + Namtxb.Text + "','" + MACT.Text + "')";
                 Console.WriteLine(query);
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -94,12 +116,36 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TBM")
             {
-                // do something ?
+                try
+                {
+                    string queryString = "DELETE FROM CADMIN2.PHANCONG WHERE MAGV = :MAGV AND MAHP = :MAHP AND HK = :HK AND NAM = :NAM AND MACT = :MACT";
+
+                    using (OracleConnection conn = new OracleConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        {
+                            cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MACT", MACT.Text));
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TK0")
             {
                 string query;
-                query = "DELETE FROM KAN.TRK_PHANCONG_VIEW WHERE MAGV = '" + MAGVtxb.Text + "' AND MAHP = '" + idtxtb.Text + "' AND HK ='" + HKtxb.Text + "' AND NAM='" + Namtxb.Text + "' AND MACT='" + MACT.Text + "'";
+                query = "DELETE FROM CADMIN2.TRK_PHANCONG_VIEW WHERE MAGV = '" + MAGVtxb.Text + "' AND MAHP = '" + idtxtb.Text + "' AND HK ='" + HKtxb.Text + "' AND NAM='" + Namtxb.Text + "' AND MACT='" + MACT.Text + "'";
                 Console.WriteLine(query);
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -142,11 +188,81 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                try
+                {
+
+                    var queryString = "UPDATE CADMIN2.UV_QUANLY_PHANCONG SET MANV = :MAGV, MAHP = :MAHP, HK = :HK, NAM = :NAM, MACT = :CT, MADV = :MADV " +
+                                        "WHERE MANV = :OMAGV AND MAHP = :OMAHP AND HK = :OHK AND NAM = :ONAM AND MACT = :OCT AND MADV = :MADV";
+                    using (var conn = new OracleConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (var cmd = new OracleCommand(queryString, conn))
+                        {
+                            cmd.CommandType = CommandType.Text;
+
+                            // Add parameters with correct placeholders and values
+                            cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":CT", MACT.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MADV", "VPK"));
+
+                            cmd.Parameters.Add(new OracleParameter(":OMAGV", old_gv));
+                            cmd.Parameters.Add(new OracleParameter(":OMAHP", old_hp));
+                            cmd.Parameters.Add(new OracleParameter(":OHK", old_hk));
+                            cmd.Parameters.Add(new OracleParameter(":ONAM", old_nam));
+                            cmd.Parameters.Add(new OracleParameter(":OCT", old_mact));
+
+
+
+                            // Execute the command
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TBM")
             {
-                // do something ?
+                try
+                {
+                    var queryString = "UPDATE CADMIN2.UV_TRGDV_QUANLY_PHANCONG SET MAGV = :MAGV, MAHP = :MAHP, HK = :HK, NAM = :NAM, MACT = :CT, MADV = :MADV " +
+                                 "WHERE MAGV = :OMAGV AND MAHP = :OMAHP AND HK = :OHK AND NAM = :ONAM AND MACT = :OCT AND MADV = :MADV";
+
+                    using (var conn = new OracleConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (var cmd = new OracleCommand(queryString, conn))
+                        {
+                            cmd.CommandType = CommandType.Text;
+
+                            // Add parameters with correct placeholders and values
+                            cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":CT", MACT.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MADV", dv));
+
+                            cmd.Parameters.Add(new OracleParameter(":OMAGV", old_gv));
+                            cmd.Parameters.Add(new OracleParameter(":OMAHP", old_hp));
+                            cmd.Parameters.Add(new OracleParameter(":OHK", old_hk));
+                            cmd.Parameters.Add(new OracleParameter(":ONAM", old_nam));
+
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TK0")
             {
@@ -173,22 +289,43 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                
+                UC_Containers.SendToBack();
+                var queryString = "SELECT * FROM CADMIN2.PHANCONG\r\n";
+
+                var dt = new DataTable();
+
+                var da = new OracleDataAdapter(queryString, conn);
+                da.Fill(dt);
+                DetailStaff.DataSource = dt;
+
+                conn.Close();
+                dt.Dispose();
+                da.Dispose();
             }
             else if (LogIn.work == "TBM")
             {
-                // do something ?
+                UC_Containers.SendToBack();
+                var queryString = "SELECT * FROM CADMIN2.UV_TRGDV_QUANLY_PHANCONG\r\n";
+
+                var dt = new DataTable();
+
+                var da = new OracleDataAdapter(queryString, conn);
+                da.Fill(dt);
+                DetailStaff.DataSource = dt;
+
+                conn.Close();
+                dt.Dispose();
+                da.Dispose();
             }
             else if (LogIn.work == "TK0")
             {
-                Console.WriteLine("in here");
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
                     conn.Open();
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.PHANCONG", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.PHANCONG", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -210,7 +347,6 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GV0")
             {
-                Console.WriteLine("in here");
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
                     conn.Open();
@@ -237,6 +373,47 @@ namespace PhanHe2
         private void guna2Button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void DetailStaff_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (LogIn.work == "TBM")
+            {
+                if (e.RowIndex >= 0 && e.RowIndex < DetailStaff.Rows.Count)
+                {
+                    DataGridViewRow row = DetailStaff.Rows[e.RowIndex];
+
+                    MAGVtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    idtxtb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    HKtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    Namtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    MACT.Text = this.DetailStaff.Rows[e.RowIndex].Cells[5].Value.ToString();
+                    dv = this.DetailStaff.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                }
+            }
+            else
+            {
+                if (e.RowIndex >= 0 && e.RowIndex < DetailStaff.Rows.Count)
+                {
+                    DataGridViewRow row = DetailStaff.Rows[e.RowIndex];
+
+                    MAGVtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[0].Value.ToString();
+                    idtxtb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[1].Value.ToString();
+                    HKtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[2].Value.ToString();
+                    Namtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    MACT.Text = this.DetailStaff.Rows[e.RowIndex].Cells[4].Value.ToString();
+
+
+                }
+            }
+
+            // Store old values for potential update operation
+            old_gv = MAGVtxb.Text;
+            old_hp = idtxtb.Text;
+            old_hk = HKtxb.Text;
+            old_nam = Namtxb.Text;
+            old_mact = MACT.Text;
         }
     }
 }

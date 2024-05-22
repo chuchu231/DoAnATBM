@@ -380,10 +380,6 @@ namespace PhanHe2
         }
 
 
-        private void UC_SINHVIEN_Load(object sender, EventArgs e)
-        {
-           // throw new NotImplementedException();
-        }
 
         #endregion
 

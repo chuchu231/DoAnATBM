@@ -50,7 +50,6 @@ namespace PhanHe2
             UC_Container.Controls.Clear();
             UC_Container.Controls.Add(uc);
             uc.BringToFront();
-
         }
         private void Nhansu_Click(object sender, EventArgs e)
         {
@@ -84,8 +83,16 @@ namespace PhanHe2
 
         private void Phancong_Click(object sender, EventArgs e)
         {
-            UC_PHANCONG uc = new UC_PHANCONG();
-            addUserControl(uc);
+            if (LogIn.work == "TBM")
+            {
+                UC_TBM_CHOICE uc = new UC_TBM_CHOICE();
+                addUserControl(uc);
+            }
+            else
+            {
+                UC_PHANCONG uc = new UC_PHANCONG();
+                addUserControl(uc);
+            }
         }
 
         private void DangKy_Click(object sender, EventArgs e)

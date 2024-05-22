@@ -165,7 +165,7 @@ namespace PhanHe2
                 STTHtxb.Enabled = false;
                 SOSVTDtxb.Enabled = false;
                 MADVtxb.Enabled = false;
-                var queryString = "SELECT * FROM ADMIN.HOCPHAN\r\n";
+                var queryString = "SELECT * FROM CADMIN2.HOCPHAN\r\n";
 
                 var dt = new DataTable();
 
@@ -182,7 +182,18 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                UC_Containers.SendToBack();
+                var queryString = "SELECT * FROM CADMIN2.HOCPHAN\r\n";
+
+                var dt = new DataTable();
+
+                var da = new OracleDataAdapter(queryString, conn);
+                da.Fill(dt);
+                DetailStaff.DataSource = dt;
+
+                conn.Close();
+                dt.Dispose();
+                da.Dispose();
             }
             else if (LogIn.work == "TBM")
             {
@@ -264,7 +275,7 @@ namespace PhanHe2
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             string key = searchtxb.Text;
-            var queryString = $"SELECT * FROM ADMIN.HOCPHAN WHERE UPPER(MAHP) = UPPER('{key}') OR UPPER(TENHP) LIKE UPPER('%{key}%')\r\n";
+            var queryString = $"SELECT * FROM CADMIN2.HOCPHAN WHERE UPPER(MAHP) = UPPER('{key}') OR UPPER(TENHP) LIKE UPPER('%{key}%')\r\n";
 
             var dt = new DataTable();
 

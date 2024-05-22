@@ -101,7 +101,7 @@ namespace PhanHe2
             else if (LogIn.work == "NV0")
             {
                 string query;
-                query = "UPDATE KAN.NVCB_NHANSU_VIEW SET DT = '" + PhoneNumbertxb.Text + "'";
+                query = "UPDATE CADMIN2.NVCB_NHANSU_VIEW SET DT = '" + PhoneNumbertxb.Text + "'";
                 Console.WriteLine(query);
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -154,7 +154,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.NHANSU", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.NHANSU", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -178,7 +178,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.NVCB_NHANSU_VIEW", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.NVCB_NHANSU_VIEW", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;

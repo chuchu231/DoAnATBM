@@ -16,6 +16,7 @@ namespace PhanHe2
 {
     public partial class UC_DANGKY : UserControl
     {
+        private string connectionString;
         OracleConnection conn = new OracleConnection(LogIn.connectionString);
         public FormScore_DANGKY score = new FormScore_DANGKY();
         public UC_DANGKY()
@@ -108,7 +109,7 @@ namespace PhanHe2
 
 
                     // Tạo câu lệnh INSERT
-                    string insertQuery = "INSERT INTO ADMIN.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) VALUES (:maSV, :maGV, :maHP, :hocKy, :namHoc, :maCT, null, null, null, null)";
+                    string insertQuery = "INSERT INTO CADMIN2.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) VALUES (:maSV, :maGV, :maHP, :hocKy, :namHoc, :maCT, null, null, null, null)";
                     using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                     {
                         connection.Open();
@@ -151,7 +152,34 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                try
+                {
+                    var queryString = "INSERT INTO CADMIN2.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT) VALUES (:MASV, :MAGV, :MAHP, :HK, :NAM, :CT)";
+                    using (var conn = new OracleConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (var cmd = new OracleCommand(queryString, conn))
+                        {
+                            cmd.CommandType = CommandType.Text;
+
+                            // Add parameters with correct placeholders and values
+                            cmd.Parameters.Add(new OracleParameter(":MASV", MSSVtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":CT", MACT.Text));
+
+                            // Execute the command
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TBM")
             {
@@ -181,7 +209,34 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                try
+                {
+                    var queryString = "DELETE FROM CADMIN2.DANGKY WHERE MASV = :MASV AND MAGV = :MAGV AND MAHP = :MAHP AND HK = :HK AND NAM = :NAM AND MACT = :CT";
+                    using (var conn = new OracleConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (var cmd = new OracleCommand(queryString, conn))
+                        {
+                            cmd.CommandType = CommandType.Text;
+
+                            // Add parameters with correct placeholders and values
+                            cmd.Parameters.Add(new OracleParameter(":MASV", MSSVtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":CT", MACT.Text));
+
+                            // Execute the command
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TBM")
             {
@@ -223,7 +278,7 @@ namespace PhanHe2
                         connection.Open();
 
                         // Tạo OracleCommand để gọi stored procedure
-                        using (OracleCommand cmd = new OracleCommand("ADMIN.GET_KHMO_BYDAY", connection))
+                        using (OracleCommand cmd = new OracleCommand("CADMIN2.GET_KHMO_BYDAY", connection))
                         {
                             // Đặt kiểu command là Stored Procedure
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -252,7 +307,18 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                UC_Containers.SendToBack();
+                var queryString = "SELECT * FROM CADMIN2.DANGKY\r\n";
+
+                var dt = new DataTable();
+
+                var da = new OracleDataAdapter(queryString, conn);
+                da.Fill(dt);
+                DetailStaff.DataSource = dt;
+
+                conn.Close();
+                dt.Dispose();
+                da.Dispose();
             }
             else if (LogIn.work == "TBM")
             {
@@ -359,7 +425,7 @@ namespace PhanHe2
                         connection.Open();
 
                         // Tạo OracleCommand để gọi stored procedure
-                        using (OracleCommand cmd = new OracleCommand("ADMIN.GET_KHMO_BYDAY", connection))
+                        using (OracleCommand cmd = new OracleCommand("CADMIN2.GET_KHMO_BYDAY", connection))
                         {
                             // Đặt kiểu command là Stored Procedure
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -397,7 +463,7 @@ namespace PhanHe2
                         connection.Open();
 
                         // Tạo OracleCommand để gọi stored procedure
-                        using (OracleCommand cmd = new OracleCommand("ADMIN.GET_KHMO_BYNAME", connection))
+                        using (OracleCommand cmd = new OracleCommand("CADMIN2.GET_KHMO_BYNAME", connection))
                         {
                             // Đặt kiểu command là Stored Procedure
                             cmd.CommandType = CommandType.StoredProcedure;
