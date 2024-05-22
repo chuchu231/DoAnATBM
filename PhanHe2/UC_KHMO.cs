@@ -178,7 +178,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.KHMO", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.KHMO", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -202,7 +202,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.KHMO", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.KHMO", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -220,7 +220,26 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GV0")
             {
-                // do something ?
+                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                {
+                    conn.Open();
+
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.KHMO", conn);
+                        using (OracleDataReader reader = cmd.ExecuteReader())
+                        {
+                            DetailStaff.DataSource = null;
+                            if (reader.HasRows)
+                            {
+                                DataTable dataTable = new DataTable();
+                                dataTable.Load(reader);
+                                DetailStaff.DataSource = dataTable;
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
             }
         }
 

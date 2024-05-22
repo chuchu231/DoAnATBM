@@ -18,15 +18,21 @@ namespace PhanHe2
 {
     public partial class UC_PHANCONG : UserControl
     {
+        private string connectionString;
+        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         public UC_PHANCONG()
         {
             InitializeComponent();
-           
+            connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+            // Replace placeholders with actual values
+            connectionString = connectionString.Replace("{$user$}", LogIn.username);
+            connectionString = connectionString.Replace("{$password%}", LogIn.password);
+            conn = new OracleConnection(connectionString);
         }
-        
+
         private void insert_btn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0" )
+            if (LogIn.work == "SV0")
             {
                 // do something ?
             }
@@ -41,7 +47,7 @@ namespace PhanHe2
             else if (LogIn.work == "TK0")
             {
                 string query;
-                query = "INSERT INTO KAN.TRK_PHANCONG_VIEW VALUES ('"+ MAGVtxb.Text +"','"+ idtxtb.Text +"','"+HKtxb.Text+"','"+Namtxb.Text+"','"+MACT.Text+"')";
+                query = "INSERT INTO KAN.TRK_PHANCONG_VIEW VALUES ('" + MAGVtxb.Text + "','" + idtxtb.Text + "','" + HKtxb.Text + "','" + Namtxb.Text + "','" + MACT.Text + "')";
                 Console.WriteLine(query);
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -93,7 +99,7 @@ namespace PhanHe2
             else if (LogIn.work == "TK0")
             {
                 string query;
-                query = "DELETE FROM KAN.TRK_PHANCONG_VIEW WHERE MAGV = '"+MAGVtxb.Text + "' AND MAHP = '" + idtxtb.Text + "' AND HK ='" + HKtxb.Text + "' AND NAM='" + Namtxb.Text + "' AND MACT='" + MACT.Text +"'";
+                query = "DELETE FROM KAN.TRK_PHANCONG_VIEW WHERE MAGV = '" + MAGVtxb.Text + "' AND MAHP = '" + idtxtb.Text + "' AND HK ='" + HKtxb.Text + "' AND NAM='" + Namtxb.Text + "' AND MACT='" + MACT.Text + "'";
                 Console.WriteLine(query);
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -167,7 +173,7 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                
             }
             else if (LogIn.work == "TBM")
             {
@@ -204,7 +210,27 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GV0")
             {
-                // do something ?
+                Console.WriteLine("in here");
+                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                {
+                    conn.Open();
+
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.PHANCONG", conn);
+                        using (OracleDataReader reader = cmd.ExecuteReader())
+                        {
+                            DetailStaff.DataSource = null;
+                            if (reader.HasRows)
+                            {
+                                DataTable dataTable = new DataTable();
+                                dataTable.Load(reader);
+                                DetailStaff.DataSource = dataTable;
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
             }
         }
 
