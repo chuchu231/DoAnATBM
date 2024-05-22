@@ -234,7 +234,7 @@ namespace PhanHe2
             score.tbxTH.Text = this.DetailStaff.Rows[e.RowIndex].Cells[6].Value.ToString();
             score.tbxQT.Text = this.DetailStaff.Rows[e.RowIndex].Cells[7].Value.ToString();
             score.tbxCK.Text = this.DetailStaff.Rows[e.RowIndex].Cells[8].Value.ToString();
-            score.lbOverall.Text = this.DetailStaff.Rows[e.RowIndex].Cells[8].Value.ToString();
+            score.lbOverall.Text = this.DetailStaff.Rows[e.RowIndex].Cells[9].Value.ToString();
         }
     }
 }

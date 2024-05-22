@@ -58,6 +58,70 @@ namespace PhanHe2
 
                 cmd.ExecuteNonQuery();
             }
+            this.Refresh();
+        }
+
+        private void tbxTH_TextChanged(object sender, EventArgs e)
+        {
+            /*var queryString = "UPDATE CADMIN2.DANGKY SET DIEMTH = @TBXTH, DIEMQT = @TBXQT, DIEMCK = @TBXCK WHERE MASV = @TBXMSSV AND MAHP = @TBXMAHP AND HK = @TBXHK AND NAMHOC = @TBXNAMHOC";
+
+            using (OracleCommand cmd = new OracleCommand(queryString, conn))
+            {
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.Add(new OracleParameter("@TBXTH", tbxTH));
+                cmd.Parameters.Add(new OracleParameter("@TBXQT", tbxQT));
+                cmd.Parameters.Add(new OracleParameter("@TBXCK", tbxCK));
+                cmd.Parameters.Add(new OracleParameter("@TBXMSSV", tbxMSSV));
+                cmd.Parameters.Add(new OracleParameter("@TBXMAHP", tbxMAHP));
+                cmd.Parameters.Add(new OracleParameter("@TBXHK", tbxHK));
+                cmd.Parameters.Add(new OracleParameter("@TBXNAMHOC", tbxNamHoc));
+
+                cmd.ExecuteNonQuery();
+            }
+            this.Refresh();*/
+        }
+
+        private void tbxQT_TextChanged(object sender, EventArgs e)
+        {
+           /* var queryString = "UPDATE CADMIN2.DANGKY SET DIEMTH = @TBXTH, DIEMQT = @TBXQT, DIEMCK = @TBXCK WHERE MASV = @TBXMSSV AND MAHP = @TBXMAHP AND HK = @TBXHK AND NAMHOC = @TBXNAMHOC";
+
+            using (OracleCommand cmd = new OracleCommand(queryString, conn))
+            {
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.Add(new OracleParameter("@TBXTH", tbxTH));
+                cmd.Parameters.Add(new OracleParameter("@TBXQT", tbxQT));
+                cmd.Parameters.Add(new OracleParameter("@TBXCK", tbxCK));
+                cmd.Parameters.Add(new OracleParameter("@TBXMSSV", tbxMSSV));
+                cmd.Parameters.Add(new OracleParameter("@TBXMAHP", tbxMAHP));
+                cmd.Parameters.Add(new OracleParameter("@TBXHK", tbxHK));
+                cmd.Parameters.Add(new OracleParameter("@TBXNAMHOC", tbxNamHoc));
+
+                cmd.ExecuteNonQuery();
+            }
+            this.Refresh();*/
+        }
+
+        private void tbxCK_TextChanged(object sender, EventArgs e)
+        {
+            /*var queryString = "UPDATE CADMIN2.DANGKY SET DIEMTH = @TBXTH, DIEMQT = @TBXQT, DIEMCK = @TBXCK WHERE MASV = @TBXMSSV AND MAHP = @TBXMAHP AND HK = @TBXHK AND NAMHOC = @TBXNAMHOC";
+
+            using (OracleCommand cmd = new OracleCommand(queryString, conn))
+            {
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.Add(new OracleParameter("@TBXTH", tbxTH));
+                cmd.Parameters.Add(new OracleParameter("@TBXQT", tbxQT));
+                cmd.Parameters.Add(new OracleParameter("@TBXCK", tbxCK));
+                cmd.Parameters.Add(new OracleParameter("@TBXMSSV", tbxMSSV));
+                cmd.Parameters.Add(new OracleParameter("@TBXMAHP", tbxMAHP));
+                cmd.Parameters.Add(new OracleParameter("@TBXHK", tbxHK));
+                cmd.Parameters.Add(new OracleParameter("@TBXNAMHOC", tbxNamHoc));
+
+                cmd.ExecuteNonQuery();
+            }
+            this.Refresh();*/
         }
     }
 }

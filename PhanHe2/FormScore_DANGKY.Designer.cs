@@ -123,6 +123,7 @@
             this.tbxTH.SelectedText = "";
             this.tbxTH.Size = new System.Drawing.Size(145, 26);
             this.tbxTH.TabIndex = 22;
+            this.tbxTH.TextChanged += new System.EventHandler(this.tbxTH_TextChanged);
             // 
             // panel1
             // 
@@ -219,6 +220,7 @@
             this.tbxQT.SelectedText = "";
             this.tbxQT.Size = new System.Drawing.Size(145, 26);
             this.tbxQT.TabIndex = 24;
+            this.tbxQT.TextChanged += new System.EventHandler(this.tbxQT_TextChanged);
             // 
             // tbxCK
             // 
@@ -241,6 +243,7 @@
             this.tbxCK.SelectedText = "";
             this.tbxCK.Size = new System.Drawing.Size(145, 26);
             this.tbxCK.TabIndex = 25;
+            this.tbxCK.TextChanged += new System.EventHandler(this.tbxCK_TextChanged);
             // 
             // guna2HtmlLabel9
             // 

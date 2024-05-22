@@ -16,9 +16,9 @@ namespace PhanHe2
     {
         public static string connectionString;
         OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
-        public static string username = "GV001";
-        public static string password = "GV001";
-        public static string work = "GV0";
+        public static string username = "";
+        public static string password = "";
+        public static string work = "";
         public LogIn()
         {
             InitializeComponent();
@@ -79,12 +79,12 @@ namespace PhanHe2
                     catch(Exception ex)
                     {   
                         conn.Close();
-                        Console.WriteLine("Error: " + ex.Message);
-                        connectionString = connectionString.Replace( username, "{$user$}");
+                        MessageBox.Show("Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.");
+                        connectionString = connectionString.Replace(username, "{$user$}");
                         connectionString = connectionString.Replace(password, "{$password%}");
-                    
+
                 }
-                }
+            }
         }
 
         private void txtBoxPassword_KeyPress(object sender, KeyPressEventArgs e)
