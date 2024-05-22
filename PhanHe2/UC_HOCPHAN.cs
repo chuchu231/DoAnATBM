@@ -13,16 +13,61 @@ namespace PhanHe2
 {
     public partial class UC_HOCPHAN : UserControl
     {
+        OracleConnection conn = new OracleConnection(LogIn.connectionString);
         public UC_HOCPHAN()
         {
             InitializeComponent();
+            this.DetailStaff.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_RowEnter);
+        }
+
+        private void DetailStaff_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                // Lấy dữ liệu của hàng được chọn
+                DataGridViewRow row = DetailStaff.Rows[e.RowIndex];
+
+                // Lấy dữ liệu của từng cột
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    if (cell.OwningColumn.HeaderText == "MAHP")
+                    {
+                        idtxtb.Text = cell.Value?.ToString();
+                    }
+                    if (cell.OwningColumn.HeaderText == "TENHP")
+                    {
+                        tenhptxb.Text = cell.Value?.ToString();
+                    }
+                    if (cell.OwningColumn.HeaderText == "SOTC")
+                    {
+                        SOTCtxb.Text = cell.Value?.ToString();
+                    }
+                    if (cell.OwningColumn.HeaderText == "STLT")
+                    {
+                        STLTtxb.Text = cell.Value?.ToString();
+                    }
+                    if (cell.OwningColumn.HeaderText == "STTH")
+                    {
+                        STTHtxb.Text = cell.Value?.ToString();
+                    }
+                    if (cell.OwningColumn.HeaderText == "SOSVTD")
+                    {
+                        SOSVTDtxb.Text = cell.Value?.ToString();
+                    }
+                    if (cell.OwningColumn.HeaderText == "MADV")
+                    {
+                        MADVtxb.Text = cell.Value?.ToString();
+                    }
+                }
+
+            }
         }
 
         private void insert_btn_Click(object sender, EventArgs e)
         {
             if (LogIn.work == "SV0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.work == "GVU")
             {
@@ -52,7 +97,7 @@ namespace PhanHe2
         {
             if (LogIn.work == "SV0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.work == "GVU")
             {
@@ -82,7 +127,7 @@ namespace PhanHe2
         {
             if (LogIn.work == "SV0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.work == "GVU")
             {
@@ -113,7 +158,27 @@ namespace PhanHe2
             // Load datagridview
             if (LogIn.work == "SV0")
             {
-                // do something ?
+                idtxtb.Enabled = false;
+                tenhptxb.Enabled = false;
+                SOTCtxb.Enabled = false;
+                STLTtxb.Enabled = false;
+                STTHtxb.Enabled = false;
+                SOSVTDtxb.Enabled = false;
+                MADVtxb.Enabled = false;
+                var queryString = "SELECT * FROM ADMIN.HOCPHAN\r\n";
+
+                var dt = new DataTable();
+
+                var da = new OracleDataAdapter(queryString, conn);
+
+                da.Fill(dt);
+                DetailStaff.DataSource = dt;
+                DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                DetailStaff.ReadOnly = true;
+                conn.Close();
+                dt.Dispose();
             }
             else if (LogIn.work == "GVU")
             {
@@ -175,6 +240,25 @@ namespace PhanHe2
             {
                 // do something ?
             }
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            string key = searchtxb.Text;
+            var queryString = $"SELECT * FROM ADMIN.HOCPHAN WHERE UPPER(MAHP) = UPPER('{key}') OR UPPER(TENHP) LIKE UPPER('%{key}%')\r\n";
+
+            var dt = new DataTable();
+
+            var da = new OracleDataAdapter(queryString, conn);
+
+            da.Fill(dt);
+            DetailStaff.DataSource = dt;
+            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DetailStaff.ReadOnly = true;
+            conn.Close();
+            dt.Dispose();
         }
     }
 }

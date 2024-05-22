@@ -81,7 +81,7 @@
             this.MAGVtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.MAGVtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.MAGVtxb.Location = new System.Drawing.Point(20, 104);
-            this.MAGVtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MAGVtxb.Margin = new System.Windows.Forms.Padding(4);
             this.MAGVtxb.Name = "MAGVtxb";
             this.MAGVtxb.PasswordChar = '\0';
             this.MAGVtxb.PlaceholderText = "";
@@ -155,7 +155,7 @@
             this.Namtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Namtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.Namtxb.Location = new System.Drawing.Point(20, 254);
-            this.Namtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Namtxb.Margin = new System.Windows.Forms.Padding(4);
             this.Namtxb.Name = "Namtxb";
             this.Namtxb.PasswordChar = '\0';
             this.Namtxb.PlaceholderText = "";
@@ -177,7 +177,7 @@
             this.searchtxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.searchtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.searchtxb.Location = new System.Drawing.Point(487, 9);
-            this.searchtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchtxb.Margin = new System.Windows.Forms.Padding(4);
             this.searchtxb.Name = "searchtxb";
             this.searchtxb.PasswordChar = '\0';
             this.searchtxb.PlaceholderText = "";
@@ -202,6 +202,7 @@
             this.guna2Button1.Size = new System.Drawing.Size(95, 34);
             this.guna2Button1.TabIndex = 37;
             this.guna2Button1.Text = "Search";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // UC_Containers
             // 
@@ -350,7 +351,7 @@
             this.HKtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.HKtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.HKtxb.Location = new System.Drawing.Point(20, 204);
-            this.HKtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.HKtxb.Margin = new System.Windows.Forms.Padding(4);
             this.HKtxb.Name = "HKtxb";
             this.HKtxb.PasswordChar = '\0';
             this.HKtxb.PlaceholderText = "";
@@ -372,7 +373,7 @@
             this.idtxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.idtxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.idtxtb.Location = new System.Drawing.Point(20, 154);
-            this.idtxtb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.idtxtb.Margin = new System.Windows.Forms.Padding(4);
             this.idtxtb.Name = "idtxtb";
             this.idtxtb.PasswordChar = '\0';
             this.idtxtb.PlaceholderText = "";
@@ -450,7 +451,7 @@
             this.MSSVtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.MSSVtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.MSSVtxb.Location = new System.Drawing.Point(20, 54);
-            this.MSSVtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MSSVtxb.Margin = new System.Windows.Forms.Padding(4);
             this.MSSVtxb.Name = "MSSVtxb";
             this.MSSVtxb.PasswordChar = '\0';
             this.MSSVtxb.PlaceholderText = "";

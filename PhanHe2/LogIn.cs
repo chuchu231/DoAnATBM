@@ -31,8 +31,8 @@ namespace PhanHe2
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            string username = txtboxUsername.Text;
-            string password = txtBoxPassword.Text;
+            username = txtboxUsername.Text;
+            password = txtBoxPassword.Text;
 
           
                 connectionString = connectionString.Replace("{$user$}", username);
@@ -50,6 +50,7 @@ namespace PhanHe2
                             this.Hide();
 
                             string rolePrefix = username.Substring(0, 3).ToUpper();
+                            work = rolePrefix;
                             if (rolePrefix == "NV0")
                             {
                                 HomeStaff form = new HomeStaff();
