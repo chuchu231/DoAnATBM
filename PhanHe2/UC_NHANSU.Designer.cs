@@ -113,6 +113,7 @@
             this.delbtn.Size = new System.Drawing.Size(163, 38);
             this.delbtn.TabIndex = 12;
             this.delbtn.Text = "DELETE";
+            this.delbtn.Click += new System.EventHandler(this.delbtn_Click);
             // 
             // PhoneNumbertxb
             // 
@@ -169,6 +170,7 @@
             this.btn_Update.Size = new System.Drawing.Size(163, 38);
             this.btn_Update.TabIndex = 10;
             this.btn_Update.Text = "UPDATE";
+            this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
             // 
             // label2
             // 
@@ -251,6 +253,7 @@
             this.addUser_btn.Size = new System.Drawing.Size(163, 38);
             this.addUser_btn.TabIndex = 0;
             this.addUser_btn.Text = "INSERT";
+            this.addUser_btn.Click += new System.EventHandler(this.addUser_btn_Click);
             // 
             // DetailStaff
             // 
@@ -366,6 +369,7 @@
             this.Controls.Add(this.UC_Containers);
             this.Name = "UC_NHANSU";
             this.Size = new System.Drawing.Size(925, 520);
+            this.Load += new System.EventHandler(this.UC_NHANSU_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DetailStaff)).EndInit();

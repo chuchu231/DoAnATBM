@@ -1,4 +1,6 @@
-﻿namespace PhanHe2
+﻿using System;
+
+namespace PhanHe2
 {
     partial class UC_SINHVIEN
     {
@@ -113,6 +115,7 @@
             this.delbtn.Size = new System.Drawing.Size(163, 38);
             this.delbtn.TabIndex = 12;
             this.delbtn.Text = "DELETE";
+            this.delbtn.Click += new System.EventHandler(this.delbtn_Click);
             // 
             // PhoneNumbertxb
             // 
@@ -169,6 +172,7 @@
             this.btn_Update.Size = new System.Drawing.Size(163, 38);
             this.btn_Update.TabIndex = 10;
             this.btn_Update.Text = "UPDATE";
+            this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
             // 
             // label2
             // 
@@ -251,6 +255,7 @@
             this.addUser_btn.Size = new System.Drawing.Size(163, 38);
             this.addUser_btn.TabIndex = 0;
             this.addUser_btn.Text = "INSERT";
+            this.addUser_btn.Click += new System.EventHandler(this.addUser_btn_Click);
             // 
             // DetailStaff
             // 
@@ -354,7 +359,7 @@
             this.UC_Containers.Size = new System.Drawing.Size(634, 405);
             this.UC_Containers.TabIndex = 20;
             // 
-            // SINHVIEN
+            // UC_SINHVIEN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -364,13 +369,20 @@
             this.Controls.Add(this.searchtxb);
             this.Controls.Add(this.guna2Button1);
             this.Controls.Add(this.UC_Containers);
-            this.Name = "SINHVIEN";
+            this.Name = "UC_SINHVIEN";
             this.Size = new System.Drawing.Size(925, 520);
+            this.Load += new System.EventHandler(this.UC_SINHVIEN_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DetailStaff)).EndInit();
             this.ResumeLayout(false);
 
+        }
+
+
+        private void UC_SINHVIEN_Load(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

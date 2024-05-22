@@ -122,7 +122,9 @@
             this.txtBoxPassword.SelectedText = "";
             this.txtBoxPassword.Size = new System.Drawing.Size(351, 33);
             this.txtBoxPassword.TabIndex = 4;
+            this.txtBoxPassword.Enter += new System.EventHandler(this.txtBoxPassword_Enter);
             this.txtBoxPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxPassword_KeyPress);
+            this.txtBoxPassword.Leave += new System.EventHandler(this.txtBoxPassword_Leave);
             // 
             // txtboxUsername
             // 

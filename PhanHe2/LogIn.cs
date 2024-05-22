@@ -5,6 +5,7 @@ using System.Configuration;
 using static System.Collections.Specialized.BitVector32;
 using static System.Net.Mime.MediaTypeNames;
 using System.Data;
+using System.Drawing;
 
 
 
@@ -13,10 +14,10 @@ namespace PhanHe2
 {
     public partial class LogIn : Form
     {
-        private string connectionString;
-        //OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
-        public static string username = "GV001";
-        public static string password = "GV001";
+        public static string connectionString;
+        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
+        public static string username = "";
+        public static string password = "";
         public static string work = "";
         public LogIn()
         {
@@ -52,11 +53,13 @@ namespace PhanHe2
                             {
                                 HomeStaff form = new HomeStaff();
                                 form.Show();
-                            }
+                            LogIn.work = rolePrefix;
+                        }
                             else if (rolePrefix == "GV0" || rolePrefix == "TBM" || rolePrefix == "TK0")
                             {
                                 HomeLEC form = new HomeLEC();
                                 form.Show();
+                                LogIn.work = rolePrefix;
                             }
                             else if (rolePrefix == "SV0")
                             {
@@ -102,5 +105,27 @@ namespace PhanHe2
             }
         }
 
+        private void txtBoxPassword_Enter(object sender, EventArgs e)
+        {
+            txtBoxPassword.Text = "";
+
+            txtBoxPassword.ForeColor = Color.Black;
+
+            txtBoxPassword.UseSystemPasswordChar = true;
+        }
+
+        private void txtBoxPassword_Leave(object sender, EventArgs e)
+        {
+            if (txtBoxPassword.Text.Length == 0)
+            {
+                txtBoxPassword.ForeColor = Color.Gray;
+
+                txtBoxPassword.Text = "Enter password";
+
+                txtBoxPassword.UseSystemPasswordChar = false;
+
+                SelectNextControl(txtBoxPassword, true, true, false, true);
+            }
+        }
     }
 }

@@ -231,6 +231,7 @@
             this.insertbtn.Size = new System.Drawing.Size(145, 30);
             this.insertbtn.TabIndex = 40;
             this.insertbtn.Text = "INSERT";
+            this.insertbtn.Click += new System.EventHandler(this.insertbtn_Click);
             // 
             // delbtn
             // 
@@ -249,6 +250,7 @@
             this.delbtn.Size = new System.Drawing.Size(145, 30);
             this.delbtn.TabIndex = 42;
             this.delbtn.Text = "DELETE";
+            this.delbtn.Click += new System.EventHandler(this.delbtn_Click);
             // 
             // updatebtn
             // 
@@ -323,7 +325,6 @@
             this.DetailStaff.ThemeStyle.RowsStyle.Height = 28;
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.DetailStaff.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_CellContentClick);
             // 
             // label1
             // 
@@ -469,6 +470,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UC_DANGKY";
             this.Size = new System.Drawing.Size(822, 440);
+            this.Load += new System.EventHandler(this.UC_DANGKY_Load);
             this.UC_Containers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DetailStaff)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
