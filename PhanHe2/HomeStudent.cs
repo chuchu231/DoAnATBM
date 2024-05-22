@@ -65,7 +65,7 @@ namespace PhanHe2
         }
         private void Sinhvien_Click(object sender, EventArgs e)
         {
-            UC_SINHVIEN uc = new UC_SINHVIEN();
+            UC_SV_THONGTIN uc = new UC_SV_THONGTIN();
             addUserControl(uc);
         }
 
@@ -84,6 +84,18 @@ namespace PhanHe2
         private void DangKy_Click(object sender, EventArgs e)
         {
             UC_DANGKY uc = new UC_DANGKY();
+            addUserControl(uc);
+        }
+
+        private void Result_DK_Click(object sender, EventArgs e)
+        {
+            UC_SV_KETQUADK uc = new UC_SV_KETQUADK();
+            addUserControl(uc);
+        }
+
+        private void Result_Click(object sender, EventArgs e)
+        {
+            UC_SV_KETQUAHT uc = new UC_SV_KETQUAHT();
             addUserControl(uc);
         }
     }

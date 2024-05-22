@@ -31,42 +31,40 @@ namespace PhanHe2
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            // username = txtboxUsername.Text;
-            // password = txtBoxPassword.Text;
-
-                connectionString = connectionString.Replace("{$user$}", username);
-                connectionString = connectionString.Replace("{$password%}", password); 
-                using (OracleConnection conn = new OracleConnection(connectionString))
+            username = txtboxUsername.Text;
+            password = txtBoxPassword.Text;
+            connectionString = connectionString.Replace("{$user$}", username);
+            connectionString = connectionString.Replace("{$password%}", password);
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                try
                 {
-                    try
+                    conn.Open();
+                    if (conn.State == ConnectionState.Open)
                     {
-                        conn.Open();
-                        if (conn.State == ConnectionState.Open)
-                        {
-                            MessageBox.Show("Đăng nhập thành công");
+                        MessageBox.Show("Đăng nhập thành công");
 
-                            // Hiding LogIn form
-                            this.Hide();
+                        // Hiding LogIn form
+                        this.Hide();
 
-                            string rolePrefix = username.Substring(0, 3).ToUpper();
-                            LogIn.work = rolePrefix;
-
+                        string rolePrefix = username.Substring(0, 3).ToUpper();
+                        work = rolePrefix;
                         if (rolePrefix == "NV0")
-                             {
-                                 HomeStaff form = new HomeStaff();
-                                 form.Show();
-                             }
+                        {
+                            HomeStaff form = new HomeStaff();
+                            form.Show();
+                        }
 
                         else if (rolePrefix == "GV0" || rolePrefix == "TBM" || rolePrefix == "TK0")
-                            {
-                                HomeLEC form = new HomeLEC();
-                                form.Show();
-                            }
+                        {
+                            HomeLEC form = new HomeLEC();
+                            form.Show();
+                        }
                         else if (rolePrefix == "SV0")
-                            {
-                                HomeStudent form = new HomeStudent();
-                                form.Show();
-                            }
+                        {
+                            HomeStudent form = new HomeStudent();
+                            form.Show();
+                        }
                         else
                             {
                                 conn.Close();
@@ -79,12 +77,12 @@ namespace PhanHe2
                     catch(Exception ex)
                     {   
                         conn.Close();
-                        MessageBox.Show("Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.");
-                        connectionString = connectionString.Replace(username, "{$user$}");
+                        Console.WriteLine("Error: " + ex.Message);
+                        connectionString = connectionString.Replace( username, "{$user$}");
                         connectionString = connectionString.Replace(password, "{$password%}");
-
+                    
                 }
-            }
+                }
         }
 
         private void txtBoxPassword_KeyPress(object sender, KeyPressEventArgs e)

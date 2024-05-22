@@ -16,17 +16,11 @@ namespace PhanHe2
 {
     public partial class FormScore_DANGKY : Form
     {
-        private string connectionString;
-        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
+        OracleConnection conn = new OracleConnection(LogIn.connectionString);
 
         public FormScore_DANGKY()
         {
             InitializeComponent();
-            connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
-            // Replace placeholders with actual values
-            connectionString = connectionString.Replace("{$user$}", LogIn.username);
-            connectionString = connectionString.Replace("{$password%}", LogIn.password);
-            conn = new OracleConnection(connectionString);
         }
       
 

@@ -202,6 +202,7 @@
             this.guna2Button1.Size = new System.Drawing.Size(95, 34);
             this.guna2Button1.TabIndex = 37;
             this.guna2Button1.Text = "Search";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // UC_Containers
             // 
