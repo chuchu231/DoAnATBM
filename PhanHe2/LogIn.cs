@@ -16,9 +16,9 @@ namespace PhanHe2
     {
         public static string connectionString;
         OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
-        public static string username = "";
-        public static string password = "";
-        public static string work = "";
+        public static string username = "GV001";
+        public static string password = "GV001";
+        public static string work = "GV0";
         public LogIn()
         {
             InitializeComponent();
@@ -31,8 +31,8 @@ namespace PhanHe2
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-             username = txtboxUsername.Text;
-             password = txtBoxPassword.Text;
+            // username = txtboxUsername.Text;
+            // password = txtBoxPassword.Text;
 
                 connectionString = connectionString.Replace("{$user$}", username);
                 connectionString = connectionString.Replace("{$password%}", password); 
@@ -49,32 +49,32 @@ namespace PhanHe2
                             this.Hide();
 
                             string rolePrefix = username.Substring(0, 3).ToUpper();
-                            if (rolePrefix == "NV0")
-                            {
-                                HomeStaff form = new HomeStaff();
-                                form.Show();
                             LogIn.work = rolePrefix;
-                        }
-                            else if (rolePrefix == "GV0" || rolePrefix == "TBM" || rolePrefix == "TK0")
+
+                        if (rolePrefix == "NV0")
+                             {
+                                 HomeStaff form = new HomeStaff();
+                                 form.Show();
+                             }
+
+                        else if (rolePrefix == "GV0" || rolePrefix == "TBM" || rolePrefix == "TK0")
                             {
                                 HomeLEC form = new HomeLEC();
                                 form.Show();
-                                LogIn.work = rolePrefix;
                             }
-                            else if (rolePrefix == "SV0")
+                        else if (rolePrefix == "SV0")
                             {
                                 HomeStudent form = new HomeStudent();
                                 form.Show();
                             }
-                            else
+                        else
                             {
                                 conn.Close();
                                 MessageBox.Show("Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.");
                                 connectionString = connectionString.Replace(username, "{$user$}");
                                 connectionString = connectionString.Replace(password, "{$password%}");
-                        }
-                        }
-                        
+                             }
+                        } 
                     }
                     catch(Exception ex)
                     {   
