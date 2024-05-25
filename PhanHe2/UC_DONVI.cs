@@ -38,7 +38,27 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                try
+                {
+                    var queryString = "INSERT INTO ADMIN.DONVI (MADV, TENDV, TRGDV) VALUES ('" + id_donvitxtb.Text + "', '" + donvitxb.Text + "', '" + trgDVtxb.Text + "')";
+
+                    using (conn = new OracleConnection(LogIn.connectionString))
+                    {
+                        conn.Open();
+                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        {
+
+                            Console.WriteLine(queryString);
+                            cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TBM")
             {
@@ -98,7 +118,27 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                try
+                {
+                    var queryString = "UPDATE ADMIN.DONVI SET TENDV = '" + donvitxb.Text + "' AND TRGDV = '" + trgDVtxb.Text + "' WHERE MADV = '" + id_donvitxtb.Text + "'";
+
+                    using (conn = new OracleConnection(LogIn.connectionString))
+                    {
+                        conn.Open();
+                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        {
+
+                            Console.WriteLine(queryString);
+                            cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TBM")
             {
@@ -217,6 +257,13 @@ namespace PhanHe2
                     conn.Close();
                 }
             }
+        }
+
+        private void DetailStaff_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            id_donvitxtb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[0].Value.ToString();
+            donvitxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[1].Value.ToString();
+            trgDVtxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[2].Value.ToString();
         }
     }
 }

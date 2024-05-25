@@ -110,7 +110,7 @@
             this.MADVtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.MADVtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.MADVtxb.Location = new System.Drawing.Point(20, 334);
-            this.MADVtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MADVtxb.Margin = new System.Windows.Forms.Padding(4);
             this.MADVtxb.Name = "MADVtxb";
             this.MADVtxb.PasswordChar = '\0';
             this.MADVtxb.PlaceholderText = "";
@@ -142,7 +142,7 @@
             this.SOSVTDtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.SOSVTDtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.SOSVTDtxb.Location = new System.Drawing.Point(20, 283);
-            this.SOSVTDtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SOSVTDtxb.Margin = new System.Windows.Forms.Padding(4);
             this.SOSVTDtxb.Name = "SOSVTDtxb";
             this.SOSVTDtxb.PasswordChar = '\0';
             this.SOSVTDtxb.PlaceholderText = "";
@@ -174,7 +174,7 @@
             this.STTHtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.STTHtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.STTHtxb.Location = new System.Drawing.Point(20, 231);
-            this.STTHtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.STTHtxb.Margin = new System.Windows.Forms.Padding(4);
             this.STTHtxb.Name = "STTHtxb";
             this.STTHtxb.PasswordChar = '\0';
             this.STTHtxb.PlaceholderText = "";
@@ -206,7 +206,7 @@
             this.STLTtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.STLTtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.STLTtxb.Location = new System.Drawing.Point(20, 183);
-            this.STLTtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.STLTtxb.Margin = new System.Windows.Forms.Padding(4);
             this.STLTtxb.Name = "STLTtxb";
             this.STLTtxb.PasswordChar = '\0';
             this.STLTtxb.PlaceholderText = "";
@@ -248,7 +248,7 @@
             this.SOTCtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.SOTCtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.SOTCtxb.Location = new System.Drawing.Point(20, 132);
-            this.SOTCtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SOTCtxb.Margin = new System.Windows.Forms.Padding(4);
             this.SOTCtxb.Name = "SOTCtxb";
             this.SOTCtxb.PasswordChar = '\0';
             this.SOTCtxb.PlaceholderText = "";
@@ -280,7 +280,7 @@
             this.tenhptxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tenhptxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tenhptxb.Location = new System.Drawing.Point(20, 82);
-            this.tenhptxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tenhptxb.Margin = new System.Windows.Forms.Padding(4);
             this.tenhptxb.Name = "tenhptxb";
             this.tenhptxb.PasswordChar = '\0';
             this.tenhptxb.PlaceholderText = "";
@@ -302,7 +302,7 @@
             this.idtxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.idtxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.idtxtb.Location = new System.Drawing.Point(20, 32);
-            this.idtxtb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.idtxtb.Margin = new System.Windows.Forms.Padding(4);
             this.idtxtb.Name = "idtxtb";
             this.idtxtb.PasswordChar = '\0';
             this.idtxtb.PlaceholderText = "";
@@ -421,6 +421,7 @@
             this.DetailStaff.ThemeStyle.RowsStyle.Height = 28;
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.DetailStaff.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_CellContentClick);
             // 
             // searchtxb
             // 
@@ -436,7 +437,7 @@
             this.searchtxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.searchtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.searchtxb.Location = new System.Drawing.Point(459, 9);
-            this.searchtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchtxb.Margin = new System.Windows.Forms.Padding(4);
             this.searchtxb.Name = "searchtxb";
             this.searchtxb.PasswordChar = '\0';
             this.searchtxb.PlaceholderText = "";

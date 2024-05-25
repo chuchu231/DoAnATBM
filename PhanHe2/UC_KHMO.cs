@@ -58,7 +58,27 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                try
+                {
+                    var queryString = "INSERT INTO ADMIN.KHMO VALUES ('" + idtxtb.Text + "', '" + HKtxb.Text + "', '" + Namtxb.Text + "', '" + MACT.Text + "')";
+
+                    using (conn = new OracleConnection(LogIn.connectionString))
+                    {
+                        conn.Open();
+                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        {
+
+                            Console.WriteLine(queryString);
+                            cmd.ExecuteNonQuery();
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TBM")
             {
@@ -116,7 +136,25 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                // do something ?
+                try
+                {
+
+                    var queryString = "UPDATE ADMIN.UV_QUANLY_PHANCONG SET MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "', MADV = 'VPK' " +
+                                        "WHERE MAHP = '" + old_hp + "' AND HK = '" + old_hk + "' AND NAM = '" + old_nam + "' AND MACT = '" + old_mact + "'";
+                    using (var conn = new OracleConnection(LogIn.connectionString))
+                    {
+                        conn.Open();
+                        using (var cmd = new OracleCommand(queryString, conn))
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
             }
             else if (LogIn.work == "TBM")
             {

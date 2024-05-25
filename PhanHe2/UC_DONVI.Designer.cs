@@ -66,19 +66,19 @@
             this.guna2Panel1.Controls.Add(this.id_donvitxtb);
             this.guna2Panel1.Controls.Add(this.addUser_btn);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(682, 77);
+            this.guna2Panel1.Location = new System.Drawing.Point(606, 62);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(210, 432);
+            this.guna2Panel1.Size = new System.Drawing.Size(187, 346);
             this.guna2Panel1.TabIndex = 21;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label5.Location = new System.Drawing.Point(29, 140);
+            this.label5.Location = new System.Drawing.Point(26, 112);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 20);
+            this.label5.Size = new System.Drawing.Size(89, 16);
             this.label5.TabIndex = 15;
             this.label5.Text = "Trưởng đơn vị";
             // 
@@ -86,9 +86,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label3.Location = new System.Drawing.Point(28, 78);
+            this.label3.Location = new System.Drawing.Point(25, 62);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 20);
+            this.label3.Size = new System.Drawing.Size(44, 16);
             this.label3.TabIndex = 13;
             this.label3.Text = "Đơn vị";
             // 
@@ -103,10 +103,10 @@
             this.delbtn.FillColor = System.Drawing.Color.White;
             this.delbtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.delbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.delbtn.Location = new System.Drawing.Point(22, 323);
+            this.delbtn.Location = new System.Drawing.Point(20, 258);
             this.delbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.delbtn.Name = "delbtn";
-            this.delbtn.Size = new System.Drawing.Size(163, 38);
+            this.delbtn.Size = new System.Drawing.Size(145, 30);
             this.delbtn.TabIndex = 12;
             this.delbtn.Text = "DELETE";
             this.delbtn.Click += new System.EventHandler(this.delbtn_Click);
@@ -124,13 +124,13 @@
             this.trgDVtxb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.trgDVtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.trgDVtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.trgDVtxb.Location = new System.Drawing.Point(22, 165);
-            this.trgDVtxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.trgDVtxb.Location = new System.Drawing.Point(20, 132);
+            this.trgDVtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.trgDVtxb.Name = "trgDVtxb";
             this.trgDVtxb.PasswordChar = '\0';
             this.trgDVtxb.PlaceholderText = "";
             this.trgDVtxb.SelectedText = "";
-            this.trgDVtxb.Size = new System.Drawing.Size(163, 32);
+            this.trgDVtxb.Size = new System.Drawing.Size(145, 26);
             this.trgDVtxb.TabIndex = 14;
             // 
             // btn_Update
@@ -144,10 +144,10 @@
             this.btn_Update.FillColor = System.Drawing.Color.White;
             this.btn_Update.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btn_Update.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btn_Update.Location = new System.Drawing.Point(22, 365);
+            this.btn_Update.Location = new System.Drawing.Point(20, 292);
             this.btn_Update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_Update.Name = "btn_Update";
-            this.btn_Update.Size = new System.Drawing.Size(163, 38);
+            this.btn_Update.Size = new System.Drawing.Size(145, 30);
             this.btn_Update.TabIndex = 10;
             this.btn_Update.Text = "UPDATE";
             this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
@@ -156,9 +156,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(29, 15);
+            this.label1.Location = new System.Drawing.Point(26, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 20);
+            this.label1.Size = new System.Drawing.Size(65, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "Mã đơn vị";
             // 
@@ -175,13 +175,13 @@
             this.donvitxb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.donvitxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.donvitxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.donvitxb.Location = new System.Drawing.Point(22, 103);
-            this.donvitxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.donvitxb.Location = new System.Drawing.Point(20, 82);
+            this.donvitxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.donvitxb.Name = "donvitxb";
             this.donvitxb.PasswordChar = '\0';
             this.donvitxb.PlaceholderText = "";
             this.donvitxb.SelectedText = "";
-            this.donvitxb.Size = new System.Drawing.Size(163, 32);
+            this.donvitxb.Size = new System.Drawing.Size(145, 26);
             this.donvitxb.TabIndex = 5;
             // 
             // id_donvitxtb
@@ -197,13 +197,13 @@
             this.id_donvitxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.id_donvitxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.id_donvitxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.id_donvitxtb.Location = new System.Drawing.Point(22, 40);
-            this.id_donvitxtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.id_donvitxtb.Location = new System.Drawing.Point(20, 32);
+            this.id_donvitxtb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.id_donvitxtb.Name = "id_donvitxtb";
             this.id_donvitxtb.PasswordChar = '\0';
             this.id_donvitxtb.PlaceholderText = "";
             this.id_donvitxtb.SelectedText = "";
-            this.id_donvitxtb.Size = new System.Drawing.Size(163, 32);
+            this.id_donvitxtb.Size = new System.Drawing.Size(145, 26);
             this.id_donvitxtb.TabIndex = 4;
             // 
             // addUser_btn
@@ -217,10 +217,10 @@
             this.addUser_btn.FillColor = System.Drawing.Color.White;
             this.addUser_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.addUser_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.addUser_btn.Location = new System.Drawing.Point(22, 281);
+            this.addUser_btn.Location = new System.Drawing.Point(20, 225);
             this.addUser_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addUser_btn.Name = "addUser_btn";
-            this.addUser_btn.Size = new System.Drawing.Size(163, 38);
+            this.addUser_btn.Size = new System.Drawing.Size(145, 30);
             this.addUser_btn.TabIndex = 0;
             this.addUser_btn.Text = "INSERT";
             this.addUser_btn.Click += new System.EventHandler(this.addUser_btn_Click);
@@ -249,13 +249,13 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DetailStaff.DefaultCellStyle = dataGridViewCellStyle3;
             this.DetailStaff.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.DetailStaff.Location = new System.Drawing.Point(32, 77);
+            this.DetailStaff.Location = new System.Drawing.Point(28, 62);
             this.DetailStaff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DetailStaff.Name = "DetailStaff";
             this.DetailStaff.RowHeadersVisible = false;
             this.DetailStaff.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DetailStaff.RowTemplate.Height = 28;
-            this.DetailStaff.Size = new System.Drawing.Size(634, 421);
+            this.DetailStaff.Size = new System.Drawing.Size(564, 337);
             this.DetailStaff.TabIndex = 24;
             this.DetailStaff.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.DetailStaff.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -278,6 +278,7 @@
             this.DetailStaff.ThemeStyle.RowsStyle.Height = 28;
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.DetailStaff.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_CellContentClick);
             // 
             // searchtxb
             // 
@@ -292,13 +293,13 @@
             this.searchtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.searchtxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.searchtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.searchtxb.Location = new System.Drawing.Point(550, 23);
-            this.searchtxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchtxb.Location = new System.Drawing.Point(489, 18);
+            this.searchtxb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.searchtxb.Name = "searchtxb";
             this.searchtxb.PasswordChar = '\0';
             this.searchtxb.PlaceholderText = "";
             this.searchtxb.SelectedText = "";
-            this.searchtxb.Size = new System.Drawing.Size(201, 30);
+            this.searchtxb.Size = new System.Drawing.Size(179, 24);
             this.searchtxb.TabIndex = 23;
             // 
             // guna2Button1
@@ -312,24 +313,23 @@
             this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(771, 11);
+            this.guna2Button1.Location = new System.Drawing.Point(685, 9);
             this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(107, 42);
+            this.guna2Button1.Size = new System.Drawing.Size(95, 34);
             this.guna2Button1.TabIndex = 22;
             this.guna2Button1.Text = "Search";
             // 
             // UC_Containers
             // 
-            this.UC_Containers.Location = new System.Drawing.Point(32, 93);
-            this.UC_Containers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.UC_Containers.Location = new System.Drawing.Point(28, 74);
             this.UC_Containers.Name = "UC_Containers";
-            this.UC_Containers.Size = new System.Drawing.Size(634, 405);
+            this.UC_Containers.Size = new System.Drawing.Size(564, 324);
             this.UC_Containers.TabIndex = 25;
             // 
             // UC_DONVI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.guna2Panel1);
@@ -337,8 +337,9 @@
             this.Controls.Add(this.searchtxb);
             this.Controls.Add(this.guna2Button1);
             this.Controls.Add(this.UC_Containers);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UC_DONVI";
-            this.Size = new System.Drawing.Size(925, 520);
+            this.Size = new System.Drawing.Size(822, 416);
             this.Load += new System.EventHandler(this.UC_DONVI_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
