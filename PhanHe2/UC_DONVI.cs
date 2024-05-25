@@ -191,7 +191,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DONVI", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.DONVI", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;

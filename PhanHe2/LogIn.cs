@@ -59,12 +59,14 @@ namespace PhanHe2
                         {
                             HomeLEC form = new HomeLEC();
                             form.Show();
+
                         }
                         else if (rolePrefix == "SV0")
                         {
                             HomeStudent form = new HomeStudent();
                             form.Show();
                         }
+
                         else
                             {
                                 conn.Close();

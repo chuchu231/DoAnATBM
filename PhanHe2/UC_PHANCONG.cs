@@ -63,7 +63,32 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                // do something ?
+                string query;
+                query = "INSERT INTO KAN.TRK_PHANCONG_VIEW VALUES ('" + MAGVtxb.Text + "','" + idtxtb.Text + "','" + HKtxb.Text + "','" + Namtxb.Text + "','" + MACT.Text + "')";
+                Console.WriteLine(query);
+                using (OracleConnection connection = new OracleConnection(connectionString))
+                {
+                    using (OracleCommand command = new OracleCommand(query, connection))
+                    {
+                        try
+                        {
+                            Console.WriteLine("ok");
+
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("Thành công");
+                            connection.Close();
+                            UC_PHANCONG_Load(sender, e);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message);
+                            //MessageBox.Show(query);
+                        }
+                    }
+                }
+
+
             }
             else if (LogIn.work == "NV0")
             {
@@ -120,6 +145,30 @@ namespace PhanHe2
             else if (LogIn.work == "TK0")
             {
                 // do something ?
+                string query;
+                query = "DELETE FROM KAN.TRK_PHANCONG_VIEW WHERE MAGV = '" + MAGVtxb.Text + "' AND MAHP = '" + idtxtb.Text + "' AND HK ='" + HKtxb.Text + "' AND NAM='" + Namtxb.Text + "' AND MACT='" + MACT.Text + "'";
+                Console.WriteLine(query);
+                using (OracleConnection connection = new OracleConnection(connectionString))
+                {
+                    using (OracleCommand command = new OracleCommand(query, connection))
+                    {
+                        try
+                        {
+                            Console.WriteLine("ok");
+
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("Thành công");
+                            connection.Close();
+                            UC_PHANCONG_Load(sender, e);
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: " + ex.Message);
+                            //MessageBox.Show(query);
+                        }
+                    }
+                }
             }
             else if (LogIn.work == "NV0")
             {
@@ -189,7 +238,28 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                // do something ?
+                try
+                {
+                    var queryString = "UPDATE KAN.TRK_PHANCONG_VIEW SET MAGV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "'" +
+                                        "WHERE MAGV = '" + old_gv + "' AND MAHP = '" + old_hp + "' AND HK = '" + old_hk + "' AND NAM = '" + old_nam + "' AND MACT = '" + old_mact + "'";
+
+                    using (var conn = new OracleConnection(connectionString))
+                    {
+                        conn.Open();
+                        using (var cmd = new OracleCommand(queryString, conn))
+                        {
+
+                            cmd.ExecuteNonQuery();
+                            conn.Close();   
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+
             }
             else if (LogIn.work == "NV0")
             {
@@ -241,7 +311,26 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                // do something ?
+                using (OracleConnection conn = new OracleConnection(connectionString))
+                {
+                    conn.Open();
+
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.PHANCONG", conn);
+                        using (OracleDataReader reader = cmd.ExecuteReader())
+                        {
+                            DetailStaff.DataSource = null;
+                            if (reader.HasRows)
+                            {
+                                DataTable dataTable = new DataTable();
+                                dataTable.Load(reader);
+                                DetailStaff.DataSource = dataTable;
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
             }
             else if (LogIn.work == "NV0")
             {

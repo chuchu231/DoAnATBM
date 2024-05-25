@@ -332,7 +332,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DANGKY", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.DANGKY", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;

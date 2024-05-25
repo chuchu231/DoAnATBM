@@ -183,7 +183,18 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                // do something ?
+                UC_Containers.SendToBack();
+                var queryString = "SELECT * FROM KAN.SINHVIEN\r\n";
+
+                var dt = new DataTable();
+
+                var da = new OracleDataAdapter(queryString, conn);
+                da.Fill(dt);
+                DetailStaff.DataSource = dt;
+
+                conn.Close();
+                dt.Dispose();
+                da.Dispose();
             }
             else if (LogIn.work == "NV0")
             {
