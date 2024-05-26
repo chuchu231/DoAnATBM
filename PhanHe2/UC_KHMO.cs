@@ -19,7 +19,6 @@ namespace PhanHe2
         public UC_KHMO()
         {
             InitializeComponent();
-            this.DetailStaff.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_RowEnter);
         }
 
         private void DetailStaff_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -52,6 +51,36 @@ namespace PhanHe2
             }
         }
 
+        private void delbtn_Click_1(object sender, EventArgs e)
+        {
+            if (LogIn.work == "SV0")
+            {
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+            }
+            else if (LogIn.work == "GVU")
+            {
+                // do something ?
+            }
+            else if (LogIn.work == "TBM")
+            {
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+            }
+            else if (LogIn.work == "TK0")
+            {
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
+            }
+            else if (LogIn.work == "NV0")
+            {
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
+            }
+            else if (LogIn.work == "GV0")
+            {
+                // do something ?
+            }
+        }
+
         private void insert_btn_Click(object sender, EventArgs e)
         {
             if (LogIn.work == "SV0")
@@ -62,24 +91,27 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "INSERT INTO ADMIN.KHMO VALUES ('" + idtxtb.Text + "', '" + HKtxb.Text + "', '" + Namtxb.Text + "', '" + MACT.Text + "')";
+                    var queryString = "INSERT INTO CADMIN2.KHMO (MAHP, HK, NAM, MACT) VALUES (:MAHP, :HK, :NAM, :MACT)";
 
-                    using (conn = new OracleConnection(LogIn.connectionString))
+                    using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
-                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        using (var cmd = new OracleCommand(queryString, conn))
                         {
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MACT", MACT.Text));
 
-                            Console.WriteLine(queryString);
                             cmd.ExecuteNonQuery();
-
                         }
                     }
+
+                    MessageBox.Show("Thêm kế hoạch mở môn thành công.");
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception or display a message
-                    MessageBox.Show("An error occurred: " + ex.Message);
+                    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
                 }
             }
             else if (LogIn.work == "TBM")
@@ -100,37 +132,7 @@ namespace PhanHe2
             }
         }
 
-        private void delbtn_Click(object sender, EventArgs e)
-        {
-            if (LogIn.work == "SV0")
-            {
-                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
-            }
-            else if (LogIn.work == "GVU")
-            {
-                // do something ?
-            }
-            else if (LogIn.work == "TBM")
-            {
-                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
-            }
-            else if (LogIn.work == "TK0")
-            {
-                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
-
-            }
-            else if (LogIn.work == "NV0")
-            {
-                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
-
-            }
-            else if (LogIn.work == "GV0")
-            {
-                // do something ?
-            }
-        }
-
-        private void btn_Update_Click(object sender, EventArgs e)
+        private void btn_Update_Click_1(object sender, EventArgs e)
         {
             if (LogIn.work == "SV0")
             {
@@ -140,23 +142,34 @@ namespace PhanHe2
             {
                 try
                 {
+                    var queryString = "UPDATE CADMIN2.KHMO SET MAHP = :MAHP, HK = :HK, NAM = :NAM, MACT = :MACT " +
+                                      "WHERE MAHP = :OLD_MAHP AND HK = :OLD_HK AND NAM = :OLD_NAM AND MACT = :OLD_MACT";
 
-                    var queryString = "UPDATE ADMIN.UV_QUANLY_PHANCONG SET MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "', MADV = 'VPK' " +
-                                        "WHERE MAHP = '" + old_hp + "' AND HK = '" + old_hk + "' AND NAM = '" + old_nam + "' AND MACT = '" + old_mact + "'";
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
                         using (var cmd = new OracleCommand(queryString, conn))
                         {
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MACT", MACT.Text));
+                            cmd.Parameters.Add(new OracleParameter(":OLD_MAHP", old_hp));
+                            cmd.Parameters.Add(new OracleParameter(":OLD_HK", old_hk));
+                            cmd.Parameters.Add(new OracleParameter(":OLD_NAM", old_nam));
+                            cmd.Parameters.Add(new OracleParameter(":OLD_MACT", old_mact));
+
                             cmd.ExecuteNonQuery();
                         }
                     }
+
+                    MessageBox.Show("Cập nhật phân công thành công.");
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception or display a message
-                    MessageBox.Show("An error occurred: " + ex.Message);
+                    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
                 }
+
 
             }
             else if (LogIn.work == "TK0")
@@ -177,14 +190,13 @@ namespace PhanHe2
 
         private void UC_KHMO_Load(object sender, EventArgs e)
         {
-            // Load datagridview
             if (LogIn.work == "SV0")
             {
                 idtxtb.Enabled = false;
                 HKtxb.Enabled = false; 
                 Namtxb.Enabled = false;
                 MACT.Enabled = false;
-                var queryString = "SELECT * FROM ADMIN.KHMO\r\n";
+                var queryString = "SELECT * FROM CADMIN2.KHMO\r\n";
 
                 var dt = new DataTable();
 
@@ -194,7 +206,6 @@ namespace PhanHe2
                 DetailStaff.DataSource = dt;
                 DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-                //DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 DetailStaff.ReadOnly = true;
                 conn.Close();
                 dt.Dispose();
@@ -202,7 +213,7 @@ namespace PhanHe2
             else if (LogIn.work == "GVU")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM ADMIN.KHMO\r\n";
+                var queryString = "SELECT * FROM CADMIN2.KHMO\r\n";
 
                 var dt = new DataTable();
 
@@ -223,7 +234,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.KHMO", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.KHMO", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -247,7 +258,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.KHMO", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.KHMO", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -271,7 +282,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.KHMO", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.KHMO", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;

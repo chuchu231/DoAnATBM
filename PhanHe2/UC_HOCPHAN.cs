@@ -17,7 +17,6 @@ namespace PhanHe2
         public UC_HOCPHAN()
         {
             InitializeComponent();
-            this.DetailStaff.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_RowEnter);
         }
 
         private void DetailStaff_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -73,25 +72,31 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "INSERT INTO ADMIN.HOCPHAN VALUES ('" + idtxtb.Text + "', '" + tenhptxb.Text + "', '" + SOTCtxb.Text + "', '"+STLTtxb.Text +"', '" + STTHtxb.Text + "', '" + SOSVTDtxb.Text+"')";
+                    var queryString = "INSERT INTO CADMIN2.HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD) VALUES (:MAHP, :TENHP, :SOTC, :STLT, :STTH, :SOSVTD)";
 
-                    using (conn = new OracleConnection(LogIn.connectionString))
+                    using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
-                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        using (var cmd = new OracleCommand(queryString, conn))
                         {
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":TENHP", tenhptxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":SOTC", SOTCtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":STLT", STLTtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":STTH", STTHtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":SOSVTD", SOSVTDtxb.Text));
 
-                            Console.WriteLine(queryString);
                             cmd.ExecuteNonQuery();
 
+                            MessageBox.Show("Thêm học phần thành công.");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception or display a message
-                    MessageBox.Show("An error occurred: " + ex.Message);
+                    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
                 }
+
             }
             else if (LogIn.work == "TBM")
             {
@@ -153,25 +158,31 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "UPDATE ADMIN.HOCPHAN SET TENHP = '" + tenhptxb.Text + "' AND SOTC = '" + SOTCtxb.Text + "' AND STTL = '"+STLTtxb.Text+"' AND STTH ='"+STTHtxb.Text+"' AND SOSVTD ='"+SOSVTDtxb.Text+"' WHERE MAHP = '" + idtxtb.Text + "'";
+                    var queryString = "UPDATE CADMIN2.HOCPHAN SET TENHP = :TENHP, SOTC = :SOTC, STLT = :STLT, STTH = :STTH, SOSVTD = :SOSVTD WHERE MAHP = :MAHP";
 
-                    using (conn = new OracleConnection(LogIn.connectionString))
+                    using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
-                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        using (var cmd = new OracleCommand(queryString, conn))
                         {
+                            cmd.Parameters.Add(new OracleParameter(":TENHP", tenhptxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":SOTC", SOTCtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":STLT", STLTtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":STTH", STTHtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":SOSVTD", SOSVTDtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
 
-                            Console.WriteLine(queryString);
                             cmd.ExecuteNonQuery();
 
+                            MessageBox.Show("Cập nhật học phần thành công.");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception or display a message
-                    MessageBox.Show("An error occurred: " + ex.Message);
+                    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
                 }
+
             }
             else if (LogIn.work == "TBM")
             {
@@ -205,7 +216,7 @@ namespace PhanHe2
                 STTHtxb.Enabled = false;
                 SOSVTDtxb.Enabled = false;
                 MADVtxb.Enabled = false;
-                var queryString = "SELECT * FROM ADMIN.HOCPHAN\r\n";
+                var queryString = "SELECT * FROM CADMIN2.HOCPHAN\r\n";
 
                 var dt = new DataTable();
 
@@ -223,7 +234,7 @@ namespace PhanHe2
             else if (LogIn.work == "GVU")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM ADMIN.HOCPHAN\r\n";
+                var queryString = "SELECT * FROM CADMIN2.HOCPHAN\r\n";
 
                 var dt = new DataTable();
 
@@ -243,7 +254,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.HOCPHAN", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.HOCPHAN", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -267,7 +278,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.HOCPHAN", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.HOCPHAN", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -291,7 +302,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.HOCPHAN", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.HOCPHAN", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -311,7 +322,7 @@ namespace PhanHe2
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             string key = searchtxb.Text;
-            var queryString = $"SELECT * FROM ADMIN.HOCPHAN WHERE UPPER(MAHP) = UPPER('{key}') OR UPPER(TENHP) LIKE UPPER('%{key}%')\r\n";
+            var queryString = $"SELECT * FROM CADMIN2.HOCPHAN WHERE UPPER(MAHP) = UPPER('{key}') OR UPPER(TENHP) LIKE UPPER('%{key}%')\r\n";
 
             var dt = new DataTable();
 

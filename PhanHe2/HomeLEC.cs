@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace PhanHe2
 {
@@ -15,6 +17,7 @@ namespace PhanHe2
         public HomeLEC()
         {
             InitializeComponent();
+
         }
 
         private void menuOpenbtn_Click(object sender, EventArgs e)
@@ -87,7 +90,43 @@ namespace PhanHe2
             {
                 UC_TBM_CHOICE uc = new UC_TBM_CHOICE();
                 addUserControl(uc);
-            }
+                string donVi = "";
+
+                string queryString = "SELECT MADV FROM CADMIN2.DONVI WHERE TRGDV = :username";
+
+                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                {
+                    using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                    {
+                        try
+                        {
+                            conn.Open();
+
+                            cmd.Parameters.Add(new OracleParameter(":username", LogIn.username));
+
+                            using (OracleDataReader reader = cmd.ExecuteReader())
+                            {
+                                if (reader.Read())
+                                {
+                                    donVi = reader["MADV"].ToString();
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Lỗi: " + ex.Message);
+                        }
+                        finally
+                        {
+                            if (conn.State == ConnectionState.Open)
+                            {
+                                conn.Close();
+                            }
+                        }
+                    }
+                }
+                uc.lbDV.Text = donVi;
+                }
             else
             {
                 UC_PHANCONG uc = new UC_PHANCONG();

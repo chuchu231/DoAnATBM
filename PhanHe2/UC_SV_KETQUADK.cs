@@ -58,7 +58,7 @@ namespace PhanHe2
 
         private void UC_SV_KETQUADK_Load(object sender, EventArgs e)
         {
-            var queryString = "SELECT DK.MAGV, DK.MAHP, HP.TENHP, DK.HK, DK.NAM, DK.MACT" +
+            var queryString = "SELECT DK.MAHP, HP.TENHP, DK.HK, DK.NAM, DK.MACT" +
                               " FROM CADMIN2.DANGKY DK JOIN CADMIN2.HOCPHAN HP ON DK.MAHP = HP.MAHP  " +
                               "WHERE DIEMTH IS NULL AND DIEMQT IS NULL AND DIEMCK IS NULL AND DIEMTK IS NULL\r\n";
 
@@ -78,59 +78,32 @@ namespace PhanHe2
 
         private void delbtn_Click(object sender, EventArgs e)
         {
-            try
+            using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
             {
-                // Lấy dữ liệu từ các TextBox hoặc các điều khiển nhập liệu
-                //string maSV = MSSVtxb.Text;
-                string maGV = MAGVtxb.Text;
-                string maHP = idtxtb.Text;
-                string hocKy = HKtxb.Text;
-                string namHoc = Namtxb.Text;
-                string maCT = MACT.Text;
-
-
-                // Tạo câu lệnh INSERT
-                string insertQuery = "DELETE FROM CADMIN2.DANGKY WHERE MAGV = :maGV AND MAHP = :maHP AND HK = :hocky AND NAM = :namHoc AND MACT = :maCT";
-                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                try
                 {
                     connection.Open();
-                    using (OracleCommand cmd = new OracleCommand(insertQuery, connection))
+
+                    using (OracleCommand cmd = new OracleCommand("CADMIN2.DeleteDangKy", connection))
                     {
-                        // Thêm các tham số cho câu lệnh INSERT
-                        //cmd.Parameters.Add(new OracleParameter("maSV", maSV));
-                        cmd.Parameters.Add(new OracleParameter("maGV", maGV));
-                        cmd.Parameters.Add(new OracleParameter("maHP", maHP));
-                        cmd.Parameters.Add(new OracleParameter("hocKy", hocKy));
-                        cmd.Parameters.Add(new OracleParameter("namHoc", namHoc));
-                        cmd.Parameters.Add(new OracleParameter("maCT", maCT));
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                        // Thực thi câu lệnh INSERT
-                        int rowsDeleted = cmd.ExecuteNonQuery();
+                        cmd.Parameters.Add("p_maHP", OracleDbType.Varchar2).Value = idtxtb.Text;
+                        cmd.Parameters.Add("p_hocKy", OracleDbType.Varchar2).Value = HKtxb.Text; ;
+                        cmd.Parameters.Add("p_namHoc", OracleDbType.Varchar2).Value = Namtxb.Text;
+                        cmd.Parameters.Add("p_maCT", OracleDbType.Varchar2).Value = MACT.Text;
 
-                        if (rowsDeleted > 0)
-                        {
-                            MessageBox.Show("Xoá thành công.");
-                            UC_SV_KETQUADK_Load(sender, e);
-                        }
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("DELETE thành công.");
                     }
                 }
-            }
-            catch (OracleException ex)
-            {
-                // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
-                if (ex.Number == 20002 || ex.Number == 20001)
+                catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Lỗi: " + ex.Message);
                 }
-                else
-                {
-                    MessageBox.Show("Lỗi Oracle: " + ex.Message);
-                }
+                UC_SV_KETQUADK_Load(sender, e);
+
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi: " + ex.Message);
-            }
-        }
+        }   
     }
 }

@@ -56,6 +56,7 @@
             // 
             // tbxMSSV
             // 
+            this.tbxMSSV.Enabled = false;
             this.tbxMSSV.Location = new System.Drawing.Point(131, 2);
             this.tbxMSSV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbxMSSV.Name = "tbxMSSV";
@@ -64,6 +65,7 @@
             // 
             // tbxHK
             // 
+            this.tbxHK.Enabled = false;
             this.tbxHK.Location = new System.Drawing.Point(131, 146);
             this.tbxHK.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbxHK.Name = "tbxHK";
@@ -72,6 +74,7 @@
             // 
             // tbxCT
             // 
+            this.tbxCT.Enabled = false;
             this.tbxCT.Location = new System.Drawing.Point(131, 178);
             this.tbxCT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbxCT.Name = "tbxCT";
@@ -80,6 +83,7 @@
             // 
             // tbxNamHoc
             // 
+            this.tbxNamHoc.Enabled = false;
             this.tbxNamHoc.Location = new System.Drawing.Point(131, 110);
             this.tbxNamHoc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbxNamHoc.Name = "tbxNamHoc";
@@ -88,6 +92,7 @@
             // 
             // tbxMAHP
             // 
+            this.tbxMAHP.Enabled = false;
             this.tbxMAHP.Location = new System.Drawing.Point(131, 72);
             this.tbxMAHP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbxMAHP.Name = "tbxMAHP";
@@ -96,6 +101,7 @@
             // 
             // tbxHoTen
             // 
+            this.tbxHoTen.Enabled = false;
             this.tbxHoTen.Location = new System.Drawing.Point(131, 34);
             this.tbxHoTen.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbxHoTen.Name = "tbxHoTen";

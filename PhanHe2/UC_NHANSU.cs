@@ -96,30 +96,28 @@ namespace PhanHe2
             }
             else if (LogIn.work == "NV0" || LogIn.work == "GVU")
             {
-                string query;
-                query = "UPDATE ADMIN.NVCB_NHANSU_VIEW SET DT = '" + PhoneNumbertxb.Text + "'";
-                Console.WriteLine(query);
-                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                try
                 {
-                    using (OracleCommand command = new OracleCommand(query, connection))
+                    string query = "UPDATE CADMIN2.NHANSU SET DT = :phone";
+
+                    using (var conn = new OracleConnection(LogIn.connectionString))
                     {
-                        try
+                        conn.Open();
+                        using (var cmd = new OracleCommand(query, conn))
                         {
-                            Console.WriteLine("ok");
+                            cmd.Parameters.Add(new OracleParameter(":phone", PhoneNumbertxb.Text));
 
-                            connection.Open();
-                            command.ExecuteNonQuery();
-                            MessageBox.Show("Thành công");
-                            connection.Close();
+                            cmd.ExecuteNonQuery();
 
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error: " + ex.Message);
-                            //MessageBox.Show(query);
+                            MessageBox.Show("Cập nhật học phần thành công.");
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
+                }
+
             }
             else if (LogIn.work == "GV0")
             {
@@ -142,7 +140,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.NHANSU", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.NHANSU", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -166,7 +164,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.NVCB_NHANSU_VIEW", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.NHANSU", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -190,7 +188,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.NVCB_NHANSU_VIEW", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.NHANSU", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -205,6 +203,10 @@ namespace PhanHe2
                     conn.Close();
                 }
             }
+            nametxtb.Text = this.DetailStaff.Rows[0].Cells[1].Value.ToString();
+            DOB.Text = this.DetailStaff.Rows[0].Cells[3].Value.ToString();
+            addresstxb.Text = this.DetailStaff.Rows[0].Cells[6].Value.ToString();
+            PhoneNumbertxb.Text = this.DetailStaff.Rows[0].Cells[5].Value.ToString();
         }
     }
 }

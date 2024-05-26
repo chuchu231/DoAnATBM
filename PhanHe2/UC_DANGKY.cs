@@ -16,13 +16,11 @@ namespace PhanHe2
 {
     public partial class UC_DANGKY : UserControl
     {
-        private string connectionString;
-        OracleConnection conn = new OracleConnection(LogIn.connectionString);
+
         public FormScore_DANGKY score = new FormScore_DANGKY();
         public UC_DANGKY()
         {
             InitializeComponent();
-            this.DetailStaff.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_RowEnter);
         }
 
         private void DetailStaff_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -62,7 +60,6 @@ namespace PhanHe2
         }
 
 
-
         private void Score_btn_Click(object sender, EventArgs e)
         {
             if (LogIn.work == "SV0")
@@ -97,72 +94,44 @@ namespace PhanHe2
         {
             if (LogIn.work == "SV0")
             {
-                try
+                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
-                    // Lấy dữ liệu từ các TextBox hoặc các điều khiển nhập liệu
-                    string maSV = MSSVtxb.Text;
-                    string maGV = MAGVtxb.Text;
-                    string maHP = idtxtb.Text;
-                    string hocKy = HKtxb.Text;
-                    string namHoc = Namtxb.Text;
-                    string maCT = MACT.Text;
-
-
-                    // Tạo câu lệnh INSERT
-                    string insertQuery = "INSERT INTO ADMIN.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) VALUES (:maSV, :maGV, :maHP, :hocKy, :namHoc, :maCT, null, null, null, null)";
-                    using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                    try
                     {
                         connection.Open();
-                        using (OracleCommand cmd = new OracleCommand(insertQuery, connection))
+
+                        using (OracleCommand cmd = new OracleCommand("CADMIN2.UpdateDangKy", connection))
                         {
-                            // Thêm các tham số cho câu lệnh INSERT
-                            cmd.Parameters.Add(new OracleParameter("maSV", maSV));
-                            cmd.Parameters.Add(new OracleParameter("maGV", maGV));
-                            cmd.Parameters.Add(new OracleParameter("maHP", maHP));
-                            cmd.Parameters.Add(new OracleParameter("hocKy", hocKy));
-                            cmd.Parameters.Add(new OracleParameter("namHoc", namHoc));
-                            cmd.Parameters.Add(new OracleParameter("maCT", maCT));
+                            cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                            // Thực thi câu lệnh INSERT
-                            int rowsInserted = cmd.ExecuteNonQuery();
+                            cmd.Parameters.Add("p_maHP", OracleDbType.Varchar2).Value = idtxtb.Text;
+                            cmd.Parameters.Add("p_hocKy", OracleDbType.Varchar2).Value = HKtxb.Text; ;
+                            cmd.Parameters.Add("p_namHoc", OracleDbType.Varchar2).Value = Namtxb.Text;
+                            cmd.Parameters.Add("p_maCT", OracleDbType.Varchar2).Value = MACT.Text;
 
-                            if (rowsInserted > 0)
-                            {
-                                MessageBox.Show("Đăng ký thành công.");
-                            }
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("INSERT thành công.");
                         }
                     }
-                }
-                catch (OracleException ex)
-                {
-                    // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
-                    if (ex.Number == 20002 || ex.Number == 20001)
+                    catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Lỗi Oracle: " + ex.Message);
+                        MessageBox.Show("Lỗi: " + ex.Message);
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi: " + ex.Message);
-                }
+                
             }
             else if (LogIn.work == "GVU")
             {
                 try
                 {
-                    var queryString = "INSERT INTO ADMIN.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT) VALUES (:MASV, :MAGV, :MAHP, :HK, :NAM, :CT)";
-                    using (var conn = new OracleConnection(connectionString))
+                    var queryString = "INSERT INTO CADMIN2.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT) VALUES (:MASV, :MAGV, :MAHP, :HK, :NAM, :CT)";
+                    using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
                         using (var cmd = new OracleCommand(queryString, conn))
                         {
                             cmd.CommandType = CommandType.Text;
 
-                            // Add parameters with correct placeholders and values
                             cmd.Parameters.Add(new OracleParameter(":MASV", MSSVtxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
@@ -170,14 +139,12 @@ namespace PhanHe2
                             cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":CT", MACT.Text));
 
-                            // Execute the command
                             cmd.ExecuteNonQuery();
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception or display a message
                     MessageBox.Show("An error occurred: " + ex.Message);
                 }
             }
@@ -211,8 +178,8 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "DELETE FROM ADMIN.DANGKY WHERE MASV = :MASV AND MAGV = :MAGV AND MAHP = :MAHP AND HK = :HK AND NAM = :NAM AND MACT = :CT";
-                    using (var conn = new OracleConnection(connectionString))
+                    var queryString = "DELETE FROM CADMIN2.DANGKY WHERE MASV = :MASV AND MAGV = :MAGV AND MAHP = :MAHP AND HK = :HK AND NAM = :NAM AND MACT = :CT";
+                    using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
                         using (var cmd = new OracleCommand(queryString, conn))
@@ -278,7 +245,7 @@ namespace PhanHe2
                         connection.Open();
 
                         // Tạo OracleCommand để gọi stored procedure
-                        using (OracleCommand cmd = new OracleCommand("ADMIN.GET_KHMO_BYDAY", connection))
+                        using (OracleCommand cmd = new OracleCommand("CADMIN2.GET_KHMO_BYDAY", connection))
                         {
                             // Đặt kiểu command là Stored Procedure
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -294,7 +261,7 @@ namespace PhanHe2
                             DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
                             DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                             DetailStaff.ReadOnly = true;
-                            conn.Close();
+                            connection.Close();
                             dt.Dispose();
 
                         }
@@ -307,22 +274,44 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM ADMIN.DANGKY\r\n";
+                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                {
+                    UC_Containers.SendToBack();
+                    var queryString = "SELECT * FROM CADMIN2.DANGKY\r\n";
 
-                var dt = new DataTable();
+                    var dt = new DataTable();
 
-                var da = new OracleDataAdapter(queryString, conn);
-                da.Fill(dt);
-                DetailStaff.DataSource = dt;
+                    var da = new OracleDataAdapter(queryString, connection);
+                    da.Fill(dt);
+                    DetailStaff.DataSource = dt;
 
-                conn.Close();
-                dt.Dispose();
-                da.Dispose();
+                    connection.Close();
+                    dt.Dispose();
+                    da.Dispose();
+                }
             }
             else if (LogIn.work == "TBM")
             {
-                // do something ?
+                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                {
+                    conn.Open();
+
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DANGKY", conn);
+                        using (OracleDataReader reader = cmd.ExecuteReader())
+                        {
+                            DetailStaff.DataSource = null;
+                            if (reader.HasRows)
+                            {
+                                DataTable dataTable = new DataTable();
+                                dataTable.Load(reader);
+                                DetailStaff.DataSource = dataTable;
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
             }
             else if (LogIn.work == "TK0")
             {
@@ -332,7 +321,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.DANGKY", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DANGKY", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -362,7 +351,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DANGKY", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DANGKY", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -441,7 +430,7 @@ namespace PhanHe2
                             DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
                             DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                             DetailStaff.ReadOnly = true;
-                            conn.Close();
+                            connection.Close();
                             dt.Dispose();
 
                         }
@@ -479,7 +468,7 @@ namespace PhanHe2
                             DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
                             DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                             DetailStaff.ReadOnly = true;
-                            conn.Close();
+                            connection.Close();
                             dt.Dispose();
 
                         }
@@ -494,7 +483,30 @@ namespace PhanHe2
 
         private void DetailStaff_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (LogIn.work == "GV0") { 
+
             score.Show();
+            string queryString = "SELECT HOTEN FROM CADMIN2.SINHVIEN";
+            using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+            {
+                connection.Open();
+                using (OracleCommand command = new OracleCommand(queryString, connection))
+                {
+                    using (OracleDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            score.tbxHoTen.Text = reader["HOTEN"].ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Không tìm thấy dữ liệu.");
+                        }
+                    }
+                }
+                connection.Close();
+            }
             score.tbxMSSV.Text = this.DetailStaff.Rows[e.RowIndex].Cells[0].Value.ToString();
             score.tbxMAHP.Text = this.DetailStaff.Rows[e.RowIndex].Cells[2].Value.ToString();
             score.tbxHK.Text = this.DetailStaff.Rows[e.RowIndex].Cells[3].Value.ToString();
@@ -504,6 +516,7 @@ namespace PhanHe2
             score.tbxQT.Text = this.DetailStaff.Rows[e.RowIndex].Cells[7].Value.ToString();
             score.tbxCK.Text = this.DetailStaff.Rows[e.RowIndex].Cells[8].Value.ToString();
             score.lbOverall.Text = this.DetailStaff.Rows[e.RowIndex].Cells[9].Value.ToString();
+        }
         }
     }
 }

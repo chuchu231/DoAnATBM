@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
+using System.Collections;
 
 
 namespace PhanHe2
@@ -16,18 +17,11 @@ namespace PhanHe2
     public partial class UC_DONVI : UserControl
     {
 
-        private string connectionString;
-        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         public UC_DONVI()
         {
 
             InitializeComponent();
-            connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
 
-            // Replace the placeholders with actual username and password
-            connectionString = connectionString.Replace("{$user$}", LogIn.username);
-            connectionString = connectionString.Replace("{$password%}", LogIn.password);
-            conn = new OracleConnection(connectionString);
         }
 
         private void addUser_btn_Click(object sender, EventArgs e)
@@ -38,27 +32,30 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                try
+                var queryString = "INSERT INTO CADMIN2.DONVI (MADV, TENDV, TRGDV) VALUES (:MADV, :TENDV, :TRGDV)";
+
+                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
-                    var queryString = "INSERT INTO ADMIN.DONVI (MADV, TENDV, TRGDV) VALUES ('" + id_donvitxtb.Text + "', '" + donvitxb.Text + "', '" + trgDVtxb.Text +"')";
-
-                    using (conn = new OracleConnection(LogIn.connectionString))
+                    using (OracleCommand command = new OracleCommand(queryString, connection))
                     {
-                        conn.Open();
-                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        try
                         {
+                            command.Parameters.Add(new OracleParameter(":MADV", id_donvitxtb.Text));
+                            command.Parameters.Add(new OracleParameter(":TENDV", donvitxb.Text));
+                            command.Parameters.Add(new OracleParameter(":TRGDV", trgDVtxb.Text));
 
-                            Console.WriteLine(queryString);
-                            cmd.ExecuteNonQuery();
-
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("Thêm đơn vị thành công.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    // Log the exception or display a message
-                    MessageBox.Show("An error occurred: " + ex.Message);
-                }
+
+
             }
             else if (LogIn.work == "TBM")
             {
@@ -118,27 +115,29 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
-                try
+                var queryString = "UPDATE CADMIN2.DONVI SET TENDV = :TENDV, TRGDV = :TRGDV WHERE MADV = :MADV";
+
+                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
-                    var queryString = "UPDATE ADMIN.DONVI SET TENDV = '"+donvitxb.Text+"' AND TRGDV = '"+trgDVtxb.Text+"' WHERE MADV = '" + id_donvitxtb.Text + "'";
-
-                    using (conn = new OracleConnection(LogIn.connectionString))
+                    using (OracleCommand command = new OracleCommand(queryString, connection))
                     {
-                        conn.Open();
-                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        try
                         {
+                            command.Parameters.Add(new OracleParameter(":TENDV", donvitxb.Text));
+                            command.Parameters.Add(new OracleParameter(":TRGDV", trgDVtxb.Text));
+                            command.Parameters.Add(new OracleParameter(":MADV", id_donvitxtb.Text));
 
-                            Console.WriteLine(queryString);
-                            cmd.ExecuteNonQuery();
-
+                            connection.Open();
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("Cập nhật đơn vị thành công.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    // Log the exception or display a message
-                    MessageBox.Show("An error occurred: " + ex.Message);
-                }
+
             }
             else if (LogIn.work == "TBM")
             {
@@ -170,17 +169,32 @@ namespace PhanHe2
             else if (LogIn.work == "GVU")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM ADMIN.DONVI\r\n";
+                var queryString = "SELECT * FROM CADMIN2.DONVI";
+                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                {
+                    using (OracleCommand command = new OracleCommand(queryString, connection))
+                    {
+                        try
+                        {
+                            connection.Open();
+                            var dt = new DataTable();
 
-                var dt = new DataTable();
+                            var da = new OracleDataAdapter(queryString, connection);
+                            da.Fill(dt);
+                            DetailStaff.DataSource = dt;
 
-                var da = new OracleDataAdapter(queryString, conn);
-                da.Fill(dt);
-                DetailStaff.DataSource = dt;
-
-                conn.Close();
-                dt.Dispose();
-                da.Dispose();
+                            connection.Close();
+                            dt.Dispose();
+                            da.Dispose();
+                        }
+                        catch (Exception ex)
+                        {
+                            // Log the exception or display a message
+                            MessageBox.Show("An error occurred: " + ex.Message);
+                        }
+                    }
+                }
+                
             }
             
             else if (LogIn.work == "TK0")
@@ -191,7 +205,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.DONVI", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DONVI", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -215,7 +229,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DONVI", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DONVI", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -239,7 +253,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DONVI", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DONVI", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;

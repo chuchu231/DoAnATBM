@@ -61,10 +61,10 @@
             // 
             this.semester.AutoSize = true;
             this.semester.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.semester.Location = new System.Drawing.Point(495, 29);
+            this.semester.Location = new System.Drawing.Point(440, 23);
             this.semester.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.semester.Name = "semester";
-            this.semester.Size = new System.Drawing.Size(57, 20);
+            this.semester.Size = new System.Drawing.Size(51, 17);
             this.semester.TabIndex = 41;
             this.semester.Text = "Học kỳ";
             // 
@@ -84,19 +84,19 @@
             "CLC",
             "CTTT",
             "VP"});
-            this.MACT.Location = new System.Drawing.Point(22, 225);
+            this.MACT.Location = new System.Drawing.Point(20, 180);
             this.MACT.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MACT.Name = "MACT";
-            this.MACT.Size = new System.Drawing.Size(163, 36);
+            this.MACT.Size = new System.Drawing.Size(145, 36);
             this.MACT.TabIndex = 18;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label2.Location = new System.Drawing.Point(28, 201);
+            this.label2.Location = new System.Drawing.Point(25, 161);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 20);
+            this.label2.Size = new System.Drawing.Size(100, 16);
             this.label2.TabIndex = 17;
             this.label2.Text = "Mã chương trình";
             // 
@@ -104,9 +104,9 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label5.Location = new System.Drawing.Point(28, 140);
+            this.label5.Location = new System.Drawing.Point(25, 112);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 20);
+            this.label5.Size = new System.Drawing.Size(61, 16);
             this.label5.TabIndex = 15;
             this.label5.Text = "Năm học";
             // 
@@ -114,9 +114,9 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label3.Location = new System.Drawing.Point(28, 79);
+            this.label3.Location = new System.Drawing.Point(25, 63);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(57, 20);
+            this.label3.Size = new System.Drawing.Size(49, 16);
             this.label3.TabIndex = 13;
             this.label3.Text = "Học kỳ";
             // 
@@ -131,12 +131,13 @@
             this.delbtn.FillColor = System.Drawing.Color.White;
             this.delbtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.delbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.delbtn.Location = new System.Drawing.Point(22, 322);
+            this.delbtn.Location = new System.Drawing.Point(20, 258);
             this.delbtn.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.delbtn.Name = "delbtn";
-            this.delbtn.Size = new System.Drawing.Size(163, 39);
+            this.delbtn.Size = new System.Drawing.Size(145, 31);
             this.delbtn.TabIndex = 12;
             this.delbtn.Text = "DELETE";
+            this.delbtn.Click += new System.EventHandler(this.delbtn_Click_1);
             // 
             // Namtxb
             // 
@@ -151,13 +152,13 @@
             this.Namtxb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.Namtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.Namtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.Namtxb.Location = new System.Drawing.Point(22, 165);
-            this.Namtxb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.Namtxb.Location = new System.Drawing.Point(20, 132);
+            this.Namtxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Namtxb.Name = "Namtxb";
             this.Namtxb.PasswordChar = '\0';
             this.Namtxb.PlaceholderText = "";
             this.Namtxb.SelectedText = "";
-            this.Namtxb.Size = new System.Drawing.Size(163, 32);
+            this.Namtxb.Size = new System.Drawing.Size(145, 26);
             this.Namtxb.TabIndex = 14;
             // 
             // btn_Update
@@ -171,20 +172,21 @@
             this.btn_Update.FillColor = System.Drawing.Color.White;
             this.btn_Update.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.btn_Update.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btn_Update.Location = new System.Drawing.Point(22, 365);
+            this.btn_Update.Location = new System.Drawing.Point(20, 292);
             this.btn_Update.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.btn_Update.Name = "btn_Update";
-            this.btn_Update.Size = new System.Drawing.Size(163, 39);
+            this.btn_Update.Size = new System.Drawing.Size(145, 31);
             this.btn_Update.TabIndex = 10;
             this.btn_Update.Text = "UPDATE";
+            this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click_1);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(28, 15);
+            this.label1.Location = new System.Drawing.Point(25, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 20);
+            this.label1.Size = new System.Drawing.Size(84, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "Mã học phần";
             // 
@@ -201,13 +203,13 @@
             this.HKtxb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.HKtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.HKtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.HKtxb.Location = new System.Drawing.Point(22, 102);
-            this.HKtxb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.HKtxb.Location = new System.Drawing.Point(20, 82);
+            this.HKtxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.HKtxb.Name = "HKtxb";
             this.HKtxb.PasswordChar = '\0';
             this.HKtxb.PlaceholderText = "";
             this.HKtxb.SelectedText = "";
-            this.HKtxb.Size = new System.Drawing.Size(163, 32);
+            this.HKtxb.Size = new System.Drawing.Size(145, 26);
             this.HKtxb.TabIndex = 5;
             // 
             // semesterComB
@@ -226,10 +228,10 @@
             "HK2",
             "HK3",
             "Tất cả"});
-            this.semesterComB.Location = new System.Drawing.Point(580, 8);
-            this.semesterComB.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.semesterComB.Location = new System.Drawing.Point(516, 6);
+            this.semesterComB.Margin = new System.Windows.Forms.Padding(4);
             this.semesterComB.Name = "semesterComB";
-            this.semesterComB.Size = new System.Drawing.Size(147, 36);
+            this.semesterComB.Size = new System.Drawing.Size(131, 36);
             this.semesterComB.TabIndex = 39;
             // 
             // idtxtb
@@ -245,13 +247,13 @@
             this.idtxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.idtxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.idtxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.idtxtb.Location = new System.Drawing.Point(22, 40);
-            this.idtxtb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.idtxtb.Location = new System.Drawing.Point(20, 32);
+            this.idtxtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.idtxtb.Name = "idtxtb";
             this.idtxtb.PasswordChar = '\0';
             this.idtxtb.PlaceholderText = "";
             this.idtxtb.SelectedText = "";
-            this.idtxtb.Size = new System.Drawing.Size(163, 32);
+            this.idtxtb.Size = new System.Drawing.Size(145, 26);
             this.idtxtb.TabIndex = 4;
             // 
             // yeartxb
@@ -267,13 +269,13 @@
             this.yeartxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.yeartxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.yeartxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.yeartxb.Location = new System.Drawing.Point(276, 8);
-            this.yeartxb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.yeartxb.Location = new System.Drawing.Point(245, 6);
+            this.yeartxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.yeartxb.Name = "yeartxb";
             this.yeartxb.PasswordChar = '\0';
             this.yeartxb.PlaceholderText = "";
             this.yeartxb.SelectedText = "";
-            this.yeartxb.Size = new System.Drawing.Size(181, 55);
+            this.yeartxb.Size = new System.Drawing.Size(161, 44);
             this.yeartxb.TabIndex = 36;
             // 
             // insert_btn
@@ -287,21 +289,22 @@
             this.insert_btn.FillColor = System.Drawing.Color.White;
             this.insert_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.insert_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.insert_btn.Location = new System.Drawing.Point(22, 281);
+            this.insert_btn.Location = new System.Drawing.Point(20, 225);
             this.insert_btn.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.insert_btn.Name = "insert_btn";
-            this.insert_btn.Size = new System.Drawing.Size(163, 39);
+            this.insert_btn.Size = new System.Drawing.Size(145, 31);
             this.insert_btn.TabIndex = 0;
             this.insert_btn.Text = "INSERT";
+            this.insert_btn.Click += new System.EventHandler(this.insert_btn_Click);
             // 
             // year
             // 
             this.year.AutoSize = true;
             this.year.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.year.Location = new System.Drawing.Point(171, 29);
+            this.year.Location = new System.Drawing.Point(152, 23);
             this.year.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.year.Name = "year";
-            this.year.Size = new System.Drawing.Size(72, 20);
+            this.year.Size = new System.Drawing.Size(64, 17);
             this.year.TabIndex = 40;
             this.year.Text = "Năm học";
             // 
@@ -324,10 +327,10 @@
             this.guna2Panel1.Controls.Add(this.idtxtb);
             this.guna2Panel1.Controls.Add(this.insert_btn);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(683, 80);
+            this.guna2Panel1.Location = new System.Drawing.Point(607, 64);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(210, 432);
+            this.guna2Panel1.Size = new System.Drawing.Size(187, 346);
             this.guna2Panel1.TabIndex = 34;
             // 
             // searchKHMOButton
@@ -341,10 +344,10 @@
             this.searchKHMOButton.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.searchKHMOButton.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.searchKHMOButton.ForeColor = System.Drawing.Color.White;
-            this.searchKHMOButton.Location = new System.Drawing.Point(771, 14);
+            this.searchKHMOButton.Location = new System.Drawing.Point(685, 11);
             this.searchKHMOButton.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.searchKHMOButton.Name = "searchKHMOButton";
-            this.searchKHMOButton.Size = new System.Drawing.Size(107, 41);
+            this.searchKHMOButton.Size = new System.Drawing.Size(95, 33);
             this.searchKHMOButton.TabIndex = 35;
             this.searchKHMOButton.Text = "Search";
             this.searchKHMOButton.Click += new System.EventHandler(this.searchKHMOButton_Click);
@@ -379,7 +382,7 @@
             this.DetailStaff.RowHeadersVisible = false;
             this.DetailStaff.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DetailStaff.RowTemplate.Height = 28;
-            this.DetailStaff.Size = new System.Drawing.Size(634, 418);
+            this.DetailStaff.Size = new System.Drawing.Size(564, 334);
             this.DetailStaff.TabIndex = 42;
             this.DetailStaff.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.DetailStaff.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -403,16 +406,17 @@
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.DetailStaff.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_CellClick);
+            this.DetailStaff.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_RowEnter);
             // 
             // UC_Containers
             // 
             this.UC_Containers.Controls.Add(this.DetailStaff);
             this.UC_Containers.Controls.Add(this.guna2ComboBox1);
             this.UC_Containers.Controls.Add(this.privileges);
-            this.UC_Containers.Location = new System.Drawing.Point(42, 95);
-            this.UC_Containers.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.UC_Containers.Location = new System.Drawing.Point(37, 76);
+            this.UC_Containers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.UC_Containers.Name = "UC_Containers";
-            this.UC_Containers.Size = new System.Drawing.Size(634, 405);
+            this.UC_Containers.Size = new System.Drawing.Size(564, 324);
             this.UC_Containers.TabIndex = 43;
             // 
             // guna2ComboBox1
@@ -431,10 +435,10 @@
             "INSERT",
             "UPDATE",
             "DELETE"});
-            this.guna2ComboBox1.Location = new System.Drawing.Point(338, 45);
-            this.guna2ComboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guna2ComboBox1.Location = new System.Drawing.Point(300, 36);
+            this.guna2ComboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2ComboBox1.Name = "guna2ComboBox1";
-            this.guna2ComboBox1.Size = new System.Drawing.Size(126, 36);
+            this.guna2ComboBox1.Size = new System.Drawing.Size(112, 36);
             this.guna2ComboBox1.TabIndex = 31;
             // 
             // privileges
@@ -453,15 +457,15 @@
             "INSERT",
             "UPDATE",
             "DELETE"});
-            this.privileges.Location = new System.Drawing.Point(338, 172);
-            this.privileges.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.privileges.Location = new System.Drawing.Point(300, 138);
+            this.privileges.Margin = new System.Windows.Forms.Padding(4);
             this.privileges.Name = "privileges";
-            this.privileges.Size = new System.Drawing.Size(104, 36);
+            this.privileges.Size = new System.Drawing.Size(93, 36);
             this.privileges.TabIndex = 32;
             // 
             // UC_KHMO
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.UC_Containers);
@@ -473,7 +477,7 @@
             this.Controls.Add(this.searchKHMOButton);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UC_KHMO";
-            this.Size = new System.Drawing.Size(925, 520);
+            this.Size = new System.Drawing.Size(822, 416);
             this.Load += new System.EventHandler(this.UC_KHMO_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();

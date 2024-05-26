@@ -36,28 +36,56 @@ namespace PhanHe2
 
         private void updatebtn_Click(object sender, EventArgs e)
         {
-            var queryString = "UPDATE CADMIN2.DANGKY SET DIEMTH = @TBXTH, DIEMQT = @TBXQT, DIEMCK = @TBXCK WHERE MASV = @TBXMSSV AND MAHP = @TBXMAHP AND HK = @TBXHK AND NAMHOC = @TBXNAMHOC";
+            var queryString = "UPDATE CADMIN2.DANGKY SET DIEMTH = :TBXTH, DIEMQT = :TBXQT, DIEMCK = :TBXCK WHERE MASV = :TBXMSSV AND MAHP = :TBXMAHP AND HK = :TBXHK AND NAM = :TBXNAMHOC";
 
-            using (OracleCommand cmd = new OracleCommand(queryString, conn))
+            using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
             {
-                cmd.CommandType = CommandType.Text;
+                using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                {
+                    try
+                    {
+                        conn.Open();
 
-                cmd.Parameters.Add(new OracleParameter("@TBXTH", tbxTH));
-                cmd.Parameters.Add(new OracleParameter("@TBXQT", tbxQT));
-                cmd.Parameters.Add(new OracleParameter("@TBXCK", tbxCK));
-                cmd.Parameters.Add(new OracleParameter("@TBXMSSV", tbxMSSV));
-                cmd.Parameters.Add(new OracleParameter("@TBXMAHP", tbxMAHP));
-                cmd.Parameters.Add(new OracleParameter("@TBXHK", tbxHK));
-                cmd.Parameters.Add(new OracleParameter("@TBXNAMHOC", tbxNamHoc));
+                        cmd.Parameters.Add(new OracleParameter(":TBXTH", float.Parse(tbxTH.Text)));
+                        cmd.Parameters.Add(new OracleParameter(":TBXQT", float.Parse(tbxQT.Text)));
+                        cmd.Parameters.Add(new OracleParameter(":TBXCK", float.Parse(tbxCK.Text)));
+                        cmd.Parameters.Add(new OracleParameter(":TBXMSSV", tbxMSSV.Text));
+                        cmd.Parameters.Add(new OracleParameter(":TBXMAHP", tbxMAHP.Text));
+                        cmd.Parameters.Add(new OracleParameter(":TBXHK", tbxHK.Text));
+                        cmd.Parameters.Add(new OracleParameter(":TBXNAMHOC", tbxNamHoc.Text));
 
-                cmd.ExecuteNonQuery();
+                        int rowsUpdated = cmd.ExecuteNonQuery();
+
+                        if (rowsUpdated > 0)
+                        {
+                            MessageBox.Show("Cập nhật thành công.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cập nhật thất bại.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi: " + ex.Message);
+                    }
+                    finally
+                    {
+                        if (conn.State == ConnectionState.Open)
+                        {
+                            conn.Close();
+                        }
+                    }
+                }
             }
-            this.Refresh();
+
+            this.Hide();
         }
+
 
         private void tbxTH_TextChanged(object sender, EventArgs e)
         {
-            /*var queryString = "UPDATE CADMIN2.DANGKY SET DIEMTH = @TBXTH, DIEMQT = @TBXQT, DIEMCK = @TBXCK WHERE MASV = @TBXMSSV AND MAHP = @TBXMAHP AND HK = @TBXHK AND NAMHOC = @TBXNAMHOC";
+           /* var queryString = "UPDATE CADMIN2.DANGKY SET DIEMTH = @TBXTH, DIEMQT = @TBXQT, DIEMCK = @TBXCK WHERE MASV = @TBXMSSV AND MAHP = @TBXMAHP AND HK = @TBXHK AND NAMHOC = @TBXNAMHOC";
 
             using (OracleCommand cmd = new OracleCommand(queryString, conn))
             {
@@ -78,7 +106,7 @@ namespace PhanHe2
 
         private void tbxQT_TextChanged(object sender, EventArgs e)
         {
-           /* var queryString = "UPDATE CADMIN2.DANGKY SET DIEMTH = @TBXTH, DIEMQT = @TBXQT, DIEMCK = @TBXCK WHERE MASV = @TBXMSSV AND MAHP = @TBXMAHP AND HK = @TBXHK AND NAMHOC = @TBXNAMHOC";
+            /*var queryString = "UPDATE CADMIN2.DANGKY SET DIEMTH = @TBXTH, DIEMQT = @TBXQT, DIEMCK = @TBXCK WHERE MASV = @TBXMSSV AND MAHP = @TBXMAHP AND HK = @TBXHK AND NAMHOC = @TBXNAMHOC";
 
             using (OracleCommand cmd = new OracleCommand(queryString, conn))
             {

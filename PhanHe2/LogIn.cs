@@ -42,30 +42,76 @@ namespace PhanHe2
                     conn.Open();
                     if (conn.State == ConnectionState.Open)
                     {
-                        MessageBox.Show("Đăng nhập thành công");
 
                         // Hiding LogIn form
                         this.Hide();
 
                         string rolePrefix = username.Substring(0, 3).ToUpper();
                         work = rolePrefix;
+
+                        if (rolePrefix == "SV0")
+                        {
+                            HomeStudent form = new HomeStudent();
+                            form.Show();
+                            MessageBox.Show("Đăng nhập thành công");
+                            return;
+                        }
+                        string queryStringTRDV = "SELECT COUNT(*) FROM CADMIN2.DONVI WHERE TRGDV = :username";
+                        using (OracleCommand cmd = new OracleCommand(queryStringTRDV, conn))
+                        {
+                            try
+                            {
+
+                                cmd.Parameters.Add(new OracleParameter(":username", LogIn.username));
+
+                                int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                                if (count > 0)
+                                {
+                                    LogIn.work = "TBM";
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Lỗi: " + ex.Message);
+                            }
+                        }
+                        string queryStringTRK = "SELECT COUNT(*) FROM CADMIN2.DONVI WHERE TRGDV = :username AND MADV = :MADV";
+                        using (OracleCommand cmd = new OracleCommand(queryStringTRK, conn))
+                        {
+                            try
+                            {
+                                cmd.Parameters.Add(new OracleParameter(":username", LogIn.username));
+                                cmd.Parameters.Add(new OracleParameter(":MADV", "VPK"));
+
+
+                                int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                                if (count > 0)
+                                {
+                                    LogIn.work = "TK0";
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Lỗi: " + ex.Message);
+                            }
+                        }
                         if (rolePrefix == "NV0")
                         {
                             HomeStaff form = new HomeStaff();
                             form.Show();
+                            MessageBox.Show("Đăng nhập thành công");
                         }
 
                         else if (rolePrefix == "GV0" || rolePrefix == "TBM" || rolePrefix == "TK0" || rolePrefix == "GVU")
                         {
                             HomeLEC form = new HomeLEC();
                             form.Show();
+                            MessageBox.Show("Đăng nhập thành công");
 
                         }
-                        else if (rolePrefix == "SV0")
-                        {
-                            HomeStudent form = new HomeStudent();
-                            form.Show();
-                        }
+                        
 
                         else
                             {
@@ -79,7 +125,7 @@ namespace PhanHe2
                     catch(Exception ex)
                     {   
                         conn.Close();
-                        Console.WriteLine("Error: " + ex.Message);
+                        MessageBox.Show("Error: " + ex.Message);
                         connectionString = connectionString.Replace( username, "{$user$}");
                         connectionString = connectionString.Replace(password, "{$password%}");
                     

@@ -20,7 +20,6 @@ namespace PhanHe2
 
         private void hp_Click(object sender, EventArgs e)
         {
-
             UC_PHANCONG uc = new UC_PHANCONG();
             uc.Dock = DockStyle.Fill;
             this.Controls.Clear();

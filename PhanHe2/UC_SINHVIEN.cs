@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
+using System.Diagnostics.Metrics;
 
 
 namespace PhanHe2
@@ -38,27 +39,47 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
+                string alterstr = "ALTER SESSION SET NLS_DATE_FORMAT = 'MM/DD/YYYY'";
+                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                {
+                    conn.Open();
+                    using (OracleCommand cmd = new OracleCommand(alterstr, conn))
+                    { 
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+
                 try
                 {
-                    var queryString = "INSERT INTO ADMIN.SINHVIEN (MASV, HOTEN, NGSINH, DCHI, DT) VALUES ('" + mssv.Text + "', '" + nametxtb.Text + "', '" + DOB.Text + "', '" + addresstxb.Text + "', " + PhoneNumbertxb.Text + "')";
+                    // Chuỗi truy vấn với các tham số
+                    var queryString = "INSERT INTO CADMIN2.SINHVIEN (MASV, HOTEN, NGSINH, DCHI, DT) VALUES (:MASV, :HOTEN, :NGSINH, :DCHI, :DT)";
 
-                    using (conn = new OracleConnection(LogIn.connectionString))
+                    using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
                         using (OracleCommand cmd = new OracleCommand(queryString, conn))
                         {
+                            // Thêm các tham số vào câu lệnh
+                            cmd.Parameters.Add(new OracleParameter(":MASV", mssv.Text));
+                            cmd.Parameters.Add(new OracleParameter(":HOTEN", nametxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NGSINH", DOB.Text));
+                            cmd.Parameters.Add(new OracleParameter(":DCHI", addresstxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":DT", PhoneNumbertxb.Text));
 
-                            Console.WriteLine(queryString);
+                            // Thực thi câu lệnh SQL
                             cmd.ExecuteNonQuery();
 
+                            // Hiển thị thông báo thành công
+                            MessageBox.Show("Thêm sinh viên thành công.");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception or display a message
-                    MessageBox.Show("An error occurred: " + ex.Message);
+                    // Ghi lại lỗi hoặc hiển thị thông báo lỗi
+                    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
                 }
+
             }
             else if (LogIn.work == "TBM")
             {
@@ -84,15 +105,15 @@ namespace PhanHe2
         {
             if (LogIn.work == "SV0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.work == "GVU")
             {
-                
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.work == "TBM")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.work == "TK0")
             {
@@ -106,7 +127,7 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GV0")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
         }
 
@@ -118,25 +139,43 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GVU")
             {
+                string alterstr = "ALTER SESSION SET NLS_DATE_FORMAT = 'MM/DD/YYYY'";
+                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                {
+                    conn.Open();
+                    using (OracleCommand cmd = new OracleCommand(alterstr, conn))
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                }
                 try
                 {
+                    var queryString = "UPDATE CADMIN2.SINHVIEN SET HOTEN = :HOTEN, NGSINH = :NGSINH, DCHI = :DCHI, DT = :DT WHERE MASV = :MASV";
 
-                    var queryString = "UPDATE ADMIN.SINHVIEN SET HOTEN = '" + nametxtb.Text + "', NGSINH = '" + DOB.Text + "', DCHI = '" + addresstxb.Text + "', DT = '"+ PhoneNumbertxb.Text+"' " +
-                                        "WHEREMASV = '" + mssv.Text + "'";
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
                         using (var cmd = new OracleCommand(queryString, conn))
                         {
+                            // Thêm các tham số vào câu lệnh SQL
+                            cmd.Parameters.Add(new OracleParameter(":HOTEN", nametxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NGSINH", DOB.Text));
+                            cmd.Parameters.Add(new OracleParameter(":DCHI", addresstxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":DT", PhoneNumbertxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MASV", mssv.Text));
+
+                            // Thực thi câu lệnh SQL
                             cmd.ExecuteNonQuery();
                         }
                     }
+                    MessageBox.Show("Cập nhật thành công.");
                 }
                 catch (Exception ex)
                 {
-                    // Log the exception or display a message
-                    MessageBox.Show("An error occurred: " + ex.Message);
+                    // Ghi lại lỗi hoặc hiển thị thông báo lỗi
+                    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
                 }
+
 
             }
             else if (LogIn.work == "TBM")
@@ -169,7 +208,7 @@ namespace PhanHe2
             else if (LogIn.work == "GVU" || LogIn.work == "TBM")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM ADMIN.SINHVIEN\r\n";
+                var queryString = "SELECT * FROM CADMIN2.SINHVIEN";
 
                 var dt = new DataTable();
 
@@ -184,7 +223,7 @@ namespace PhanHe2
             else if (LogIn.work == "TK0")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM KAN.SINHVIEN\r\n";
+                var queryString = "SELECT * FROM CADMIN2.SINHVIEN\r\n";
 
                 var dt = new DataTable();
 
@@ -198,11 +237,33 @@ namespace PhanHe2
             }
             else if (LogIn.work == "NV0")
             {
-                // do something ?
+                UC_Containers.SendToBack();
+                var queryString = "SELECT * FROM CADMIN2.SINHVIEN\r\n";
+
+                var dt = new DataTable();
+
+                var da = new OracleDataAdapter(queryString, conn);
+                da.Fill(dt);
+                DetailStaff.DataSource = dt;
+
+                conn.Close();
+                dt.Dispose();
+                da.Dispose();
             }
             else if (LogIn.work == "GV0")
             {
-                // do something ?
+                UC_Containers.SendToBack();
+                var queryString = "SELECT * FROM CADMIN2.SINHVIEN\r\n";
+
+                var dt = new DataTable();
+
+                var da = new OracleDataAdapter(queryString, conn);
+                da.Fill(dt);
+                DetailStaff.DataSource = dt;
+
+                conn.Close();
+                dt.Dispose();
+                da.Dispose();
             }
         }
 

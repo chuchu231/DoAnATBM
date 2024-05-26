@@ -9,8 +9,7 @@ namespace PhanHe2
 {
     public partial class UC_PHANCONG : UserControl
     {
-        private string connectionString;
-        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
+        OracleConnection conn = new OracleConnection(LogIn.connectionString);
 
         // bien tam
         string old_gv, old_hp, old_hk, old_nam, old_mact, dv;
@@ -18,10 +17,7 @@ namespace PhanHe2
         public UC_PHANCONG()
         {
             InitializeComponent();
-            connectionString = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
-            connectionString = connectionString.Replace("{$user$}", LogIn.username);
-            connectionString = connectionString.Replace("{$password%}", LogIn.password);
-            conn = new OracleConnection(connectionString);
+            
         }
 
         private void insert_btn_Click(object sender, EventArgs e)
@@ -37,12 +33,11 @@ namespace PhanHe2
             else if (LogIn.work == "TBM")
             {
 
-
                 try
                 {
                     var queryString = "INSERT INTO ADMIN.UV_TRGDV_QUANLY_PHANCONG VALUES ('" + MAGVtxb.Text + "', '" + dv + "', '" + idtxtb.Text + "', '" + HKtxb.Text + "', '" + Namtxb.Text + "', '" + MACT.Text + "')";
 
-                    using (conn = new OracleConnection(connectionString))
+                    using (conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
                         using (OracleCommand cmd = new OracleCommand(queryString, conn))
@@ -66,7 +61,7 @@ namespace PhanHe2
                 string query;
                 query = "INSERT INTO KAN.TRK_PHANCONG_VIEW VALUES ('" + MAGVtxb.Text + "','" + idtxtb.Text + "','" + HKtxb.Text + "','" + Namtxb.Text + "','" + MACT.Text + "')";
                 Console.WriteLine(query);
-                using (OracleConnection connection = new OracleConnection(connectionString))
+                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
                     using (OracleCommand command = new OracleCommand(query, connection))
                     {
@@ -118,7 +113,7 @@ namespace PhanHe2
                 {
                     string queryString = "DELETE FROM ADMIN.PHANCONG WHERE MAGV = :MAGV AND MAHP = :MAHP AND HK = :HK AND NAM = :NAM AND MACT = :MACT";
 
-                    using (OracleConnection conn = new OracleConnection(connectionString))
+                    using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
                         using (OracleCommand cmd = new OracleCommand(queryString, conn))
@@ -148,7 +143,7 @@ namespace PhanHe2
                 string query;
                 query = "DELETE FROM KAN.TRK_PHANCONG_VIEW WHERE MAGV = '" + MAGVtxb.Text + "' AND MAHP = '" + idtxtb.Text + "' AND HK ='" + HKtxb.Text + "' AND NAM='" + Namtxb.Text + "' AND MACT='" + MACT.Text + "'";
                 Console.WriteLine(query);
-                using (OracleConnection connection = new OracleConnection(connectionString))
+                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
                     using (OracleCommand command = new OracleCommand(query, connection))
                     {
@@ -192,9 +187,9 @@ namespace PhanHe2
                 try
                 {
 
-                    var queryString = "UPDATE ADMIN.UV_QUANLY_PHANCONG SET MANV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "', MADV = 'VPK' " +
+                    var queryString = "UPDATE CADMIN2.UV_QUANLY_PHANCONG SET MANV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "', MADV = 'VPK' " +
                                         "WHERE MANV = '" + old_gv + "' AND MAHP = '" + old_hp + "' AND HK = '" + old_hk + "' AND NAM = '" + old_nam + "' AND MACT = '" + old_mact + "' AND MADV = 'VPK'";
-                    using (var conn = new OracleConnection(connectionString))
+                    using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
                         using (var cmd = new OracleCommand(queryString, conn))
@@ -215,10 +210,10 @@ namespace PhanHe2
 
                 try
                 {
-                    var queryString = "UPDATE ADMIN.UV_TRGDV_QUANLY_PHANCONG SET MAGV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "', MADV = '" + dv + "' " +
+                    var queryString = "UPDATE CADMIN2.UV_TRGDV_QUANLY_PHANCONG SET MAGV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "', MADV = '" + dv + "' " +
                                         "WHERE MAGV = '" + old_gv + "' AND MAHP = '" + old_hp + "' AND HK = '" + old_hk + "' AND NAM = '" + old_nam + "' AND MACT = '" + old_mact + "' AND MADV = '" + dv + "'";
 
-                    using (var conn = new OracleConnection(connectionString))
+                    using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
                         using (var cmd = new OracleCommand(queryString, conn))
@@ -243,7 +238,7 @@ namespace PhanHe2
                     var queryString = "UPDATE KAN.TRK_PHANCONG_VIEW SET MAGV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "'" +
                                         "WHERE MAGV = '" + old_gv + "' AND MAHP = '" + old_hp + "' AND HK = '" + old_hk + "' AND NAM = '" + old_nam + "' AND MACT = '" + old_mact + "'";
 
-                    using (var conn = new OracleConnection(connectionString))
+                    using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
                         using (var cmd = new OracleCommand(queryString, conn))
@@ -282,7 +277,7 @@ namespace PhanHe2
             else if (LogIn.work == "GVU")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM ADMIN.PHANCONG\r\n";
+                var queryString = "SELECT * FROM CADMIN2.PHANCONG\r\n";
 
                 var dt = new DataTable();
 
@@ -297,7 +292,7 @@ namespace PhanHe2
             else if (LogIn.work == "TBM")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM ADMIN.UV_TRGDV_QUANLY_PHANCONG\r\n";
+                var queryString = "SELECT * FROM CADMIN2.UV_TRGDV_QUANLY_PHANCONG\r\n";
 
                 var dt = new DataTable();
 
@@ -311,7 +306,7 @@ namespace PhanHe2
             }
             else if (LogIn.work == "TK0")
             {
-                using (OracleConnection conn = new OracleConnection(connectionString))
+                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
                     conn.Open();
 
@@ -338,7 +333,28 @@ namespace PhanHe2
             }
             else if (LogIn.work == "GV0")
             {
-                // do something ?
+                var queryString = "SELECT * FROM CADMIN2.UV_GV_Phancong";
+
+                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                {
+                    conn.Open();
+
+                    if (conn.State == ConnectionState.Open)
+                    {
+                        OracleCommand cmd = new OracleCommand(queryString, conn);
+                        using (OracleDataReader reader = cmd.ExecuteReader())
+                        {
+                            DetailStaff.DataSource = null;
+                            if (reader.HasRows)
+                            {
+                                DataTable dataTable = new DataTable();
+                                dataTable.Load(reader);
+                                DetailStaff.DataSource = dataTable;
+                            }
+                        }
+                    }
+                    conn.Close();
+                }
             }
         }
 

@@ -494,6 +494,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.DetailStaff)).EndInit();
             this.UC_Containers.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.DetailStaff.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_RowEnter);
+
 
         }
 

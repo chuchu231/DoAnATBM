@@ -73,18 +73,21 @@ namespace PhanHe2
 
         private void UpdateStudent(string address, string phone)
         {
+            string queryString = "UPDATE CADMIN2.SINHVIEN SET DCHI = :DCHI, DT = :DT";
+
             using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
             {
                 conn.Open();
-                using (OracleCommand cmd = new OracleCommand("CADMIN2.UPDATE_STUDENT", conn))
+                using (OracleCommand cmd = new OracleCommand(queryString, conn))
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("DCHI", OracleDbType.NVarchar2).Value = address;
-                    cmd.Parameters.Add("DT", OracleDbType.NVarchar2).Value = phone;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Parameters.Add(":DCHI", OracleDbType.NVarchar2).Value = address;
+                    cmd.Parameters.Add(":DT", OracleDbType.NVarchar2).Value = phone;
                     cmd.ExecuteNonQuery();
                 }
             }
         }
+
 
         private void save_Click(object sender, EventArgs e)
         {

@@ -262,6 +262,9 @@
     <EmbeddedResource Include="UC_SV_THONGTIN.resx">
       <DependentUpon>UC_SV_THONGTIN.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC_TBM_CHOICE.resx">
+      <DependentUpon>UC_TBM_CHOICE.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>
     </None>
