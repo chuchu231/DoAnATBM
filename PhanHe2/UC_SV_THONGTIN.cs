@@ -27,7 +27,7 @@ namespace PhanHe2
                 try
                 {
                     conn.Open();
-                    string query = "SELECT * FROM ADMIN.SINHVIEN";
+                    string query = "SELECT * FROM CADMIN2.SINHVIEN";
                     using (OracleCommand cmd = new OracleCommand(query, conn))
                     {
                         using (OracleDataReader reader = cmd.ExecuteReader())
@@ -78,7 +78,7 @@ namespace PhanHe2
             using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
             {
                 conn.Open();
-                using (OracleCommand cmd = new OracleCommand("ADMIN.UPDATE_STUDENT", conn))
+                using (OracleCommand cmd = new OracleCommand(queryString, conn))
                 {
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.Add(":DCHI", OracleDbType.NVarchar2).Value = address;

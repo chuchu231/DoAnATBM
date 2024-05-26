@@ -111,26 +111,26 @@ namespace PhanHe2
                             MessageBox.Show("Đăng nhập thành công");
 
                         }
-                        
+
 
                         else
-                            {
-                                conn.Close();
-                                MessageBox.Show("Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.");
-                                connectionString = connectionString.Replace(username, "{$user$}");
-                                connectionString = connectionString.Replace(password, "{$password%}");
-                             }
-                        } 
+                        {
+                            conn.Close();
+                            MessageBox.Show("Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.");
+                            connectionString = connectionString.Replace(username, "{$user$}");
+                            connectionString = connectionString.Replace(password, "{$password%}");
+                        }
                     }
-                    catch(Exception ex)
-                    {   
-                        conn.Close();
-                        MessageBox.Show("Error: " + ex.Message);
-                        connectionString = connectionString.Replace( username, "{$user$}");
-                        connectionString = connectionString.Replace(password, "{$password%}");
-                    
                 }
+                catch (Exception ex)
+                {
+                    conn.Close();
+                    MessageBox.Show("Error: " + ex.Message);
+                    connectionString = connectionString.Replace(username, "{$user$}");
+                    connectionString = connectionString.Replace(password, "{$password%}");
+
                 }
+            }
         }
 
         private void txtBoxPassword_KeyPress(object sender, KeyPressEventArgs e)
