@@ -40,7 +40,7 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "INSERT INTO ADMIN.DONVI (MADV, TENDV, TRGDV) VALUES ('" + id_donvitxtb.Text + "', '" + donvitxb.Text + "', '" + trgDVtxb.Text + "')";
+                    var queryString = "INSERT INTO ADMIN.DONVI (MADV, TENDV, TRGDV) VALUES ('" + id_donvitxtb.Text + "', '" + donvitxb.Text + "', '" + trgDVtxb.Text +"')";
 
                     using (conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -120,7 +120,7 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "UPDATE ADMIN.DONVI SET TENDV = '" + donvitxb.Text + "' AND TRGDV = '" + trgDVtxb.Text + "' WHERE MADV = '" + id_donvitxtb.Text + "'";
+                    var queryString = "UPDATE ADMIN.DONVI SET TENDV = '"+donvitxb.Text+"' AND TRGDV = '"+trgDVtxb.Text+"' WHERE MADV = '" + id_donvitxtb.Text + "'";
 
                     using (conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -170,7 +170,7 @@ namespace PhanHe2
             else if (LogIn.work == "GVU")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.DONVI\r\n";
+                var queryString = "SELECT * FROM ADMIN.DONVI\r\n";
 
                 var dt = new DataTable();
 
@@ -182,10 +182,7 @@ namespace PhanHe2
                 dt.Dispose();
                 da.Dispose();
             }
-            else if (LogIn.work == "TBM")
-            {
-                // do something ?
-            }
+            
             else if (LogIn.work == "TK0")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
@@ -194,7 +191,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DONVI", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.DONVI", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -210,7 +207,7 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.work == "NV0" || LogIn.work == "TBM")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -218,7 +215,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DONVI", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DONVI", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -242,7 +239,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DONVI", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DONVI", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -259,7 +256,7 @@ namespace PhanHe2
             }
         }
 
-        private void DetailStaff_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DetailStaff_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             id_donvitxtb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[0].Value.ToString();
             donvitxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[1].Value.ToString();

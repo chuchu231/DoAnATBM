@@ -109,7 +109,7 @@ namespace PhanHe2
 
 
                     // Tạo câu lệnh INSERT
-                    string insertQuery = "INSERT INTO CADMIN2.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) VALUES (:maSV, :maGV, :maHP, :hocKy, :namHoc, :maCT, null, null, null, null)";
+                    string insertQuery = "INSERT INTO ADMIN.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) VALUES (:maSV, :maGV, :maHP, :hocKy, :namHoc, :maCT, null, null, null, null)";
                     using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                     {
                         connection.Open();
@@ -154,7 +154,7 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "INSERT INTO CADMIN2.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT) VALUES (:MASV, :MAGV, :MAHP, :HK, :NAM, :CT)";
+                    var queryString = "INSERT INTO ADMIN.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT) VALUES (:MASV, :MAGV, :MAHP, :HK, :NAM, :CT)";
                     using (var conn = new OracleConnection(connectionString))
                     {
                         conn.Open();
@@ -211,7 +211,7 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "DELETE FROM CADMIN2.DANGKY WHERE MASV = :MASV AND MAGV = :MAGV AND MAHP = :MAHP AND HK = :HK AND NAM = :NAM AND MACT = :CT";
+                    var queryString = "DELETE FROM ADMIN.DANGKY WHERE MASV = :MASV AND MAGV = :MAGV AND MAHP = :MAHP AND HK = :HK AND NAM = :NAM AND MACT = :CT";
                     using (var conn = new OracleConnection(connectionString))
                     {
                         conn.Open();
@@ -278,7 +278,7 @@ namespace PhanHe2
                         connection.Open();
 
                         // Tạo OracleCommand để gọi stored procedure
-                        using (OracleCommand cmd = new OracleCommand("CADMIN2.GET_KHMO_BYDAY", connection))
+                        using (OracleCommand cmd = new OracleCommand("ADMIN.GET_KHMO_BYDAY", connection))
                         {
                             // Đặt kiểu command là Stored Procedure
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -308,7 +308,7 @@ namespace PhanHe2
             else if (LogIn.work == "GVU")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.DANGKY\r\n";
+                var queryString = "SELECT * FROM ADMIN.DANGKY\r\n";
 
                 var dt = new DataTable();
 
@@ -332,7 +332,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DANGKY", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.DANGKY", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -362,7 +362,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DANGKY", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DANGKY", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -425,7 +425,7 @@ namespace PhanHe2
                         connection.Open();
 
                         // Tạo OracleCommand để gọi stored procedure
-                        using (OracleCommand cmd = new OracleCommand("CADMIN2.GET_KHMO_BYDAY", connection))
+                        using (OracleCommand cmd = new OracleCommand("ADMIN.GET_KHMO_BYDAY", connection))
                         {
                             // Đặt kiểu command là Stored Procedure
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -463,7 +463,7 @@ namespace PhanHe2
                         connection.Open();
 
                         // Tạo OracleCommand để gọi stored procedure
-                        using (OracleCommand cmd = new OracleCommand("CADMIN2.GET_KHMO_BYNAME", connection))
+                        using (OracleCommand cmd = new OracleCommand("ADMIN.GET_KHMO_BYNAME", connection))
                         {
                             // Đặt kiểu command là Stored Procedure
                             cmd.CommandType = CommandType.StoredProcedure;

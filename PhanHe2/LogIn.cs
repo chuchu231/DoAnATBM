@@ -55,16 +55,18 @@ namespace PhanHe2
                             form.Show();
                         }
 
-                        else if (rolePrefix == "GV0" || rolePrefix == "TBM" || rolePrefix == "TK0")
+                        else if (rolePrefix == "GV0" || rolePrefix == "TBM" || rolePrefix == "TK0" || rolePrefix == "GVU")
                         {
                             HomeLEC form = new HomeLEC();
                             form.Show();
+
                         }
                         else if (rolePrefix == "SV0")
                         {
                             HomeStudent form = new HomeStudent();
                             form.Show();
                         }
+
                         else
                             {
                                 conn.Close();
