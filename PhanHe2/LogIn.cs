@@ -79,7 +79,7 @@ namespace PhanHe2
                     catch(Exception ex)
                     {   
                         conn.Close();
-                        Console.WriteLine("Error: " + ex.Message);
+                        MessageBox.Show("Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.");
                         connectionString = connectionString.Replace( username, "{$user$}");
                         connectionString = connectionString.Replace(password, "{$password%}");
                     

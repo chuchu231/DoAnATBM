@@ -59,7 +59,7 @@ namespace PhanHe2
         private void UC_SV_KETQUADK_Load(object sender, EventArgs e)
         {
             var queryString = "SELECT DK.MAGV, DK.MAHP, HP.TENHP, DK.HK, DK.NAM, DK.MACT" +
-                              " FROM CADMIN2.DANGKY DK JOIN CADMIN2.HOCPHAN HP ON DK.MAHP = HP.MAHP  " +
+                              " FROM ADMIN.DANGKY DK JOIN ADMIN.HOCPHAN HP ON DK.MAHP = HP.MAHP  " +
                               "WHERE DIEMTH IS NULL AND DIEMQT IS NULL AND DIEMCK IS NULL AND DIEMTK IS NULL\r\n";
 
             var dt = new DataTable();
@@ -90,7 +90,7 @@ namespace PhanHe2
 
 
                 // Tạo câu lệnh INSERT
-                string insertQuery = "DELETE FROM CADMIN2.DANGKY WHERE MAGV = :maGV AND MAHP = :maHP AND HK = :hocky AND NAM = :namHoc AND MACT = :maCT";
+                string insertQuery = "DELETE FROM ADMIN.DANGKY WHERE MAGV = :maGV AND MAHP = :maHP AND HK = :hocky AND NAM = :namHoc AND MACT = :maCT";
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
                     connection.Open();
