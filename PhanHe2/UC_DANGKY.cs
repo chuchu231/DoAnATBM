@@ -90,6 +90,37 @@ namespace PhanHe2
             }
         }
 
+        private string getMaGV(string maHP, string hocKy, string namHoc, string maCT)
+        {
+            string magv = "";
+            string query = "";
+
+            try
+            {
+                conn.Open();
+                query = $"SELECT MAGV FROM ADMIN.PHANCONG" +
+                              $" WHERE MAHP = '{maHP}' AND HK = '{hocKy}' AND NAM = '{namHoc}' AND MACT = '{maCT}'";
+                using (OracleCommand cmd = new OracleCommand(query, conn))
+                {
+                    using (OracleDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            magv = reader["MAGV"].ToString();
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lấy MAGV: " + ex.Message);
+                conn.Close();
+            }
+
+            return magv;
+        }
+
         private void insertbtn_Click(object sender, EventArgs e)
         {
             if (LogIn.work == "SV0")
@@ -103,6 +134,30 @@ namespace PhanHe2
                         using (OracleCommand cmd = new OracleCommand("CADMIN2.UpdateDangKy", connection))
                         {
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                try
+                {
+                    // Lấy dữ liệu từ các TextBox hoặc các điều khiển nhập liệu
+                    string maSV = MSSVtxb.Text;
+                    string maHP = idtxtb.Text;
+                    string hocKy = HKtxb.Text;
+                    string namHoc = Namtxb.Text;
+                    string maCT = MACT.Text;
+                    string maGV = getMaGV(maHP, hocKy, namHoc, maCT);
+
+                    // Tạo câu lệnh INSERT
+                    string insertQuery = "INSERT INTO ADMIN.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) VALUES (:maSV, :maGV, :maHP, :hocKy, :namHoc, :maCT, null, null, null, null)";
+                    using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                    {
+                        connection.Open();
+                        using (OracleCommand cmd = new OracleCommand(insertQuery, connection))
+                        {
+                            // Thêm các tham số cho câu lệnh INSERT
+                            cmd.Parameters.Add(new OracleParameter("maSV", maSV));
+                            cmd.Parameters.Add(new OracleParameter("maGV", maGV));
+                            cmd.Parameters.Add(new OracleParameter("maHP", maHP));
+                            cmd.Parameters.Add(new OracleParameter("hocKy", hocKy));
+                            cmd.Parameters.Add(new OracleParameter("namHoc", namHoc));
+                            cmd.Parameters.Add(new OracleParameter("maCT", maCT));
 
                             cmd.Parameters.Add("p_maHP", OracleDbType.Varchar2).Value = idtxtb.Text;
                             cmd.Parameters.Add("p_hocKy", OracleDbType.Varchar2).Value = HKtxb.Text; ;
@@ -517,6 +572,23 @@ namespace PhanHe2
             score.tbxCK.Text = this.DetailStaff.Rows[e.RowIndex].Cells[8].Value.ToString();
             score.lbOverall.Text = this.DetailStaff.Rows[e.RowIndex].Cells[9].Value.ToString();
         }
+        }
+    }
+}
+            if (LogIn.work == "GV0")
+            {
+                score.Show();
+                score.tbxMSSV.Text = this.DetailStaff.Rows[e.RowIndex].Cells[0].Value.ToString();
+                score.tbxMAHP.Text = this.DetailStaff.Rows[e.RowIndex].Cells[2].Value.ToString();
+                score.tbxHK.Text = this.DetailStaff.Rows[e.RowIndex].Cells[3].Value.ToString();
+                score.tbxNamHoc.Text = this.DetailStaff.Rows[e.RowIndex].Cells[4].Value.ToString();
+                score.tbxCT.Text = this.DetailStaff.Rows[e.RowIndex].Cells[5].Value.ToString();
+                score.tbxTH.Text = this.DetailStaff.Rows[e.RowIndex].Cells[6].Value.ToString();
+                score.tbxQT.Text = this.DetailStaff.Rows[e.RowIndex].Cells[7].Value.ToString();
+                score.tbxCK.Text = this.DetailStaff.Rows[e.RowIndex].Cells[8].Value.ToString();
+                score.lbOverall.Text = this.DetailStaff.Rows[e.RowIndex].Cells[9].Value.ToString();
+            }    
+                
         }
     }
 }

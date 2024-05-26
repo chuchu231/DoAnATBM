@@ -58,8 +58,8 @@ namespace PhanHe2
 
         private void UC_SV_KETQUADK_Load(object sender, EventArgs e)
         {
-            var queryString = "SELECT DK.MAHP, HP.TENHP, DK.HK, DK.NAM, DK.MACT" +
-                              " FROM CADMIN2.DANGKY DK JOIN CADMIN2.HOCPHAN HP ON DK.MAHP = HP.MAHP  " +
+            var queryString = "SELECT DK.MAGV, DK.MAHP, HP.TENHP, DK.HK, DK.NAM, DK.MACT" +
+                              " FROM ADMIN.DANGKY DK JOIN ADMIN.HOCPHAN HP ON DK.MAHP = HP.MAHP  " +
                               "WHERE DIEMTH IS NULL AND DIEMQT IS NULL AND DIEMCK IS NULL AND DIEMTK IS NULL\r\n";
 
             var dt = new DataTable();
@@ -84,9 +84,21 @@ namespace PhanHe2
                 {
                     connection.Open();
 
-                    using (OracleCommand cmd = new OracleCommand("CADMIN2.DeleteDangKy", connection))
+
+                // Tạo câu lệnh INSERT
+                string insertQuery = "DELETE FROM ADMIN.DANGKY WHERE MAGV = :maGV AND MAHP = :maHP AND HK = :hocky AND NAM = :namHoc AND MACT = :maCT";
+                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                {
+                    connection.Open();
+                    using (OracleCommand cmd = new OracleCommand(insertQuery, connection))
                     {
-                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        // Thêm các tham số cho câu lệnh INSERT
+                        //cmd.Parameters.Add(new OracleParameter("maSV", maSV));
+                        cmd.Parameters.Add(new OracleParameter("maGV", maGV));
+                        cmd.Parameters.Add(new OracleParameter("maHP", maHP));
+                        cmd.Parameters.Add(new OracleParameter("hocKy", hocKy));
+                        cmd.Parameters.Add(new OracleParameter("namHoc", namHoc));
+                        cmd.Parameters.Add(new OracleParameter("maCT", maCT));
 
                         cmd.Parameters.Add("p_maHP", OracleDbType.Varchar2).Value = idtxtb.Text;
                         cmd.Parameters.Add("p_hocKy", OracleDbType.Varchar2).Value = HKtxb.Text; ;

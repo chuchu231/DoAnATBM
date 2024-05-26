@@ -22,7 +22,7 @@ namespace PhanHe2
         private void UC_SV_KETQUAHT_Load(object sender, EventArgs e)
         {
             var queryString = "SELECT DK.MAGV, DK.MAHP, HP.TENHP, DK.HK, DK.NAM, DK.MACT, DK.DIEMTH, DK.DIEMQT, DK.DIEMCK, DK.DIEMTK  " +
-                              "FROM CADMIN2.DANGKY DK JOIN CADMIN2.HOCPHAN HP ON DK.MAHP = HP.MAHP " +
+                              "FROM ADMIN.DANGKY DK JOIN ADMIN.HOCPHAN HP ON DK.MAHP = HP.MAHP " +
                               "WHERE DIEMTH IS NOT NULL AND DIEMQT IS NOT NULL AND DIEMCK IS NOT NULL AND DIEMTK IS NOT NULL\r\n";
 
             var dt = new DataTable();
