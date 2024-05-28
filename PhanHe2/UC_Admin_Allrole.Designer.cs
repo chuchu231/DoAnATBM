@@ -1,6 +1,6 @@
-﻿namespace PhanHe1
+﻿namespace PhanHe2
 {
-    partial class UC_AllRole
+    partial class UC_Admin_Allrole
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.allrole = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.searchtxb = new Guna.UI2.WinForms.Guna2TextBox();
+            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.UC_Containers = new System.Windows.Forms.Panel();
             this.oracleDataAdapter1 = new Oracle.ManagedDataAccess.Client.OracleDataAdapter();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
@@ -50,27 +50,27 @@
             // 
             // allrole
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.allrole.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.allrole.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.allrole.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.allrole.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.allrole.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.allrole.ColumnHeadersHeight = 4;
             this.allrole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.allrole.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.MediumSlateBlue;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.allrole.DefaultCellStyle = dataGridViewCellStyle6;
             this.allrole.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.allrole.Location = new System.Drawing.Point(0, -2);
             this.allrole.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -103,25 +103,6 @@
             this.allrole.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.allrole.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.allrole_CellContentClick);
             // 
-            // guna2Button1
-            // 
-            this.guna2Button1.BorderColor = System.Drawing.Color.Transparent;
-            this.guna2Button1.BorderRadius = 12;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(778, 24);
-            this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(106, 42);
-            this.guna2Button1.TabIndex = 5;
-            this.guna2Button1.Text = "Search";
-            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
-            // 
             // searchtxb
             // 
             this.searchtxb.Cursor = System.Windows.Forms.Cursors.IBeam;
@@ -134,27 +115,42 @@
             this.searchtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.searchtxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.searchtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.searchtxb.Location = new System.Drawing.Point(557, 38);
+            this.searchtxb.Location = new System.Drawing.Point(550, 42);
             this.searchtxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.searchtxb.Name = "searchtxb";
             this.searchtxb.PasswordChar = '\0';
             this.searchtxb.PlaceholderText = "";
             this.searchtxb.SelectedText = "";
             this.searchtxb.Size = new System.Drawing.Size(201, 30);
-            this.searchtxb.TabIndex = 6;
+            this.searchtxb.TabIndex = 10;
+            // 
+            // guna2Button1
+            // 
+            this.guna2Button1.BorderColor = System.Drawing.Color.Transparent;
+            this.guna2Button1.BorderRadius = 12;
+            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2Button1.ForeColor = System.Drawing.Color.White;
+            this.guna2Button1.Location = new System.Drawing.Point(771, 28);
+            this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.guna2Button1.Name = "guna2Button1";
+            this.guna2Button1.Size = new System.Drawing.Size(106, 42);
+            this.guna2Button1.TabIndex = 9;
+            this.guna2Button1.Text = "Search";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // UC_Containers
             // 
             this.UC_Containers.Controls.Add(this.allrole);
-            this.UC_Containers.Location = new System.Drawing.Point(27, 84);
+            this.UC_Containers.Location = new System.Drawing.Point(20, 88);
             this.UC_Containers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.UC_Containers.Name = "UC_Containers";
             this.UC_Containers.Size = new System.Drawing.Size(654, 405);
-            this.UC_Containers.TabIndex = 7;
-            // 
-            // oracleDataAdapter1
-            // 
-            this.oracleDataAdapter1.RowUpdated += new Oracle.ManagedDataAccess.Client.OracleRowUpdatedEventHandler(this.oracleDataAdapter1_RowUpdated);
+            this.UC_Containers.TabIndex = 11;
             // 
             // guna2Panel1
             // 
@@ -170,11 +166,11 @@
             this.guna2Panel1.Controls.Add(this.usernametxtb);
             this.guna2Panel1.Controls.Add(this.addUser_btn);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(701, 81);
+            this.guna2Panel1.Location = new System.Drawing.Point(694, 85);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(210, 405);
-            this.guna2Panel1.TabIndex = 8;
+            this.guna2Panel1.TabIndex = 12;
             // 
             // btn_Update
             // 
@@ -278,19 +274,18 @@
             this.addUser_btn.Text = "ADD";
             this.addUser_btn.Click += new System.EventHandler(this.addUser_btn_Click);
             // 
-            // UC_AllRole
+            // UC_Admin_Allrole
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.searchtxb);
             this.Controls.Add(this.guna2Button1);
             this.Controls.Add(this.UC_Containers);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "UC_AllRole";
+            this.Controls.Add(this.guna2Panel1);
+            this.Name = "UC_Admin_Allrole";
             this.Size = new System.Drawing.Size(925, 520);
-            this.Load += new System.EventHandler(this.UC_AllRole_Load);
+            this.Load += new System.EventHandler(this.UC_Admin_Allrole_Load);
             ((System.ComponentModel.ISupportInitialize)(this.allrole)).EndInit();
             this.UC_Containers.ResumeLayout(false);
             this.guna2Panel1.ResumeLayout(false);
@@ -300,17 +295,18 @@
         }
 
         #endregion
+
         private Guna.UI2.WinForms.Guna2DataGridView allrole;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2TextBox searchtxb;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private System.Windows.Forms.Panel UC_Containers;
         private Oracle.ManagedDataAccess.Client.OracleDataAdapter oracleDataAdapter1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private Guna.UI2.WinForms.Guna2Button btn_Update;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2TextBox pwtxtb;
         private Guna.UI2.WinForms.Guna2TextBox usernametxtb;
         private Guna.UI2.WinForms.Guna2Button addUser_btn;
-        private Guna.UI2.WinForms.Guna2Button btn_Update;
     }
 }

@@ -106,6 +106,24 @@
     <Compile Include="FormScore_DANGKY.Designer.cs">
       <DependentUpon>FormScore_DANGKY.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form_Admin_Grant.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Admin_Grant.Designer.cs">
+      <DependentUpon>Form_Admin_Grant.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_Admin_Grant_Revoke_Role.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Admin_Grant_Revoke_Role.Designer.cs">
+      <DependentUpon>Form_Admin_Grant_Revoke_Role.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HomeAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HomeAdmin.Designer.cs">
+      <DependentUpon>HomeAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="HomeLEC.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +141,42 @@
     </Compile>
     <Compile Include="HomeStudent.Designer.cs">
       <DependentUpon>HomeStudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Admin_Allrole.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Admin_Allrole.Designer.cs">
+      <DependentUpon>UC_Admin_Allrole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Admin_Alluser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Admin_Alluser.Designer.cs">
+      <DependentUpon>UC_Admin_Alluser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Admin_DetailRole.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Admin_DetailRole.Designer.cs">
+      <DependentUpon>UC_Admin_DetailRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Admin_DetailUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Admin_DetailUser.Designer.cs">
+      <DependentUpon>UC_Admin_DetailUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Admin_GrantRevoke.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Admin_GrantRevoke.Designer.cs">
+      <DependentUpon>UC_Admin_GrantRevoke.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Admin_TabAndView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Admin_TabAndView.Designer.cs">
+      <DependentUpon>UC_Admin_TabAndView.cs</DependentUpon>
     </Compile>
     <Compile Include="UC_DANGKY.cs">
       <SubType>UserControl</SubType>
@@ -207,6 +261,15 @@
     <EmbeddedResource Include="FormScore_DANGKY.resx">
       <DependentUpon>FormScore_DANGKY.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form_Admin_Grant.resx">
+      <DependentUpon>Form_Admin_Grant.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Admin_Grant_Revoke_Role.resx">
+      <DependentUpon>Form_Admin_Grant_Revoke_Role.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HomeAdmin.resx">
+      <DependentUpon>HomeAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomeLEC.resx">
       <DependentUpon>HomeLEC.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +278,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="HomeStudent.resx">
       <DependentUpon>HomeStudent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Admin_Allrole.resx">
+      <DependentUpon>UC_Admin_Allrole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Admin_Alluser.resx">
+      <DependentUpon>UC_Admin_Alluser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Admin_DetailRole.resx">
+      <DependentUpon>UC_Admin_DetailRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Admin_DetailUser.resx">
+      <DependentUpon>UC_Admin_DetailUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Admin_GrantRevoke.resx">
+      <DependentUpon>UC_Admin_GrantRevoke.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Admin_TabAndView.resx">
+      <DependentUpon>UC_Admin_TabAndView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_DANGKY.resx">
       <DependentUpon>UC_DANGKY.cs</DependentUpon>

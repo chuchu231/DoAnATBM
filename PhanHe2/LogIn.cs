@@ -56,6 +56,13 @@ namespace PhanHe2
                             MessageBox.Show("Đăng nhập thành công");
                             return;
                         }
+                        else if (rolePrefix == "ADM")
+                        {
+                            HomeAdmin form = new HomeAdmin();
+                            form.Show();
+                            MessageBox.Show("Đăng nhập thành công");
+                            return;
+                        }
                         string queryStringTRDV = "SELECT COUNT(*) FROM CADMIN2.DONVI WHERE TRGDV = :username";
                         using (OracleCommand cmd = new OracleCommand(queryStringTRDV, conn))
                         {
@@ -110,7 +117,7 @@ namespace PhanHe2
                             form.Show();
                             MessageBox.Show("Đăng nhập thành công");
 
-                        }
+                        } 
 
 
                         else

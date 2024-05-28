@@ -61,12 +61,11 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.allrole.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.allrole.ColumnHeadersHeight = 4;
-            this.allrole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.allrole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -78,7 +77,7 @@
             this.allrole.RowHeadersVisible = false;
             this.allrole.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.allrole.RowTemplate.Height = 28;
-            this.allrole.Size = new System.Drawing.Size(654, 405);
+            this.allrole.Size = new System.Drawing.Size(581, 324);
             this.allrole.TabIndex = 3;
             this.allrole.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.allrole.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -91,7 +90,7 @@
             this.allrole.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.allrole.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.allrole.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.allrole.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            this.allrole.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.allrole.ThemeStyle.HeaderStyle.Height = 4;
             this.allrole.ThemeStyle.ReadOnly = false;
             this.allrole.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
@@ -114,10 +113,10 @@
             this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(778, 24);
+            this.guna2Button1.Location = new System.Drawing.Point(692, 19);
             this.guna2Button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(106, 42);
+            this.guna2Button1.Size = new System.Drawing.Size(94, 34);
             this.guna2Button1.TabIndex = 5;
             this.guna2Button1.Text = "Search";
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
@@ -134,22 +133,21 @@
             this.searchtxb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.searchtxb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.searchtxb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.searchtxb.Location = new System.Drawing.Point(557, 38);
-            this.searchtxb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.searchtxb.Location = new System.Drawing.Point(495, 30);
+            this.searchtxb.Margin = new System.Windows.Forms.Padding(4);
             this.searchtxb.Name = "searchtxb";
             this.searchtxb.PasswordChar = '\0';
             this.searchtxb.PlaceholderText = "";
             this.searchtxb.SelectedText = "";
-            this.searchtxb.Size = new System.Drawing.Size(201, 30);
+            this.searchtxb.Size = new System.Drawing.Size(179, 24);
             this.searchtxb.TabIndex = 6;
             // 
             // UC_Containers
             // 
             this.UC_Containers.Controls.Add(this.allrole);
-            this.UC_Containers.Location = new System.Drawing.Point(27, 84);
-            this.UC_Containers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.UC_Containers.Location = new System.Drawing.Point(24, 67);
             this.UC_Containers.Name = "UC_Containers";
-            this.UC_Containers.Size = new System.Drawing.Size(654, 405);
+            this.UC_Containers.Size = new System.Drawing.Size(581, 324);
             this.UC_Containers.TabIndex = 7;
             // 
             // oracleDataAdapter1
@@ -170,10 +168,10 @@
             this.guna2Panel1.Controls.Add(this.usernametxtb);
             this.guna2Panel1.Controls.Add(this.addUser_btn);
             this.guna2Panel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.guna2Panel1.Location = new System.Drawing.Point(701, 81);
+            this.guna2Panel1.Location = new System.Drawing.Point(623, 65);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(210, 405);
+            this.guna2Panel1.Size = new System.Drawing.Size(187, 324);
             this.guna2Panel1.TabIndex = 8;
             // 
             // btn_Update
@@ -187,10 +185,10 @@
             this.btn_Update.FillColor = System.Drawing.Color.White;
             this.btn_Update.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btn_Update.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btn_Update.Location = new System.Drawing.Point(22, 330);
+            this.btn_Update.Location = new System.Drawing.Point(20, 264);
             this.btn_Update.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_Update.Name = "btn_Update";
-            this.btn_Update.Size = new System.Drawing.Size(163, 38);
+            this.btn_Update.Size = new System.Drawing.Size(145, 30);
             this.btn_Update.TabIndex = 10;
             this.btn_Update.Text = "UPDATE";
             this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
@@ -199,9 +197,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label2.Location = new System.Drawing.Point(30, 140);
+            this.label2.Location = new System.Drawing.Point(27, 112);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 20);
+            this.label2.Size = new System.Drawing.Size(67, 16);
             this.label2.TabIndex = 9;
             this.label2.Text = "Password";
             // 
@@ -209,9 +207,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(30, 51);
+            this.label1.Location = new System.Drawing.Point(27, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 20);
+            this.label1.Size = new System.Drawing.Size(70, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "Rolename";
             // 
@@ -228,13 +226,13 @@
             this.pwtxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.pwtxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.pwtxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.pwtxtb.Location = new System.Drawing.Point(22, 165);
-            this.pwtxtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pwtxtb.Location = new System.Drawing.Point(20, 132);
+            this.pwtxtb.Margin = new System.Windows.Forms.Padding(4);
             this.pwtxtb.Name = "pwtxtb";
             this.pwtxtb.PasswordChar = '\0';
             this.pwtxtb.PlaceholderText = "";
             this.pwtxtb.SelectedText = "";
-            this.pwtxtb.Size = new System.Drawing.Size(163, 32);
+            this.pwtxtb.Size = new System.Drawing.Size(145, 26);
             this.pwtxtb.TabIndex = 5;
             // 
             // usernametxtb
@@ -250,13 +248,13 @@
             this.usernametxtb.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.usernametxtb.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.usernametxtb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.usernametxtb.Location = new System.Drawing.Point(22, 76);
-            this.usernametxtb.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.usernametxtb.Location = new System.Drawing.Point(20, 61);
+            this.usernametxtb.Margin = new System.Windows.Forms.Padding(4);
             this.usernametxtb.Name = "usernametxtb";
             this.usernametxtb.PasswordChar = '\0';
             this.usernametxtb.PlaceholderText = "";
             this.usernametxtb.SelectedText = "";
-            this.usernametxtb.Size = new System.Drawing.Size(163, 32);
+            this.usernametxtb.Size = new System.Drawing.Size(145, 26);
             this.usernametxtb.TabIndex = 4;
             // 
             // addUser_btn
@@ -270,17 +268,17 @@
             this.addUser_btn.FillColor = System.Drawing.Color.White;
             this.addUser_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.addUser_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.addUser_btn.Location = new System.Drawing.Point(22, 258);
+            this.addUser_btn.Location = new System.Drawing.Point(20, 206);
             this.addUser_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.addUser_btn.Name = "addUser_btn";
-            this.addUser_btn.Size = new System.Drawing.Size(163, 38);
+            this.addUser_btn.Size = new System.Drawing.Size(145, 30);
             this.addUser_btn.TabIndex = 0;
             this.addUser_btn.Text = "ADD";
             this.addUser_btn.Click += new System.EventHandler(this.addUser_btn_Click);
             // 
             // UC_AllRole
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.guna2Panel1);
@@ -289,7 +287,7 @@
             this.Controls.Add(this.UC_Containers);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UC_AllRole";
-            this.Size = new System.Drawing.Size(925, 520);
+            this.Size = new System.Drawing.Size(822, 416);
             this.Load += new System.EventHandler(this.UC_AllRole_Load);
             ((System.ComponentModel.ISupportInitialize)(this.allrole)).EndInit();
             this.UC_Containers.ResumeLayout(false);

@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.AnimatorNS.Animation animation2 = new Guna.UI2.AnimatorNS.Animation();
+            Guna.UI2.AnimatorNS.Animation animation1 = new Guna.UI2.AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.Menu = new Guna.UI2.WinForms.Guna2Panel();
             this.btnTableAndView = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.menubtn = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Separator1 = new Guna.UI2.WinForms.Guna2Separator();
             this.HomeBtn = new Guna.UI2.WinForms.Guna2GradientButton();
             this.LogOutBtn = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -47,12 +46,13 @@
             this.UC_Container = new System.Windows.Forms.Panel();
             this.homepagePic = new Guna.UI2.WinForms.Guna2PictureBox();
             this.menuOpenbtn = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.menubtn = new Guna.UI2.WinForms.Guna2PictureBox();
             this.Menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.menubtn)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.UC_Container.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.homepagePic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuOpenbtn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.menubtn)).BeginInit();
             this.SuspendLayout();
             // 
             // Menu
@@ -95,19 +95,6 @@
             this.btnTableAndView.Text = "All tables and view";
             this.btnTableAndView.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.btnTableAndView.Click += new System.EventHandler(this.TableAndView_Click_1);
-            // 
-            // menubtn
-            // 
-            this.guna2Transition1.SetDecoration(this.menubtn, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.menubtn.Image = global::PhanHe1.Properties.Resources.menubar;
-            this.menubtn.ImageRotate = 0F;
-            this.menubtn.Location = new System.Drawing.Point(3, 85);
-            this.menubtn.Name = "menubtn";
-            this.menubtn.Size = new System.Drawing.Size(72, 38);
-            this.menubtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.menubtn.TabIndex = 10;
-            this.menubtn.TabStop = false;
-            this.menubtn.Click += new System.EventHandler(this.menubtn_Click);
             // 
             // guna2Separator1
             // 
@@ -246,22 +233,22 @@
             // 
             this.guna2Transition1.AnimationType = Guna.UI2.AnimatorNS.AnimationType.HorizSlide;
             this.guna2Transition1.Cursor = null;
-            animation2.AnimateOnlyDifferences = true;
-            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
-            animation2.LeafCoeff = 0F;
-            animation2.MaxTime = 1F;
-            animation2.MinTime = 0F;
-            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
-            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
-            animation2.MosaicSize = 0;
-            animation2.Padding = new System.Windows.Forms.Padding(0);
-            animation2.RotateCoeff = 0F;
-            animation2.RotateLimit = 0F;
-            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
-            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
-            animation2.TimeCoeff = 0F;
-            animation2.TransparencyCoeff = 0F;
-            this.guna2Transition1.DefaultAnimation = animation2;
+            animation1.AnimateOnlyDifferences = true;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.guna2Transition1.DefaultAnimation = animation1;
             // 
             // guna2ControlBox1
             // 
@@ -339,6 +326,19 @@
             this.menuOpenbtn.TabStop = false;
             this.menuOpenbtn.Click += new System.EventHandler(this.menuOpenbtn_Click_1);
             // 
+            // menubtn
+            // 
+            this.guna2Transition1.SetDecoration(this.menubtn, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.menubtn.Image = global::PhanHe1.Properties.Resources.menubar;
+            this.menubtn.ImageRotate = 0F;
+            this.menubtn.Location = new System.Drawing.Point(3, 85);
+            this.menubtn.Name = "menubtn";
+            this.menubtn.Size = new System.Drawing.Size(72, 38);
+            this.menubtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.menubtn.TabIndex = 10;
+            this.menubtn.TabStop = false;
+            this.menubtn.Click += new System.EventHandler(this.menubtn_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -355,11 +355,11 @@
             this.Text = "Home";
             this.Load += new System.EventHandler(this.Home_Load);
             this.Menu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.menubtn)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
             this.UC_Container.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.homepagePic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuOpenbtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.menubtn)).EndInit();
             this.ResumeLayout(false);
 
         }
