@@ -139,5 +139,11 @@ namespace PhanHe2
             UC_DANGKY uc = new UC_DANGKY();
             addUserControl(uc);
         }
+
+        private void Alertbtn_Click(object sender, EventArgs e)
+        {
+            UC_THONGBAO uc = new UC_THONGBAO();
+            addUserControl(uc);
+        }
     }
 }

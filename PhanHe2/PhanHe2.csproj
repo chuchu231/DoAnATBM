@@ -258,6 +258,12 @@
     <Compile Include="UC_TBM_CHOICE.Designer.cs">
       <DependentUpon>UC_TBM_CHOICE.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC_THONGBAO.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_THONGBAO.Designer.cs">
+      <DependentUpon>UC_THONGBAO.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormScore_DANGKY.resx">
       <DependentUpon>FormScore_DANGKY.cs</DependentUpon>
     </EmbeddedResource>
@@ -345,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_TBM_CHOICE.resx">
       <DependentUpon>UC_TBM_CHOICE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_THONGBAO.resx">
+      <DependentUpon>UC_THONGBAO.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>

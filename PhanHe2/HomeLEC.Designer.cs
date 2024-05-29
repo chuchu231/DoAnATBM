@@ -46,6 +46,7 @@
             this.guna2ControlBox2 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.close = new Guna.UI2.WinForms.Guna2ControlBox();
             this.UC_Container = new System.Windows.Forms.Panel();
+            this.Alertbtn = new Guna.UI2.WinForms.Guna2GradientButton();
             this.menuOpenbtn = new Guna.UI2.WinForms.Guna2PictureBox();
             this.menubtn = new Guna.UI2.WinForms.Guna2PictureBox();
             this.homepagePic = new Guna.UI2.WinForms.Guna2PictureBox();
@@ -104,6 +105,7 @@
             // Menu
             // 
             this.Menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Menu.Controls.Add(this.Alertbtn);
             this.Menu.Controls.Add(this.DangKy);
             this.Menu.Controls.Add(this.Phancong);
             this.Menu.Controls.Add(this.Sinhvien);
@@ -346,6 +348,28 @@
             this.UC_Container.Size = new System.Drawing.Size(1102, 559);
             this.UC_Container.TabIndex = 24;
             // 
+            // Alertbtn
+            // 
+            this.guna2Transition1.SetDecoration(this.Alertbtn, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.Alertbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.Alertbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.Alertbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.Alertbtn.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.Alertbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.Alertbtn.FillColor = System.Drawing.Color.Empty;
+            this.Alertbtn.FillColor2 = System.Drawing.Color.Empty;
+            this.Alertbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.Alertbtn.ForeColor = System.Drawing.Color.White;
+            this.Alertbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.Alertbtn.HoverState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            this.Alertbtn.Location = new System.Drawing.Point(3, 585);
+            this.Alertbtn.Name = "Alertbtn";
+            this.Alertbtn.Size = new System.Drawing.Size(281, 45);
+            this.Alertbtn.TabIndex = 23;
+            this.Alertbtn.Text = "Thông báo";
+            this.Alertbtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.Alertbtn.Click += new System.EventHandler(this.Alertbtn_Click);
+            // 
             // menuOpenbtn
             // 
             this.guna2Transition1.SetDecoration(this.menuOpenbtn, Guna.UI2.AnimatorNS.DecorationType.None);
@@ -430,5 +454,6 @@
         private Guna.UI2.WinForms.Guna2ControlBox close;
         private System.Windows.Forms.Panel UC_Container;
         private Guna.UI2.WinForms.Guna2PictureBox homepagePic;
+        private Guna.UI2.WinForms.Guna2GradientButton Alertbtn;
     }
 }

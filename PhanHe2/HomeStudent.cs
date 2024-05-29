@@ -47,7 +47,7 @@ namespace PhanHe2
             this.UC_Container.Location = new Point(100, 90);
             guna2Transition1.ShowSync(Menu);
         }
-
+        
         private void LogOutBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -96,6 +96,12 @@ namespace PhanHe2
         private void Result_Click(object sender, EventArgs e)
         {
             UC_SV_KETQUAHT uc = new UC_SV_KETQUAHT();
+            addUserControl(uc);
+        }
+
+        private void Alertbtn_Click(object sender, EventArgs e)
+        {
+            UC_THONGBAO uc = new UC_THONGBAO();
             addUserControl(uc);
         }
     }
