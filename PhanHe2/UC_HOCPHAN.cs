@@ -64,15 +64,15 @@ namespace PhanHe2
 
         private void insert_btn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 try
                 {
-                    var queryString = "INSERT INTO CADMIN2.HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD) VALUES (:MAHP, :TENHP, :SOTC, :STLT, :STTH, :SOSVTD)";
+                    var queryString = "INSERT INTO ADMIN.HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD) VALUES (:MAHP, :TENHP, :SOTC, :STLT, :STTH, :SOSVTD)";
 
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -98,21 +98,21 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -120,29 +120,29 @@ namespace PhanHe2
 
         private void delbtn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -150,15 +150,15 @@ namespace PhanHe2
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 try
                 {
-                    var queryString = "UPDATE CADMIN2.HOCPHAN SET TENHP = :TENHP, SOTC = :SOTC, STLT = :STLT, STTH = :STTH, SOSVTD = :SOSVTD WHERE MAHP = :MAHP";
+                    var queryString = "UPDATE ADMIN.HOCPHAN SET TENHP = :TENHP, SOTC = :SOTC, STLT = :STLT, STTH = :STTH, SOSVTD = :SOSVTD WHERE MAHP = :MAHP";
 
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -184,21 +184,21 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -207,7 +207,7 @@ namespace PhanHe2
         private void UC_HOCPHAN_Load(object sender, EventArgs e)
         {
             // Load datagridview
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 idtxtb.Enabled = false;
                 tenhptxb.Enabled = false;
@@ -216,7 +216,7 @@ namespace PhanHe2
                 STTHtxb.Enabled = false;
                 SOSVTDtxb.Enabled = false;
                 MADVtxb.Enabled = false;
-                var queryString = "SELECT * FROM CADMIN2.HOCPHAN\r\n";
+                var queryString = "SELECT * FROM ADMIN.HOCPHAN\r\n";
 
                 var dt = new DataTable();
 
@@ -231,10 +231,10 @@ namespace PhanHe2
                 conn.Close();
                 dt.Dispose();
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.HOCPHAN\r\n";
+                var queryString = "SELECT * FROM ADMIN.HOCPHAN\r\n";
 
                 var dt = new DataTable();
 
@@ -246,7 +246,7 @@ namespace PhanHe2
                 dt.Dispose();
                 da.Dispose();
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -254,7 +254,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.HOCPHAN", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.HOCPHAN", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -270,7 +270,7 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "NV0" || LogIn.work == "TBM")
+            else if (LogIn.role == "RL_NHANVIEN" || LogIn.role == "RL_TRUONGBM")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -278,7 +278,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.HOCPHAN", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.HOCPHAN", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -294,7 +294,7 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -302,7 +302,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.HOCPHAN", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.HOCPHAN", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -322,7 +322,7 @@ namespace PhanHe2
         private void guna2Button1_Click(object sender, EventArgs e)
         {
             string key = searchtxb.Text;
-            var queryString = $"SELECT * FROM CADMIN2.HOCPHAN WHERE UPPER(MAHP) = UPPER('{key}') OR UPPER(TENHP) LIKE UPPER('%{key}%')\r\n";
+            var queryString = $"SELECT * FROM ADMIN.HOCPHAN WHERE UPPER(MAHP) = UPPER('{key}') OR UPPER(TENHP) LIKE UPPER('%{key}%')\r\n";
 
             var dt = new DataTable();
 

@@ -24,7 +24,7 @@ namespace PhanHe2
         private void UC_PHANCONG_GIANGVIEN_Load(object sender, EventArgs e)
         {
             UC_Containers.SendToBack();
-            var queryString = "SELECT * FROM CADMIN2.UV_TRGDV_PHANCONG\r\n";
+            var queryString = "SELECT * FROM ADMIN.UV_TRGDV_PHANCONG\r\n";
 
             var dt = new DataTable();
 

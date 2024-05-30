@@ -62,29 +62,29 @@ namespace PhanHe2
 
         private void Score_btn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -92,7 +92,7 @@ namespace PhanHe2
 
         private void insertbtn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -100,7 +100,7 @@ namespace PhanHe2
                     {
                         connection.Open();
 
-                        using (OracleCommand cmd = new OracleCommand("CADMIN2.UpdateDangKy", connection))
+                        using (OracleCommand cmd = new OracleCommand("ADMIN.UpdateDangKy", connection))
                         {
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -120,11 +120,11 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 try
                 {
-                    var queryString = "INSERT INTO CADMIN2.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT) VALUES (:MASV, :MAGV, :MAHP, :HK, :NAM, :CT)";
+                    var queryString = "INSERT INTO ADMIN.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT) VALUES (:MASV, :MAGV, :MAHP, :HK, :NAM, :CT)";
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
@@ -148,21 +148,21 @@ namespace PhanHe2
                     MessageBox.Show("An error occurred: " + ex.Message);
                 }
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -170,15 +170,15 @@ namespace PhanHe2
 
         private void delbtn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 try
                 {
-                    var queryString = "DELETE FROM CADMIN2.DANGKY WHERE MASV = :MASV AND MAGV = :MAGV AND MAHP = :MAHP AND HK = :HK AND NAM = :NAM AND MACT = :CT";
+                    var queryString = "DELETE FROM ADMIN.DANGKY WHERE MASV = :MASV AND MAGV = :MAGV AND MAHP = :MAHP AND HK = :HK AND NAM = :NAM AND MACT = :CT";
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
@@ -205,21 +205,21 @@ namespace PhanHe2
                     MessageBox.Show("An error occurred: " + ex.Message);
                 }
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -228,7 +228,7 @@ namespace PhanHe2
         private void UC_DANGKY_Load(object sender, EventArgs e)
         {
             // Load datagridview
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 MSSVtxb.Enabled = false;
                 MAGVtxb.Enabled = false;
@@ -245,7 +245,7 @@ namespace PhanHe2
                         connection.Open();
 
                         // Tạo OracleCommand để gọi stored procedure
-                        using (OracleCommand cmd = new OracleCommand("CADMIN2.GET_KHMO_BYDAY", connection))
+                        using (OracleCommand cmd = new OracleCommand("ADMIN.GET_KHMO_BYDAY", connection))
                         {
                             // Đặt kiểu command là Stored Procedure
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -272,12 +272,12 @@ namespace PhanHe2
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
                     UC_Containers.SendToBack();
-                    var queryString = "SELECT * FROM CADMIN2.DANGKY\r\n";
+                    var queryString = "SELECT * FROM ADMIN.DANGKY\r\n";
 
                     var dt = new DataTable();
 
@@ -290,7 +290,7 @@ namespace PhanHe2
                     da.Dispose();
                 }
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -298,7 +298,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DANGKY", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DANGKY", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -313,7 +313,7 @@ namespace PhanHe2
                     conn.Close();
                 }
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -321,7 +321,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DANGKY", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DANGKY", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -338,12 +338,12 @@ namespace PhanHe2
 
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
 
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -351,7 +351,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DANGKY", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DANGKY", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -371,30 +371,30 @@ namespace PhanHe2
         private void updatebtn_Click(object sender, EventArgs e)
         {
             // Load datagridview
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -483,11 +483,11 @@ namespace PhanHe2
 
         private void DetailStaff_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (LogIn.work == "GV0")
+            if (LogIn.role == "RL_GIANGVIEN")
             {
 
                 score.Show();
-                string queryString = "SELECT HOTEN FROM CADMIN2.SINHVIEN";
+                string queryString = "SELECT HOTEN FROM ADMIN.SINHVIEN";
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
                     connection.Open();

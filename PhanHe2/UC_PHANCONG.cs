@@ -22,15 +22,15 @@ namespace PhanHe2
 
         private void insert_btn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 // ignore role ni`
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
 
                 try
@@ -56,10 +56,10 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 string query;
-                query = "INSERT INTO KAN.TRK_PHANCONG_VIEW VALUES ('" + MAGVtxb.Text + "','" + idtxtb.Text + "','" + HKtxb.Text + "','" + Namtxb.Text + "','" + MACT.Text + "')";
+                query = "INSERT INTO ADMIN.TRK_PHANCONG_VIEW VALUES ('" + MAGVtxb.Text + "','" + idtxtb.Text + "','" + HKtxb.Text + "','" + Namtxb.Text + "','" + MACT.Text + "')";
                 Console.WriteLine(query);
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -85,11 +85,11 @@ namespace PhanHe2
 
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -98,15 +98,15 @@ namespace PhanHe2
 
         private void delbtn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 // ignore role ni`
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
 
                 try
@@ -137,11 +137,11 @@ namespace PhanHe2
 
 
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 // do something ?
                 string query;
-                query = "DELETE FROM KAN.TRK_PHANCONG_VIEW WHERE MAGV = '" + MAGVtxb.Text + "' AND MAHP = '" + idtxtb.Text + "' AND HK ='" + HKtxb.Text + "' AND NAM='" + Namtxb.Text + "' AND MACT='" + MACT.Text + "'";
+                query = "DELETE FROM ADMIN.TRK_PHANCONG_VIEW WHERE MAGV = '" + MAGVtxb.Text + "' AND MAHP = '" + idtxtb.Text + "' AND HK ='" + HKtxb.Text + "' AND NAM='" + Namtxb.Text + "' AND MACT='" + MACT.Text + "'";
                 Console.WriteLine(query);
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -165,11 +165,11 @@ namespace PhanHe2
                     }
                 }
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -178,16 +178,16 @@ namespace PhanHe2
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 try
                 {
 
-                    var queryString = "UPDATE CADMIN2.UV_QUANLY_PHANCONG SET MANV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "', MADV = 'VPK' " +
+                    var queryString = "UPDATE ADMIN.UV_QUANLY_PHANCONG SET MANV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "', MADV = 'VPK' " +
                                         "WHERE MANV = '" + old_gv + "' AND MAHP = '" + old_hp + "' AND HK = '" + old_hk + "' AND NAM = '" + old_nam + "' AND MACT = '" + old_mact + "' AND MADV = 'VPK'";
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -205,12 +205,12 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
 
                 try
                 {
-                    var queryString = "UPDATE CADMIN2.UV_TRGDV_QUANLY_PHANCONG SET MAGV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "', MADV = '" + dv + "' " +
+                    var queryString = "UPDATE ADMIN.UV_TRGDV_QUANLY_PHANCONG SET MAGV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "', MADV = '" + dv + "' " +
                                         "WHERE MAGV = '" + old_gv + "' AND MAHP = '" + old_hp + "' AND HK = '" + old_hk + "' AND NAM = '" + old_nam + "' AND MACT = '" + old_mact + "' AND MADV = '" + dv + "'";
 
                     using (var conn = new OracleConnection(LogIn.connectionString))
@@ -231,11 +231,11 @@ namespace PhanHe2
 
 
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 try
                 {
-                    var queryString = "UPDATE KAN.TRK_PHANCONG_VIEW SET MAGV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "'" +
+                    var queryString = "UPDATE ADMIN.TRK_PHANCONG_VIEW SET MAGV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "'" +
                                         "WHERE MAGV = '" + old_gv + "' AND MAHP = '" + old_hp + "' AND HK = '" + old_hk + "' AND NAM = '" + old_nam + "' AND MACT = '" + old_mact + "'";
 
                     using (var conn = new OracleConnection(LogIn.connectionString))
@@ -256,11 +256,11 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -270,14 +270,14 @@ namespace PhanHe2
         private void UC_PHANCONG_Load(object sender, EventArgs e)
         {
             // Load datagridview
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.PHANCONG\r\n";
+                var queryString = "SELECT * FROM ADMIN.PHANCONG\r\n";
 
                 var dt = new DataTable();
 
@@ -289,10 +289,10 @@ namespace PhanHe2
                 dt.Dispose();
                 da.Dispose();
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.UV_TRGDV_QUANLY_PHANCONG\r\n";
+                var queryString = "SELECT * FROM ADMIN.UV_TRGDV_QUANLY_PHANCONG\r\n";
 
                 var dt = new DataTable();
 
@@ -304,7 +304,7 @@ namespace PhanHe2
                 dt.Dispose();
                 da.Dispose();
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -312,7 +312,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM KAN.PHANCONG", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.PHANCONG", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -327,13 +327,13 @@ namespace PhanHe2
                     conn.Close();
                 }
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
-                var queryString = "SELECT * FROM CADMIN2.UV_GV_Phancong";
+                var queryString = "SELECT * FROM ADMIN.UV_GV_Phancong";
 
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -365,7 +365,7 @@ namespace PhanHe2
 
         private void DetailStaff_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (LogIn.work == "TBM")
+            if (LogIn.role == "RL_TRUONGBM")
             {
                 if (e.RowIndex >= 0 && e.RowIndex < DetailStaff.Rows.Count)
                 {

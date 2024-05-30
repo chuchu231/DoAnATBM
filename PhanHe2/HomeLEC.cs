@@ -86,7 +86,7 @@ namespace PhanHe2
 
         private void Phancong_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "TBM")
+            if (LogIn.role == "RL_TRUONGBM")
             {
                 UC_TBM_CHOICE uc = new UC_TBM_CHOICE();
                 addUserControl(uc);

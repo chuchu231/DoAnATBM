@@ -58,8 +58,8 @@ namespace PhanHe2
 
         private void UC_SV_KETQUADK_Load(object sender, EventArgs e)
         {
-            var queryString = "SELECT DK.MAHP, HP.TENHP, DK.HK, DK.NAM, DK.MACT" +
-                              " FROM CADMIN2.DANGKY DK JOIN CADMIN2.HOCPHAN HP ON DK.MAHP = HP.MAHP  " +
+            var queryString = "SELECT DK.MAHP, HP.TENHP, DK.HK, DK.NAM, DK.MACT " +
+                              " FROM ADMIN.DANGKY DK JOIN ADMIN.HOCPHAN HP ON DK.MAHP = HP.MAHP " +
                               "WHERE DIEMTH IS NULL AND DIEMQT IS NULL AND DIEMCK IS NULL AND DIEMTK IS NULL\r\n";
 
             var dt = new DataTable();
@@ -84,7 +84,7 @@ namespace PhanHe2
                 {
                     connection.Open();
 
-                    using (OracleCommand cmd = new OracleCommand("CADMIN2.DeleteDangKy", connection))
+                    using (OracleCommand cmd = new OracleCommand("ADMIN.DeleteDangKy", connection))
                     {
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
 

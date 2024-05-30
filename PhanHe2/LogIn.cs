@@ -8,17 +8,14 @@ using System.Data;
 using System.Drawing;
 
 
-
-
 namespace PhanHe2
 {
     public partial class LogIn : Form
     {
         public static string connectionString;
-        OracleConnection conn = new OracleConnection(ConfigurationManager.ConnectionStrings["con"].ConnectionString);
         public static string username = "";
         public static string password = "";
-        public static string work = "";
+        public static string role = "";
         public LogIn()
         {
             InitializeComponent();
@@ -29,12 +26,35 @@ namespace PhanHe2
         {
         }
 
+        private string Get_Role_ByUsername(string username, string password)
+        {
+            string role = "";
+            connectionString = connectionString.Replace("Id=" + username, "Id=admin");
+            connectionString = connectionString.Replace(password, "admin123");
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+                using (OracleCommand cmd = new OracleCommand("SELECT GETROLE_BYUSERNAME(:USERNAME) FROM DUAL", conn))
+                {
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.Parameters.Add(new OracleParameter("USERNAME", OracleDbType.Varchar2)).Value = username;
+
+                    role = cmd.ExecuteScalar().ToString();
+                }
+            }
+            connectionString = connectionString.Replace("Id=admin", "Id=" + username);
+            connectionString = connectionString.Replace("admin123", password);
+            return role;
+        }
+
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             username = txtboxUsername.Text;
             password = txtBoxPassword.Text;
             connectionString = connectionString.Replace("{$user$}", username);
             connectionString = connectionString.Replace("{$password%}", password);
+            Console.WriteLine(connectionString);
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
                 try
@@ -42,84 +62,38 @@ namespace PhanHe2
                     conn.Open();
                     if (conn.State == ConnectionState.Open)
                     {
-
+                        
                         // Hiding LogIn form
                         this.Hide();
-
-                        string rolePrefix = username.Substring(0, 3).ToUpper();
-                        work = rolePrefix;
-
-                        if (rolePrefix == "SV0")
+                        role = Get_Role_ByUsername(username, password);
+                        Console.WriteLine(role);
+                        if (role == "RL_SINHVIEN")
                         {
                             HomeStudent form = new HomeStudent();
                             form.Show();
                             MessageBox.Show("Đăng nhập thành công");
                             return;
                         }
-                        else if (rolePrefix == "ADM")
+                        else if (role == "ADMIN")
                         {
                             HomeAdmin form = new HomeAdmin();
                             form.Show();
                             MessageBox.Show("Đăng nhập thành công");
                             return;
-                        }
-                        string queryStringTRDV = "SELECT COUNT(*) FROM CADMIN2.DONVI WHERE TRGDV = :username";
-                        using (OracleCommand cmd = new OracleCommand(queryStringTRDV, conn))
-                        {
-                            try
-                            {
-
-                                cmd.Parameters.Add(new OracleParameter(":username", LogIn.username));
-
-                                int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                                if (count > 0)
-                                {
-                                    LogIn.work = "TBM";
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Lỗi: " + ex.Message);
-                            }
-                        }
-                        string queryStringTRK = "SELECT COUNT(*) FROM CADMIN2.DONVI WHERE TRGDV = :username AND MADV = :MADV";
-                        using (OracleCommand cmd = new OracleCommand(queryStringTRK, conn))
-                        {
-                            try
-                            {
-                                cmd.Parameters.Add(new OracleParameter(":username", LogIn.username));
-                                cmd.Parameters.Add(new OracleParameter(":MADV", "VPK"));
-
-
-                                int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                                if (count > 0)
-                                {
-                                    LogIn.work = "TK0";
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show("Lỗi: " + ex.Message);
-                            }
-                        }
-                        if (rolePrefix == "NV0")
+                        }             
+                        if (role == "RL_NHANVIEN")
                         {
                             HomeStaff form = new HomeStaff();
-                            form.Show();
+                            form.Show();;
                             MessageBox.Show("Đăng nhập thành công");
                         }
-
-                        else if (rolePrefix == "GV0" || rolePrefix == "TBM" || rolePrefix == "TK0" || rolePrefix == "GVU")
+                        else if (role == "RL_GIANGVIEN" || role == "RL_TRUONGBM" || role == "RL_TRUONGKHOA" || role == "RL_GIAOVU")
                         {
                             HomeLEC form = new HomeLEC();
                             form.Show();
                             MessageBox.Show("Đăng nhập thành công");
-
+                            return;
                         } 
-
-
                         else
                         {
                             conn.Close();
@@ -132,7 +106,8 @@ namespace PhanHe2
                 catch (Exception ex)
                 {
                     conn.Close();
-                    MessageBox.Show("Error: " + ex.Message);
+                    //MessageBox.Show("Error: " + ex.Message);
+                    Console.WriteLine(ex.Message);
                     connectionString = connectionString.Replace(username, "{$user$}");
                     connectionString = connectionString.Replace(password, "{$password%}");
 

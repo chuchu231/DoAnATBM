@@ -26,13 +26,13 @@ namespace PhanHe2
 
         private void addUser_btn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
-                var queryString = "INSERT INTO CADMIN2.DONVI (MADV, TENDV, TRGDV) VALUES (:MADV, :TENDV, :TRGDV)";
+                var queryString = "INSERT INTO ADMIN.DONVI (MADV, TENDV, TRGDV) VALUES (:MADV, :TENDV, :TRGDV)";
 
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -57,21 +57,21 @@ namespace PhanHe2
 
 
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -79,29 +79,29 @@ namespace PhanHe2
 
         private void delbtn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -109,13 +109,13 @@ namespace PhanHe2
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
-                var queryString = "UPDATE CADMIN2.DONVI SET TENDV = :TENDV, TRGDV = :TRGDV WHERE MADV = :MADV";
+                var queryString = "UPDATE ADMIN.DONVI SET TENDV = :TENDV, TRGDV = :TRGDV WHERE MADV = :MADV";
 
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -139,21 +139,21 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -162,14 +162,14 @@ namespace PhanHe2
         private void UC_DONVI_Load(object sender, EventArgs e)
         {
             // Load datagridview
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.DONVI";
+                var queryString = "SELECT * FROM ADMIN.DONVI";
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
                     using (OracleCommand command = new OracleCommand(queryString, connection))
@@ -197,7 +197,7 @@ namespace PhanHe2
                 
             }
             
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -205,7 +205,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DONVI", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DONVI", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -221,7 +221,7 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "NV0" || LogIn.work == "TBM")
+            else if (LogIn.role == "RL_NHANVIEN" || LogIn.role == "RL_TRUONGBM")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -229,7 +229,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DONVI", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DONVI", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -245,7 +245,7 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -253,7 +253,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.DONVI", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DONVI", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;

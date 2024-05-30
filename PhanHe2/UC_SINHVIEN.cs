@@ -33,11 +33,11 @@ namespace PhanHe2
 
         private void addUser_btn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 string alterstr = "ALTER SESSION SET NLS_DATE_FORMAT = 'MM/DD/YYYY'";
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
@@ -52,7 +52,7 @@ namespace PhanHe2
                 try
                 {
                     // Chuỗi truy vấn với các tham số
-                    var queryString = "INSERT INTO CADMIN2.SINHVIEN (MASV, HOTEN, NGSINH, DCHI, DT) VALUES (:MASV, :HOTEN, :NGSINH, :DCHI, :DT)";
+                    var queryString = "INSERT INTO ADMIN.SINHVIEN (MASV, HOTEN, NGSINH, DCHI, DT) VALUES (:MASV, :HOTEN, :NGSINH, :DCHI, :DT)";
 
                     using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -81,21 +81,21 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -103,29 +103,29 @@ namespace PhanHe2
 
         private void delbtn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
-            else if (LogIn.work == "TK0")
-            {
-                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
-
-            }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_NHANVIEN")
+            {
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
+
+            }
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
@@ -133,11 +133,11 @@ namespace PhanHe2
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 string alterstr = "ALTER SESSION SET NLS_DATE_FORMAT = 'MM/DD/YYYY'";
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
@@ -150,7 +150,7 @@ namespace PhanHe2
                 }
                 try
                 {
-                    var queryString = "UPDATE CADMIN2.SINHVIEN SET HOTEN = :HOTEN, NGSINH = :NGSINH, DCHI = :DCHI, DT = :DT WHERE MASV = :MASV";
+                    var queryString = "UPDATE ADMIN.SINHVIEN SET HOTEN = :HOTEN, NGSINH = :NGSINH, DCHI = :DCHI, DT = :DT WHERE MASV = :MASV";
 
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -178,21 +178,21 @@ namespace PhanHe2
 
 
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -201,14 +201,14 @@ namespace PhanHe2
         {
 
             // Load datagridview
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU" || LogIn.work == "TBM")
+            else if (LogIn.role == "RL_GIAOVU" || LogIn.role == "RL_TRUONGBM")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.SINHVIEN";
+                var queryString = "SELECT * FROM ADMIN.SINHVIEN";
 
                 var dt = new DataTable();
 
@@ -220,10 +220,10 @@ namespace PhanHe2
                 dt.Dispose();
                 da.Dispose();
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.SINHVIEN\r\n";
+                var queryString = "SELECT * FROM ADMIN.SINHVIEN\r\n";
 
                 var dt = new DataTable();
 
@@ -235,10 +235,10 @@ namespace PhanHe2
                 dt.Dispose();
                 da.Dispose();
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.SINHVIEN\r\n";
+                var queryString = "SELECT * FROM ADMIN.SINHVIEN\r\n";
 
                 var dt = new DataTable();
 
@@ -250,10 +250,10 @@ namespace PhanHe2
                 dt.Dispose();
                 da.Dispose();
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM CADMIN2.SINHVIEN\r\n";
+                var queryString = "SELECT * FROM ADMIN.SINHVIEN\r\n";
 
                 var dt = new DataTable();
 

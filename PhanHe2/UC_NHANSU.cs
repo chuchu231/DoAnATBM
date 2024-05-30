@@ -19,31 +19,62 @@ namespace PhanHe2
             InitializeComponent();
         }
 
+        private void DetailStaff_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                // Lấy dữ liệu của hàng được chọn
+                DataGridViewRow row = DetailStaff.Rows[e.RowIndex];
+
+                // Lấy dữ liệu của từng cột
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    Console.WriteLine(cell);
+                    if (cell.OwningColumn.HeaderText == "HOTEN")
+                    {
+                        nametxtb.Text = cell.Value?.ToString();
+                    }
+                    if (cell.OwningColumn.HeaderText == "NGSINH")
+                    {
+                        DOB.Text = cell.Value?.ToString();
+                    }
+                    if (cell.OwningColumn.HeaderText == "VAITRO")
+                    {
+                        roletxb.Text = cell.Value?.ToString();
+                    }
+                    if (cell.OwningColumn.HeaderText == "DT")
+                    {
+                        PhoneNumbertxb.Text = cell.Value?.ToString();
+                    }
+                }
+            }
+        }
+
         private void addUser_btn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -51,29 +82,29 @@ namespace PhanHe2
 
         private void delbtn_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "GVU")
+            else if (LogIn.role == "RL_GIAOVU")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TBM")
+            else if (LogIn.role == "RL_TRUONGBM")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "NV0")
+            else if (LogIn.role == "RL_NHANVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
 
             }
-            else if (LogIn.work == "GV0")
+            else if (LogIn.role == "RL_GIANGVIEN")
             {
                 // do something ?
             }
@@ -81,24 +112,15 @@ namespace PhanHe2
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            if (LogIn.work == "SV0")
-            {
-                // do something ?
-            }
-            else if (LogIn.work == "TBM")
-            {
-                // do something ?
-            }
-            else if (LogIn.work == "TK0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
-
             }
-            else if (LogIn.work == "NV0" || LogIn.work == "GVU")
+            else
             {
                 try
                 {
-                    string query = "UPDATE CADMIN2.NHANSU SET DT = :phone";
+                    string query = "UPDATE ADMIN.NHANSU SET DT = :phone";
 
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -110,6 +132,7 @@ namespace PhanHe2
                             cmd.ExecuteNonQuery();
 
                             MessageBox.Show("Cập nhật học phần thành công.");
+                            UC_NHANSU_Load(sender, e);
                         }
                     }
                 }
@@ -119,20 +142,16 @@ namespace PhanHe2
                 }
 
             }
-            else if (LogIn.work == "GV0")
-            {
-                // do something ?
-            }
         }
 
         private void UC_NHANSU_Load(object sender, EventArgs e)
         {
             // Load datagridview
-            if (LogIn.work == "SV0")
+            if (LogIn.role == "RL_SINHVIEN")
             {
                 // do something ?
             }
-            else if (LogIn.work == "TK0")
+            else
             {
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
@@ -140,7 +159,7 @@ namespace PhanHe2
 
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.NHANSU", conn);
+                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.NHANSU", conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -152,61 +171,17 @@ namespace PhanHe2
                             }
                         }
                     }
+                    DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                    DetailStaff.ReadOnly = true;
                     conn.Close();
                 }
 
             }
-            else if (LogIn.work == "NV0" || LogIn.work == "TBM" || LogIn.work == "GVU")
-            {
-                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
-                {
-                    conn.Open();
-
-                    if (conn.State == ConnectionState.Open)
-                    {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.NHANSU", conn);
-                        using (OracleDataReader reader = cmd.ExecuteReader())
-                        {
-                            DetailStaff.DataSource = null;
-                            if (reader.HasRows)
-                            {
-                                DataTable dataTable = new DataTable();
-                                dataTable.Load(reader);
-                                DetailStaff.DataSource = dataTable;
-                            }
-                        }
-                    }
-                    conn.Close();
-                }
-
-            }
-            else if (LogIn.work == "GV0")
-            {
-                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
-                {
-                    conn.Open();
-
-                    if (conn.State == ConnectionState.Open)
-                    {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM CADMIN2.NHANSU", conn);
-                        using (OracleDataReader reader = cmd.ExecuteReader())
-                        {
-                            DetailStaff.DataSource = null;
-                            if (reader.HasRows)
-                            {
-                                DataTable dataTable = new DataTable();
-                                dataTable.Load(reader);
-                                DetailStaff.DataSource = dataTable;
-                            }
-                        }
-                    }
-                    conn.Close();
-                }
-            }
-            nametxtb.Text = this.DetailStaff.Rows[0].Cells[1].Value.ToString();
-            DOB.Text = this.DetailStaff.Rows[0].Cells[3].Value.ToString();
-            addresstxb.Text = this.DetailStaff.Rows[0].Cells[6].Value.ToString();
-            PhoneNumbertxb.Text = this.DetailStaff.Rows[0].Cells[5].Value.ToString();
+            
+            //nametxtb.Text = this.DetailStaff.Rows[0].Cells[1].Value.ToString();
+            //DOB.Text = this.DetailStaff.Rows[0].Cells[3].Value.ToString();
+            //roletxb.Text = this.DetailStaff.Rows[0].Cells[6].Value.ToString();
+            //PhoneNumbertxb.Text = this.DetailStaff.Rows[0].Cells[5].Value.ToString();
         }
     }
 }
