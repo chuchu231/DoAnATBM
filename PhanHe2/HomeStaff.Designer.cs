@@ -37,6 +37,7 @@
             this.KHMO = new Guna.UI2.WinForms.Guna2GradientButton();
             this.HP = new Guna.UI2.WinForms.Guna2GradientButton();
             this.UC_Container = new System.Windows.Forms.Panel();
+            this.homepagePic = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2ControlBox1 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.guna2ControlBox2 = new Guna.UI2.WinForms.Guna2ControlBox();
@@ -44,15 +45,15 @@
             this.Donvi = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2Transition1 = new Guna.UI2.WinForms.Guna2Transition();
             this.Menu = new Guna.UI2.WinForms.Guna2Panel();
-            this.menuOpenbtn = new Guna.UI2.WinForms.Guna2PictureBox();
             this.menubtn = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.homepagePic = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.menuOpenbtn = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.Alertbtn = new Guna.UI2.WinForms.Guna2GradientButton();
             this.UC_Container.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.homepagePic)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.Menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.menuOpenbtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.menubtn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.homepagePic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.menuOpenbtn)).BeginInit();
             this.SuspendLayout();
             // 
             // Sinhvien
@@ -185,6 +186,19 @@
             this.UC_Container.Size = new System.Drawing.Size(1102, 559);
             this.UC_Container.TabIndex = 20;
             // 
+            // homepagePic
+            // 
+            this.homepagePic.BackColor = System.Drawing.Color.Transparent;
+            this.guna2Transition1.SetDecoration(this.homepagePic, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.homepagePic.Image = global::PhanHe2.Properties.Resources.HomePage;
+            this.homepagePic.ImageRotate = 0F;
+            this.homepagePic.Location = new System.Drawing.Point(118, 44);
+            this.homepagePic.Name = "homepagePic";
+            this.homepagePic.Size = new System.Drawing.Size(790, 393);
+            this.homepagePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.homepagePic.TabIndex = 1;
+            this.homepagePic.TabStop = false;
+            // 
             // guna2Panel1
             // 
             this.guna2Panel1.Controls.Add(this.guna2ControlBox1);
@@ -283,6 +297,7 @@
             // Menu
             // 
             this.Menu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.Menu.Controls.Add(this.Alertbtn);
             this.Menu.Controls.Add(this.Sinhvien);
             this.Menu.Controls.Add(this.menubtn);
             this.Menu.Controls.Add(this.guna2Separator1);
@@ -298,19 +313,6 @@
             this.Menu.Size = new System.Drawing.Size(10, 688);
             this.Menu.TabIndex = 17;
             // 
-            // menuOpenbtn
-            // 
-            this.guna2Transition1.SetDecoration(this.menuOpenbtn, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.menuOpenbtn.Image = global::PhanHe2.Properties.Resources.menubar;
-            this.menuOpenbtn.ImageRotate = 0F;
-            this.menuOpenbtn.Location = new System.Drawing.Point(16, 85);
-            this.menuOpenbtn.Name = "menuOpenbtn";
-            this.menuOpenbtn.Size = new System.Drawing.Size(72, 38);
-            this.menuOpenbtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.menuOpenbtn.TabIndex = 18;
-            this.menuOpenbtn.TabStop = false;
-            this.menuOpenbtn.Click += new System.EventHandler(this.menuOpenbtn_Click);
-            // 
             // menubtn
             // 
             this.guna2Transition1.SetDecoration(this.menubtn, Guna.UI2.AnimatorNS.DecorationType.None);
@@ -324,18 +326,40 @@
             this.menubtn.TabStop = false;
             this.menubtn.Click += new System.EventHandler(this.menubtn_Click_1);
             // 
-            // homepagePic
+            // menuOpenbtn
             // 
-            this.homepagePic.BackColor = System.Drawing.Color.Transparent;
-            this.guna2Transition1.SetDecoration(this.homepagePic, Guna.UI2.AnimatorNS.DecorationType.None);
-            this.homepagePic.Image = global::PhanHe2.Properties.Resources.HomePage;
-            this.homepagePic.ImageRotate = 0F;
-            this.homepagePic.Location = new System.Drawing.Point(118, 44);
-            this.homepagePic.Name = "homepagePic";
-            this.homepagePic.Size = new System.Drawing.Size(790, 393);
-            this.homepagePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.homepagePic.TabIndex = 1;
-            this.homepagePic.TabStop = false;
+            this.guna2Transition1.SetDecoration(this.menuOpenbtn, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.menuOpenbtn.Image = global::PhanHe2.Properties.Resources.menubar;
+            this.menuOpenbtn.ImageRotate = 0F;
+            this.menuOpenbtn.Location = new System.Drawing.Point(16, 85);
+            this.menuOpenbtn.Name = "menuOpenbtn";
+            this.menuOpenbtn.Size = new System.Drawing.Size(72, 38);
+            this.menuOpenbtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.menuOpenbtn.TabIndex = 18;
+            this.menuOpenbtn.TabStop = false;
+            this.menuOpenbtn.Click += new System.EventHandler(this.menuOpenbtn_Click);
+            // 
+            // Alertbtn
+            // 
+            this.guna2Transition1.SetDecoration(this.Alertbtn, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.Alertbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.Alertbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.Alertbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.Alertbtn.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.Alertbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.Alertbtn.FillColor = System.Drawing.Color.Empty;
+            this.Alertbtn.FillColor2 = System.Drawing.Color.Empty;
+            this.Alertbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.Alertbtn.ForeColor = System.Drawing.Color.White;
+            this.Alertbtn.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.Alertbtn.HoverState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(255)))));
+            this.Alertbtn.Location = new System.Drawing.Point(3, 576);
+            this.Alertbtn.Name = "Alertbtn";
+            this.Alertbtn.Size = new System.Drawing.Size(281, 45);
+            this.Alertbtn.TabIndex = 24;
+            this.Alertbtn.Text = "Thông báo";
+            this.Alertbtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.Alertbtn.Click += new System.EventHandler(this.Alertbtn_Click);
             // 
             // HomeStaff
             // 
@@ -352,11 +376,11 @@
             this.Name = "HomeStaff";
             this.Text = "HomeStaff";
             this.UC_Container.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.homepagePic)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
             this.Menu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.menuOpenbtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.menubtn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.homepagePic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.menuOpenbtn)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -380,5 +404,6 @@
         private Guna.UI2.WinForms.Guna2ControlBox close;
         private Guna.UI2.WinForms.Guna2GradientButton Donvi;
         private Guna.UI2.WinForms.Guna2Panel Menu;
+        private Guna.UI2.WinForms.Guna2GradientButton Alertbtn;
     }
 }
