@@ -1,6 +1,6 @@
 
 CREATE OR REPLACE TRIGGER Check_Valid_Date
-BEFORE INSERT OR DELETE ON DANGKY
+BEFORE INSERT OR DELETE ON ADMIN.DANGKY
 FOR EACH ROW
 DECLARE 
     month_tmp NUMBER;
@@ -16,14 +16,14 @@ BEGIN
         IF INSERTING THEN
             SELECT 1
             INTO tmp
-            FROM PHANCONG
+            FROM ADMIN.PHANCONG
             WHERE MAHP = :NEW.MAHP AND HK = :NEW.HK AND 
                   NAM = :NEW.NAM AND MACT = :NEW.MACT AND MAGV = :NEW.MAGV and :NEW.DIEMTH IS NULL
                   AND :NEW.DIEMQT IS NULL AND :NEW.DIEMCK IS NULL AND :NEW.DIEMTK IS NULL;
         ELSIF DELETING THEN
             SELECT 1
             INTO tmp
-            FROM PHANCONG
+            FROM ADMIN.PHANCONG
             WHERE MAHP = :OLD.MAHP AND HK = :OLD.HK AND 
                   NAM = :OLD.NAM AND MACT = :OLD.MACT AND MAGV = :OLD.MAGV and :OLD.DIEMTH IS NULL
                   AND :OLD.DIEMQT IS NULL AND :OLD.DIEMCK IS NULL AND :OLD.DIEMTK IS NULL;
@@ -39,12 +39,12 @@ BEGIN
         IF INSERTING THEN
             SELECT 1
             INTO tmp
-            FROM SINHVIEN
+            FROM ADMIN.SINHVIEN
             WHERE MASV = :NEW.MASV;
         ELSIF DELETING THEN
             SELECT 1
             INTO tmp
-            FROM SINHVIEN
+            FROM ADMIN.SINHVIEN
             WHERE MASV = :OLD.MASV;
         END IF;
     EXCEPTION
@@ -61,6 +61,7 @@ BEGIN
         RAISE_APPLICATION_ERROR(-20001, 'CANNOT WRITE AT THIS TIME');
     END IF;
 END;
+/
 -----------
 CREATE OR REPLACE TRIGGER admin.uv_quanly_phancong_trig
 INSTEAD OF
@@ -351,3 +352,75 @@ END;
 
 GRANT EXECUTE ON ADMIN.GET_KHMO_BYNAME TO RL_SINHVIEN;
 
+
+--Proc insert/delete DANGKY cua sinh vien
+
+CREATE OR REPLACE PROCEDURE ADMIN.InsertDangKy(
+    p_maHP VARCHAR2,
+    p_hocKy VARCHAR2,
+    p_namHoc VARCHAR2,
+    p_maCT VARCHAR2
+) AS
+    v_maGV VARCHAR2(20);
+    v_user VARCHAR2(30);
+    p_MASV VARCHAR2(20);
+BEGIN
+    v_user := SYS_CONTEXT('USERENV', 'SESSION_USER');
+    p_MASV := v_user;
+        EXECUTE IMMEDIATE 'GRANT SELECT ON ADMIN.PHANCONG TO ' || v_user;
+    
+    BEGIN
+        SELECT MAGV INTO v_maGV
+        FROM ADMIN.PHANCONG
+        WHERE MAHP = p_maHP AND HK = p_hocKy AND NAM = p_namHoc AND MACT = p_maCT;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Không tìm th?y h?c ph?n phù h?p');
+    END;
+
+    INSERT INTO ADMIN.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK)
+    VALUES (p_MASV, v_maGV, p_maHP, p_hocKy, p_namHoc, p_maCT, NULL, NULL, NULL, NULL);
+    
+    EXECUTE IMMEDIATE 'REVOKE SELECT ON ADMIN.PHANCONG FROM ' || v_user;
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        EXECUTE IMMEDIATE 'REVOKE SELECT ON ADMIN.PHANCONG FROM ' || v_user;
+        RAISE;
+END;
+/
+GRANT EXECUTE ON ADMIN.InsertDangKy TO RL_SINHVIEN;
+
+CREATE OR REPLACE PROCEDURE ADMIN.DeleteDangKy(
+    p_maHP VARCHAR2,
+    p_hocKy VARCHAR2,
+    p_namHoc VARCHAR2,
+    p_maCT VARCHAR2
+) AS
+    v_maGV VARCHAR2(20);
+    v_user VARCHAR2(30);
+    p_MASV VARCHAR2(20);
+BEGIN
+    v_user := SYS_CONTEXT('USERENV', 'SESSION_USER');
+        EXECUTE IMMEDIATE 'GRANT SELECT ON ADMIN.PHANCONG TO ' || v_user;
+    
+    BEGIN
+        SELECT MAGV INTO v_maGV
+        FROM ADMIN.PHANCONG
+        WHERE MAHP = p_maHP AND HK = p_hocKy AND NAM = p_namHoc AND MACT = p_maCT;
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Không tìm th?y h?c ph?n phù h?p');
+    END;
+
+    DELETE FROM ADMIN.DANGKY WHERE MAGV = v_maGV AND MAHP = p_maHP AND HK = p_hocKy AND NAM = p_namHoc AND MACT = p_maCT;
+    
+    EXECUTE IMMEDIATE 'REVOKE SELECT ON ADMIN.PHANCONG FROM ' || v_user;
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        EXECUTE IMMEDIATE 'REVOKE SELECT ON ADMIN.PHANCONG FROM ' || v_user;
+        RAISE;
+END;
+/
+GRANT EXECUTE ON ADMIN.DeleteDangKy TO RL_SINHVIEN;

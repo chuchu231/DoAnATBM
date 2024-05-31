@@ -5,22 +5,145 @@ CREATE ROLE RL_GIAOVU;
 CREATE ROLE RL_TRUONGBM;
 CREATE ROLE RL_TRUONGKHOA;
 CREATE ROLE RL_SINHVIEN;
+--SELECT * FROM DBA_POLICIES;
+--Tao cac user là SINHVIEN
 
---User test
-CREATE USER NV001 IDENTIFIED BY NV001;
-CREATE USER GV001 IDENTIFIED BY GV001;
-CREATE USER GVU001 IDENTIFIED BY GVU001;
-CREATE USER TBM001 IDENTIFIED BY TBM001;
-CREATE USER TK001 IDENTIFIED BY TK001;
-CREATE USER SV001 IDENTIFIED BY SV001;
-GRANT CONNECT TO NV001, GV001, GVU001, TBM001, TK001, SV001;
---Cap role
-GRANT RL_NHANVIEN TO NV001;
-GRANT RL_GIANGVIEN TO GV001;
-GRANT RL_GIAOVU TO GVU001;
-GRANT RL_TRUONGBM TO TBM001;
-GRANT RL_TRUONGKHOA TO TK001;
-GRANT RL_SINHVIEN TO SV001;
+CREATE OR REPLACE PROCEDURE USP_CREATESINHVIEN
+AS
+    CURSOR CUR IS (SELECT MASV
+                    FROM ADMIN.SINHVIEN
+                    WHERE MASV NOT IN (SELECT USERNAME
+                                        		      FROM ALL_USERS)
+                    );
+    STRSQL VARCHAR(2000);
+    USR VARCHAR2(5);
+BEGIN
+    OPEN CUR;
+    STRSQL := 'ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE';
+    EXECUTE IMMEDIATE(STRSQL);
+    LOOP
+        FETCH CUR INTO USR;
+        EXIT WHEN CUR%NOTFOUND;
+            
+        STRSQL := 'CREATE USER '||USR||' IDENTIFIED BY '||USR;
+        EXECUTE IMMEDIATE(STRSQL);
+        STRSQL := 'GRANT CONNECT TO '||USR;
+        EXECUTE IMMEDIATE(STRSQL);
+    END LOOP;
+    STRSQL := 'ALTER SESSION SET "_ORACLE_SCRIPT" = FALSE';
+    EXECUTE IMMEDIATE(STRSQL);
+    CLOSE CUR;
+END;
+/
+EXEC USP_CREATESINHVIEN;
+
+--Cap role cho SINHVIEN
+CREATE OR REPLACE PROCEDURE USP_GRANTROLESV
+AS
+    CURSOR CUR IS (SELECT MASV
+                    FROM ADMIN.SINHVIEN);
+    STRSQL VARCHAR(2000);
+    USR VARCHAR2(5);
+BEGIN
+    OPEN CUR;
+    LOOP
+        FETCH CUR INTO USR;
+        EXIT WHEN CUR%NOTFOUND;
+        
+        STRSQL := 'GRANT RL_SINHVIEN TO '||USR;
+        EXECUTE IMMEDIATE (STRSQL);
+    END LOOP;
+    CLOSE CUR;
+END;
+/
+EXEC USP_GRANTROLESV;
+
+--Tao cac user NHANSU
+CREATE OR REPLACE PROCEDURE USP_CREATENHANSU
+AS
+    CURSOR CUR IS (SELECT MANV
+                    FROM ADMIN.NHANSU
+                    WHERE MANV NOT IN (SELECT USERNAME
+                                        		      FROM ALL_USERS)
+                    );
+    STRSQL VARCHAR(2000);
+    USR VARCHAR2(5);
+BEGIN
+    OPEN CUR;
+    STRSQL := 'ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE';
+    EXECUTE IMMEDIATE(STRSQL);
+    LOOP
+        FETCH CUR INTO USR;
+        EXIT WHEN CUR%NOTFOUND;
+            
+        STRSQL := 'CREATE USER '||USR||' IDENTIFIED BY '||USR;
+        EXECUTE IMMEDIATE(STRSQL);
+        STRSQL := 'GRANT CONNECT TO '||USR;
+        EXECUTE IMMEDIATE(STRSQL);
+    END LOOP;
+    STRSQL := 'ALTER SESSION SET "_ORACLE_SCRIPT" = FALSE';
+    EXECUTE IMMEDIATE(STRSQL);
+    CLOSE CUR;
+END;
+/
+EXEC USP_CREATENHANSU;
+--Cap role cho NHANSU
+CREATE OR REPLACE PROCEDURE USP_GRANTROLE_NS
+    (STRROLE VARCHAR, VT NVARCHAR2)
+AS
+    CURSOR CUR IS (SELECT MANV
+                    FROM ADMIN.NHANSU
+                    WHERE MANV IN (SELECT USERNAME
+                                        FROM ALL_USERS)
+                    AND VAITRO = VT);
+    STRSQL VARCHAR(2000);
+    USR VARCHAR2(5);
+BEGIN
+    OPEN CUR;
+    LOOP
+        FETCH CUR INTO USR;
+        EXIT WHEN CUR%NOTFOUND;
+        
+        STRSQL := 'GRANT '||STRROLE||' TO '||USR;
+        EXECUTE IMMEDIATE (STRSQL);
+    END LOOP;
+    CLOSE CUR;
+END;
+/
+EXEC USP_GRANTROLE_NS ('RL_NHANVIEN', 'Nhan vien');
+EXEC USP_GRANTROLE_NS ('RL_GIANGVIEN', 'Giang vien');
+EXEC USP_GRANTROLE_NS ('RL_GIAOVU', 'Giao vu');
+EXEC USP_GRANTROLE_NS ('RL_TRUONGKHOA', 'Truong khoa');
+EXEC USP_GRANTROLE_NS ('RL_TRUONGBM', 'Truong don vi');
+
+
+--Viet function lay role
+CREATE OR REPLACE FUNCTION GETROLE_BYUSERNAME
+(USERNAME VARCHAR2) 
+RETURN VARCHAR2 
+AS
+    v_role VARCHAR2(30);
+BEGIN    
+    IF (USERNAME = 'admin') THEN 
+        v_role := 'ADMIN';
+    ELSE
+        SELECT GRANTED_ROLE INTO v_role
+        FROM DBA_ROLE_PRIVS
+        WHERE GRANTEE = USERNAME AND GRANTED_ROLE != 'CONNECT';
+    END IF;
+    
+    RETURN v_role;
+END;
+/
+
+set serveroutput on;
+DECLARE
+    v_role VARCHAR2(30);
+BEGIN
+    v_role := GETROLE_BYUSERNAME('SV04');
+    DBMS_OUTPUT.PUT_LINE('Role: ' || v_role);
+END;
+/
 
 --Cap quyen tren bang NHANSU
 CREATE OR REPLACE FUNCTION SELECT_NHANSU_FUNCTION 
@@ -28,17 +151,18 @@ CREATE OR REPLACE FUNCTION SELECT_NHANSU_FUNCTION
 RETURN VARCHAR2 
 AS 
     USER VARCHAR(100); 
-    ROLE VARCHAR(5);
+    ROLE VARCHAR(20);
 BEGIN 
     USER := SYS_CONTEXT('USERENV', 'SESSION_USER');
-    ROLE := SUBSTR(USER, 0, 3);
-    IF ROLE = 'TK0' THEN
+    ROLE := GETROLE_BYUSERNAME(USER);
+    IF ROLE = 'RL_TRUONGKHOA' THEN
         RETURN '1=1';
     ELSE
         RETURN 'MANV = ''' || USER || '''';
     END IF;  
 END;
 /
+
 
 BEGIN
 	dbms_rls.add_policy(
@@ -51,16 +175,20 @@ BEGIN
 	);
 END;
 /
-GRANT SELECT ON ADMIN.NHANSU TO RL_NHANVIEN, RL_GIANGVIEN, RL_GIAOVU, RL_TRUONGBM, RL_TRUONGKHOA;
-GRANT UPDATE(DT) ON ADMIN.NHANSU TO RL_NHANVIEN, RL_GIANGVIEN, RL_GIAOVU, RL_TRUONGBM;
+GRANT SELECT ON ADMIN.NHANSU TO RL_NHANVIEN;
+GRANT UPDATE(DT) ON ADMIN.NHANSU TO RL_NHANVIEN;
+GRANT RL_NHANVIEN TO RL_GIANGVIEN;
+GRANT RL_NHANVIEN TO RL_TRUONGKHOA;
+GRANT RL_NHANVIEN TO RL_GIAOVU;
+GRANT RL_NHANVIEN TO RL_TRUONGBM;
 GRANT INSERT, DELETE, UPDATE ON ADMIN.NHANSU TO RL_TRUONGKHOA;
 
 --Cap quyen tren bang DONVI
-GRANT SELECT ON ADMIN.DONVI TO RL_NHANVIEN, RL_GIANGVIEN, RL_GIAOVU, RL_TRUONGBM, RL_TRUONGKHOA;
+GRANT SELECT ON ADMIN.DONVI TO RL_NHANVIEN;
 GRANT INSERT, UPDATE ON ADMIN.DONVI TO RL_GIAOVU;
 
 --Cap quyen tren bang HOCPHAN
-GRANT SELECT ON ADMIN.HOCPHAN TO RL_NHANVIEN, RL_GIANGVIEN, RL_GIAOVU, RL_TRUONGBM, RL_TRUONGKHOA, RL_SINHVIEN;
+GRANT SELECT ON ADMIN.HOCPHAN TO RL_NHANVIEN, RL_SINHVIEN;
 GRANT INSERT, UPDATE ON ADMIN.HOCPHAN TO RL_GIAOVU;
 
 --Cap quyen tren bang KHMO
@@ -69,13 +197,12 @@ CREATE OR REPLACE FUNCTION SELECT_KHMO_FUNCTION (
     P_OBJ VARCHAR2
 ) RETURN VARCHAR2 AS
     USER VARCHAR(100); 
-    ROLE VARCHAR(5);
+    ROLE VARCHAR(20);
     MA VARCHAR2(10);
 BEGIN
     USER := SYS_CONTEXT('USERENV', 'SESSION_USER');
-    ROLE := SUBSTR(USER, 0, 3);  
-    
-    IF ROLE = 'SV0' THEN
+    ROLE := GETROLE_BYUSERNAME (USER);    
+    IF ROLE = 'RL_SINHVIEN' THEN
         --LAY MA CHUONG TRINH CUA SINH VIEN
         SELECT MACT
         INTO MA
@@ -99,7 +226,7 @@ BEGIN
 	);
 END;
 /
-GRANT SELECT ON ADMIN.KHMO TO RL_NHANVIEN, RL_GIANGVIEN, RL_GIAOVU, RL_TRUONGBM, RL_TRUONGKHOA, RL_SINHVIEN;
+GRANT SELECT ON ADMIN.KHMO TO RL_NHANVIEN, RL_SINHVIEN;
 GRANT INSERT, UPDATE ON ADMIN.KHMO TO RL_GIAOVU;
 
 --Cap quyen tren bang SINHVIEN
@@ -108,11 +235,11 @@ CREATE OR REPLACE FUNCTION SELECT_SINHVIEN_FUNCTION
 RETURN VARCHAR2 
 AS 
     USER VARCHAR(100); 
-    ROLE VARCHAR(5);
+    ROLE VARCHAR(20);
 BEGIN 
     USER := SYS_CONTEXT('USERENV', 'SESSION_USER');
-    ROLE := SUBSTR(USER, 0, 3);
-    IF ROLE = 'SV0' THEN
+    ROLE := GETROLE_BYUSERNAME (USER); 
+    IF ROLE = 'RL_SINHVIEN' THEN
         RETURN 'MASV = ''' || USER || '''';
     ELSE
         RETURN '1=1';
@@ -131,9 +258,7 @@ BEGIN
 	);
 END;
 /
-
-
-GRANT SELECT ON ADMIN.SINHVIEN TO RL_NHANVIEN, RL_GIANGVIEN, RL_GIAOVU, RL_TRUONGBM, RL_TRUONGKHOA, RL_SINHVIEN;
+GRANT SELECT ON ADMIN.SINHVIEN TO RL_NHANVIEN, RL_SINHVIEN;
 GRANT UPDATE(DCHI, DT) ON ADMIN.SINHVIEN TO RL_SINHVIEN;
 GRANT INSERT, UPDATE, DELETE ON ADMIN.SINHVIEN TO RL_GIAOVU;
 
@@ -156,21 +281,38 @@ END;
 
 GRANT EXECUTE ON ADMIN.UPDATE_STUDENT TO RL_SINHVIEN;
 --Cap quyen cho bang DANGKY
-CREATE OR REPLACE FUNCTION DANGKY_FUNCTION 
+CREATE OR REPLACE FUNCTION SELECT_DANGKY_FUNCTION 
 (P_SCHEMA VARCHAR2, P_OBJ VARCHAR2) 
 RETURN VARCHAR2 
 AS 
     USER VARCHAR(100);
-    ROLE VARCHAR(5);
+    ROLE VARCHAR(20);
 BEGIN 
     USER:= SYS_CONTEXT('USERENV','SESSION_USER'); 
-    ROLE := SUBSTR(USER, 0, 3);
-    IF (ROLE = 'GV0') THEN
-        RETURN 'MAGV = '''|| USER ||'''';   
-    ELSIF (ROLE = 'SV0') THEN
+    ROLE := GETROLE_BYUSERNAME (USER); 
+    IF (ROLE IN ('RL_GIANGVIEN', 'RL_TRUONGBM')) THEN
+        RETURN 'MAGV = '''|| USER ||''''; 
+    ELSIF (ROLE = 'RL_SINHVIEN') THEN
         RETURN 'MASV = '''|| USER ||''''; 
     ELSE
         RETURN '1=1';
+    END IF;   
+END;
+/
+
+CREATE OR REPLACE FUNCTION UPDATE_DANGKY_FUNCTION 
+(P_SCHEMA VARCHAR2, P_OBJ VARCHAR2) 
+RETURN VARCHAR2 
+AS 
+    USER VARCHAR(100);
+    ROLE VARCHAR(20);
+BEGIN 
+    USER:= SYS_CONTEXT('USERENV','SESSION_USER'); 
+    ROLE := GETROLE_BYUSERNAME (USER); 
+    IF (ROLE IN ('RL_GIANGVIEN', 'RL_TRUONGBM', 'RL_TRUONGKHOA')) THEN
+        RETURN 'MAGV = '''|| USER ||''''; 
+    ELSE
+        RETURN '1=0';
     END IF;   
 END;
 /
@@ -179,26 +321,40 @@ BEGIN
 	dbms_rls.add_policy(
     	OBJECT_SCHEMA =>'ADMIN',
     	OBJECT_NAME=>'DANGKY',
-    	POLICY_NAME =>'DANGKY_POLICY',
-    	POLICY_FUNCTION=>'DANGKY_FUNCTION',
-    	STATEMENT_TYPES=>'SELECT, DELETE, INSERT, UPDATE',
-    	UPDATE_CHECK => TRUE
+    	POLICY_NAME =>'SELECT_DANGKY_POLICY',
+    	POLICY_FUNCTION=>'SELECT_DANGKY_FUNCTION',
+    	STATEMENT_TYPES=>'SELECT,DELETE,INSERT',
+        UPDATE_CHECK => TRUE
 	);
 END;
 /
 
+BEGIN
+	dbms_rls.add_policy(
+    	OBJECT_SCHEMA =>'ADMIN',
+    	OBJECT_NAME=>'DANGKY',
+    	POLICY_NAME =>'UPDATE_DANGKY_POLICY',
+    	POLICY_FUNCTION=>'UPDATE_DANGKY_FUNCTION',
+    	STATEMENT_TYPES=>'UPDATE',
+        UPDATE_CHECK => TRUE
+	);
+END;
+/
 
 BEGIN
 	dbms_rls.drop_policy(
     	OBJECT_SCHEMA =>'ADMIN',
     	OBJECT_NAME=>'DANGKY',
-    	POLICY_NAME =>'DANGKY_POLICY'
+    	POLICY_NAME =>'SELECT_DANGKY_POLICY'
 	);
 END;
 /
 
-GRANT SELECT ON ADMIN.DANGKY TO RL_GIANGVIEN, RL_GIAOVU, RL_SINHVIEN, RL_TRUONGKHOA;
+GRANT SELECT ON ADMIN.DANGKY TO RL_GIANGVIEN;
+GRANT SELECT ON ADMIN.DANGKY TO RL_SINHVIEN;
 GRANT UPDATE(DIEMTH, DIEMQT, DIEMCK, DIEMTK) ON ADMIN.DANGKY TO RL_GIANGVIEN;
+GRANT RL_GIANGVIEN TO RL_TRUONGKHOA;
+GRANT RL_GIANGVIEN TO RL_TRUONGBM;
 GRANT INSERT, DELETE ON ADMIN.DANGKY TO RL_GIAOVU, RL_SINHVIEN;
 
 -------PHANCONG
@@ -229,11 +385,6 @@ AS
     WHERE DV.TRGDV = SYS_CONTEXT('USERENV', 'SESSION_USER');
 /
 
-GRANT SELECT, INSERT, UPDATE ON ADMIN.SINHVIEN TO RL_GIAOVU;
-GRANT SELECT, INSERT, UPDATE ON ADMIN.DONVI TO RL_GIAOVU;
-GRANT SELECT, INSERT, UPDATE ON ADMIN.HOCPHAN TO RL_GIAOVU;
-GRANT SELECT, INSERT, UPDATE ON ADMIN.KHMO TO RL_GIAOVU;
-GRANT SELECT, UPDATE ON ADMIN.PHANCONG TO RL_GIAOVU;
 
 GRANT SELECT ON ADMIN.UV_GV_Phancong  TO RL_GIANGVIEN;
 /
@@ -251,163 +402,10 @@ select * from PHANCONG
 where MAHP in (select MAHP from HOCPHAN where MADV = 'VPK');
 
 
-
-CREATE OR REPLACE TRIGGER UV_TRGDV_QUANLY_PHANCONG_trig
-INSTEAD OF
-    UPDATE OR DELETE OR INSERT ON TRK_PHANCONG_VIEW
-FOR EACH ROW
-DECLARE
-    gv_magv NHANSU.MANV%TYPE;
-    dv_madv DONVI.MADV%TYPE;
-    pc_hk PHANCONG.HK%TYPE;
-    pc_nam PHANCONG.NAM%TYPE;
-    pc_mahp PHANCONG.MAHP%TYPE;
-    pc_mact PHANCONG.MACT%TYPE;
-BEGIN
-    IF UPDATING THEN
-        BEGIN
-            -- Check if the new MANV exists in NHANSU
-            BEGIN
-                SELECT MANV INTO gv_magv 
-                FROM NHANSU 
-                WHERE MANV = :new.magv;
-            EXCEPTION
-                WHEN NO_DATA_FOUND THEN
-                    raise_application_error(-20001, 'COACHER IS NOT EXIST IN SYSTEM');
-            END;
-            
-            -- Check if the new course information exists in KHMO
-            BEGIN
-                SELECT HK, NAM, MAHP, MACT INTO pc_hk, pc_nam, pc_mahp, pc_mact
-                FROM KHMO
-                WHERE MAHP = :new.mahp AND HK = :new.hk AND NAM = :new.nam AND MACT = :new.mact;
-            EXCEPTION
-                WHEN NO_DATA_FOUND THEN
-                    raise_application_error(-20002, 'INFORMATION CANNOT BE FOUND');
-            END;
-            
-            -- Update logic for DANGKY first to avoid integrity constraint violation
-            FOR R IN (SELECT DK.MASV FROM DANGKY DK 
-                      WHERE DK.MAGV = :old.magv 
-                        AND DK.MAHP = :old.mahp 
-                        AND DK.HK = :old.hk 
-                        AND DK.NAM = :old.nam 
-                        AND DK.MACT = :old.mact)
-            LOOP
-                UPDATE DANGKY
-                SET MAGV = :new.magv,
-                    MAHP = :new.mahp,
-                    HK = :new.hk,
-                    NAM = :new.nam,
-                    MACT = :new.mact
-                WHERE MAGV = :old.magv 
-                  AND MAHP = :old.mahp 
-                  AND HK = :old.hk 
-                  AND NAM = :old.nam 
-                  AND MACT = :old.mact
-                  AND MASV = R.MASV;
-            END LOOP;
-        
-            -- Update logic for PHANCONG
-            UPDATE PHANCONG
-            SET MAGV = :new.magv,
-                MAHP = :new.mahp,
-                HK = :new.hk,
-                NAM = :new.nam,
-                MACT = :new.mact
-            WHERE MAGV = :old.magv 
-              AND MAHP = :old.mahp 
-              AND HK = :old.hk 
-              AND NAM = :old.nam 
-              AND MACT = :old.mact;
-            
-            DBMS_OUTPUT.PUT_LINE('UPDATED');
-        END;
-    ELSIF INSERTING THEN
-        BEGIN
-            -- Check if the new MANV exists in NHANSU
-            BEGIN
-                SELECT MANV INTO gv_magv 
-                FROM NHANSU 
-                WHERE MANV = :new.magv;
-            EXCEPTION
-                WHEN NO_DATA_FOUND THEN
-                    raise_application_error(-20001, 'COACHER IS NOT EXIST IN SYSTEM');
-            END;
-            
-            -- Check if the new course information exists in KHMO
-            BEGIN
-                SELECT HK, NAM, MAHP, MACT INTO pc_hk, pc_nam, pc_mahp, pc_mact
-                FROM KHMO
-                WHERE MAHP = :new.mahp AND HK = :new.hk AND NAM = :new.nam AND MACT = :new.mact and mahp in (select MAHP from HOCPHAN where MADV='VPK');
-            EXCEPTION
-                WHEN NO_DATA_FOUND THEN
-                    raise_application_error(-20002, 'INFORMATION CANNOT BE FOUND');
-            END;
-            
-            -- Insert logic for PHANCONG
-            INSERT INTO PHANCONG (MAGV, MAHP, HK, NAM, MACT)
-            VALUES (:NEW.MAGV, :NEW.MAHP, :NEW.HK, :NEW.NAM, :NEW.MACT);
-            
-            DBMS_OUTPUT.PUT_LINE('INSERTED');
-        END;
-    ELSIF DELETING THEN
-    
-    
-            
-        BEGIN
-        
-         BEGIN
-                SELECT HK, NAM, MAHP, MACT INTO pc_hk, pc_nam, pc_mahp, pc_mact
-                FROM KHMO
-                WHERE MAHP = :old.mahp AND HK = :old.hk AND NAM = :old.nam AND MACT = :old.mact and mahp in (select MAHP from HOCPHAN where MADV='VPK');
-            EXCEPTION
-                WHEN NO_DATA_FOUND THEN
-                    raise_application_error(-20002, 'INFORMATION CANNOT BE FOUND');
-            END;
-            -- Delete logic for DANGKY first to avoid integrity constraint violation
-            FOR R IN (SELECT DK.MASV FROM DANGKY DK 
-                      WHERE DK.MAGV = :old.magv
-                        AND DK.MAHP = :old.mahp 
-                        AND DK.HK = :old.hk 
-                        AND DK.NAM = :old.nam 
-                        AND DK.MACT = :old.mact)
-            LOOP
-                DELETE FROM DANGKY
-                WHERE MAGV = :old.magv
-                  AND MAHP = :old.mahp 
-                  AND HK = :old.hk 
-                  AND NAM = :old.nam 
-                  AND MACT = :old.mact
-                  AND MASV = R.MASV;
-            END LOOP;
-        
-            -- Delete logic for PHANCONG
-            DELETE FROM PHANCONG
-            WHERE MAGV = :old.magv
-              AND MAHP = :old.mahp 
-              AND HK = :old.hk 
-              AND NAM = :old.nam 
-              AND MACT = :old.mact
-              AND MAHP in (select MAHP from HOCPHAN where MADV='VPK'); 
-            
-            DBMS_OUTPUT.PUT_LINE('DELETED');
-        END;
-    END IF;
-END;
-/
-BEGIN
-   FOR r IN (SELECT table_name  FROM all_tables WHERE owner = 'ADMIN') LOOP
-      EXECUTE IMMEDIATE 'GRANT SELECT ON ADMIN.' || r.table_name || ' TO RL_TRUONGKHOA ';
-   END LOOP;
-END;
-/
-
-
-
 grant select on TRK_PHANCONG_VIEW to RL_TRUONGKHOA;
 grant insert on TRK_PHANCONG_VIEW to RL_TRUONGKHOA;
 grant update on TRK_PHANCONG_VIEW to RL_TRUONGKHOA;
 grant delete on TRK_PHANCONG_VIEW to RL_TRUONGKHOA;
-GRANT SELECT ON ADMIN.PHANCONG TO RL_SINHVIEN;
+
+
 

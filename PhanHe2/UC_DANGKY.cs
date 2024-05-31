@@ -100,7 +100,7 @@ namespace PhanHe2
                     {
                         connection.Open();
 
-                        using (OracleCommand cmd = new OracleCommand("ADMIN.UpdateDangKy", connection))
+                        using (OracleCommand cmd = new OracleCommand("ADMIN.InsertDangKy", connection))
                         {
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -111,6 +111,18 @@ namespace PhanHe2
 
                             cmd.ExecuteNonQuery();
                             MessageBox.Show("INSERT thành công.");
+                        }
+                    }
+                    catch (OracleException ex)
+                    {
+                        // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                        if (ex.Number == 20002 || ex.Number == 20001)
+                        {
+                            MessageBox.Show("Thời gian đăng ký học phần đã hết!");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Lỗi Oracle: " + ex.Message);
                         }
                     }
                     catch (Exception ex)
