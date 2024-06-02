@@ -30,7 +30,7 @@ namespace PhanHe2
         {
             string role = "";
             connectionString = connectionString.Replace("Id=" + username, "Id=admin");
-            connectionString = connectionString.Replace(password, "admin123");
+            connectionString = connectionString.Replace(password, "123");
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
                 conn.Open();
@@ -44,7 +44,7 @@ namespace PhanHe2
                 }
             }
             connectionString = connectionString.Replace("Id=admin", "Id=" + username);
-            connectionString = connectionString.Replace("admin123", password);
+            connectionString = connectionString.Replace("123", password);
             return role;
         }
 

@@ -24,17 +24,34 @@ namespace PhanHe2
         private void UC_PHANCONG_GIANGVIEN_Load(object sender, EventArgs e)
         {
             UC_Containers.SendToBack();
-            var queryString = "SELECT * FROM ADMIN.UV_TRGDV_PHANCONG\r\n";
+            try
+            {
+                using (OracleConnection conn = new OracleConnection(connectionString))
+                {
+                    conn.Open();
 
-            var dt = new DataTable();
+                    using (OracleCommand cmd = new OracleCommand("ADMIN.GET_UV_TRGDV_PHANCONG", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-            var da = new OracleDataAdapter(queryString, conn);
-            da.Fill(dt);
-            giangvien.DataSource = dt;
+                        cmd.Parameters.Add("p_username", OracleDbType.Varchar2).Value = LogIn.username;
+                        cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
-            conn.Close();
-            dt.Dispose();
-            da.Dispose();
+                        using (OracleDataReader reader = cmd.ExecuteReader())
+                        {
+                            DataTable dataTable = new DataTable();
+                            dataTable.Load(reader);
+
+                            // Display data in DataGridView or process it as needed
+                            giangvien.DataSource = dataTable;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
 
         private void giangvien_CellContentClick(object sender, DataGridViewCellEventArgs e)
