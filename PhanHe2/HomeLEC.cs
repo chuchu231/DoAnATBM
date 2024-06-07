@@ -125,7 +125,6 @@ namespace PhanHe2
                         }
                     }
                 }
-                uc.lbDV.Text = donVi;
                 }
             else
             {
