@@ -47,7 +47,8 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.thongbao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.thongbao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.thongbao.ColumnHeadersHeight = 4;
+            this.thongbao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
@@ -57,12 +58,13 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.thongbao.DefaultCellStyle = dataGridViewCellStyle3;
             this.thongbao.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.thongbao.Location = new System.Drawing.Point(35, 90);
+            this.thongbao.Location = new System.Drawing.Point(31, 72);
+            this.thongbao.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.thongbao.Name = "thongbao";
             this.thongbao.RowHeadersVisible = false;
             this.thongbao.RowHeadersWidth = 62;
             this.thongbao.RowTemplate.Height = 28;
-            this.thongbao.Size = new System.Drawing.Size(824, 340);
+            this.thongbao.Size = new System.Drawing.Size(732, 272);
             this.thongbao.TabIndex = 0;
             this.thongbao.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.thongbao.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -75,7 +77,7 @@
             this.thongbao.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.thongbao.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.thongbao.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.thongbao.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.thongbao.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.thongbao.ThemeStyle.HeaderStyle.Height = 4;
             this.thongbao.ThemeStyle.ReadOnly = false;
             this.thongbao.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
@@ -88,12 +90,14 @@
             // 
             // UC_THONGBAO
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.thongbao);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UC_THONGBAO";
-            this.Size = new System.Drawing.Size(925, 520);
+            this.Size = new System.Drawing.Size(822, 416);
+            this.Load += new System.EventHandler(this.UC_THONGBAO_Load);
             ((System.ComponentModel.ISupportInitialize)(this.thongbao)).EndInit();
             this.ResumeLayout(false);
 

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
+using System.Configuration;
 
 namespace PhanHe2
 {
@@ -16,5 +18,26 @@ namespace PhanHe2
         {
             InitializeComponent();
         }
-    }
+
+        private void UC_THONGBAO_Load(object sender, EventArgs e)
+        {
+            //string connectionString = LogIn.connectionString;
+            //connectionString = connectionString.Replace("xe", "OLS_DEMO");
+            OracleConnection conn = new OracleConnection(LogIn.connectionString);
+            var queryString = "SELECT ID, NoiDung FROM ADMIN_OLS.THONGBAO";
+
+            var dt = new DataTable();
+
+            var da = new OracleDataAdapter(queryString, conn);
+
+            da.Fill(dt);
+            thongbao.DataSource = dt;
+            thongbao.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            thongbao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            thongbao.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            thongbao.ReadOnly = true;
+            conn.Close();
+            dt.Dispose();
+        }
+    } 
 }

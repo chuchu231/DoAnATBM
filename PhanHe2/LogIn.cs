@@ -48,71 +48,159 @@ namespace PhanHe2
             return role;
         }
 
+        private string Get_Role_OLS(string username)
+        {
+            string role = "";
+            if (username == "TK001")
+            {
+                role = "RL_TRUONGKHOA";
+            }
+            if (username == "TBMCS2")
+            {
+                role = "RL_TRUONGBM";
+            }
+            if (username == "GVU001")
+            {
+                role = "RL_GIAOVU";
+            }
+            if (username == "SVHTTT")
+            {
+                role = "RL_SINHVIEN";
+            }
+            return role;
+        }
+
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             username = txtboxUsername.Text;
             password = txtBoxPassword.Text;
             connectionString = connectionString.Replace("{$user$}", username);
             connectionString = connectionString.Replace("{$password%}", password);
-            Console.WriteLine(connectionString);
-            using (OracleConnection conn = new OracleConnection(connectionString))
+            if ((username == "TK001") || (username == "TBMCS2") || (username == "GVU001") || (username == "SVHTTT"))
             {
-                try
+                connectionString = connectionString.Replace("xe", "OLS_DEMO");
+                using (OracleConnection conn = new OracleConnection(connectionString))
                 {
-                    conn.Open();
-                    if (conn.State == ConnectionState.Open)
+                    try
                     {
-                        
-                        // Hiding LogIn form
-                        this.Hide();
-                        role = Get_Role_ByUsername(username, password);
-                        Console.WriteLine(role);
-                        if (role == "RL_SINHVIEN")
+                        conn.Open();
+                        if (conn.State == ConnectionState.Open)
                         {
-                            HomeStudent form = new HomeStudent();
-                            form.Show();
-                            MessageBox.Show("Đăng nhập thành công");
-                            return;
-                        }
-                        else if (role == "ADMIN")
-                        {
-                            HomeAdmin form = new HomeAdmin();
-                            form.Show();
-                            MessageBox.Show("Đăng nhập thành công");
-                            return;
-                        }             
-                        if (role == "RL_NHANVIEN")
-                        {
-                            HomeStaff form = new HomeStaff();
-                            form.Show();;
-                            MessageBox.Show("Đăng nhập thành công");
-                        }
-                        else if (role == "RL_GIANGVIEN" || role == "RL_TRUONGBM" || role == "RL_TRUONGKHOA" || role == "RL_GIAOVU")
-                        {
-                            HomeLEC form = new HomeLEC();
-                            form.Show();
-                            MessageBox.Show("Đăng nhập thành công");
-                            return;
-                        } 
-                        else
-                        {
-                            conn.Close();
-                            MessageBox.Show("Đăng nhập thất bại. Tên đăng nhập hoặc mật khẩu không đúng.");
-                            connectionString = connectionString.Replace(username, "{$user$}");
-                            connectionString = connectionString.Replace(password, "{$password%}");
+
+                            // Hiding LogIn form
+                            this.Hide();
+                            role = Get_Role_OLS(username);
+                            Console.WriteLine(role);
+                            if (role == "RL_SINHVIEN")
+                            {
+                                HomeStudent form = new HomeStudent();
+                                form.Show();
+                                MessageBox.Show("Đăng nhập thành công");
+                                return;
+                            }
+                            else if (role == "ADMIN")
+                            {
+                                HomeAdmin form = new HomeAdmin();
+                                form.Show();
+                                MessageBox.Show("Đăng nhập thành công");
+                                return;
+                            }
+                            if (role == "RL_NHANVIEN")
+                            {
+                                HomeStaff form = new HomeStaff();
+                                form.Show(); ;
+                                MessageBox.Show("Đăng nhập thành công");
+                            }
+                            else if (role == "RL_GIANGVIEN" || role == "RL_TRUONGBM" || role == "RL_TRUONGKHOA" || role == "RL_GIAOVU")
+                            {
+                                HomeLEC form = new HomeLEC();
+                                form.Show();
+                                MessageBox.Show("Đăng nhập thành công");
+                                return;
+                            }
+                            else
+                            {
+                                conn.Close();
+                                MessageBox.Show("Bạn không có quyền !!!");
+                                connectionString = connectionString.Replace(username, "{$user$}");
+                                connectionString = connectionString.Replace(password, "{$password%}");
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    conn.Close();
-                    //MessageBox.Show("Error: " + ex.Message);
-                    Console.WriteLine(ex.Message);
-                    connectionString = connectionString.Replace(username, "{$user$}");
-                    connectionString = connectionString.Replace(password, "{$password%}");
+                    catch (Exception ex)
+                    {
+                        conn.Close();
+                        MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!");
+                        //Console.WriteLine(ex.Message);
+                        connectionString = connectionString.Replace(username, "{$user$}");
+                        connectionString = connectionString.Replace(password, "{$password%}");
 
+                    }
+                }
+
+            }
+            else
+            {
+                using (OracleConnection conn = new OracleConnection(connectionString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        if (conn.State == ConnectionState.Open)
+                        {
+
+                            // Hiding LogIn form
+                            this.Hide();
+                            role = Get_Role_ByUsername(username, password);
+                            Console.WriteLine(role);
+                            if (role == "RL_SINHVIEN")
+                            {
+                                HomeStudent form = new HomeStudent();
+                                form.Show();
+                                MessageBox.Show("Đăng nhập thành công");
+                                return;
+                            }
+                            else if (role == "ADMIN")
+                            {
+                                HomeAdmin form = new HomeAdmin();
+                                form.Show();
+                                MessageBox.Show("Đăng nhập thành công");
+                                return;
+                            }
+                            if (role == "RL_NHANVIEN")
+                            {
+                                HomeStaff form = new HomeStaff();
+                                form.Show(); ;
+                                MessageBox.Show("Đăng nhập thành công");
+                            }
+                            else if (role == "RL_GIANGVIEN" || role == "RL_TRUONGBM" || role == "RL_TRUONGKHOA" || role == "RL_GIAOVU")
+                            {
+                                HomeLEC form = new HomeLEC();
+                                form.Show();
+                                MessageBox.Show("Đăng nhập thành công");
+                                return;
+                            }
+                            else
+                            {
+                                conn.Close();
+                                MessageBox.Show("Bạn không có quyền !!!");
+                                connectionString = connectionString.Replace(username, "{$user$}");
+                                connectionString = connectionString.Replace(password, "{$password%}");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        conn.Close();
+                        MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!");
+                        //Console.WriteLine(ex.Message);
+                        connectionString = connectionString.Replace(username, "{$user$}");
+                        connectionString = connectionString.Replace(password, "{$password%}");
+
+                    }
                 }
             }
+            
         }
 
         private void txtBoxPassword_KeyPress(object sender, KeyPressEventArgs e)
