@@ -30,7 +30,7 @@ namespace PhanHe2
         {
             string role = "";
             connectionString = connectionString.Replace("Id=" + username, "Id=admin");
-            connectionString = connectionString.Replace(password, "123");
+            connectionString = connectionString.Replace(password, "admin123");
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
                 conn.Open();
@@ -44,7 +44,7 @@ namespace PhanHe2
                 }
             }
             connectionString = connectionString.Replace("Id=admin", "Id=" + username);
-            connectionString = connectionString.Replace("123", password);
+            connectionString = connectionString.Replace("admin123", password);
             return role;
         }
 
@@ -86,11 +86,10 @@ namespace PhanHe2
                         conn.Open();
                         if (conn.State == ConnectionState.Open)
                         {
-
                             // Hiding LogIn form
                             this.Hide();
+
                             role = Get_Role_OLS(username);
-                            Console.WriteLine(role);
                             if (role == "RL_SINHVIEN")
                             {
                                 HomeStudent form = new HomeStudent();
@@ -125,6 +124,7 @@ namespace PhanHe2
                                 connectionString = connectionString.Replace(username, "{$user$}");
                                 connectionString = connectionString.Replace(password, "{$password%}");
                             }
+                            
                         }
                     }
                     catch (Exception ex)

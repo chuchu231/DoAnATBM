@@ -58,7 +58,7 @@ namespace PhanHe2
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
                 string query;
-                query = "INSERT INTO ADMIN.TRK_PHANCONG_VIEW VALUES ('" + MAGVtxb.Text + "','" + idtxtb.Text + "','" + HKtxb.Text + "','" + Namtxb.Text + "','" + MACT.Text + "')";
+                query = "INSERT INTO ADMIN.UV_Quanly_Phancong VALUES ('" + MAGVtxb.Text + "','" + idtxtb.Text + "','" + HKtxb.Text + "','" + Namtxb.Text + "','" + MACT.Text + "')";
                 Console.WriteLine(query);
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -144,7 +144,7 @@ namespace PhanHe2
             {
                 // do something ?
                 string query;
-                query = "DELETE FROM ADMIN.TRK_PHANCONG_VIEW WHERE MAGV = '" + MAGVtxb.Text + "' AND MAHP = '" + idtxtb.Text + "' AND HK ='" + HKtxb.Text + "' AND NAM='" + Namtxb.Text + "' AND MACT='" + MACT.Text + "'";
+                query = "DELETE FROM ADMIN.UV_Quanly_Phancong WHERE MAGV = '" + MAGVtxb.Text + "' AND MAHP = '" + idtxtb.Text + "' AND HK ='" + HKtxb.Text + "' AND NAM='" + Namtxb.Text + "' AND MACT='" + MACT.Text + "'";
                 Console.WriteLine(query);
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
                 {
@@ -212,12 +212,13 @@ namespace PhanHe2
                             int row = cmd.ExecuteNonQuery();
                             if (row > 0)
                             {
-                                MessageBox.Show("updae thành công");
+                                MessageBox.Show("update thành công");
                             }
                             else {
                                 MessageBox.Show("Không có quyền update trên dòng này");
 
                             }
+                            UC_PHANCONG_Load(sender, e);
                         }
                     }
                 }
@@ -278,7 +279,7 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "UPDATE ADMIN.TRK_PHANCONG_VIEW SET MAGV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "'" +
+                    var queryString = "UPDATE ADMIN.UV_Quanly_Phancong SET MAGV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "'" +
                                         "WHERE MAGV = '" + old_gv + "' AND MAHP = '" + old_hp + "' AND HK = '" + old_hk + "' AND NAM = '" + old_nam + "' AND MACT = '" + old_mact + "'";
 
                     using (var conn = new OracleConnection(LogIn.connectionString))
@@ -312,6 +313,10 @@ namespace PhanHe2
 
         private void UC_PHANCONG_Load(object sender, EventArgs e)
         {
+            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DetailStaff.ReadOnly = true;
             // Load datagridview
             if (LogIn.role == "RL_SINHVIEN")
             {
@@ -320,7 +325,8 @@ namespace PhanHe2
             else if (LogIn.role == "RL_GIAOVU")
             {
                 UC_Containers.SendToBack();
-                var queryString = "SELECT * FROM ADMIN.PHANCONG\r\n";
+                var queryString = "SELECT PC.*, HP.MADV" +
+                                  " FROM ADMIN.PHANCONG PC JOIN ADMIN.HOCPHAN HP ON PC.MAHP = HP.MAHP\r\n";
 
                 var dt = new DataTable();
 
@@ -376,6 +382,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
+                DetailStaff.ReadOnly = true;
                 var queryString = "SELECT * FROM ADMIN.UV_GV_Phancong";
 
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))

@@ -92,7 +92,7 @@ namespace PhanHe2
                 addUserControl(uc);
                 string donVi = "";
 
-                string queryString = "SELECT MADV FROM CADMIN2.DONVI WHERE TRGDV = :username";
+                string queryString = "SELECT MADV FROM ADMIN.DONVI WHERE TRGDV = :username";
 
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {

@@ -21,6 +21,7 @@ namespace PhanHe2
             conn = new OracleConnection(connectionString);
         }
 
+
         private void UC_PHANCONG_GIANGVIEN_Load(object sender, EventArgs e)
         {
             UC_Containers.SendToBack();

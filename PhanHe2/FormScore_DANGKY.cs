@@ -36,7 +36,7 @@ namespace PhanHe2
 
         private void updatebtn_Click(object sender, EventArgs e)
         {
-            var queryString = "UPDATE CADMIN2.DANGKY SET DIEMTH = :TBXTH, DIEMQT = :TBXQT, DIEMCK = :TBXCK WHERE MASV = :TBXMSSV AND MAHP = :TBXMAHP AND HK = :TBXHK AND NAM = :TBXNAMHOC";
+            var queryString = "UPDATE ADMIN.DANGKY SET DIEMTH = :TBXTH, DIEMQT = :TBXQT, DIEMCK = :TBXCK WHERE MASV = :TBXMSSV AND MAHP = :TBXMAHP AND HK = :TBXHK AND NAM = :TBXNAMHOC";
 
             using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
             {

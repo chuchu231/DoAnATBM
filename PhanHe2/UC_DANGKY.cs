@@ -27,13 +27,20 @@ namespace PhanHe2
         {
             if (e.RowIndex >= 0)
             {
-                MSSVtxb.Text = LogIn.username;
+                if (LogIn.role == "RL_SINHVIEN")
+                {
+                    MSSVtxb.Text = LogIn.username;
+                }
                 // Lấy dữ liệu của hàng được chọn
                 DataGridViewRow row = DetailStaff.Rows[e.RowIndex];
 
                 // Lấy dữ liệu của từng cột
                 foreach (DataGridViewCell cell in row.Cells)
                 {
+                    if (cell.OwningColumn.HeaderText == "MASV")
+                    {
+                        MSSVtxb.Text = cell.Value?.ToString();
+                    }
                     if (cell.OwningColumn.HeaderText == "MAGV")
                     {
                         MAGVtxb.Text = cell.Value?.ToString();
@@ -110,7 +117,7 @@ namespace PhanHe2
                             cmd.Parameters.Add("p_maCT", OracleDbType.Varchar2).Value = MACT.Text;
 
                             cmd.ExecuteNonQuery();
-                            MessageBox.Show("INSERT thành công.");
+                            MessageBox.Show("Thêm thành công.");
                         }
                     }
                     catch (OracleException ex)
@@ -139,19 +146,39 @@ namespace PhanHe2
                     var queryString = "INSERT INTO ADMIN.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT) VALUES (:MASV, :MAGV, :MAHP, :HK, :NAM, :CT)";
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
-                        conn.Open();
-                        using (var cmd = new OracleCommand(queryString, conn))
+                        try
                         {
-                            cmd.CommandType = CommandType.Text;
+                            conn.Open();
+                            using (var cmd = new OracleCommand(queryString, conn))
+                            {
+                                cmd.CommandType = CommandType.Text;
 
-                            cmd.Parameters.Add(new OracleParameter(":MASV", MSSVtxb.Text));
-                            cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
-                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
-                            cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
-                            cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
-                            cmd.Parameters.Add(new OracleParameter(":CT", MACT.Text));
+                                cmd.Parameters.Add(new OracleParameter(":MASV", MSSVtxb.Text));
+                                cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
+                                cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                                cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
+                                cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
+                                cmd.Parameters.Add(new OracleParameter(":CT", MACT.Text));
 
-                            cmd.ExecuteNonQuery();
+                                cmd.ExecuteNonQuery();
+                                MessageBox.Show("Thêm thành công.");
+                            }
+                        }
+                        catch (OracleException ex)
+                        {
+                            // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                            if (ex.Number == 20001)
+                            {
+                                MessageBox.Show("Thời gian đăng ký học phần đã hết!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Lỗi Oracle: " + ex.Message);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Lỗi: " + ex.Message);
                         }
                     }
                 }
@@ -286,20 +313,40 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIAOVU")
             {
-                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                try
                 {
-                    UC_Containers.SendToBack();
-                    var queryString = "SELECT * FROM ADMIN.DANGKY\r\n";
+                    // Tạo kết nối đến cơ sở dữ liệu Oracle
+                    using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                    {
+                        // Mở kết nối
+                        connection.Open();
 
-                    var dt = new DataTable();
+                        // Tạo OracleCommand để gọi stored procedure
+                        using (OracleCommand cmd = new OracleCommand("ADMIN.GET_PHANCONG_BYDAY", connection))
+                        {
+                            // Đặt kiểu command là Stored Procedure
+                            cmd.CommandType = CommandType.StoredProcedure;
 
-                    var da = new OracleDataAdapter(queryString, connection);
-                    da.Fill(dt);
-                    DetailStaff.DataSource = dt;
+                            // Tạo tham số đầu ra
+                            cmd.Parameters.Add("khmo_cursor", OracleDbType.RefCursor, ParameterDirection.Output);
 
-                    connection.Close();
-                    dt.Dispose();
-                    da.Dispose();
+                            OracleDataAdapter da = new OracleDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            DetailStaff.DataSource = dt;
+                            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                            DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                            DetailStaff.ReadOnly = true;
+                            connection.Close();
+                            dt.Dispose();
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
                 }
             }
             else if (LogIn.role == "RL_TRUONGBM")
@@ -412,9 +459,8 @@ namespace PhanHe2
             }
         }
 
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void sinhvien_search(string key)
         {
-            string key = searchtxb.Text;
             if (key == "")
             {
                 try
@@ -491,6 +537,144 @@ namespace PhanHe2
                     MessageBox.Show("Error: " + ex.Message);
                 }
             }
+        }
+
+        private void gvu_search(string key)
+        {
+            if (key == "")
+            {
+                try
+                {
+                    // Tạo kết nối đến cơ sở dữ liệu Oracle
+                    using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                    {
+                        // Mở kết nối
+                        connection.Open();
+
+                        // Tạo OracleCommand để gọi stored procedure
+                        using (OracleCommand cmd = new OracleCommand("ADMIN.GET_PHANCONG_BYDAY", connection))
+                        {
+                            // Đặt kiểu command là Stored Procedure
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            // Tạo tham số đầu ra
+                            cmd.Parameters.Add("khmo_cursor", OracleDbType.RefCursor, ParameterDirection.Output);
+
+                            OracleDataAdapter da = new OracleDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            DetailStaff.DataSource = dt;
+                            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                            DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                            DetailStaff.ReadOnly = true;
+                            connection.Close();
+                            dt.Dispose();
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+            else
+            {
+                try
+                {
+                    // Tạo kết nối đến cơ sở dữ liệu Oracle
+                    using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                    {
+                        // Mở kết nối
+                        connection.Open();
+
+                        // Tạo OracleCommand để gọi stored procedure
+                        using (OracleCommand cmd = new OracleCommand("ADMIN.GET_PHANCONG_BYNAME", connection))
+                        {
+                            // Đặt kiểu command là Stored Procedure
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("name", OracleDbType.Varchar2).Value = key;
+                            // Tạo tham số đầu ra
+                            cmd.Parameters.Add("khmo_cursor", OracleDbType.RefCursor, ParameterDirection.Output);
+
+                            OracleDataAdapter da = new OracleDataAdapter(cmd);
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            DetailStaff.DataSource = dt;
+                            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                            DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                            DetailStaff.ReadOnly = true;
+                            connection.Close();
+                            dt.Dispose();
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            string key = searchtxb.Text;
+            if(LogIn.role == "RL_SINHVIEN")
+            {
+                sinhvien_search(key);
+            }
+            else if (LogIn.role == "RL_GIAOVU")
+            {
+                gvu_search(key);
+            }
+            else
+            {
+                if (key != "")
+                {
+                    using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                    {
+                        conn.Open();
+                        var queryString = $"SELECT * FROM ADMIN.DANGKY WHERE UPPER(MAHP) = UPPER('{key}')";
+                        Console.Write(queryString);
+                        var dt = new DataTable();
+
+                        var da = new OracleDataAdapter(queryString, conn);
+
+                        da.Fill(dt);
+                        DetailStaff.DataSource = dt;
+                        DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                        DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                        DetailStaff.ReadOnly = true;
+                        conn.Close();
+                        dt.Dispose();
+                    }
+                }
+                else
+                {
+                    using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                    {
+                        conn.Open();
+                        var queryString = "SELECT * FROM ADMIN.DANGKY";
+                        Console.Write(queryString);
+                        var dt = new DataTable();
+
+                        var da = new OracleDataAdapter(queryString, conn);
+
+                        da.Fill(dt);
+                        DetailStaff.DataSource = dt;
+                        DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                        DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                        DetailStaff.ReadOnly = true;
+                        conn.Close();
+                        dt.Dispose();
+                    }
+                }
+                
+            }
+            
         }
 
         private void DetailStaff_CellContentClick(object sender, DataGridViewCellEventArgs e)

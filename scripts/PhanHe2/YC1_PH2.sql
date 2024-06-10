@@ -135,12 +135,15 @@ BEGIN
     RETURN v_role;
 END;
 /
+SELECT GRANTED_ROLE 
+        FROM DBA_ROLE_PRIVS
+        WHERE GRANTEE = 'SV01' AND GRANTED_ROLE != 'CONNECT';
 
 set serveroutput on;
 DECLARE
     v_role VARCHAR2(30);
 BEGIN
-    v_role := GETROLE_BYUSERNAME('SV04');
+    v_role := GETROLE_BYUSERNAME('SV01');
     DBMS_OUTPUT.PUT_LINE('Role: ' || v_role);
 END;
 /
@@ -308,11 +311,15 @@ AS
     ROLE VARCHAR(20);
 BEGIN 
     USER:= SYS_CONTEXT('USERENV','SESSION_USER'); 
-    ROLE := GETROLE_BYUSERNAME (USER); 
-    IF (ROLE IN ('RL_GIANGVIEN', 'RL_TRUONGBM', 'RL_TRUONGKHOA')) THEN
-        RETURN 'MAGV = '''|| USER ||''''; 
+    ROLE := GETROLE_BYUSERNAME (USER);
+    IF sys_context('my_context', 'vpd_bypass') = 'TRUE' THEN
+        RETURN '1=1'; 
     ELSE
-        RETURN '1=0';
+        IF (ROLE IN ('RL_GIANGVIEN', 'RL_TRUONGBM', 'RL_TRUONGKHOA')) THEN
+            RETURN 'MAGV = '''|| USER ||''''; 
+        ELSE
+            RETURN '1=0';
+        END IF;
     END IF;   
 END;
 /
@@ -356,6 +363,7 @@ GRANT UPDATE(DIEMTH, DIEMQT, DIEMCK, DIEMTK) ON ADMIN.DANGKY TO RL_GIANGVIEN;
 GRANT RL_GIANGVIEN TO RL_TRUONGKHOA;
 GRANT RL_GIANGVIEN TO RL_TRUONGBM;
 GRANT INSERT, DELETE ON ADMIN.DANGKY TO RL_GIAOVU, RL_SINHVIEN;
+GRANT UPDATE ON ADMIN.DANGKY TO RL_GIAOVU;
 
 -------PHANCONG
 create or replace VIEW ADMIN.UV_GV_Phancong 
@@ -366,9 +374,9 @@ AS
 /
 create or replace VIEW ADMIN.UV_Quanly_Phancong 
 AS
-    SELECT gv.manv, DV.madv, pc.hk, pc.nam, pc.mahp, pc.mact
-    FROM ADMIN.NHANSU GV, ADMIN.DONVI DV, ADMIN.PHANCONG PC, ADMIN.HOCPHAN HP
-    WHERE dv.madv = 'VPK' AND HP.MAHP = PC.MAHP AND HP.MADV = DV.MADV AND PC.MAGV  = GV.MANV;
+   SELECT PC.MAGV, pc.mahp, pc.hk, pc.nam, pc.mact
+        FROM ADMIN.PHANCONG PC, ADMIN.HOCPHAN HP
+    WHERE PC.MAHP = HP.MAHP AND HP.MADV = 'VPK';
 /
 CREATE OR REPLACE VIEW ADMIN.UV_TRGDV_QUANLY_PHANCONG
 AS
@@ -377,6 +385,7 @@ AS
      JOIN ADMIN.DONVI DV ON DV.MADV = HP.MADV
     WHERE DV.TRGDV = SYS_CONTEXT('USERENV', 'SESSION_USER');
 /
+--Nay bi sai
 CREATE OR REPLACE VIEW ADMIN.UV_TRGDV_PHANCONG
 AS
     SELECT gv.manv, pc.hk, pc.nam, pc.mahp, pc.mact
@@ -388,24 +397,38 @@ AS
 
 GRANT SELECT ON ADMIN.UV_GV_Phancong  TO RL_GIANGVIEN;
 /
-GRANT SELECT, UPDATE ON ADMIN.UV_Quanly_Phancong TO RL_GIAOVU;
+GRANT SELECT ON ADMIN.PHANCONG TO RL_GIAOVU;
 GRANT SELECT, UPDATE ON ADMIN.UV_Quanly_Phancong TO RL_GIAOVU;
 /
 GRANT SELECT, UPDATE, DELETE, INSERT ON ADMIN.UV_TRGDV_QUANLY_PHANCONG TO RL_TRUONGBM;
 GRANT SELECT ON ADMIN.UV_TRGDV_PHANCONG TO RL_TRUONGBM;
+/
+GRANT SELECT ON ADMIN.PHANCONG TO RL_TRUONGKHOA;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ADMIN.UV_Quanly_Phancong TO RL_TRUONGKHOA;
 
-
-----PHANCONG (TruongKhoa)
-create or replace view TRK_PHANCONG_VIEW 
-as
-select * from PHANCONG
-where MAHP in (select MAHP from HOCPHAN where MADV = 'VPK');
-
-
-grant select on TRK_PHANCONG_VIEW to RL_TRUONGKHOA;
-grant insert on TRK_PHANCONG_VIEW to RL_TRUONGKHOA;
-grant update on TRK_PHANCONG_VIEW to RL_TRUONGKHOA;
-grant delete on TRK_PHANCONG_VIEW to RL_TRUONGKHOA;
-
-
-
+--Test application context
+CREATE OR REPLACE CONTEXT my_context USING my_package;
+CREATE OR REPLACE PACKAGE my_package IS
+  PROCEDURE set_context;
+  PROCEDURE clear_context;
+END my_package;
+/
+CREATE OR REPLACE PACKAGE BODY my_package IS
+  PROCEDURE set_context IS
+  BEGIN
+    DBMS_SESSION.SET_CONTEXT('my_context', 'vpd_bypass', 'TRUE');
+  END set_context;
+  PROCEDURE clear_context IS
+  BEGIN
+    DBMS_SESSION.CLEAR_CONTEXT('my_context', 'vpd_bypass');
+  END clear_context;
+END my_package;
+/
+set serveroutput on;
+DECLARE
+  context_exists varchar2(100);
+BEGIN
+  context_exists := sys_context('my_context', 'vpd_bypass');
+  DBMS_OUTPUT.PUT_LINE(context_exists);
+END;
+/
