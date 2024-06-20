@@ -78,5 +78,11 @@ namespace PhanHe2
             LogIn form = new LogIn();
             form.Show();
         }
+
+        private void auditbtn_Click(object sender, EventArgs e)
+        {
+            UC_Admin_Audit uc= new UC_Admin_Audit();
+            addUserControl(uc);
+        }
     }
 }

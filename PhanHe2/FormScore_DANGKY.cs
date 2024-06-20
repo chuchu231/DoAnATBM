@@ -15,7 +15,7 @@ using static System.Formats.Asn1.AsnWriter;
 namespace PhanHe2
 {
     public partial class FormScore_DANGKY : Form
-    {
+    { 
         OracleConnection conn = new OracleConnection(LogIn.connectionString);
 
         public FormScore_DANGKY()

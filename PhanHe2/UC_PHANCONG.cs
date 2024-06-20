@@ -31,58 +31,97 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
-                string insertQuery = "INSERT INTO ADMIN.UV_TRGDV_QUANLY_PHANCONG (MAGV, MADV, MAHP, HK, NAM, MACT) VALUES (:MAGV, :MADV, :MAHP, :HK, :NAM, :MACT)";
+                string insertQuery = "INSERT INTO ADMIN.UV_TRGDV_QUANLY_PHANCONG (MAGV, MAHP, HK, NAM, MACT) VALUES (:MAGV, :MAHP, :HK, :NAM, :MACT)";
 
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
-                    conn.Open();
-                    using (OracleCommand cmd = new OracleCommand(insertQuery, conn))
+                    try
                     {
-                        cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
-                        cmd.Parameters.Add(new OracleParameter(":MADV", dv));
-                        cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
-                        cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
-                        cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
-                        cmd.Parameters.Add(new OracleParameter(":MACT", MACT.Text));
+                        conn.Open();
+                        using (OracleCommand cmd = new OracleCommand(insertQuery, conn))
+                        {
+                            cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MACT", MACT.Text));
 
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Thành công");
-                        UC_PHANCONG_Load(sender, e);
-
-
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Thành công");
+                            UC_PHANCONG_Load(sender, e);
+                        }
                     }
+                    catch (OracleException ex)
+                    {
+                        // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                        if (ex.Number == 20001)
+                        {
+                            MessageBox.Show("Mã học phần không thuộc chuyên ngành");
+                        }
+                        else if (ex.Number == 20002)
+                        {
+                            MessageBox.Show("Học phần không được mở");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Lỗi Oracle: " + ex.Message);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi: " + ex.Message);
+                    }
+                    
                 }
 
 
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
-                string query;
-                query = "INSERT INTO ADMIN.UV_Quanly_Phancong VALUES ('" + MAGVtxb.Text + "','" + idtxtb.Text + "','" + HKtxb.Text + "','" + Namtxb.Text + "','" + MACT.Text + "')";
-                Console.WriteLine(query);
-                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
-                {
-                    using (OracleCommand command = new OracleCommand(query, connection))
-                    {
-                        try
-                        {
-                            Console.WriteLine("ok");
+                string insertQuery = "INSERT INTO ADMIN.UV_QUANLY_PHANCONG (MAGV, MAHP, HK, NAM, MACT) VALUES (:MAGV, :MAHP, :HK, :NAM, :MACT)";
 
-                            connection.Open();
-                            command.ExecuteNonQuery();
-                            MessageBox.Show("Thành công");
-                            UC_PHANCONG_Load(sender, e);
-                            connection.Close();
-                        }
-                        catch (Exception ex)
+                using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                {
+                    try
+                    {
+                        conn.Open();
+                        using (OracleCommand cmd = new OracleCommand(insertQuery, conn))
                         {
-                            MessageBox.Show("Error: " + ex.Message);
-                            //MessageBox.Show(query);
+                            cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MACT", MACT.Text));
+
+                            cmd.ExecuteNonQuery();
+                            MessageBox.Show("Thêm thành công");
+                            UC_PHANCONG_Load(sender, e);
+
+
                         }
                     }
+                    catch (OracleException ex)
+                    {
+                        // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                        if (ex.Number == 20001)
+                        {
+                            MessageBox.Show("Mã học phần không thuộc văn phòng khoa");
+                        }
+                        else if( ex.Number == 20002)
+                        {
+                            MessageBox.Show("Học phần này không được mở");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Lỗi Oracle: " + ex.Message);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi: " + ex.Message);
+                    }
+
                 }
-
-
             }
             else if (LogIn.role == "RL_NHANVIEN")
             {
@@ -124,8 +163,16 @@ namespace PhanHe2
                             cmd.Parameters.Add(new OracleParameter(":MACT", MACT.Text));
                             cmd.Parameters.Add(new OracleParameter(":MADV", dv));
 
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("Xóa thành công");
+                            int row = cmd.ExecuteNonQuery();
+                            if (row > 0)
+                            {
+                                MessageBox.Show("Xóa thành công");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Xóa thất bại");
+
+                            }
                             UC_PHANCONG_Load(sender, e);
                         }
                     }
@@ -142,31 +189,43 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
-                // do something ?
-                string query;
-                query = "DELETE FROM ADMIN.UV_Quanly_Phancong WHERE MAGV = '" + MAGVtxb.Text + "' AND MAHP = '" + idtxtb.Text + "' AND HK ='" + HKtxb.Text + "' AND NAM='" + Namtxb.Text + "' AND MACT='" + MACT.Text + "'";
-                Console.WriteLine(query);
-                using (OracleConnection connection = new OracleConnection(LogIn.connectionString))
+                try
                 {
-                    connection.Open();
-                    using (OracleCommand command = new OracleCommand(query, connection))
-                    {
-                        try
-                        {
-                            Console.WriteLine("ok");
+                    string queryString = "DELETE FROM ADMIN.UV_QUANLY_PHANCONG WHERE MAGV = :MAGV AND MAHP = :MAHP AND HK = :HK AND NAM = :NAM AND MACT = :MACT";
 
-                            command.ExecuteNonQuery();
-                            MessageBox.Show("Thành công");
-                            connection.Close();
+                    using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
+                    {
+                        conn.Open();
+                        using (OracleCommand cmd = new OracleCommand(queryString, conn))
+                        {
+                            cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":HK", HKtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NAM", Namtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MACT", MACT.Text));
+
+                            int row = cmd.ExecuteNonQuery();
+                            if (row > 0)
+                            {
+                                MessageBox.Show("Xóa thành công");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Không có quyền xóa trên dòng này");
+
+                            }
                             UC_PHANCONG_Load(sender, e);
                         }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error: " + ex.Message);
-                            //MessageBox.Show(query);
-                        }
                     }
+
+
                 }
+                catch (Exception ex)
+                {
+                    // Log the exception or display a message
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+
             }
             else if (LogIn.role == "RL_NHANVIEN")
             {
@@ -222,6 +281,22 @@ namespace PhanHe2
                         }
                     }
                 }
+                catch (OracleException ex)
+                {
+                    // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                    if (ex.Number == 20001)
+                    {
+                        MessageBox.Show("Mã học phần không thuộc văn phòng khoa");
+                    }
+                    else if (ex.Number == 20002)
+                    {
+                        MessageBox.Show("Học phần này không được mở");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi Oracle: " + ex.Message);
+                    }
+                }
                 catch (Exception ex)
                 {
                     // Log the exception or display a message
@@ -269,6 +344,22 @@ namespace PhanHe2
                         }
                     }
                 }
+                catch (OracleException ex)
+                {
+                    // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                    if (ex.Number == 20001)
+                    {
+                        MessageBox.Show("Mã học phần không thuộc chuyên ngành");
+                    }
+                    else if (ex.Number == 20002)
+                    {
+                        MessageBox.Show("Học phần này không được mở");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi Oracle: " + ex.Message);
+                    }
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show("An error occurred: " + ex.Message);
@@ -279,18 +370,54 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "UPDATE ADMIN.UV_Quanly_Phancong SET MAGV = '" + MAGVtxb.Text + "', MAHP = '" + idtxtb.Text + "', HK = '" + HKtxb.Text + "', NAM = '" + Namtxb.Text + "', MACT = '" + MACT.Text + "'" +
-                                        "WHERE MAGV = '" + old_gv + "' AND MAHP = '" + old_hp + "' AND HK = '" + old_hk + "' AND NAM = '" + old_nam + "' AND MACT = '" + old_mact + "'";
+                    var queryString = "UPDATE ADMIN.UV_QUANLY_PHANCONG SET MAGV = :MAGV, MAHP = :MAHP, HK = :HK, NAM = :NAM, MACT = :MACT " +
+                                      "WHERE MAGV = :OLD_GV AND MAHP = :OLD_HP AND HK = :OLD_HK AND NAM = :OLD_NAM AND MACT = :OLD_MACT";
 
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
                         conn.Open();
                         using (var cmd = new OracleCommand(queryString, conn))
                         {
+                            cmd.Parameters.Add(":MAGV", OracleDbType.Varchar2).Value = MAGVtxb.Text;
+                            cmd.Parameters.Add(":MAHP", OracleDbType.Varchar2).Value = idtxtb.Text;
+                            cmd.Parameters.Add(":HK", OracleDbType.Varchar2).Value = HKtxb.Text;
+                            cmd.Parameters.Add(":NAM", OracleDbType.Varchar2).Value = Namtxb.Text;
+                            cmd.Parameters.Add(":MACT", OracleDbType.Varchar2).Value = MACT.Text;
 
-                            cmd.ExecuteNonQuery();
-                            conn.Close();   
+                            cmd.Parameters.Add(":OLD_GV", OracleDbType.Varchar2).Value = old_gv;
+                            cmd.Parameters.Add(":OLD_HP", OracleDbType.Varchar2).Value = old_hp;
+                            cmd.Parameters.Add(":OLD_HK", OracleDbType.Varchar2).Value = old_hk;
+                            cmd.Parameters.Add(":OLD_NAM", OracleDbType.Varchar2).Value = old_nam;
+                            cmd.Parameters.Add(":OLD_MACT", OracleDbType.Varchar2).Value = old_mact;
+
+                            int row = cmd.ExecuteNonQuery();
+                            if (row > 0)
+                            {
+                                MessageBox.Show("update thành công");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Không có quyền update trên dòng này");
+
+                            }
+                            UC_PHANCONG_Load(sender, e);
                         }
+                    }
+                }
+                catch (OracleException ex)
+                {
+                    // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                    if (ex.Number == 20001)
+                    {
+                        MessageBox.Show("Mã học phần không thuộc văn phòng khoa");
+                    }
+                    else if (ex.Number == 20002)
+                    {
+                        MessageBox.Show("Học phần này không được mở");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi Oracle: " + ex.Message);
                     }
                 }
                 catch (Exception ex)
@@ -298,7 +425,6 @@ namespace PhanHe2
                     // Log the exception or display a message
                     MessageBox.Show("An error occurred: " + ex.Message);
                 }
-
             }
             else if (LogIn.role == "RL_NHANVIEN")
             {
@@ -311,6 +437,7 @@ namespace PhanHe2
             UC_PHANCONG_Load(sender, e);
         }
 
+       
         private void UC_PHANCONG_Load(object sender, EventArgs e)
         {
             DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -358,10 +485,11 @@ namespace PhanHe2
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
                     conn.Open();
-
+                    var queryString = "SELECT PC.*, HP.MADV" +
+                                  " FROM ADMIN.PHANCONG PC JOIN ADMIN.HOCPHAN HP ON PC.MAHP = HP.MAHP\r\n";
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.TRK_PHANCONG_VIEW", conn);
+                        OracleCommand cmd = new OracleCommand(queryString, conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;

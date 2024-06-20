@@ -108,6 +108,19 @@ namespace PhanHe2
                     }
 
                     MessageBox.Show("Thêm kế hoạch mở môn thành công.");
+                    UC_KHMO_Load(sender, e);
+                }
+                catch (OracleException ex)
+                {
+                    // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                    if (ex.Number == 02291)
+                    {
+                        MessageBox.Show("Mã học phần không tồn tại!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi Oracle: " + ex.Message);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -162,8 +175,20 @@ namespace PhanHe2
                             cmd.ExecuteNonQuery();
                         }
                     }
-
-                    MessageBox.Show("Cập nhật phân công thành công.");
+                    MessageBox.Show("Cập nhật khóa học thành công.");
+                    UC_KHMO_Load(sender, e);
+                }
+                catch (OracleException ex)
+                {
+                    // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                    if (ex.Number == 02291)
+                    {
+                        MessageBox.Show("Mã học phần không tồn tại!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi Oracle: " + ex.Message);
+                    }
                 }
                 catch (Exception ex)
                 {

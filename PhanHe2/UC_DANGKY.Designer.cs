@@ -49,7 +49,6 @@
             this.HKtxb = new Guna.UI2.WinForms.Guna2TextBox();
             this.idtxtb = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.Score_btn = new Guna.UI2.WinForms.Guna2Button();
             this.label6 = new System.Windows.Forms.Label();
             this.MSSVtxb = new Guna.UI2.WinForms.Guna2TextBox();
             this.UC_Containers.SuspendLayout();
@@ -326,7 +325,8 @@
             this.DetailStaff.ThemeStyle.RowsStyle.Height = 28;
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DetailStaff.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            this.DetailStaff.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_CellContentClick);
+            this.DetailStaff.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_CellContentDoubleClick);
+            this.DetailStaff.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_RowEnter);
             // 
             // label1
             // 
@@ -389,7 +389,6 @@
             this.guna2Panel1.BorderRadius = 16;
             this.guna2Panel1.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
             this.guna2Panel1.BorderThickness = 7;
-            this.guna2Panel1.Controls.Add(this.Score_btn);
             this.guna2Panel1.Controls.Add(this.label6);
             this.guna2Panel1.Controls.Add(this.MSSVtxb);
             this.guna2Panel1.Controls.Add(this.label4);
@@ -408,25 +407,6 @@
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(187, 400);
             this.guna2Panel1.TabIndex = 36;
-            // 
-            // Score_btn
-            // 
-            this.Score_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.Score_btn.BorderRadius = 12;
-            this.Score_btn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.Score_btn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.Score_btn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.Score_btn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.Score_btn.FillColor = System.Drawing.Color.White;
-            this.Score_btn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.Score_btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.Score_btn.Location = new System.Drawing.Point(20, 344);
-            this.Score_btn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Score_btn.Name = "Score_btn";
-            this.Score_btn.Size = new System.Drawing.Size(145, 30);
-            this.Score_btn.TabIndex = 23;
-            this.Score_btn.Text = "ĐIỂM";
-            this.Score_btn.Click += new System.EventHandler(this.Score_btn_Click);
             // 
             // label6
             // 
@@ -478,8 +458,6 @@
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.DetailStaff.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DetailStaff_RowEnter);
-
 
         }
 
@@ -505,6 +483,5 @@
         private Guna.UI2.WinForms.Guna2Button updatebtn;
         private System.Windows.Forms.Label label6;
         public Guna.UI2.WinForms.Guna2TextBox MSSVtxb;
-        private Guna.UI2.WinForms.Guna2Button Score_btn;
     }
 }

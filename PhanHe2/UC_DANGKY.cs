@@ -17,7 +17,7 @@ namespace PhanHe2
     public partial class UC_DANGKY : UserControl
     {
 
-        public FormScore_DANGKY score = new FormScore_DANGKY();
+        public FormScore_DANGKY score;
         public UC_DANGKY()
         {
             InitializeComponent();
@@ -66,36 +66,6 @@ namespace PhanHe2
             }
         }
 
-
-        private void Score_btn_Click(object sender, EventArgs e)
-        {
-            if (LogIn.role == "RL_SINHVIEN")
-            {
-                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
-            }
-            else if (LogIn.role == "RL_GIAOVU")
-            {
-                // do something ?
-            }
-            else if (LogIn.role == "RL_TRUONGBM")
-            {
-                // do something ?
-            }
-            else if (LogIn.role == "RL_TRUONGKHOA")
-            {
-                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
-
-            }
-            else if (LogIn.role == "RL_NHANVIEN")
-            {
-                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
-
-            }
-            else if (LogIn.role == "RL_GIANGVIEN")
-            {
-                // do something ?
-            }
-        }
 
         private void insertbtn_Click(object sender, EventArgs e)
         {
@@ -152,7 +122,6 @@ namespace PhanHe2
                             using (var cmd = new OracleCommand(queryString, conn))
                             {
                                 cmd.CommandType = CommandType.Text;
-
                                 cmd.Parameters.Add(new OracleParameter(":MASV", MSSVtxb.Text));
                                 cmd.Parameters.Add(new OracleParameter(":MAGV", MAGVtxb.Text));
                                 cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
@@ -235,7 +204,20 @@ namespace PhanHe2
 
                             // Execute the command
                             cmd.ExecuteNonQuery();
+                            MessageBox.Show("Xóa thành công");
                         }
+                    }
+                }
+                catch (OracleException ex)
+                {
+                    // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                    if (ex.Number == 20001)
+                    {
+                        MessageBox.Show("Thời gian đăng ký học phần đã hết!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi Oracle: " + ex.Message);
                     }
                 }
                 catch (Exception ex)
@@ -264,8 +246,13 @@ namespace PhanHe2
             }
         }
 
+
         private void UC_DANGKY_Load(object sender, EventArgs e)
         {
+            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DetailStaff.ReadOnly = true;
             // Load datagridview
             if (LogIn.role == "RL_SINHVIEN")
             {
@@ -296,10 +283,6 @@ namespace PhanHe2
                             DataTable dt = new DataTable();
                             da.Fill(dt);
                             DetailStaff.DataSource = dt;
-                            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                            DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-                            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                            DetailStaff.ReadOnly = true;
                             connection.Close();
                             dt.Dispose();
 
@@ -334,10 +317,6 @@ namespace PhanHe2
                             DataTable dt = new DataTable();
                             da.Fill(dt);
                             DetailStaff.DataSource = dt;
-                            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                            DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-                            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                            DetailStaff.ReadOnly = true;
                             connection.Close();
                             dt.Dispose();
 
@@ -374,13 +353,22 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
+                UC_Containers.SendToBack();
+                var queryString = "";
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
                     conn.Open();
-
+                    if (UC_TK_CHOICE_DK.temp == 1)
+                    {
+                        queryString = "SELECT * FROM ADMIN.DANGKY";
+                    }
+                    else
+                    {
+                        queryString = "SELECT * FROM ADMIN.UV_TRGKHOA_DANGKY";
+                    }
                     if (conn.State == ConnectionState.Open)
                     {
-                        OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DANGKY", conn);
+                        OracleCommand cmd = new OracleCommand(queryString, conn);
                         using (OracleDataReader reader = cmd.ExecuteReader())
                         {
                             DetailStaff.DataSource = null;
@@ -407,7 +395,6 @@ namespace PhanHe2
                 using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                 {
                     conn.Open();
-
                     if (conn.State == ConnectionState.Open)
                     {
                         OracleCommand cmd = new OracleCommand("SELECT * FROM ADMIN.DANGKY", conn);
@@ -677,11 +664,14 @@ namespace PhanHe2
             
         }
 
-        private void DetailStaff_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DetailStaff_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (LogIn.role == "RL_GIANGVIEN")
+            if (score == null || score.IsDisposed)
             {
-
+                score = new FormScore_DANGKY();
+            }
+            if (LogIn.role == "RL_GIANGVIEN" || (LogIn.role == "RL_TRUONGKHOA" && UC_TK_CHOICE_DK.temp == 0) || LogIn.role == "RL_TRUONGBM")
+            {
                 score.Show();
                 string queryString = "SELECT HOTEN FROM ADMIN.SINHVIEN";
                 using (OracleConnection connection = new OracleConnection(LogIn.connectionString))

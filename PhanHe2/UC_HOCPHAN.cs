@@ -72,7 +72,7 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "INSERT INTO ADMIN.HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD) VALUES (:MAHP, :TENHP, :SOTC, :STLT, :STTH, :SOSVTD)";
+                    var queryString = "INSERT INTO ADMIN.HOCPHAN (MAHP, TENHP, SOTC, STLT, STTH, SOSVTD, MADV) VALUES (:MAHP, :TENHP, :SOTC, :STLT, :STTH, :SOSVTD, :MADV)";
 
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -85,11 +85,24 @@ namespace PhanHe2
                             cmd.Parameters.Add(new OracleParameter(":STLT", STLTtxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":STTH", STTHtxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":SOSVTD", SOSVTDtxb.Text));
-
+                            cmd.Parameters.Add(new OracleParameter(":MADV", MADVtxb.Text));
                             cmd.ExecuteNonQuery();
 
                             MessageBox.Show("Thêm học phần thành công.");
                         }
+                        UC_HOCPHAN_Load(sender, e);
+                    }
+                }
+                catch (OracleException ex)
+                {
+                    // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                    if (ex.Number == 00001)
+                    {
+                        MessageBox.Show("Mã học phần đã tồn tại!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi Oracle: " + ex.Message);
                     }
                 }
                 catch (Exception ex)
@@ -100,7 +113,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
@@ -114,7 +127,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
         }
 
@@ -126,11 +139,11 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIAOVU")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
@@ -144,7 +157,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
         }
 
@@ -158,7 +171,7 @@ namespace PhanHe2
             {
                 try
                 {
-                    var queryString = "UPDATE ADMIN.HOCPHAN SET TENHP = :TENHP, SOTC = :SOTC, STLT = :STLT, STTH = :STTH, SOSVTD = :SOSVTD WHERE MAHP = :MAHP";
+                    var queryString = "UPDATE ADMIN.HOCPHAN SET TENHP = :TENHP, SOTC = :SOTC, STLT = :STLT, STTH = :STTH, SOSVTD = :SOSVTD, MADV = :MADV WHERE MAHP = :MAHP";
 
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -170,12 +183,26 @@ namespace PhanHe2
                             cmd.Parameters.Add(new OracleParameter(":STLT", STLTtxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":STTH", STTHtxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":SOSVTD", SOSVTDtxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MADV", MADVtxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":MAHP", idtxtb.Text));
 
                             cmd.ExecuteNonQuery();
 
                             MessageBox.Show("Cập nhật học phần thành công.");
                         }
+                        UC_HOCPHAN_Load(sender, e);
+                    }
+                }
+                catch (OracleException ex)
+                {
+                    // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                    if (ex.Number == 00001)
+                    {
+                        MessageBox.Show("Mã học phần đã tồn tại!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi Oracle: " + ex.Message);
                     }
                 }
                 catch (Exception ex)
@@ -186,7 +213,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
@@ -200,22 +227,26 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
         }
 
         private void UC_HOCPHAN_Load(object sender, EventArgs e)
         {
+            idtxtb.Enabled = false;
+            tenhptxb.Enabled = false;
+            SOTCtxb.Enabled = false;
+            STLTtxb.Enabled = false;
+            STTHtxb.Enabled = false;
+            SOSVTDtxb.Enabled = false;
+            MADVtxb.Enabled = false;
+            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DetailStaff.ReadOnly = true;
             // Load datagridview
             if (LogIn.role == "RL_SINHVIEN")
-            {
-                idtxtb.Enabled = false;
-                tenhptxb.Enabled = false;
-                SOTCtxb.Enabled = false;
-                STLTtxb.Enabled = false;
-                STTHtxb.Enabled = false;
-                SOSVTDtxb.Enabled = false;
-                MADVtxb.Enabled = false;
+            {             
                 var queryString = "SELECT * FROM ADMIN.HOCPHAN\r\n";
 
                 var dt = new DataTable();
@@ -224,15 +255,18 @@ namespace PhanHe2
 
                 da.Fill(dt);
                 DetailStaff.DataSource = dt;
-                DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-                DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-                DetailStaff.ReadOnly = true;
                 conn.Close();
                 dt.Dispose();
             }
             else if (LogIn.role == "RL_GIAOVU")
             {
+                idtxtb.Enabled = true;
+                tenhptxb.Enabled = true;
+                SOTCtxb.Enabled = true;
+                STLTtxb.Enabled = true;
+                STTHtxb.Enabled = true;
+                SOSVTDtxb.Enabled = true;
+                MADVtxb.Enabled = true;
                 UC_Containers.SendToBack();
                 var queryString = "SELECT * FROM ADMIN.HOCPHAN\r\n";
 

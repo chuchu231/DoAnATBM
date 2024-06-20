@@ -1,15 +1,8 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
-using System.Diagnostics.Metrics;
 
 
 namespace PhanHe2
@@ -47,12 +40,14 @@ namespace PhanHe2
                     { 
                         cmd.ExecuteNonQuery();
                     }
+                    conn.Close();
                 }
 
                 try
                 {
                     // Chuỗi truy vấn với các tham số
-                    var queryString = "INSERT INTO ADMIN.SINHVIEN (MASV, HOTEN, NGSINH, DCHI, DT) VALUES (:MASV, :HOTEN, :NGSINH, :DCHI, :DT)";
+                    var queryString = "INSERT INTO ADMIN.SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) " +
+                                        "VALUES (:MASV, :HOTEN, :PHAI,:NGSINH, :DCHI, :DT, :MACT, :MANGANH, 0, 0)";
 
                     using (OracleConnection conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -62,20 +57,39 @@ namespace PhanHe2
                             // Thêm các tham số vào câu lệnh
                             cmd.Parameters.Add(new OracleParameter(":MASV", mssv.Text));
                             cmd.Parameters.Add(new OracleParameter(":HOTEN", nametxtb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":PHAI", Gioitinh.Text));
                             cmd.Parameters.Add(new OracleParameter(":NGSINH", DOB.Text));
                             cmd.Parameters.Add(new OracleParameter(":DCHI", addresstxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":DT", PhoneNumbertxb.Text));
-
+                            cmd.Parameters.Add(new OracleParameter(":MACT", mact.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MANGANH", manganh.Text));
+                            Console.WriteLine(DOB.Text);
                             // Thực thi câu lệnh SQL
                             cmd.ExecuteNonQuery();
 
                             // Hiển thị thông báo thành công
                             MessageBox.Show("Thêm sinh viên thành công.");
                         }
+                        conn.Close();
+                        UC_SINHVIEN_Load(sender, e);
+                    }
+                }
+                catch (OracleException ex)
+                {
+                    conn.Close();
+                    // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                    if (ex.Number == 00001)
+                    {
+                        MessageBox.Show("Mã sinh viên đã tồn tại!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi Oracle: " + ex.Message);
                     }
                 }
                 catch (Exception ex)
                 {
+                    conn.Close();
                     // Ghi lại lỗi hoặc hiển thị thông báo lỗi
                     MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
                 }
@@ -83,7 +97,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
@@ -97,7 +111,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
         }
 
@@ -150,7 +164,8 @@ namespace PhanHe2
                 }
                 try
                 {
-                    var queryString = "UPDATE ADMIN.SINHVIEN SET HOTEN = :HOTEN, NGSINH = :NGSINH, DCHI = :DCHI, DT = :DT WHERE MASV = :MASV";
+                    var queryString = "UPDATE ADMIN.SINHVIEN SET HOTEN = :HOTEN, NGSINH = :NGSINH, PHAI = :PHAI, DCHI = :DCHI, DT = :DT, MACT = :MACT, MANGANH = :MANGANH" +
+                                        " WHERE MASV = :MASV";
 
                     using (var conn = new OracleConnection(LogIn.connectionString))
                     {
@@ -160,8 +175,11 @@ namespace PhanHe2
                             // Thêm các tham số vào câu lệnh SQL
                             cmd.Parameters.Add(new OracleParameter(":HOTEN", nametxtb.Text));
                             cmd.Parameters.Add(new OracleParameter(":NGSINH", DOB.Text));
+                            cmd.Parameters.Add(new OracleParameter(":PHAI", Gioitinh.Text));
                             cmd.Parameters.Add(new OracleParameter(":DCHI", addresstxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":DT", PhoneNumbertxb.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MACT", mact.Text));
+                            cmd.Parameters.Add(new OracleParameter(":MANGANH", manganh.Text));
                             cmd.Parameters.Add(new OracleParameter(":MASV", mssv.Text));
 
                             // Thực thi câu lệnh SQL
@@ -169,6 +187,7 @@ namespace PhanHe2
                         }
                     }
                     MessageBox.Show("Cập nhật thành công.");
+                    UC_SINHVIEN_Load(sender, e);
                 }
                 catch (Exception ex)
                 {
@@ -199,7 +218,10 @@ namespace PhanHe2
         }
         private void UC_SINHVIEN_Load(object sender, EventArgs e)
         {
-
+            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            DetailStaff.ReadOnly = true;
             // Load datagridview
             if (LogIn.role == "RL_SINHVIEN")
             {
@@ -271,10 +293,12 @@ namespace PhanHe2
         {
             mssv.Text = this.DetailStaff.Rows[e.RowIndex].Cells[0].Value.ToString();
             nametxtb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[1].Value.ToString();
+            Gioitinh.Text = this.DetailStaff.Rows[e.RowIndex].Cells[2].Value.ToString();
             DOB.Text = this.DetailStaff.Rows[e.RowIndex].Cells[3].Value.ToString();
             addresstxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[4].Value.ToString();
             PhoneNumbertxb.Text = this.DetailStaff.Rows[e.RowIndex].Cells[5].Value.ToString();
-
+            mact.Text = this.DetailStaff.Rows[e.RowIndex].Cells[6].Value.ToString();
+            manganh.Text = this.DetailStaff.Rows[e.RowIndex].Cells[7].Value.ToString();
         }
     }
 }

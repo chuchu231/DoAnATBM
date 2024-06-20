@@ -135,8 +135,17 @@ namespace PhanHe2
 
         private void DangKy_Click(object sender, EventArgs e)
         {
-            UC_DANGKY uc = new UC_DANGKY();
-            addUserControl(uc);
+            if (LogIn.role == "RL_TRUONGKHOA")
+            {
+                UC_TK_CHOICE_DK uc = new UC_TK_CHOICE_DK();
+                addUserControl(uc);
+            }
+            else
+            {
+                UC_DANGKY uc = new UC_DANGKY();
+                addUserControl(uc);
+            }
+                
         }
 
         private void Alertbtn_Click(object sender, EventArgs e)

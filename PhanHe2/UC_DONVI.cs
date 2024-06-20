@@ -47,6 +47,19 @@ namespace PhanHe2
                             connection.Open();
                             command.ExecuteNonQuery();
                             MessageBox.Show("Thêm đơn vị thành công.");
+                            UC_DONVI_Load(sender, e);
+                        }
+                        catch (OracleException ex)
+                        {
+                            // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                            if (ex.Number == 00001)
+                            {
+                                MessageBox.Show("Mã đơn vị đã tồn tại!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Lỗi Oracle: " + ex.Message);
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -59,7 +72,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
@@ -73,7 +86,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
         }
 
@@ -81,15 +94,15 @@ namespace PhanHe2
         {
             if (LogIn.role == "RL_SINHVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_GIAOVU")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
@@ -103,7 +116,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
         }
 
@@ -111,7 +124,7 @@ namespace PhanHe2
         {
             if (LogIn.role == "RL_SINHVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_GIAOVU")
             {
@@ -130,6 +143,19 @@ namespace PhanHe2
                             connection.Open();
                             command.ExecuteNonQuery();
                             MessageBox.Show("Cập nhật đơn vị thành công.");
+                            UC_DONVI_Load(sender, e);
+                        }
+                        catch (OracleException ex)
+                        {
+                            // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                            if (ex.Number == 00001)
+                            {
+                                MessageBox.Show("Mã đơn vị đã tồn tại!");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Lỗi Oracle: " + ex.Message);
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -141,7 +167,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
@@ -155,12 +181,15 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
         }
 
         private void UC_DONVI_Load(object sender, EventArgs e)
         {
+            DetailStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DetailStaff.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DetailStaff.ReadOnly = true;
             // Load datagridview
             if (LogIn.role == "RL_SINHVIEN")
             {

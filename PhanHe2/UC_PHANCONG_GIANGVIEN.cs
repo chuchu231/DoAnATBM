@@ -31,11 +31,9 @@ namespace PhanHe2
                 {
                     conn.Open();
 
-                    using (OracleCommand cmd = new OracleCommand("ADMIN.GET_UV_TRGDV_PHANCONG", conn))
+                    using (OracleCommand cmd = new OracleCommand("ADMIN.GET_TRGDV_PHANCONG", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.Add("p_username", OracleDbType.Varchar2).Value = LogIn.username;
                         cmd.Parameters.Add("p_result", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
                         using (OracleDataReader reader = cmd.ExecuteReader())

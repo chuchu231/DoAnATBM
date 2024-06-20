@@ -53,7 +53,7 @@ BEGIN
 
     -- Check the conditions for the current date
     IF month_tmp = 1 OR month_tmp = 6 OR month_tmp = 9 THEN
-        IF day_tmp > 14 THEN
+        IF day_tmp > 17 THEN
             RAISE_APPLICATION_ERROR(-20001, 'CANNOT WRITE AT THIS TIME');
         END IF;
     ELSE
@@ -68,14 +68,29 @@ INSTEAD OF
 FOR EACH ROW
 DECLARE
     pc_magv  NHANSU.MANV%TYPE;
-    dv_madv  DONVI.MADV%TYPE;
     pc_hk    PHANCONG.HK%TYPE;
     pc_nam   PHANCONG.NAM%TYPE;
     pc_mahp  PHANCONG.MAHP%TYPE;
     pc_mact  PHANCONG.MACT%TYPE;
+    l_count  INTEGER;
+    k_count INTEGER;
 BEGIN
-    my_package.set_context;  
+    SELECT COUNT(*) 
+    INTO k_count
+    FROM ADMIN.KHMO 
+    WHERE MAHP = :NEW.MAHP AND HK = :NEW.HK AND NAM = :NEW.NAM AND MACT = :NEW.MACT;
+    SELECT COUNT(*)
+    INTO l_count
+    FROM ADMIN.HOCPHAN
+    WHERE MAHP = :NEW.MAHP AND MADV = 'VPK';
     IF UPDATING THEN
+        IF k_count = 0 THEN
+            RAISE_APPLICATION_ERROR(-20002, 'H?c ph?n này không ???c m?');
+        END IF;
+        IF l_count = 0 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Mã h?c ph?n không thu?c v?n phòng khoa');
+        END IF;
+        my_package.set_context;  
         BEGIN   
             -- Update logic for PHANCONG
             UPDATE PHANCONG
@@ -111,11 +126,17 @@ BEGIN
                   AND NAM = :old.nam 
                   AND MACT = :old.mact
                   AND MASV = R.MASV;
-            END LOOP;
-        
-            
+            END LOOP;           
         END;
+        my_package.clear_context;
     ELSIF INSERTING THEN
+        IF k_count = 0 THEN
+            RAISE_APPLICATION_ERROR(-20002, 'H?c ph?n này không ???c m?');
+        END IF;
+        IF l_count = 0 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Mã h?c ph?n không thu?c v?n phòng khoa');
+        END IF;
+        
         BEGIN
             -- Insert logic for PHANCONG
             INSERT INTO PHANCONG (MAGV, MAHP, HK, NAM, MACT)
@@ -124,6 +145,7 @@ BEGIN
             DBMS_OUTPUT.PUT_LINE('INSERTED');
         END;
     ELSIF DELETING THEN
+        my_package.set_context;  
         BEGIN
              -- Delete logic for PHANCONG
             DELETE FROM PHANCONG
@@ -151,12 +173,18 @@ BEGIN
                   AND MASV = R.MASV;
             END LOOP;      
         END;
-    END IF;
-    my_package.clear_context;
-    
+        my_package.clear_context;
+    END IF;   
 EXCEPTION
     WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('| ERROR!   | ' || SQLERRM);
+       my_package.clear_context;
+       IF SQLCODE = -20001 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Mã h?c ph?n không thu?c v?n phòng khoa');
+        ELSIF SQLCODE = -20002 THEN
+            RAISE_APPLICATION_ERROR(-20002, 'H?c ph?n này không ???c m?');
+        ELSE
+            RAISE;
+        END IF;
 END;
 /
 
@@ -172,9 +200,25 @@ DECLARE
     pc_nam PHANCONG.NAM%TYPE;
     pc_mahp PHANCONG.MAHP%TYPE;
     pc_mact PHANCONG.MACT%TYPE;
-BEGIN
-    my_package.set_context;  
-    IF UPDATING THEN
+    l_count  INTEGER;
+    k_count  INTEGER;
+BEGIN    
+    SELECT COUNT(*) 
+    INTO k_count
+    FROM ADMIN.KHMO 
+    WHERE MAHP = :NEW.MAHP AND HK = :NEW.HK AND NAM = :NEW.NAM AND MACT = :NEW.MACT;
+    SELECT COUNT(*)
+    INTO l_count
+    FROM ADMIN.HOCPHAN HP JOIN ADMIN.NHANSU NS ON HP.MADV = NS.MADV 
+    WHERE MAHP = :NEW.MAHP;
+    IF UPDATING THEN        
+        IF k_count = 0 THEN
+            RAISE_APPLICATION_ERROR(-20002, 'H?c ph?n này không ???c m?');
+        END IF;
+        IF l_count = 0 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Mã h?c ph?n không thu?c chuyên ngành');
+        END IF;
+        my_package.set_context;  
         BEGIN   
             -- Update logic for PHANCONG
             UPDATE PHANCONG
@@ -210,11 +254,17 @@ BEGIN
                   AND NAM = :old.nam 
                   AND MACT = :old.mact
                   AND MASV = R.MASV;
-            END LOOP;
-        
-            
+            END LOOP;         
         END;
+        my_package.clear_context;
     ELSIF INSERTING THEN
+
+        IF l_count = 0 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Mã h?c ph?n không thu?c chuyên ngành');
+        END IF;
+        IF k_count = 0 THEN
+            RAISE_APPLICATION_ERROR(-20002, 'H?c ph?n này không ???c m?');
+        END IF;
         BEGIN
             -- Insert logic for PHANCONG
             INSERT INTO PHANCONG (MAGV, MAHP, HK, NAM, MACT)
@@ -223,6 +273,7 @@ BEGIN
             DBMS_OUTPUT.PUT_LINE('INSERTED');
         END;
     ELSIF DELETING THEN
+        my_package.set_context;  
         BEGIN
              -- Delete logic for PHANCONG
             DELETE FROM PHANCONG
@@ -250,8 +301,19 @@ BEGIN
                   AND MASV = R.MASV;
             END LOOP;       
         END;
+        my_package.clear_context;
     END IF;
-    my_package.clear_context;
+    
+EXCEPTION
+    WHEN OTHERS THEN
+        my_package.clear_context;
+        IF SQLCODE = -20001 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Mã h?c ph?n không thu?c chuyên ngành');
+        ELSIF SQLCODE = -20002 THEN
+            RAISE_APPLICATION_ERROR(-20002, 'H?c ph?n này không ???c m?');
+        ELSE
+            RAISE;
+        END IF;
 END;
 /
 --------
@@ -278,6 +340,64 @@ BEGIN
     END IF;
 END;
 /
+
+CREATE OR REPLACE TRIGGER ADMIN.KHMO_TRIG
+AFTER UPDATE ON ADMIN.KHMO 
+FOR EACH ROW
+DECLARE
+    mahp KHMO.MAHP%TYPE;
+    hk KHMO.HK%TYPE;
+    nam KHMO.NAM%TYPE;
+    mact KHMO.MACT%TYPE;
+BEGIN
+        my_package.set_context;  
+        BEGIN             
+            -- Update logic for PHANCONG first to avoid integrity constraint violation
+            FOR R IN (SELECT PC.MAGV FROM PHANCONG PC 
+                      WHERE PC.MAHP = :old.mahp 
+                        AND PC.HK = :old.hk 
+                        AND PC.NAM = :old.nam 
+                        AND PC.MACT = :old.mact)
+            LOOP
+                UPDATE PHANCONG
+                SET MAHP = :new.mahp,
+                    HK = :new.hk,
+                    NAM = :new.nam,
+                    MACT = :new.mact
+                WHERE MAGV = R.magv 
+                  AND MAHP = :old.mahp 
+                  AND HK = :old.hk 
+                  AND NAM = :old.nam 
+                  AND MACT = :old.mact;
+            END LOOP;
+            
+            --DBMS_OUTPUT.PUT_LINE('UPDATED');
+            -- Update logic for DANGKY first to avoid integrity constraint violation
+            FOR D IN (SELECT DK.MAGV, DK.MASV FROM DANGKY DK 
+                        WHERE DK.MAHP = :old.mahp 
+                        AND DK.HK = :old.hk 
+                        AND DK.NAM = :old.nam 
+                        AND DK.MACT = :old.mact)
+            LOOP
+                UPDATE DANGKY
+                SET MAHP = :new.mahp,
+                    HK = :new.hk,
+                    NAM = :new.nam,
+                    MACT = :new.mact
+                WHERE MAGV = D.magv 
+                  AND MAHP = :old.mahp 
+                  AND HK = :old.hk 
+                  AND NAM = :old.nam 
+                  AND MACT = :old.mact
+                  AND MASV = D.MASV;
+            END LOOP;
+        
+            
+        END;
+    my_package.clear_context;
+END;
+/
+
 --PROCEDURE
 CREATE OR REPLACE PROCEDURE ADMIN.GET_KHMO_BYDAY(khmo_cursor OUT SYS_REFCURSOR)
 AS
@@ -469,5 +589,18 @@ END;
 /
 GRANT EXECUTE ON ADMIN.DeleteDangKy TO RL_SINHVIEN;
 
-
-
+CREATE OR REPLACE PROCEDURE ADMIN.GET_TRGDV_PHANCONG (
+    p_result OUT SYS_REFCURSOR
+) AS
+BEGIN
+    my_package.set_context;  
+    OPEN p_result FOR
+        SELECT gv.manv, pc.hk, pc.nam, pc.mahp, pc.mact
+        FROM ADMIN.NHANSU GV 
+        JOIN ADMIN.DONVI DV ON dv.madv = gv.madv 
+        JOIN ADMIN.PHANCONG PC ON gv.manv = pc.magv
+        WHERE DV.TRGDV = SYS_CONTEXT('USERENV', 'SESSION_USER');
+    my_package.clear_context;
+END;
+/
+GRANT EXECUTE ON ADMIN.GET_TRGDV_PHANCONG TO RL_TRUONGBM; 
