@@ -5,12 +5,17 @@ drop user admin cascade;
 create user admin identified by admin123;
 grant dba to admin ;
 grant grant any role to admin;
+grant select any dictionary to admin;
 grant execute any procedure to admin;
 grant create session to admin;
 grant all privileges to admin;
-GRANT EXECUTE ON DBMS_RLS TO ADMIN;
+grant execute on DBMS_RLS to admin;
 grant unlimited tablespace to admin;
 
+SELECT USERNAME, USER_ID, PASSWORD_CHANGE_DATE FROM DBA_USERS;
+SELECT ROLE, ROLE_ID, PASSWORD_REQUIRED FROM DBA_ROLES;
+SELECT * FROM DBA_ROLES;
+SELECT * FROM DBA_SYS_PRIVS WHERE GRANTEE = 'ADMIN';
 -- DANGKY
 ALTER TABLE admin.DANGKY DROP CONSTRAINT fk_dangky_sinhvien;
 ALTER TABLE admin.DANGKY DROP CONSTRAINT fk_dangky_phancong;
@@ -171,7 +176,8 @@ REFERENCES ADMIN.NHANSU(MANV)ON DELETE CASCADE ;
 ALTER TABLE ADMIN.PHANCONG
 ADD CONSTRAINT fk_phancong_KHMO
 FOREIGN KEY (MAHP, HK, NAM, MACT)
-REFERENCES ADMIN.KHMO(MAHP, HK, NAM, MACT) ON DELETE CASCADE;
+REFERENCES ADMIN.KHMO(MAHP, HK, NAM, MACT) ON DELETE CASCADE
+DEFERRABLE INITIALLY DEFERRED;
 
 -- DANGKY
 ALTER TABLE ADMIN.DANGKY
@@ -184,52 +190,6 @@ ADD CONSTRAINT fk_dangky_phancong
 FOREIGN KEY (MAGV, MAHP, HK, NAM, MACT)
 REFERENCES ADMIN.PHANCONG(MAGV, MAHP, HK, NAM, MACT) ON DELETE CASCADE
 DEFERRABLE INITIALLY DEFERRED;
-
--- NHANSU
-ALTER TABLE admin.NHANSU
-ADD CONSTRAINT fk_nhansu_donvi
-FOREIGN KEY (MADV)
-REFERENCES admin.DONVI(MADV);
-select * from admin.KHMO;
--- DONVI
-ALTER TABLE admin.DONVI
-ADD CONSTRAINT fk_donvi_nhansu
-FOREIGN KEY (TRGDV)
-REFERENCES admin.NHANSU(MANV);
-
--- HOCPHAN
-ALTER TABLE admin.HOCPHAN
-ADD CONSTRAINT fk_hocphan_donvi
-FOREIGN KEY (MADV)
-REFERENCES admin.DONVI(MADV);
-
--- KHMO
-ALTER TABLE admin.KHMO
-ADD CONSTRAINT fk_khmo_hocphan
-FOREIGN KEY (MAHP)
-REFERENCES admin.HOCPHAN(MAHP);
-
--- PHANCONG
-ALTER TABLE admin.PHANCONG
-ADD CONSTRAINT fk_phancong_nhansu
-FOREIGN KEY (MAGV)
-REFERENCES admin.NHANSU(MANV);
-
-ALTER TABLE admin.PHANCONG
-ADD CONSTRAINT fk_phancong_hocphan
-FOREIGN KEY (MAHP, HK, NAM, MACT)
-REFERENCES admin.KHMO(MAHP, HK, NAM, MACT);
-
--- DANGKY
-ALTER TABLE admin.DANGKY
-ADD CONSTRAINT fk_dangky_sinhvien
-FOREIGN KEY (MASV)
-REFERENCES admin.SINHVIEN(MASV);
-
-ALTER TABLE admin.DANGKY
-ADD CONSTRAINT fk_dangky_phancong
-FOREIGN KEY (MAGV, MAHP, HK, NAM, MACT)
-REFERENCES admin.PHANCONG(MAGV, MAHP, HK, NAM, MACT)
 
 
 -- Insert
@@ -302,6 +262,7 @@ insert into admin.KHMO (MAHP, HK, NAM, MACT) values ('HP140', 'HK3', '2023-2024'
 insert into admin.KHMO (MAHP, HK, NAM, MACT) values ('HP145', 'HK3', '2023-2024', 'VP');
 
 
+
 insert into admin.PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('NS001', 'HP100', 'HK1', '2023-2024', 'CLC');
 insert into admin.PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('NS002', 'HP085', 'HK2', '2023-2024', 'CLC');
 insert into admin.PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('NS004', 'HP120', 'HK3', '2022-2023', 'CQ');
@@ -317,12 +278,22 @@ insert into admin.PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('NS004', 'HP135',
 insert into admin.PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('NS018', 'HP140', 'HK3', '2023-2024', 'CQ');
 insert into admin.PHANCONG (MAGV, MAHP, HK, NAM, MACT) values ('NS001', 'HP145', 'HK3', '2023-2024', 'VP');
 SELECT * FROM ADMIN.PHANCONG;
+--DELETE FROM ADMIN.PHANCONG WHERE MAGV = 'NS001' AND MAHP = 'HP140';
 
 insert into admin.SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV02', 'Ichabod Radley', 'Nam', '08-07-2006', '1293 Grasskamp Center', '814 974 8950', 'CLC', 'KHDL', 131, 6.3);
 insert into admin.SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV01', 'Lonny Willshaw', 'Nu', '04-01-2005', '54 Elka Parkway', '443 809 3568', 'CLC', 'HTTT', 110, 8.2);
 insert into admin.SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV03', 'Mickey Ritmeyer', 'Nu', '23-10-2009', '69 Evergreen Road', '532 662 5974', 'CQ', 'CNPM', 130, 6.3);
 insert into admin.SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV04', 'Mickey Ritmeyer', 'Nam', '23-10-2009', '69 Evergreen Road', '532 662 5974', 'CQ', 'CNPM', 130, 6.3);
+insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV10', 'Kissee Lambie', 'Nu', '08-08-2018', '435 Almo Hill', '649 606 6462', 'CLC', 'HTTT', 133, 6.7);
+insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV11', 'Egbert Portsmouth', 'Nam', '07-12-2016', '31 Sunbrook Way', '322 811 8260', 'CQ', 'HTTT', 100, 6.8);
+insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV12', 'Abby Yeowell', 'Nam', '14-12-2014', '6505 Lunder Place', '337 731 5474', 'VP', 'HTTT', 110, 8.4);
+insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV13', 'Francoise Ryhorovich', 'Nam', '10-12-2001', '3 Hansons Drive', '349 646 0677', 'VP', 'HTTT', 134, 8.0);
+insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV14, 'Germain Pablos', 'Nu', '17-04-2008', '0 Mariners Cove Trail', '876 927 7315', 'VP', 'KHDL', 136, 6.7);
+insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV15', 'Emalia Bygott', 'Nam', '03-11-2021', '6 Meadow Ridge Point', '267 473 9564', 'VP', 'KHMT', 138, 8.3);
+insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV16', 'Gill Mapis', 'Nam', '01-01-2003', '2342 Waxwing Drive', '145 824 8838', 'VP', 'CNTT', 101, 8.5);
+insert into SINHVIEN (MASV, HOTEN, PHAI, NGSINH, DCHI, DT, MACT, MANGANH, SOTCTL, DTBTL) values ('SV17', 'Shirley Mathivon', 'Nam', '25-03-2023', '856 Declaration Circle', '130 751 0705', 'VP', 'CNPM', 123, 6.4);
 SELECT * FROM ADMIN.SINHVIEN;
+
 insert into admin.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values ('SV01', 'NS001', 'HP100', 'HK1', '2023-2024', 'CLC', 8.1, 8.4, 6.8, 5.7);
 insert into admin.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values ('SV02', 'NS002', 'HP085', 'HK2', '2023-2024', 'CLC', 9.0, 8.3, 7.0, 6.8);
 insert into admin.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values ('SV03', 'NS004', 'HP120', 'HK3', '2022-2023', 'CQ', 9.7, 7.1, 7.6, 8.4);
@@ -333,5 +304,230 @@ insert into admin.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMC
 insert into admin.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values ('SV02', 'NS013', 'HP105', 'HK2', '2023-2024', 'CQ', 6.1, 5.8, 8.9, 9.5);
 insert into admin.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values ('SV03', 'NS001', 'HP080', 'HK3', '2022-2023', 'CQ', 9.7, 8.4, 9.4, 5.2);
 insert into admin.DANGKY (MASV, MAGV, MAHP, HK, NAM, MACT, DIEMTH, DIEMQT, DIEMCK, DIEMTK) values ('SV02', 'NS015', 'HP115', 'HK1', '2023-2024', 'VP', 8.2, 7.9, 6.2, 5.3);
-UPDATE ADMIN.DANGKY SET MACT = 'CLC' WHERE MASV = 'SV03' AND MAHP = 'HP090';
 SELECT * FROM ADMIN.DANGKY;
+
+
+create or replace procedure Create_NewUser(User_name in varchar2,Pass_Word in nvarchar2)
+authid current_user 
+as
+    Tmp_count int;
+Begin
+    execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
+    select count(*) into Tmp_count from all_users where username = User_name;
+    If(Tmp_count != 0) then
+        RAISE_APPLICATION_ERROR(-20000,'User da ton tai'); 
+    ELSE 
+        IF Pass_Word IS NULL THEN
+            EXECUTE IMMEDIATE 'CREATE USER ' || User_name; 
+        ELSE
+            execute immediate('Create user '|| User_name||' identified by '||Pass_Word);
+            execute immediate('grant create session to '||User_name);
+        END IF;
+    END IF;
+    execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = false');
+End;
+/
+create or replace procedure Create_NewRole(Role_name in varchar2,Pass_Word in nvarchar2)
+authid current_user 
+as
+    Tmp_count int;
+Begin
+    select count(*) into Tmp_count from dba_roles where role = Role_name;
+    If(Tmp_count != 0) then
+        RAISE_APPLICATION_ERROR(-20000,'Role da ton tai'); 
+    ELSE 
+        IF Pass_Word IS NULL THEN
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
+            EXECUTE IMMEDIATE 'CREATE Role ' || Role_name; 
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = FALSE');
+        ELSE
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
+            execute immediate('Create role '|| Role_name||' identified by '||Pass_Word);
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = false');
+        END IF;
+    END IF;
+End;
+/
+CREATE OR REPLACE PROCEDURE Alter_role(role_name IN VARCHAR2, pass_word IN VARCHAR2)
+AUTHID current_user
+AS
+    tmp_query VARCHAR2(100);
+BEGIN
+    IF pass_word IS NULL OR LENGTH(pass_word) = 0 THEN
+        tmp_query := 'ALTER ROLE ' || role_name || ' IDENTIFIED BY NULL';
+    ELSE 
+        tmp_query := 'ALTER ROLE ' || role_name || ' IDENTIFIED BY ' || pass_word;
+    END IF;
+    execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
+    EXECUTE IMMEDIATE(tmp_query);
+    execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = false');
+END;
+/
+CREATE OR REPLACE PROCEDURE Alter_User(User_name IN VARCHAR2, Pass_Word IN VARCHAR2)
+authid current_user 
+AS
+    Tmp_count INT;
+    upper_user_name VARCHAR2(100);
+BEGIN
+    upper_user_name := UPPER(User_name);
+
+    SELECT COUNT(*) INTO Tmp_count FROM all_users WHERE username = upper_user_name;
+    
+    IF Tmp_count != 0 THEN
+        execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
+        EXECUTE IMMEDIATE 'ALTER USER ' || upper_user_name || ' IDENTIFIED BY ' || Pass_Word;
+        execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = false');
+    ELSE
+        RAISE_APPLICATION_ERROR(-20000, 'User ' || upper_user_name || ' does not exist');
+    END IF;
+END;
+/
+CREATE OR REPLACE PROCEDURE Delete_User(User_name IN VARCHAR2)
+authid current_user 
+AS
+    user_exists NUMBER;
+    upper_user_name VARCHAR2(100);
+BEGIN
+    upper_user_name := UPPER(User_name);
+    IF User_name IS NULL THEN
+        RAISE_APPLICATION_ERROR(-20000, 'Username cannot be null'); 
+    ELSE
+        SELECT COUNT(*)
+        INTO user_exists
+        FROM all_users
+        WHERE username = upper_user_name;
+
+        IF user_exists = 0 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'User does not exist'); 
+        ELSE
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
+            EXECUTE IMMEDIATE('DROP USER ' || upper_user_name);
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = false');
+        END IF;
+    END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20002, 'An error occurred: ' || SQLERRM);
+END;
+/
+CREATE OR REPLACE PROCEDURE Delete_Role(Role_name IN VARCHAR2)
+AS
+    role_exists NUMBER;
+    upper_role_name VARCHAR2(100);
+BEGIN
+    upper_role_name := UPPER(Role_name);
+    IF Role_name IS NULL THEN
+        RAISE_APPLICATION_ERROR(-20000, 'Role cannot be null'); 
+    ELSE
+        SELECT COUNT(*)
+        INTO role_exists
+        FROM dba_roles
+        WHERE role = upper_role_name;
+
+        IF role_exists = 0 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Role does not exist'); 
+        ELSE
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
+            EXECUTE IMMEDIATE 'DROP ROLE ' || upper_role_name;
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = false');
+        END IF;
+    END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20002, 'An error occurred: ' || SQLERRM);
+END;
+/
+CREATE OR REPLACE PROCEDURE GetUserPrivilegesByUsername( Username IN VARCHAR2, UserCursor OUT SYS_REFCURSOR)
+AS
+    upper_user_name VARCHAR2(100);
+BEGIN
+    upper_user_name := UPPER(Username);
+    OPEN UserCursor FOR
+    SELECT TABLE_NAME , PRIVILEGE
+    FROM USER_TAB_PRIVS r
+    WHERE r.GRANTEE = upper_user_name;
+
+END;
+/
+CREATE OR REPLACE PROCEDURE GetRolePrivileges(Role_name IN VARCHAR2, ResultCursor OUT SYS_REFCURSOR)
+AUTHID current_user
+AS
+    upper_role_name VARCHAR2(100);
+BEGIN
+    upper_role_name := UPPER(Role_name);
+    
+    OPEN ResultCursor FOR
+    SELECT r.role, r.table_name, r.privilege
+    FROM role_tab_privs r
+    WHERE r.role = upper_role_name;
+END;
+/
+CREATE OR REPLACE PROCEDURE GetUsersOfRole(Role_name IN VARCHAR2, UsersCursor OUT SYS_REFCURSOR)
+AS
+BEGIN
+    OPEN UsersCursor FOR
+    SELECT GRANTEE
+    FROM DBA_ROLE_PRIVS
+    WHERE GRANTED_ROLE = Role_name;
+END;
+/
+CREATE OR REPLACE PROCEDURE Alter_User(User_name IN VARCHAR2, Pass_Word IN VARCHAR2)
+authid current_user 
+AS
+    Tmp_count INT;
+    upper_user_name VARCHAR2(100);
+BEGIN
+    upper_user_name := UPPER(User_name);
+
+    SELECT COUNT(*) INTO Tmp_count FROM all_users WHERE username = upper_user_name;
+    
+    IF Tmp_count != 0 THEN
+        execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
+        EXECUTE IMMEDIATE 'ALTER USER ' || upper_user_name || ' IDENTIFIED BY ' || Pass_Word;
+        execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = false');
+    ELSE
+        RAISE_APPLICATION_ERROR(-20000, 'User ' || upper_user_name || ' does not exist');
+    END IF;
+END;
+/
+CREATE OR REPLACE PROCEDURE Alter_role(role_name IN VARCHAR2, pass_word IN VARCHAR2)
+AUTHID current_user
+AS
+    tmp_query VARCHAR2(100);
+BEGIN
+    IF pass_word IS NULL OR LENGTH(pass_word) = 0 THEN
+        tmp_query := 'ALTER ROLE ' || role_name || ' IDENTIFIED BY NULL';
+    ELSE 
+        tmp_query := 'ALTER ROLE ' || role_name || ' IDENTIFIED BY ' || pass_word;
+    END IF;
+    execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
+    EXECUTE IMMEDIATE(tmp_query);
+    execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = false');
+END;
+/
+CREATE OR REPLACE PROCEDURE Delete_Role(Role_name IN VARCHAR2)
+AS
+    role_exists NUMBER;
+    upper_role_name VARCHAR2(100);
+BEGIN
+    upper_role_name := UPPER(Role_name);
+    IF Role_name IS NULL THEN
+        RAISE_APPLICATION_ERROR(-20000, 'Role cannot be null'); 
+    ELSE
+        SELECT COUNT(*)
+        INTO role_exists
+        FROM dba_roles
+        WHERE role = upper_role_name;
+
+        IF role_exists = 0 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Role does not exist'); 
+        ELSE
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE');
+            EXECUTE IMMEDIATE 'DROP ROLE ' || upper_role_name;
+            execute immediate('ALTER SESSION SET "_ORACLE_SCRIPT" = false');
+        END IF;
+    END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        RAISE_APPLICATION_ERROR(-20002, 'An error occurred: ' || SQLERRM);
+END;

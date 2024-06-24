@@ -56,13 +56,17 @@ namespace PhanHe2
             this.dataGridView1.SendToBack();
             this.guna2Button1.SendToBack();
             this.guna2Button2.SendToBack();
-            var queryString = "SELECT * FROM ALL_USERS";
+            var queryString = "SELECT USERNAME, USER_ID, PASSWORD_CHANGE_DATE FROM DBA_USERS";
 
             var dt = new DataTable();
             var da = new OracleDataAdapter(queryString, conn);
             da.Fill(dt);
 
             dataGridView2.DataSource = dt;
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView2.ReadOnly = true;
             dataGridView2.BringToFront();
         }
 

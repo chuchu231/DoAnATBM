@@ -61,13 +61,13 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.DetailStaff.DefaultCellStyle = dataGridViewCellStyle3;
             this.DetailStaff.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.DetailStaff.Location = new System.Drawing.Point(-25, 32);
+            this.DetailStaff.Location = new System.Drawing.Point(3, 32);
             this.DetailStaff.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.DetailStaff.Name = "DetailStaff";
             this.DetailStaff.RowHeadersVisible = false;
             this.DetailStaff.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.DetailStaff.RowTemplate.Height = 28;
-            this.DetailStaff.Size = new System.Drawing.Size(784, 310);
+            this.DetailStaff.Size = new System.Drawing.Size(811, 310);
             this.DetailStaff.TabIndex = 39;
             this.DetailStaff.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.DetailStaff.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -94,10 +94,10 @@
             // UC_Containers
             // 
             this.UC_Containers.Controls.Add(this.DetailStaff);
-            this.UC_Containers.Location = new System.Drawing.Point(38, 29);
+            this.UC_Containers.Location = new System.Drawing.Point(3, 29);
             this.UC_Containers.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.UC_Containers.Name = "UC_Containers";
-            this.UC_Containers.Size = new System.Drawing.Size(746, 383);
+            this.UC_Containers.Size = new System.Drawing.Size(817, 383);
             this.UC_Containers.TabIndex = 53;
             // 
             // UC_SV_KETQUAHT

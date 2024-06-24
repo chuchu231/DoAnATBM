@@ -65,6 +65,14 @@ namespace PhanHe2
                             MessageBox.Show("Cập nhật thất bại.");
                         }
                     }
+                    catch (OracleException ex)
+                    {
+                        // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
+                        if (ex.Number == 20001)
+                        {
+                            MessageBox.Show("Điểm không hợp lệ");
+                        }
+                    }
                     catch (Exception ex)
                     {
                         MessageBox.Show("Lỗi: " + ex.Message);

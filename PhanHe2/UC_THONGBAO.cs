@@ -24,7 +24,7 @@ namespace PhanHe2
             //string connectionString = LogIn.connectionString;
             //connectionString = connectionString.Replace("xe", "OLS_DEMO");
             OracleConnection conn = new OracleConnection(LogIn.connectionString);
-            var queryString = "SELECT ID, NoiDung FROM ADMIN_OLS.THONGBAO";
+            var queryString = "SELECT ID, NoiDung FROM ADMIN_OLS.THONGBAO ORDER BY ID";
 
             var dt = new DataTable();
 
@@ -32,9 +32,7 @@ namespace PhanHe2
 
             da.Fill(dt);
             thongbao.DataSource = dt;
-            thongbao.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             thongbao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            thongbao.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             thongbao.ReadOnly = true;
             conn.Close();
             dt.Dispose();

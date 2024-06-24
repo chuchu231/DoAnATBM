@@ -56,7 +56,7 @@ namespace PhanHe2
             this.dataGridView1.SendToBack();
             this.guna2Button1.SendToBack();
             this.guna2Button2.SendToBack();
-            var queryString = "SELECT * FROM ALL_USERS";
+            var queryString = "SELECT ROLE, ROLE_ID, PASSWORD_REQUIRED FROM DBA_ROLES";
 
             var dt = new DataTable();
             var da = new OracleDataAdapter(queryString, conn);
@@ -76,6 +76,7 @@ namespace PhanHe2
             UC_Containers.BringToFront();
             addUserControl(uc);
             string username = this.DataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString();
+            Console.WriteLine(username);
             conn.Open();
 
 
@@ -83,7 +84,7 @@ namespace PhanHe2
             {
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add("Role_name", OracleDbType.Varchar2).Value = this.DataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString();
+                command.Parameters.Add("Role_name", OracleDbType.Varchar2).Value = username;
                 command.Parameters.Add("cur", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
                 using (OracleDataReader reader = command.ExecuteReader())

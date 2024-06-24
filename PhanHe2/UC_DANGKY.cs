@@ -16,7 +16,6 @@ namespace PhanHe2
 {
     public partial class UC_DANGKY : UserControl
     {
-
         public FormScore_DANGKY score;
         public UC_DANGKY()
         {
@@ -76,11 +75,9 @@ namespace PhanHe2
                     try
                     {
                         connection.Open();
-
                         using (OracleCommand cmd = new OracleCommand("ADMIN.InsertDangKy", connection))
                         {
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-
                             cmd.Parameters.Add("p_maHP", OracleDbType.Varchar2).Value = idtxtb.Text;
                             cmd.Parameters.Add("p_hocKy", OracleDbType.Varchar2).Value = HKtxb.Text; ;
                             cmd.Parameters.Add("p_namHoc", OracleDbType.Varchar2).Value = Namtxb.Text;
@@ -93,9 +90,14 @@ namespace PhanHe2
                     catch (OracleException ex)
                     {
                         // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
-                        if (ex.Number == 20002 || ex.Number == 20001)
+                        if (ex.Number == 20001)
                         {
-                            MessageBox.Show("Thời gian đăng ký học phần đã hết!");
+                            MessageBox.Show(ex.Message);
+                            //MessageBox.Show("Thời gian đăng ký học phần đã hết!");
+                        }
+                        else if (ex.Number == 20002)
+                        {
+                            MessageBox.Show(ex.Message);
                         }
                         else
                         {

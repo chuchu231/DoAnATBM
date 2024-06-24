@@ -161,6 +161,7 @@ namespace PhanHe2
                     {
                         cmd.ExecuteNonQuery();
                     }
+                    conn.Close();
                 }
                 try
                 {
@@ -186,11 +187,13 @@ namespace PhanHe2
                             cmd.ExecuteNonQuery();
                         }
                     }
+                    conn.Close();
                     MessageBox.Show("Cập nhật thành công.");
                     UC_SINHVIEN_Load(sender, e);
                 }
                 catch (Exception ex)
                 {
+                    conn.Close();
                     // Ghi lại lỗi hoặc hiển thị thông báo lỗi
                     MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
                 }
@@ -199,7 +202,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
@@ -213,7 +216,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
         }
         private void UC_SINHVIEN_Load(object sender, EventArgs e)

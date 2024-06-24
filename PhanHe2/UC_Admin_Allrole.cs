@@ -141,7 +141,7 @@ namespace PhanHe2
                 command.CommandType = CommandType.StoredProcedure;
 
                 command.Parameters.Add("Role_name", OracleDbType.Varchar2).Value = this.allrole.Rows[e.RowIndex].Cells[0].Value.ToString();
-                command.Parameters.Add("cur", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
+                command.Parameters.Add("ResultCursor", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
                 using (OracleDataReader reader = command.ExecuteReader())
                 {

@@ -53,7 +53,7 @@ BEGIN
 
     -- Check the conditions for the current date
     IF month_tmp = 1 OR month_tmp = 6 OR month_tmp = 9 THEN
-        IF day_tmp > 17 THEN
+        IF day_tmp > 28 THEN
             RAISE_APPLICATION_ERROR(-20001, 'CANNOT WRITE AT THIS TIME');
         END IF;
     ELSE

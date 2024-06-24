@@ -32,7 +32,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.standard = new Guna.UI2.WinForms.Guna2DataGridView();
-            this.status = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.standard)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,28 +87,11 @@
             this.standard.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.standard.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
-            // status
-            // 
-            this.status.BorderRadius = 12;
-            this.status.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.status.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.status.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.status.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.status.FillColor = System.Drawing.Color.MediumPurple;
-            this.status.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.status.ForeColor = System.Drawing.Color.White;
-            this.status.Location = new System.Drawing.Point(719, 39);
-            this.status.Name = "status";
-            this.status.Size = new System.Drawing.Size(180, 45);
-            this.status.TabIndex = 1;
-            this.status.Text = "Status";
-            // 
             // UC_Admin_Standard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.status);
             this.Controls.Add(this.standard);
             this.Name = "UC_Admin_Standard";
             this.Size = new System.Drawing.Size(943, 550);
@@ -122,6 +104,5 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2DataGridView standard;
-        private Guna.UI2.WinForms.Guna2Button status;
     }
 }
