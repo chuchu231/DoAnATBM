@@ -92,12 +92,16 @@ namespace PhanHe2
                         // Bắt lỗi Oracle và hiển thị thông báo lỗi từ trigger
                         if (ex.Number == 20001)
                         {
-                            MessageBox.Show(ex.Message);
-                            //MessageBox.Show("Thời gian đăng ký học phần đã hết!");
+                            //MessageBox.Show(ex.Message);
+                            MessageBox.Show("Thời gian đăng ký học phần đã hết!");
                         }
                         else if (ex.Number == 20002)
                         {
                             MessageBox.Show(ex.Message);
+                        }
+                        else if (ex.Number == 00001)
+                        {
+                            MessageBox.Show("Bạn đã đăng ký học phần này!");
                         }
                         else
                         {
@@ -142,6 +146,14 @@ namespace PhanHe2
                             {
                                 MessageBox.Show("Thời gian đăng ký học phần đã hết!");
                             }
+                            else if (ex.Number == 20002)
+                            {
+                                MessageBox.Show("Mã sinh viên không tồn tại!");
+                            }
+                            else if (ex.Number == 20003)
+                            {
+                                MessageBox.Show("Học phần không mở trong kì này!");
+                            }
                             else
                             {
                                 MessageBox.Show("Lỗi Oracle: " + ex.Message);
@@ -160,7 +172,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGKHOA")
             {
@@ -174,7 +186,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
         }
 
@@ -298,6 +310,11 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_GIAOVU")
             {
+                MAGVtxb.Enabled = false;
+                HKtxb.Enabled = false;
+                Namtxb.Enabled = false;
+                idtxtb.Enabled = false;
+                MACT.Enabled = false;
                 try
                 {
                     // Tạo kết nối đến cơ sở dữ liệu Oracle

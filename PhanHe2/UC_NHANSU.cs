@@ -101,10 +101,21 @@ namespace PhanHe2
                         conn.Open();
                         using (var cmd = new OracleCommand(queryString, conn))
                         {
+                            string[] date = DOB.Text.Split('/');
+                            string formattedDate = "";
+                            if (date[0].Length == 1)
+                            {
+                                date[0] = "0" + date[0];
+                            }
+                            if (date[1].Length == 1)
+                            {
+                                date[1] = "0" + date[1];
+                            }
+                            formattedDate = date[0] + "/" + date[1] + "/" + date[2];
                             cmd.Parameters.Add(new OracleParameter(":MANV", manv.Text));
                             cmd.Parameters.Add(new OracleParameter(":HOTEN", nametxtb.Text));
                             cmd.Parameters.Add(new OracleParameter(":PHAI", phai.Text));
-                            cmd.Parameters.Add(new OracleParameter(":NGAYSINH", DOB.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NGAYSINH", formattedDate));
                             cmd.Parameters.Add(new OracleParameter(":PHUCAP", salary.Text));
                             cmd.Parameters.Add(new OracleParameter(":DT", PhoneNumbertxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":VAITRO", roletxb.Text));

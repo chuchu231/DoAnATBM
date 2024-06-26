@@ -191,7 +191,7 @@ namespace PhanHe2
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Error: " + ex.Message);
+                        MessageBox.Show("Error: " + ex.Message);
                         //MessageBox.Show(query);
                     }
                 }

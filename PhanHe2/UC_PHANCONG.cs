@@ -23,11 +23,11 @@ namespace PhanHe2
         {
             if (LogIn.role == "RL_SINHVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_GIAOVU")
             {
-                // ignore role ni`
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
@@ -125,11 +125,11 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_NHANVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             UC_PHANCONG_Load(sender, e);
         }
@@ -138,11 +138,11 @@ namespace PhanHe2
         {
             if (LogIn.role == "RL_SINHVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_GIAOVU")
             {
-                // ignore role ni`
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_TRUONGBM")
             {
@@ -229,11 +229,11 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_NHANVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             UC_PHANCONG_Load(sender, e);
         }
@@ -428,11 +428,11 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_NHANVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             UC_PHANCONG_Load(sender, e);
         }
@@ -506,7 +506,7 @@ namespace PhanHe2
             }
             else if (LogIn.role == "RL_NHANVIEN")
             {
-                // do something ?
+                MessageBox.Show("Bạn không có quyền thực hiện thao tác này!");
             }
             else if (LogIn.role == "RL_GIANGVIEN")
             {

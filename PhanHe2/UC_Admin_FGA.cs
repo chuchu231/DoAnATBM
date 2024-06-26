@@ -28,7 +28,7 @@ namespace PhanHe2
             conn.Open();
 
             OracleCommand cmd = new OracleCommand("SELECT DBUSERNAME ,ACTION_NAME, OBJECT_SCHEMA, OBJECT_NAME, EVENT_TIMESTAMP, SQL_TEXT"
-                +" FROM UNIFIED_AUDIT_TRAIL WHERE OBJECT_NAME = 'DANGKY' AND AUDIT_TYPE = 'FineGrainedAudit'", conn);
+                + " FROM UNIFIED_AUDIT_TRAIL WHERE OBJECT_NAME = 'DANGKY' AND AUDIT_TYPE = 'FineGrainedAudit' order by event_timestamp desc", conn);
             using (OracleDataReader reader = cmd.ExecuteReader())
             {
                 FGA_DANGKY.DataSource = null;
@@ -41,7 +41,7 @@ namespace PhanHe2
             }
 
              cmd = new OracleCommand("SELECT DBUSERNAME ,ACTION_NAME, OBJECT_SCHEMA, OBJECT_NAME, EVENT_TIMESTAMP, SQL_TEXT"
-                + " FROM UNIFIED_AUDIT_TRAIL WHERE OBJECT_NAME = 'NHANSU' AND AUDIT_TYPE = 'FineGrainedAudit'", conn);
+                + " FROM UNIFIED_AUDIT_TRAIL WHERE OBJECT_NAME = 'NHANSU' AND AUDIT_TYPE = 'FineGrainedAudit' order by event_timestamp desc", conn);
             using (OracleDataReader reader = cmd.ExecuteReader())
             {
                 FGA_NHANSU.DataSource = null;

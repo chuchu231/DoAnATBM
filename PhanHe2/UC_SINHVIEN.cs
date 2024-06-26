@@ -3,7 +3,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Configuration;
-
+using System.Globalization;
 
 namespace PhanHe2
 {
@@ -54,16 +54,27 @@ namespace PhanHe2
                         conn.Open();
                         using (OracleCommand cmd = new OracleCommand(queryString, conn))
                         {
+                            string[] date = DOB.Text.Split('/');
+                            string formattedDate = "";
+                            if (date[0].Length == 1)
+                            {
+                                date[0] = "0" + date[0];
+                            }
+                            if (date[1].Length == 1)
+                            {
+                                date[1] = "0" + date[1];
+                            }
+                            formattedDate = date[0] + "/" + date[1] + "/" + date[2];
+                            //Console.WriteLine(formattedDate);
                             // Thêm các tham số vào câu lệnh
                             cmd.Parameters.Add(new OracleParameter(":MASV", mssv.Text));
                             cmd.Parameters.Add(new OracleParameter(":HOTEN", nametxtb.Text));
                             cmd.Parameters.Add(new OracleParameter(":PHAI", Gioitinh.Text));
-                            cmd.Parameters.Add(new OracleParameter(":NGSINH", DOB.Text));
+                            cmd.Parameters.Add(new OracleParameter(":NGSINH", formattedDate));
                             cmd.Parameters.Add(new OracleParameter(":DCHI", addresstxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":DT", PhoneNumbertxb.Text));
                             cmd.Parameters.Add(new OracleParameter(":MACT", mact.Text));
                             cmd.Parameters.Add(new OracleParameter(":MANGANH", manganh.Text));
-                            Console.WriteLine(DOB.Text);
                             // Thực thi câu lệnh SQL
                             cmd.ExecuteNonQuery();
 
